@@ -63,7 +63,12 @@ update_status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 		camera.y -= cameraSpeed;
 
-	// TODO 1: Handle horizontal movement of the camera
+	//Handle horizontal movement of the camera
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && camera.x <=-1)
+		camera.x += cameraSpeed;
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && camera.x >= -6655)
+		camera.x -= cameraSpeed;
+
 
 	return update_status::UPDATE_CONTINUE;
 }

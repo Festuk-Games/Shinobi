@@ -31,9 +31,10 @@ public:
 	
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* stageTexture = nullptr;
+	SDL_Texture* skyTexture = nullptr;
 	
 	// The sprite rectangle for the ground
-	SDL_Rect ground;
+	SDL_Rect ground , sky;
 
 	// The sprite section for the background
 	SDL_Rect background;
