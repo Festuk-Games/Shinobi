@@ -34,6 +34,11 @@ ModulePlayer::ModulePlayer()
 	backwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
 	backwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
 	backwardAnim.speed = 0.1f;
+
+	jumpAnim.PushBack({ 11, 410, 46 - 11, 470 - 410 });
+	jumpAnim.PushBack({ 47, 384, 82 - 47, 470 - 384 });
+	jumpAnim.PushBack({ 83, 410, 118 - 83, 470 - 410 });
+	jumpAnim.speed = 0.05f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -50,11 +55,12 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/main.png"); // arcade version
 
 	return ret;
-}
+} 
 
 update_status ModulePlayer::Update()
 {
 	//Reset the currentAnimation back to idle before updating the logic
+
 	currentAnimation = &idleAnim;
 
 	if(App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
@@ -68,6 +74,11 @@ update_status ModulePlayer::Update()
 	{
 		currentAnimation = &backwardAnim;
 		position.x -= speed;
+	}
+
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_REPEAT)
+	{
+		currentAnimation = &jumpAnim;
 	}
 
 	currentAnimation->Update();

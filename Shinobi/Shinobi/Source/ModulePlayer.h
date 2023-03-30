@@ -46,6 +46,7 @@ public:
 	Animation idleAnim;
 	Animation forwardAnim;
 	Animation backwardAnim;
+	Animation jumpAnim;
 };
 
 #endif //!__MODULE_PLAYER_H__

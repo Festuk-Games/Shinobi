@@ -32,7 +32,10 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* stageTexture = nullptr;
 	SDL_Texture* skyTexture = nullptr;
-	
+	SDL_Texture* stageTexture2 = nullptr;
+	SDL_Texture* skyTexture2 = nullptr;
+	SDL_Texture* stageTexture3 = nullptr;
+	SDL_Texture* skyTexture3 = nullptr;
 	// The sprite rectangle for the ground
 	SDL_Rect ground , sky;
 
@@ -41,6 +44,8 @@ public:
 
 	// The different sprite sections for the flag
 	Animation flag;
+
+	bool stage1 = false, stage2 = false, stage3 = true;
 
 };
 
