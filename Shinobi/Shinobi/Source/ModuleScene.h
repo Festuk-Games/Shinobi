@@ -45,7 +45,7 @@ public:
 	// The different sprite sections for the flag
 	Animation flag;
 
-	bool stage1 = false, stage2 = false, stage3 = true;
+	bool stage1 = true, stage2 = false, stage3 = false;
 
 };
 

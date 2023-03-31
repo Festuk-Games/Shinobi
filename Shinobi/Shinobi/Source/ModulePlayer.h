@@ -47,6 +47,8 @@ public:
 	Animation forwardAnim;
 	Animation backwardAnim;
 	Animation jumpAnim;
+
+	bool alive = true;
 };
 
 #endif //!__MODULE_PLAYER_H__

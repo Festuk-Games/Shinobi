@@ -115,13 +115,8 @@ update_status ModuleScene::PostUpdate()
 		App->render->Blit(skyTexture3, 0, 0, &sky, 0.75); // sky
 		App->render->Blit(stageTexture3, 0, 0, &ground, 0.75f); // ground
 	}
-	
 
 	//App->render->Blit(stageTexture, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
-
-	// TODO 2: Draw the ship from the sprite sheet with some parallax effect
-
-	// TODO 3: Animate the girl on the ship (see sprite sheet)
 	
 	//App->render->Blit(stageTexture, 0, 0, &ground);
 
