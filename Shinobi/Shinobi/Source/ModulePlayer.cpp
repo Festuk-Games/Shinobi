@@ -14,33 +14,36 @@ ModulePlayer::ModulePlayer()
 	position.x = 100;
 	position.y = 220;
 
-	// idle animation (arcade sprite sheet)
+	// idle animation
 	idleAnim.PushBack({13, 39, 48 - 13, 99 - 39 });
 
-	// walk forward animation (arcade sprite sheet)
+	// walk forward animation
 	forwardAnim.PushBack({5, 112, 40 - 5, 172 - 112});
 	forwardAnim.PushBack({ 41, 112, 72 - 41, 172 - 112 });
 	forwardAnim.PushBack({ 73, 112, 108 - 73, 172 - 112 });
 	forwardAnim.PushBack({ 109, 112, 144 - 109, 172 - 112 });
 	forwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
 	forwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
-	forwardAnim.loop = false;
+	forwardAnim.loop = true;
 	forwardAnim.speed = 0.1f;
 
+	//walk backward animation
 	backwardAnim.PushBack({ 5, 112, 40 - 5, 172 - 112 });
 	backwardAnim.PushBack({ 41, 112, 72 - 41, 172 - 112 });
 	backwardAnim.PushBack({ 73, 112, 108 - 73, 172 - 112 });
 	backwardAnim.PushBack({ 109, 112, 144 - 109, 172 - 112 });
 	backwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
 	backwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
-	backwardAnim.loop = false;
+	backwardAnim.loop = true;
 	backwardAnim.speed = 0.1f;
 
-	jumpAnim.PushBack({ 11, 410, 46 - 11, 470 - 410 });
-	jumpAnim.PushBack({ 47, 384, 82 - 47, 470 - 384 });
-	jumpAnim.PushBack({ 83, 410, 118 - 83, 470 - 410 });
-	jumpAnim.loop = false;
-	jumpAnim.speed = 0.08f;
+	//jump animation
+	jumpAnim1.PushBack({ 11, 410, 46 - 11, 470 - 410 });
+	jumpAnim2.PushBack({ 47, 384, 82 - 47, 470 - 410 });
+	jumpAnim1.loop = false;
+	jumpAnim1.speed = 0.1f;
+	jumpAnim2.loop = false;
+	jumpAnim2.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -62,36 +65,96 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 
-	if(App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && !isJumping)
 	{
-		currentAnimation = &forwardAnim;
-		position.x += speed;
+		isJumping = true;
 	}
 
+	if (isJumping)
+	{
+		if (!jumpState)
+		{
+			if (position.y >= 180)
+			{
+				currentAnimation = &jumpAnim1;
+				currentAnimation->Reset();
+				position.y -= speed;
+				if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+				{
+					position.x += speed;
+				}
+				if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+				{
+					position.x -= speed;
+				}
+			}
+			if (position.y == 180)
+			{
+				jumpState = true;
+			}
+		}
+		else
+		{
+			if (position.y >= 180 && position.y <= 220)
+			{
+				currentAnimation = &jumpAnim2;
+				currentAnimation->Reset();
+				position.y += speed;
+				if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+				{
+					position.x += speed;
+				}
+				if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+				{
+					position.x -= speed;
+				}
+			}
+			if (position.y == 220)
+			{
+				isJumping = false;
+				jumpState = false;
+				currentAnimation = &idleAnim;
+			}
+		}
+		currentAnimation->Update();
+		return update_status::UPDATE_CONTINUE;
+	}
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+	{
+		if (currentAnimation != &forwardAnim)
+		{
+			currentAnimation = &forwardAnim;
+			currentAnimation->Reset();
+		}
+		position.x += speed;
+	}
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
-		currentAnimation = &backwardAnim;
+		if (currentAnimation != &backwardAnim)
+		{
+			currentAnimation = &backwardAnim; 
+			currentAnimation->Reset();
+		}
 		position.x -= speed;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_REPEAT)
+	// Spawn explosion particles when pressing LALT
+	if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN)
 	{
-		currentAnimation = &jumpAnim;
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y);
 	}
 
-	// Spawn explosion particles when pressing B
-	if (App->input->keys[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y + 25);
-		App->particles->AddParticle(App->particles->explosion, position.x - 25, position.y, 30);
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y - 25, 60);
-		App->particles->AddParticle(App->particles->explosion, position.x + 25, position.y, 90);
+		//if (currentAnimation != &Anim)
+		//{
+		//	currentAnimation = &Anim;
+		//	currentAnimation->Reset();
+		//}
 	}
 
-	//Reset the currentAnimation back to idle before updating the logic
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE 
-		&& App->input->keys[SDL_SCANCODE_SPACE] == KEY_IDLE)
+		&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
 		currentAnimation = &idleAnim;
 
 	currentAnimation->Update();

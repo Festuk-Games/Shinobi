@@ -21,13 +21,13 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/particles.png");
+	texture = App->textures->Load("Assets/main.png");
 
 	// Explosion particle
 	explosion.anim.PushBack({ 274, 296, 33, 30 });
 	explosion.anim.PushBack({ 313, 296, 33, 30 });
 	explosion.anim.PushBack({ 346, 296, 33, 30 });
-	explosion.anim.loop = false;
+	explosion.anim.loop = true;
 	explosion.anim.speed = 0.3f;
 
 
@@ -65,6 +65,7 @@ update_status ModuleParticles::Update()
 			delete particle;
 			particles[i] = nullptr;
 		}
+
 	}
 
 	return update_status::UPDATE_CONTINUE;

@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "SDL/include/SDL.h"
+#pragma comment( lib, "SDL/libx86/SDL2.lib")
+#pragma comment( lib, "SDL/libx86/SDL2main.lib")
 
 struct SDL_Texture;
 
@@ -46,8 +49,12 @@ public:
 	Animation idleAnim;
 	Animation forwardAnim;
 	Animation backwardAnim;
-	Animation jumpAnim;
+	Animation jumpAnim1, jumpAnim2;
 
+	bool jumpState = false;
+
+
+	bool isJumping = false;
 	bool alive = true;
 };
 
