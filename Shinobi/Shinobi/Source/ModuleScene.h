@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Animation.h"
+#include "ModulePlayer.h"
 
 struct SDL_Texture;
 
@@ -46,6 +47,7 @@ public:
 	Animation flag;
 
 	bool stage1 = true, stage2 = false, stage3 = false;
+	bool nextStage = true;
 
 };
 

@@ -53,7 +53,12 @@ public:
 	Animation jumpAnim1, jumpAnim2;
 	Animation shootAnim;
 	Animation gunAnim;
+	Animation dieAnim1, dieAnim2, dieAnim3;
+	Animation backAnim;
 
+	iPoint diePosition;
+	bool diePos = false;
+	bool dieState = false;
 	bool jumpState = false;
 	bool isJumping = false;
 	bool isShooting = false;

@@ -4,8 +4,6 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleScene::ModuleScene()
 {
 	
@@ -92,6 +90,19 @@ bool ModuleScene::Start()
 update_status ModuleScene::Update()
 {
 	flag.Update();
+
+	//next stage condition
+	if (nextStage)
+	{
+		if (App->player->position.x >= 400)
+		{
+			stage1 = false;
+			stage2 = true;
+			App->player->position.x = 30;
+			App->render->camera.x = 0;
+			nextStage = false;
+		}
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
