@@ -24,12 +24,12 @@ bool ModuleParticles::Start()
 	texture = App->textures->Load("Assets/main.png");
 
 	// Explosion particle
-	explosion.anim.PushBack({ 274, 296, 33, 30 });
-	explosion.anim.PushBack({ 313, 296, 33, 30 });
-	explosion.anim.PushBack({ 346, 296, 33, 30 });
+	explosion.anim.PushBack({ 105, 290, 20, 19 });
+	explosion.anim.PushBack({ 124, 290, 20, 19 });
+	explosion.anim.PushBack({ 145, 290, 20, 19 });
+	explosion.speed = iPoint(2, 0);
 	explosion.anim.loop = true;
-	explosion.anim.speed = 0.3f;
-
+	explosion.anim.speed = 0.2f;
 
 	return true;
 }
@@ -47,7 +47,6 @@ bool ModuleParticles::CleanUp()
 			particles[i] = nullptr;
 		}
 	}
-
 	return true;
 }
 

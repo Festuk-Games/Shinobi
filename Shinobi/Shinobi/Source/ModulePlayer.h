@@ -49,12 +49,16 @@ public:
 	Animation idleAnim;
 	Animation forwardAnim;
 	Animation backwardAnim;
+	Animation crouchAnim, crouchForwardAnim, crouchBackwardAnim;
 	Animation jumpAnim1, jumpAnim2;
+	Animation shootAnim;
+	Animation gunAnim;
 
 	bool jumpState = false;
-
-
 	bool isJumping = false;
+	bool isShooting = false;
+	bool isWalking = false;
+	bool isCrouching = false;
 	bool alive = true;
 };
 

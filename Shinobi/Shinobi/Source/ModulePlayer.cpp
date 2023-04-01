@@ -11,8 +11,8 @@
 
 ModulePlayer::ModulePlayer()
 {
-	position.x = 100;
-	position.y = 220;
+	position.x = 30;
+	position.y = 208;
 
 	// idle animation
 	idleAnim.PushBack({13, 39, 48 - 13, 99 - 39 });
@@ -25,7 +25,7 @@ ModulePlayer::ModulePlayer()
 	forwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
 	forwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
 	forwardAnim.loop = true;
-	forwardAnim.speed = 0.1f;
+	forwardAnim.speed = 0.05f;
 
 	//walk backward animation
 	backwardAnim.PushBack({ 5, 112, 40 - 5, 172 - 112 });
@@ -35,15 +35,39 @@ ModulePlayer::ModulePlayer()
 	backwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
 	backwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
 	backwardAnim.loop = true;
-	backwardAnim.speed = 0.1f;
+	backwardAnim.speed = 0.05f;
 
 	//jump animation
 	jumpAnim1.PushBack({ 11, 410, 46 - 11, 470 - 410 });
 	jumpAnim2.PushBack({ 47, 384, 82 - 47, 470 - 410 });
 	jumpAnim1.loop = false;
-	jumpAnim1.speed = 0.1f;
+	jumpAnim1.speed = 0.05f;
 	jumpAnim2.loop = false;
-	jumpAnim2.speed = 0.1f;
+	jumpAnim2.speed = 0.05f;
+
+	//crouch animation
+	crouchAnim.PushBack({15,186,37,61});
+	crouchAnim.loop = false;
+	crouchAnim.speed = 0.05f;
+
+	//crouch right animation
+	crouchForwardAnim.PushBack({ 180,186,43,61 });
+	crouchForwardAnim.PushBack({ 229,186,31,61 });
+	crouchForwardAnim.PushBack({ 266,186,37,61 });
+	crouchForwardAnim.loop = true;
+	crouchForwardAnim.speed = 0.02f;
+
+	//crouch left animation
+	crouchBackwardAnim.PushBack({ 180,186,43,61 });
+	crouchBackwardAnim.PushBack({ 229,186,31,61 });
+	crouchBackwardAnim.PushBack({ 266,186,37,61 });
+	crouchBackwardAnim.loop = true;
+	crouchBackwardAnim.speed = 0.02f;
+
+	//shoot animation
+	shootAnim.PushBack({ 13,283,49,60 });
+	shootAnim.loop = false;
+	shootAnim.speed = 0.05f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -65,7 +89,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && !isJumping)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping)
 	{
 		isJumping = true;
 	}
@@ -74,7 +98,7 @@ update_status ModulePlayer::Update()
 	{
 		if (!jumpState)
 		{
-			if (position.y >= 180)
+			if (position.y >= 150)
 			{
 				currentAnimation = &jumpAnim1;
 				currentAnimation->Reset();
@@ -88,18 +112,18 @@ update_status ModulePlayer::Update()
 					position.x -= speed;
 				}
 			}
-			if (position.y == 180)
+			if (position.y == 150)
 			{
 				jumpState = true;
 			}
 		}
 		else
 		{
-			if (position.y >= 180 && position.y <= 220)
+			if (position.y >= 150 && position.y <= 208)
 			{
 				currentAnimation = &jumpAnim2;
 				currentAnimation->Reset();
-				position.y += speed;
+				position.y += 1.2;
 				if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 				{
 					position.x += speed;
@@ -109,7 +133,7 @@ update_status ModulePlayer::Update()
 					position.x -= speed;
 				}
 			}
-			if (position.y == 220)
+			if (position.y == 208)
 			{
 				isJumping = false;
 				jumpState = false;
@@ -119,8 +143,9 @@ update_status ModulePlayer::Update()
 		currentAnimation->Update();
 		return update_status::UPDATE_CONTINUE;
 	}
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching)
 	{
+		isWalking = true;
 		if (currentAnimation != &forwardAnim)
 		{
 			currentAnimation = &forwardAnim;
@@ -128,8 +153,9 @@ update_status ModulePlayer::Update()
 		}
 		position.x += speed;
 	}
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching)
 	{
+		isWalking = true;
 		if (currentAnimation != &backwardAnim)
 		{
 			currentAnimation = &backwardAnim; 
@@ -139,23 +165,69 @@ update_status ModulePlayer::Update()
 	}
 
 	// Spawn explosion particles when pressing LALT
-	if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !isCrouching)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+		isShooting = true;
+		if (currentAnimation != &shootAnim)
+		{
+			currentAnimation = &shootAnim;
+			currentAnimation->Reset();
+		}
+		App->particles->AddParticle(App->particles->explosion, position.x + 20, position.y - 50);
 	}
 
 	if (App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT)
 	{
-		//if (currentAnimation != &Anim)
-		//{
-		//	currentAnimation = &Anim;
-		//	currentAnimation->Reset();
-		//}
+		isCrouching = true;
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			if (currentAnimation != &crouchForwardAnim)
+			{
+				currentAnimation = &crouchForwardAnim;
+				currentAnimation->Reset();
+			}
+			position.x += speed;
+		}
+		else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			if (currentAnimation != &crouchBackwardAnim)
+			{
+				currentAnimation = &crouchBackwardAnim;
+				currentAnimation->Reset();
+			}
+			position.x -= speed;
+		}
+		else
+		{
+			if (currentAnimation != &crouchAnim)
+			{
+				currentAnimation = &crouchAnim;
+				currentAnimation->Reset();
+			}
+		}
+		
+	}
+
+	if (isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT
+		&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_IDLE
+		|| isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT
+		&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_IDLE)
+	{
+		isCrouching = false;
+		currentAnimation = &idleAnim;
 	}
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
+		&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE 
+		&& App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_IDLE)
+	{
+		isWalking = false;
+		isShooting = false;
+		isCrouching = false;
 		currentAnimation = &idleAnim;
+	}
+
 
 	currentAnimation->Update();
 
