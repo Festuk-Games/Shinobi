@@ -94,7 +94,7 @@ update_status ModuleScene::Update()
 	//next stage condition
 	if (nextStage)
 	{
-		if (App->player->position.x >= 400)
+		if (App->player->position.x >= 4000)
 		{
 			stage1 = false;
 			stage2 = true;

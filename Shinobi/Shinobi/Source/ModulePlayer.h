@@ -51,17 +51,25 @@ public:
 	Animation backwardAnim;
 	Animation crouchAnim, crouchForwardAnim, crouchBackwardAnim;
 	Animation jumpAnim1, jumpAnim2;
+	Animation jumpUpAnim;
 	Animation shootAnim;
 	Animation gunAnim;
 	Animation dieAnim1, dieAnim2, dieAnim3;
 	Animation backAnim;
+	Animation crouchAttackAnim , crouchKickAnim, crouchKatanaAnim;
 
 	iPoint diePosition;
+	int kick = 0;
 	bool diePos = false;
 	bool dieState = false;
 	bool jumpState = false;
 	bool isJumping = false;
+	bool isJumpingUp1 = false;
+	bool isJumpingUp2 = false;
+	bool isJumpingDown1 = false;
+	bool isJumpingDown2 = false;
 	bool isShooting = false;
+	bool isKicking = false;
 	bool isWalking = false;
 	bool isCrouching = false;
 	bool alive = true;
