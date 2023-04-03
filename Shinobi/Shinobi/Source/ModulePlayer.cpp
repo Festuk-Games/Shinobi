@@ -266,6 +266,7 @@ update_status ModulePlayer::Update()
 			}
 			else
 			{
+				L2 = true;
 				if (position.y >= 70 && position.y <= 100)
 				{
 					currentAnimation = &jumpUpAnim;
@@ -308,6 +309,7 @@ update_status ModulePlayer::Update()
 			}
 			else
 			{
+				L2 = false;
 				if (position.y >= 70 && position.y <= 208)
 				{
 					currentAnimation = &jumpUpAnim;

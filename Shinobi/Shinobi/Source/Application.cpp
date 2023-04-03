@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
 #include "ModuleScene.h"
+#include "ModuleAuxScene.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 
@@ -20,9 +21,9 @@ Application::Application()
 
 	modules[3] = scene = new ModuleScene();
 	modules[4] = player = new ModulePlayer();
-
-	modules[5] = particles = new ModuleParticles();
-	modules[6] = render = new ModuleRender();
+	modules[5] = auxscene = new ModuleAuxScene();
+	modules[6] = particles = new ModuleParticles();
+	modules[7] = render = new ModuleRender();
 
 	//modules[] = audio = new ModuleAudio();
 }

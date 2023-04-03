@@ -73,6 +73,8 @@ public:
 	bool isWalking = false;
 	bool isCrouching = false;
 	bool alive = true;
+
+	bool L2 = false;
 };
 
 #endif //!__MODULE_PLAYER_H__

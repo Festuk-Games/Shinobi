@@ -1,5 +1,5 @@
-#ifndef __MODULE_SCENE_H__
-#define __MODULE_SCENE_H__
+#ifndef __MODULE_AUX_SCENE_H__
+#define __MODULE_AUX_SCENE_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -7,14 +7,14 @@
 
 struct SDL_Texture;
 
-class ModuleScene : public Module
+class ModuleAuxScene : public Module
 {
 public:
 	//Constructor
-	ModuleScene();
+	ModuleAuxScene();
 
 	//Destructor
-	~ModuleScene();
+	~ModuleAuxScene();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the map background
@@ -29,7 +29,7 @@ public:
 	update_status PostUpdate();
 
 public:
-	
+
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* stageTexture = nullptr;
 	SDL_Texture* stageTextureL2 = nullptr;
@@ -39,7 +39,7 @@ public:
 	SDL_Texture* stageTexture3 = nullptr;
 	SDL_Texture* skyTexture3 = nullptr;
 	// The sprite rectangle for the ground
-	SDL_Rect ground , sky;
+	SDL_Rect ground, sky;
 
 	// The sprite section for the background
 	SDL_Rect background;

@@ -64,6 +64,7 @@
     <ClInclude Include="ModuleAudio.h">
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleAuxScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -104,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Source Files\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAuxScene.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

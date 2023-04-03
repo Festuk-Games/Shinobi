@@ -1,12 +1,12 @@
-#include "ModuleScene.h"
+#include "ModuleAuxScene.h"
 
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 
-ModuleScene::ModuleScene()
+ModuleAuxScene::ModuleAuxScene()
 {
-	
+
 	if (stage1)
 	{
 		// ground
@@ -65,13 +65,13 @@ ModuleScene::ModuleScene()
 
 }
 
-ModuleScene::~ModuleScene()
+ModuleAuxScene::~ModuleAuxScene()
 {
 
 }
 
 // Load assets
-bool ModuleScene::Start()
+bool ModuleAuxScene::Start()
 {
 	LOG("Loading background assets");
 
@@ -88,7 +88,7 @@ bool ModuleScene::Start()
 	return ret;
 }
 
-update_status ModuleScene::Update()
+update_status ModuleAuxScene::Update()
 {
 	flag.Update();
 
@@ -109,29 +109,14 @@ update_status ModuleScene::Update()
 }
 
 // Update: draw background
-update_status ModuleScene::PostUpdate()
+update_status ModuleAuxScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	if (stage1)
 	{
-		App->render->Blit(skyTexture, 0, -265, &sky, 0.375f); // sky
-		App->render->Blit(stageTexture, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // ground
+
 		if (App->player->L2) App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // groundL2
 	}
-	if (stage2)
-	{
-		App->render->Blit(skyTexture2, 0, -265, &sky, 0.375f); // sky
-		App->render->Blit(stageTexture2, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // ground
-	}
-	if (stage3)
-	{
-		App->render->Blit(skyTexture3, 0, 0, &sky, 0.75); // sky
-		App->render->Blit(stageTexture3, 0, 0, &ground, 0.75f); // ground
-	}
-
-	//App->render->Blit(stageTexture, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
-	
-	//App->render->Blit(stageTexture, 0, 0, &ground);
 
 	return update_status::UPDATE_CONTINUE;
 }
