@@ -9,6 +9,7 @@
 #include "ModuleAuxScene.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
+#include "ModuleAudio.h"
 
 Application::Application()
 {
@@ -23,9 +24,9 @@ Application::Application()
 	modules[4] = player = new ModulePlayer();
 	modules[5] = auxscene = new ModuleAuxScene();
 	modules[6] = particles = new ModuleParticles();
-	modules[7] = render = new ModuleRender();
+	modules[7] = audio = new ModuleAudio();
+	modules[8] = render = new ModuleRender();
 
-	//modules[] = audio = new ModuleAudio();
 }
 
 Application::~Application()

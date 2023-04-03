@@ -1,7 +1,11 @@
-#pragma once
+#ifndef __MODULE_AUDIO_H__
+#define __MODULE_AUDIO_H__
+
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #pragma comment(lib, "SDL_mixer/libx86/SDL2_mixer.lib")
+
+#include "Module.h"
 
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
 #define MAX_FX 200
@@ -13,15 +17,18 @@ public:
 	Audio();
 	~Audio();
 
-	bool Init();
-	bool CleanUp();
+	virtual bool Init();
 
+	virtual bool Start();
 
-	//bool Init() override;
+	virtual update_status PreUpdate();
 
-	//update_status PreUpdate() override;
+	virtual update_status Update();
 
-	//bool CleanUp() override;
+	virtual update_status PostUpdate();
+
+	virtual bool CleanUp();
+
 
 	// Play a music file
 	bool PlayMusic(const char* path, float fade_time = DEFAULT_MUSIC_FADE_TIME);
@@ -39,3 +46,4 @@ private:
 	Mix_Chunk* fx[MAX_FX];
 	int			last_fx = 1;
 };
+#endif
