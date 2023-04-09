@@ -38,8 +38,11 @@ public:
 	SDL_Texture* skyTexture2 = nullptr;
 	SDL_Texture* stageTexture3 = nullptr;
 	SDL_Texture* skyTexture3 = nullptr;
+
+	SDL_Texture* hostage = nullptr;
+
 	// The sprite rectangle for the ground
-	SDL_Rect ground , sky;
+	SDL_Rect ground , sky, host;
 
 	// The sprite section for the background
 	SDL_Rect background;

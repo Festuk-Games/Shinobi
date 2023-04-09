@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
 
+#include "ModuleAudio.h"
 #include "ModuleScene.h"
 
 #include "SDL/include/SDL_scancode.h"
@@ -221,7 +222,9 @@ update_status ModulePlayer::Update()
 				currentAnimation = &shootAnim;
 				currentAnimation->Reset();
 			}
+			App->audio->PlayFx(App->audio->shuriken);
 			App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50);
+
 		}
 
 		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching)
@@ -363,6 +366,7 @@ update_status ModulePlayer::Update()
 					currentAnimation = &crouchAttackAnim;
 					currentAnimation->Reset();
 				}
+				App->audio->PlayFx(App->audio->shuriken);
 				App->particles->AddParticle(App->particles->shuriken, position.x + 35 , position.y - 30);
 			}
 			else if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_DOWN && !isWalking)

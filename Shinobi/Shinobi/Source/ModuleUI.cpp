@@ -6,7 +6,20 @@
 
 ModuleUI::ModuleUI()
 {
+	host.x = 0;
+	host.y = 0;
+	host.h = 8;
+	host.w = 8;
 
+	life.x = 0;
+	life.y = 0;
+	life.h = 8;
+	life.w = 8;
+
+	skill.x = 0;
+	skill.y = 0;
+	skill.h = 14;
+	skill.w = 16;
 }
 
 ModuleUI::~ModuleUI()
@@ -21,7 +34,9 @@ bool ModuleUI::Start()
 
 	bool ret = true;
 
-	/*stageTextureL2 = App->textures->Load("Assets/layer_aa.png");*/
+	hostage = App->textures->Load("Assets/UI/hostage.png");
+	lifes = App->textures->Load("Assets/UI/lifes.png");
+	skill2 = App->textures->Load("Assets/UI/skill2.png");
 
 	return ret;
 }
@@ -36,10 +51,9 @@ update_status ModuleUI::Update()
 update_status ModuleUI::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	//if (stage1)
-	//{
-	//	if (App->player->L2) App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // groundL2
-	//}
+	App->render->Blit(hostage, 0, 0, &host, 0.0f);
+	App->render->Blit(lifes, 16, 0, &life, 0.0f);
+	App->render->Blit(skill2, 50, 0, &skill, 0.0f);
 
 	return update_status::UPDATE_CONTINUE;
 }

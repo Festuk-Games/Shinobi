@@ -31,6 +31,7 @@ bool ModuleParticles::Start()
 	shuriken.anim.loop = true;
 	shuriken.anim.speed = 0.2f;
 
+
 	return true;
 }
 

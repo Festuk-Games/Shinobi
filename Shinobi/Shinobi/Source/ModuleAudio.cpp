@@ -40,6 +40,8 @@ bool ModuleAudio::Init()
 		SDL_Log("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		ret = false;
 	}
+	
+	shuriken = LoadFx("Audio/FX/Shuriken.wav");
 
 	return ret;
 }

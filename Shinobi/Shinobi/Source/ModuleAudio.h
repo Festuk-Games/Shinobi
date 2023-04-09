@@ -31,7 +31,9 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
-	bool isPlaying = nullptr;
+	bool isPlaying = false;
+
+	unsigned int shuriken;
 private:
 
 	Mix_Music* music = nullptr;

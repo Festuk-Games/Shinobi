@@ -29,7 +29,11 @@ public:
 
 public:
 
+	SDL_Texture* hostage = nullptr;
+	SDL_Texture* lifes = nullptr;
+	SDL_Texture* skill2 = nullptr;
 
+	SDL_Rect life, host, skill;
 
 };
 

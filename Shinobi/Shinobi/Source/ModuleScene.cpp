@@ -53,19 +53,6 @@ ModuleScene::ModuleScene()
 
 	}
 
-
-	// Background / sky
-	//ground.x = 0;
-	//ground.y = 0;
-	//ground.w = 2048;
-	//ground.h = 512;
-
-	// flag animation
-	/*flag.PushBack({848, 208, 40, 40});
-	flag.PushBack({848, 256, 40, 40});
-	flag.PushBack({848, 304, 40, 40});
-	flag.speed = 0.08f;*/
-
 }
 
 ModuleScene::~ModuleScene()
@@ -136,6 +123,7 @@ update_status ModuleScene::PostUpdate()
 	{
 		App->render->Blit(skyTexture, 0, -265, &sky, 0.375f); // sky
 		App->render->Blit(stageTexture, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // ground
+
 
 		if (App->audio->isPlaying);
 		else
