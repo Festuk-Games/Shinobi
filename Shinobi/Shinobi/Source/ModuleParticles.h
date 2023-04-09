@@ -53,8 +53,8 @@ private:
 	uint lastParticle = 0;
 
 public:
-	//Template particle for an explosion
-	Particle explosion;
+	//Template particle for an shuriken
+	Particle shuriken;
 };
 
 #endif // !__MODULEPARTICLES_H__

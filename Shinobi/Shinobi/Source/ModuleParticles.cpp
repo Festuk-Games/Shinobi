@@ -23,13 +23,13 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	texture = App->textures->Load("Assets/main.png");
 
-	// Explosion particle
-	explosion.anim.PushBack({ 105, 290, 20, 19 });
-	explosion.anim.PushBack({ 124, 290, 20, 19 });
-	explosion.anim.PushBack({ 145, 290, 20, 19 });
-	explosion.speed = iPoint(2, 0);
-	explosion.anim.loop = true;
-	explosion.anim.speed = 0.2f;
+	// shuriken particle
+	shuriken.anim.PushBack({ 105, 290, 20, 19 });
+	shuriken.anim.PushBack({ 124, 290, 20, 19 });
+	shuriken.anim.PushBack({ 145, 290, 20, 19 });
+	shuriken.speed = iPoint(2, 0);
+	shuriken.anim.loop = true;
+	shuriken.anim.speed = 0.2f;
 
 	return true;
 }

@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "ModuleAudio.h"
 
 ModuleScene::ModuleScene()
 {
@@ -20,6 +21,7 @@ ModuleScene::ModuleScene()
 		sky.y = 0;
 		sky.w = 1312;
 		sky.h = 512;
+
 	}
 	if (stage2)
 	{
@@ -48,6 +50,7 @@ ModuleScene::ModuleScene()
 		sky.y = 0;
 		sky.w = 512;
 		sky.h = 256;
+
 	}
 
 
@@ -93,16 +96,33 @@ update_status ModuleScene::Update()
 	flag.Update();
 
 	//next stage condition
-	if (nextStage)
+	if (nextStage && stage1)
 	{
-		if (App->player->position.x >= 4000)
+		if (App->player->position.x >= 500)
 		{
 			stage1 = false;
 			stage2 = true;
 			App->player->position.x = 30;
 			App->render->camera.x = 0;
 			nextStage = false;
+			App->audio->PlayMusic("Audio/music/mission_2.ogg", 2.0f);
 		}
+	}
+	if (nextStage && stage2)
+	{
+		if (App->player->position.x >= 500)
+		{
+			stage2 = false;
+			stage3 = true;
+			App->player->position.x = 30;
+			App->render->camera.x = 0;
+			nextStage = false;
+			App->audio->PlayMusic("Audio/music/mission_3.ogg", 2.0f);
+		}
+	}
+	if (nextStage && stage3)
+	{
+
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -116,17 +136,25 @@ update_status ModuleScene::PostUpdate()
 	{
 		App->render->Blit(skyTexture, 0, -265, &sky, 0.375f); // sky
 		App->render->Blit(stageTexture, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // ground
-		if (App->player->L2) App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // groundL2
+
+		if (App->audio->isPlaying);
+		else
+		{
+			App->audio->isPlaying = true;
+			App->audio->PlayMusic("Audio/music/mission_1.ogg", 2.0f);
+		}
 	}
 	if (stage2)
 	{
 		App->render->Blit(skyTexture2, 0, -265, &sky, 0.375f); // sky
 		App->render->Blit(stageTexture2, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // ground
+
 	}
 	if (stage3)
 	{
 		App->render->Blit(skyTexture3, 0, 0, &sky, 0.75); // sky
 		App->render->Blit(stageTexture3, 0, 0, &ground, 0.75f); // ground
+
 	}
 
 	//App->render->Blit(stageTexture, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation

@@ -3,10 +3,11 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 9
+#define NUM_MODULES 10
 
 class Module;
 class ModuleWindow;
+class ModuleAudio;
 class ModuleInput;
 class ModuleTextures;
 class ModulePlayer;
@@ -14,8 +15,8 @@ class ModuleScene;
 class ModuleParticles;
 class ModuleRender;
 class ModuleAuxScene;
-class ModuleAudio;
-//class ModuleAudio;
+class ModuleUI;
+
 
 class Application
 {
@@ -43,16 +44,18 @@ public:
 
 	// All the modules stored individually
 	ModuleWindow* window = nullptr;
+	ModuleAudio* audio = nullptr;
 	ModuleInput* input = nullptr;
 	ModuleTextures* textures = nullptr;
 
 	ModulePlayer* player = nullptr;
 	ModuleScene* scene = nullptr;
 	ModuleParticles* particles = nullptr;
-	ModuleAudio* audio = nullptr;
-	ModuleAuxScene* auxscene = nullptr;
 
+	ModuleAuxScene* auxscene = nullptr;
+	ModuleUI* ui = nullptr;
 	ModuleRender* render = nullptr;
+
 };
 
 // Global var made extern for Application ---

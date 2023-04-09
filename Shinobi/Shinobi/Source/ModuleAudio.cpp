@@ -1,17 +1,18 @@
 #include "ModuleAudio.h"
+#include "Application.h"
 
-Audio::Audio()
+ModuleAudio::ModuleAudio()
 {
 	for (int i = 0; i < MAX_FX; ++i)
 		fx[i] = nullptr;
 }
 
-Audio::~Audio()
+ModuleAudio::~ModuleAudio()
 {
 
 }
 
-bool Audio::Init()
+bool ModuleAudio::Init()
 {
 	SDL_Log("Loading Audio Mixer");
 	bool ret = true;
@@ -43,7 +44,8 @@ bool Audio::Init()
 	return ret;
 }
 
-bool Audio::PlayMusic(const char* path, float fade_time)
+
+bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 {
 	bool ret = true;
 
@@ -93,7 +95,7 @@ bool Audio::PlayMusic(const char* path, float fade_time)
 	return ret;
 }
 
-bool Audio::CleanUp()
+bool ModuleAudio::CleanUp()
 {
 	SDL_Log("Freeing sound FX, closing Mixer and Audio subsystem");
 
@@ -113,7 +115,7 @@ bool Audio::CleanUp()
 }
 
 // Load WAV
-int Audio::LoadFx(const char* path)
+int ModuleAudio::LoadFx(const char* path)
 {
 	int ret = 0;
 	Mix_Chunk* chunk = Mix_LoadWAV(path);
@@ -132,7 +134,7 @@ int Audio::LoadFx(const char* path)
 }
 
 // UnLoad WAV
-bool Audio::UnLoadFx(int id)
+bool ModuleAudio::UnLoadFx(int id)
 {
 	bool ret = false;
 
@@ -147,7 +149,7 @@ bool Audio::UnLoadFx(int id)
 }
 
 // Play WAV
-bool Audio::PlayFx(unsigned int id, int repeat)
+bool ModuleAudio::PlayFx(unsigned int id, int repeat)
 {
 	bool ret = false;
 

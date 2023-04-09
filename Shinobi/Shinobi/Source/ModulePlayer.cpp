@@ -6,6 +6,8 @@
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
 
+#include "ModuleScene.h"
+
 #include "SDL/include/SDL_scancode.h"
 
 
@@ -135,7 +137,7 @@ update_status ModulePlayer::Update()
 	if (alive)
 	{
 
-		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && !isJumpingUp1 && !isJumpingDown1)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && !isJumpingUp1 && !isJumpingDown1 && position.y >= 150)
 		{
 			isJumping = true;
 		}
@@ -210,7 +212,7 @@ update_status ModulePlayer::Update()
 			position.x -= speed;
 		}
 
-		// Spawn explosion particles when pressing LALT
+		// Spawn shuriken particles when pressing LALT
 		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !isCrouching)
 		{
 			isShooting = true;
@@ -219,7 +221,7 @@ update_status ModulePlayer::Update()
 				currentAnimation = &shootAnim;
 				currentAnimation->Reset();
 			}
-			App->particles->AddParticle(App->particles->explosion, position.x + 35, position.y - 50);
+			App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50);
 		}
 
 		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching)
@@ -242,7 +244,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && isJumpingUp1)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && isJumpingUp1 && App->scene->stage1)
 		{
 			isJumpingUp2 = true;
 		}
@@ -361,7 +363,7 @@ update_status ModulePlayer::Update()
 					currentAnimation = &crouchAttackAnim;
 					currentAnimation->Reset();
 				}
-				App->particles->AddParticle(App->particles->explosion, position.x + 35, position.y - 30);
+				App->particles->AddParticle(App->particles->shuriken, position.x + 35 , position.y - 30);
 			}
 			else if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_DOWN && !isWalking)
 			{

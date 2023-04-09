@@ -1,33 +1,24 @@
 #ifndef __MODULE_AUDIO_H__
 #define __MODULE_AUDIO_H__
 
+#include "Module.h"
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #pragma comment(lib, "SDL_mixer/libx86/SDL2_mixer.lib")
 
-#include "Module.h"
-
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
 #define MAX_FX 200
 
-class Audio
+class ModuleAudio : public Module
 {
 public:
 
-	Audio();
-	~Audio();
+	ModuleAudio();
+	~ModuleAudio();
 
-	virtual bool Init();
+	bool Init();
 
-	virtual bool Start();
-
-	virtual update_status PreUpdate();
-
-	virtual update_status Update();
-
-	virtual update_status PostUpdate();
-
-	virtual bool CleanUp();
+	bool CleanUp();
 
 
 	// Play a music file
@@ -40,6 +31,7 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
+	bool isPlaying = nullptr;
 private:
 
 	Mix_Music* music = nullptr;
