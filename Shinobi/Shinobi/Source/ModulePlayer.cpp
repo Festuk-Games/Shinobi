@@ -224,7 +224,7 @@ update_status ModulePlayer::Update()
 			}
 			App->audio->PlayFx(App->audio->shuriken);
 			App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50);
-
+		
 		}
 
 		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching)

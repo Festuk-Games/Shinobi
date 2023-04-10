@@ -31,7 +31,11 @@ public:
 
 	SDL_Texture* hostage = nullptr;
 	SDL_Texture* lifes = nullptr;
+	SDL_Texture* skill1 = nullptr;
 	SDL_Texture* skill2 = nullptr;
+	SDL_Texture* skill3 = nullptr;
+
+	bool sk1 = true, sk2 = false, sk3 = false;
 
 	SDL_Rect life, host, skill;
 
