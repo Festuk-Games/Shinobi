@@ -34,10 +34,21 @@ public:
 	SDL_Texture* skill1 = nullptr;
 	SDL_Texture* skill2 = nullptr;
 	SDL_Texture* skill3 = nullptr;
+	SDL_Texture* save = nullptr;
+	SDL_Texture* nums = nullptr;
 
-	bool sk1 = true, sk2 = false, sk3 = false;
 
-	SDL_Rect life, host, skill;
+
+	bool sk1 = false, sk2 = true, sk3 = false;
+
+	int timesec2 = 9;
+	int timesec1 = 5;
+	int timemin = 2;
+	int timef2 = 0;
+	int timef1 = 0;
+	int timef3 = 0;
+
+	SDL_Rect life, savet, host, skill, timer[10], points;
 
 };
 

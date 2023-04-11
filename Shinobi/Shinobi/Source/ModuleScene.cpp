@@ -80,7 +80,6 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	flag.Update();
 
 	//next stage condition
 	if (nextStage && stage1)

@@ -20,6 +20,19 @@ ModuleUI::ModuleUI()
 	skill.y = 0;
 	skill.h = 14;
 	skill.w = 16;
+
+	savet.x = 0;
+	savet.y = 0;
+	savet.h = 8;
+	savet.w = 16;
+	
+	for	(int i = 0; i < 10; i++)
+	{
+		timer[i] = { 1 + 8* i, 1, 7, 14 };
+	}
+
+	points = { 81, 12, 3, 3 };
+
 }
 
 ModuleUI::~ModuleUI()
@@ -39,12 +52,38 @@ bool ModuleUI::Start()
 	skill1 = App->textures->Load("Assets/UI/skill1.png");
 	skill2 = App->textures->Load("Assets/UI/skill2.png");
 	skill3 = App->textures->Load("Assets/UI/skill3.png");
+	nums = App->textures->Load("Assets/UI/nums.png");
+	save = App->textures->Load("Assets/UI/save.png");
 
 	return ret;
 }
 
 update_status ModuleUI::Update()
 {
+
+	//Timer one number every second
+	timef2++;
+	if (timef2 == 120)
+	{
+		timesec2--;
+		timef2 = 0;
+	}
+	if (timesec2 < 0) timesec2 = 9;
+
+	timef1++;
+	if (timef1 == 1200)
+	{
+		timesec1--;
+		timef1 = 0;
+	}
+	if (timesec1 < 0) timesec1 = 5;
+
+	timef3++;
+	if (timef3 == 1200*6)
+	{
+		timemin--;
+		timef3 = 0;
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -57,30 +96,38 @@ update_status ModuleUI::PostUpdate()
 	//Draw the hostages
 	for (int i = 0; i < 4; i++)
 	{
-		App->render->Blit(hostage, 8 + 8 * i, 0, &host, 0.0f);
+		App->render->Blit(hostage, 40 + 8 * i, 200, &host, 0.0f);
 	}
 
 	//Draw the lifes
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		App->render->Blit(lifes, 16 + 8 * i, 0, &life, 0.0f);
+		App->render->Blit(lifes, 16 + 8 * i, 20, &life, 0.0f);
 	}
 
 	//Draw the skills icons
 	if (sk1)
 	{
-		App->render->Blit(skill1, 0, 0, &skill, 0.0f);
+		App->render->Blit(skill1, 266, 200, &skill, 0.0f);
 	}
 	else if (sk2)
 	{
-		App->render->Blit(skill2, 0, 0, &skill, 0.0f);
+		App->render->Blit(skill2, 266, 200, &skill, 0.0f);
 	}
 	else if (sk3)
 	{
-		App->render->Blit(skill3, 0, 0, &skill, 0.0f);
+		App->render->Blit(skill3, 266, 200, &skill, 0.0f);
 	}
 
-
+	App->render->Blit(save, 24, 200, &savet, 0.0f);
+	
+	App->render->Blit(nums, 286, 200, &timer[timemin], 0.0f);
+	App->render->Blit(nums, 295, 203, &points, 0.0f);
+	App->render->Blit(nums, 295, 208, &points, 0.0f);
+	App->render->Blit(nums, 300, 200, &timer[timesec1], 0.0f);
+	App->render->Blit(nums, 308, 200, &timer[timesec2], 0.0f);
+	
+	
 
 	return update_status::UPDATE_CONTINUE;
 }
