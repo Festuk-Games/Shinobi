@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "ModuleScene.h"
 
 ModuleUI::ModuleUI()
 {
@@ -116,6 +117,12 @@ update_status ModuleUI::Update()
 		time1p = 0;
 	}
 
+	if (hostages == 0)
+	{
+		App->scene->nextStage = true;
+
+	}
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -150,7 +157,10 @@ update_status ModuleUI::PostUpdate()
 		App->render->Blit(skill3, 266, 200, &skill, 0.0f);
 	}
 
-	App->render->Blit(nums, 24, 200, &savet, 0.0f);
+	if (!App->scene->nextStage)
+	{
+		App->render->Blit(nums, 24, 200, &savet, 0.0f);
+	}
 	
 	App->render->Blit(nums, 286, 200, &timer[timemin], 0.0f);
 	App->render->Blit(nums, 295, 203, &points, 0.0f);

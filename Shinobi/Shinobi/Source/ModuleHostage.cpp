@@ -69,6 +69,15 @@ update_status ModuleHostage::Update()
 		}
 	}
 
+	if (App->player->position.x == 300 && App->player->position.y == 208)
+	{
+		if (!h[1].col)
+		{
+			App->ui->hostages--;
+			h[1].col = true;
+		}
+	}
+
 	return update_status::UPDATE_CONTINUE;
 }
 
