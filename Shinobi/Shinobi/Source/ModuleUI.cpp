@@ -21,10 +21,35 @@ ModuleUI::ModuleUI()
 	skill.h = 14;
 	skill.w = 16;
 
-	savet.x = 0;
-	savet.y = 0;
+	savet.x = 85;
+	savet.y = 7;
 	savet.h = 8;
 	savet.w = 16;
+
+	sega.x = 1;
+	sega.y = 17;
+	sega.h = 8;
+	sega.w = 40;
+
+	coin.x = 1;
+	coin.y = 27;
+	coin.h = 8;
+	coin.w = 90;
+
+	t1987.x = 1;
+	t1987.y = 37;
+	t1987.h = 8;
+	t1987.w = 32;
+
+	blue1p.x = 18;
+	blue1p.y = 47;
+	blue1p.h = 8;
+	blue1p.w = 14;
+
+	white1p.x = 1;
+	white1p.y = 47;
+	white1p.h = 8;
+	white1p.w = 14;
 	
 	for	(int i = 0; i < 10; i++)
 	{
@@ -53,14 +78,12 @@ bool ModuleUI::Start()
 	skill2 = App->textures->Load("Assets/UI/skill2.png");
 	skill3 = App->textures->Load("Assets/UI/skill3.png");
 	nums = App->textures->Load("Assets/UI/nums.png");
-	save = App->textures->Load("Assets/UI/save.png");
 
 	return ret;
 }
 
 update_status ModuleUI::Update()
 {
-
 	//Timer one number every second
 	timef2++;
 	if (timef2 == 120)
@@ -83,6 +106,14 @@ update_status ModuleUI::Update()
 	{
 		timemin--;
 		timef3 = 0;
+	}
+
+	time1p++;
+	if (time1p == 200)
+	{
+		if (blue) blue = false;
+		else blue = true;
+		time1p = 0;
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -119,7 +150,7 @@ update_status ModuleUI::PostUpdate()
 		App->render->Blit(skill3, 266, 200, &skill, 0.0f);
 	}
 
-	App->render->Blit(save, 24, 200, &savet, 0.0f);
+	App->render->Blit(nums, 24, 200, &savet, 0.0f);
 	
 	App->render->Blit(nums, 286, 200, &timer[timemin], 0.0f);
 	App->render->Blit(nums, 295, 203, &points, 0.0f);
@@ -127,6 +158,8 @@ update_status ModuleUI::PostUpdate()
 	App->render->Blit(nums, 300, 200, &timer[timesec1], 0.0f);
 	App->render->Blit(nums, 308, 200, &timer[timesec2], 0.0f);
 	
+	if (blue) App->render->Blit(nums, 16, 12, &blue1p, 0.0f);
+	else App->render->Blit(nums, 16, 12, &white1p, 0.0f);
 	
 
 	return update_status::UPDATE_CONTINUE;

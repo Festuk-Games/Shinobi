@@ -34,7 +34,6 @@ public:
 	SDL_Texture* skill1 = nullptr;
 	SDL_Texture* skill2 = nullptr;
 	SDL_Texture* skill3 = nullptr;
-	SDL_Texture* save = nullptr;
 	SDL_Texture* nums = nullptr;
 
 
@@ -48,7 +47,10 @@ public:
 	int timef1 = 0;
 	int timef3 = 0;
 
-	SDL_Rect life, savet, host, skill, timer[10], points;
+	int time1p = 0;
+	bool blue = false;
+
+	SDL_Rect life, savet, host, skill, timer[10], points, sega, coin, t1987, blue1p, white1p;
 
 };
 
