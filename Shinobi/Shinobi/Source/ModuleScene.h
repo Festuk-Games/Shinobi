@@ -51,7 +51,7 @@ public:
 	Animation flag;
 
 	bool stage1 = true, stage1L2 = false, stage2 = false, stage3 = false;
-	bool nextStage = true;
+	bool nextStage = false;
 
 };
 

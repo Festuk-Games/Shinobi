@@ -192,7 +192,7 @@ update_status ModulePlayer::Update()
 			currentAnimation->Update();
 			return update_status::UPDATE_CONTINUE;
 		}
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && position.x > 20 && position.x < 2550)
 		{
 			isWalking = true;
 			if (currentAnimation != &forwardAnim)
@@ -202,7 +202,7 @@ update_status ModulePlayer::Update()
 			}
 			position.x += speed;
 		}
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && position.x > 20 && position.x < 2550)
 		{
 			isWalking = true;
 			if (currentAnimation != &backwardAnim)
