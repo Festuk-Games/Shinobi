@@ -78,6 +78,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleAuxScene.h" />
+    <ClInclude Include="ModuleHostage.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModuleScene.h" />
     <ClInclude Include="ModuleInput.h" />
@@ -97,6 +98,7 @@
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleAuxScene.cpp" />
+    <ClCompile Include="ModuleHostage.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModuleScene.cpp" />
     <ClCompile Include="ModuleInput.cpp" />

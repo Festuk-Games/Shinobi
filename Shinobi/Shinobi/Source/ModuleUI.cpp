@@ -125,7 +125,7 @@ update_status ModuleUI::PostUpdate()
 {
 	
 	//Draw the hostages
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < hostages; i++)
 	{
 		App->render->Blit(hostage, 40 + 8 * i, 200, &host, 0.0f);
 	}

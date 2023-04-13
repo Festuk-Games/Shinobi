@@ -70,6 +70,7 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleHostage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -116,6 +117,9 @@
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Source Files\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleHostage.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
