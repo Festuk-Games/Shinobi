@@ -5,6 +5,7 @@
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
 
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_scancode.h"
@@ -64,11 +65,34 @@ update_status ModuleRender::Update()
 		camera.y -= cameraSpeed;
 
 	//Handle horizontal movement of the camera
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && camera.x <=-1)
-		camera.x += cameraSpeed;
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && camera.x >= -6655)
-		camera.x -= cameraSpeed;
 
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && camera.x <=-1)
+	{
+		if (changedirection && App->player->position.x <= 200)
+		{
+			auxpos = 0;
+			changedirection = false;
+		}
+		else if(App->player->position.x <= 2350)
+		{
+			camera.x += cameraSpeed;
+			
+		}
+	}
+
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && camera.x >= -6655)
+	{
+		if (!changedirection && App->player->position.x <= 200)
+		{
+			auxpos = 0;
+			changedirection = true;
+		}
+		else
+		{
+			if (auxpos == 100) camera.x -= cameraSpeed;
+			else auxpos++;
+		}
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
