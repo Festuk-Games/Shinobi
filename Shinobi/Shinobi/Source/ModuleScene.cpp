@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
+#include "ModuleCollisions.h"
 
 ModuleScene::ModuleScene()
 {
@@ -74,6 +75,8 @@ bool ModuleScene::Start()
 	skyTexture2 = App->textures->Load("Assets/layer_b1.png");
 	stageTexture3 = App->textures->Load("Assets/layer_a2.png");
 	skyTexture3 = App->textures->Load("Assets/layer_b2.png");
+
+	App->collisions->AddCollider({ 416, 208-32, 32, 32 }, Collider::Type::BOX);
 
 	return ret;
 }

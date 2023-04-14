@@ -46,6 +46,12 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::HOSTAGE][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::HOSTAGE][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::HOSTAGE][Collider::Type::ENEMY_SHOT] = false;
+
+	matrix[Collider::Type::BOX][Collider::Type::WALL] = false;
+	matrix[Collider::Type::BOX][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::BOX][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::BOX][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::BOX][Collider::Type::ENEMY_SHOT] = true;
 }
 
 // Destructor
@@ -133,7 +139,7 @@ void ModuleCollisions::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
 			case Collider::Type::PLAYER: // green
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
+			App->render->DrawQuadPlayer(colliders[i]->rect, 0, 255, 0, alpha, 3.0f);
 			break;
 			case Collider::Type::ENEMY: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
@@ -143,6 +149,12 @@ void ModuleCollisions::DebugDraw()
 			break;
 			case Collider::Type::ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			break;
+			case Collider::Type::HOSTAGE: // blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+			break;
+			case Collider::Type::BOX: // blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha, -0.75f);
 			break;
 		}
 	}

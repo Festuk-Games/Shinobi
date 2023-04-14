@@ -9,6 +9,8 @@
 #include "ModuleAudio.h"
 #include "ModuleScene.h"
 
+#include "ModuleCollisions.h"
+
 #include "SDL/include/SDL_scancode.h"
 
 
@@ -129,6 +131,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/main.png"); 
+	App->collisions->AddCollider({ 180, 150, 35, 58 }, Collider::Type::PLAYER);
 
 	return ret;
 } 

@@ -45,6 +45,7 @@ public:
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section = nullptr, float speed = 1.0f);
 
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f);
+	bool DrawQuadPlayer(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f);
 
 public:
 	// Rendering context used for any rendering action
@@ -53,9 +54,7 @@ public:
 	// A rectangle that represents the camera section
 	// Sprites will be rendered to the screen depending on the camera position
 	SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-
-	int auxpos = 0;
-	bool changedirection = false;
+	SDL_Rect playercamera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
 	// The speed at which the camera will be moving
 	int cameraSpeed = 9;
