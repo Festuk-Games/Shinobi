@@ -71,6 +71,8 @@
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleHostage.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="ModuleCollisions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -119,6 +121,12 @@
       <Filter>Source Files\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleHostage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCollisions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -12,6 +12,7 @@
 #include "ModuleAudio.h"
 #include "ModuleUI.h"
 #include "ModuleHostage.h"
+#include "ModuleCollisions.h"
 
 Application::Application()
 {
@@ -29,8 +30,9 @@ Application::Application()
 	modules[6] = auxscene = new ModuleAuxScene();
 	modules[7] = ui = new ModuleUI();
 	modules[8] = particles = new ModuleParticles();
-	modules[9] = render = new ModuleRender();
-	modules[10] = audio = new ModuleAudio();
+	modules[9] = collisions = new ModuleCollisions();
+	modules[10] = render = new ModuleRender();
+	modules[11] = audio = new ModuleAudio();
 
 }
 

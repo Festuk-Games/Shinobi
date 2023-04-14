@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 11
+#define NUM_MODULES 12
 
 class Module;
 class ModuleWindow;
@@ -17,6 +17,7 @@ class ModuleRender;
 class ModuleAuxScene;
 class ModuleUI;
 class ModuleHostage;
+class ModuleCollisions;
 
 
 class Application
@@ -56,6 +57,7 @@ public:
 	ModuleAuxScene* auxscene = nullptr;
 	ModuleUI* ui = nullptr;
 	ModuleRender* render = nullptr;
+	ModuleCollisions* collisions = nullptr;
 
 	ModuleHostage* hostage = nullptr;
 
