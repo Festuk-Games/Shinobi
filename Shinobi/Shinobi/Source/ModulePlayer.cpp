@@ -28,7 +28,7 @@ ModulePlayer::ModulePlayer()
 	forwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
 	forwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
 	forwardAnim.loop = true;
-	forwardAnim.speed = 0.05f;
+	forwardAnim.speed = 0.2f;
 
 	//walk backward animation
 	backwardAnim.PushBack({ 5, 112, 40 - 5, 172 - 112 });
@@ -38,15 +38,15 @@ ModulePlayer::ModulePlayer()
 	backwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
 	backwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
 	backwardAnim.loop = true;
-	backwardAnim.speed = 0.05f;
+	backwardAnim.speed = 0.2f;
 
 	//jump animation
 	jumpAnim1.PushBack({ 11, 410, 46 - 11, 470 - 410 });
 	jumpAnim2.PushBack({ 47, 384, 82 - 47, 470 - 410 });
 	jumpAnim1.loop = false;
-	jumpAnim1.speed = 0.05f;
+	jumpAnim1.speed = 0.1f;
 	jumpAnim2.loop = false;
-	jumpAnim2.speed = 0.05f;
+	jumpAnim2.speed = 0.1f;
 
 	//jump up animation
 	jumpUpAnim.PushBack({ 172, 745, 45, 42});
@@ -57,33 +57,33 @@ ModulePlayer::ModulePlayer()
 	//crouch animation
 	crouchAnim.PushBack({15,186,37,61});
 	crouchAnim.loop = false;
-	crouchAnim.speed = 0.05f;
+	crouchAnim.speed = 0.1f;
 
 	//crouch right animation
 	crouchForwardAnim.PushBack({ 180,186,43,61 });
 	crouchForwardAnim.PushBack({ 229,186,31,61 });
 	crouchForwardAnim.PushBack({ 266,186,37,61 });
 	crouchForwardAnim.loop = true;
-	crouchForwardAnim.speed = 0.02f;
+	crouchForwardAnim.speed = 0.1f;
 
 	//crouch left animation
 	crouchBackwardAnim.PushBack({ 180,186,43,61 });
 	crouchBackwardAnim.PushBack({ 229,186,31,61 });
 	crouchBackwardAnim.PushBack({ 266,186,37,61 });
 	crouchBackwardAnim.loop = true;
-	crouchBackwardAnim.speed = 0.02f;
+	crouchBackwardAnim.speed = 0.1f;
 
 	//crouch attack animation
 	crouchAttackAnim.PushBack({ 760,186,53,61 });
 	crouchAttackAnim.loop = false;
-	crouchAttackAnim.speed = 0.05f;
+	crouchAttackAnim.speed = 0.1f;
 
 	//crouch kick animation
 	crouchKickAnim.PushBack({ 380,654,45,40 });
 	crouchKickAnim.PushBack({ 431,654,67,40 });
 	crouchKickAnim.PushBack({ 504,654,45,40 });
 	crouchKickAnim.loop = false;
-	crouchKickAnim.speed = 0.04f;
+	crouchKickAnim.speed = 0.1f;
 
 	//crouch katana animation
 	crouchKatanaAnim.PushBack({ 15,825,50,52 });
@@ -94,12 +94,12 @@ ModulePlayer::ModulePlayer()
 	crouchKatanaAnim.PushBack({ 306,825,50,52 });
 	crouchKatanaAnim.PushBack({ 355,825,38,52 });
 	crouchKatanaAnim.loop = false;
-	crouchKatanaAnim.speed = 0.08f;
+	crouchKatanaAnim.speed = 0.2f;
 
 	//shoot animation
 	shootAnim.PushBack({ 13,283,49,60 });
 	shootAnim.loop = false;
-	shootAnim.speed = 0.05f;
+	shootAnim.speed = 0.1f;
 
 	//die animation
 	dieAnim1.PushBack({ 99,650,42,44 });
@@ -107,14 +107,14 @@ ModulePlayer::ModulePlayer()
 	dieAnim2.PushBack({ 194,650,62,44 });
 	dieAnim2.PushBack({ 262,650,72,44 });
 	dieAnim1.loop = false;
-	dieAnim1.speed = 0.01f;
+	dieAnim1.speed = 0.1f;
 	dieAnim2.loop = false;
-	dieAnim2.speed = 0.03f;
+	dieAnim2.speed = 0.1f;
 
 	//back animation
 	backAnim.PushBack({ 127,735,46,52 });
 	backAnim.loop = false;
-	backAnim.speed = 0.05f;
+	backAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -147,11 +147,11 @@ update_status ModulePlayer::Update()
 		{
 			if (!jumpState)
 			{
-				if (position.y >= 150)
+				if (position.y >= 152)
 				{
 					currentAnimation = &jumpAnim1;
 					currentAnimation->Reset();
-					position.y -= speed;
+					position.y -= 4;
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 					{
 						position.x += speed;
@@ -161,18 +161,18 @@ update_status ModulePlayer::Update()
 						position.x -= speed;
 					}
 				}
-				if (position.y == 150)
+				if (position.y == 152)
 				{
 					jumpState = true;
 				}
 			}
 			else
 			{
-				if (position.y >= 150 && position.y <= 208)
+				if (position.y >= 152 && position.y <= 208)
 				{
 					currentAnimation = &jumpAnim2;
 					currentAnimation->Reset();
-					position.y += 1.2;
+					position.y += 4;
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 					{
 						position.x += speed;

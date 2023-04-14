@@ -93,6 +93,7 @@ update_status ModuleRender::Update()
 			else auxpos++;
 		}
 	}
+	
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -101,6 +102,8 @@ update_status ModuleRender::PostUpdate()
 {
 	//Update the screen
 	SDL_RenderPresent(renderer);
+
+	SDL_Delay(16.666);
 
 	return update_status::UPDATE_CONTINUE;
 }

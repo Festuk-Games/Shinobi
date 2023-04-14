@@ -26,11 +26,11 @@ ModuleHostage::ModuleHostage()
 		h[i].idleAnim.PushBack({ 7, 12, 24, 29 });
 		h[i].idleAnim.PushBack({ 36, 12, 24, 29 });
 		h[i].idleAnim.loop = true;
-		h[i].idleAnim.speed = 0.05f;
+		h[i].idleAnim.speed = 0.1f;
 
 		h[i].exitAnim.PushBack({ 7, 12, 24, 29 });
 		h[i].exitAnim.loop = true;
-		h[i].exitAnim.speed = 0.05f;
+		h[i].exitAnim.speed = 0.1f;
 
 	}
 
@@ -88,7 +88,7 @@ update_status ModuleHostage::PostUpdate()
 	{
 		if (!h[i].col)
 		{
-			App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, &rect);
+			App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, &rect, 2.0f);
 		}
 	}
 

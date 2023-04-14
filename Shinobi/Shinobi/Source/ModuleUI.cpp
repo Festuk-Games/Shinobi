@@ -87,7 +87,7 @@ update_status ModuleUI::Update()
 {
 	//Timer one number every second
 	timef2++;
-	if (timef2 == 120)
+	if (timef2 == 60)
 	{
 		timesec2--;
 		timef2 = 0;
@@ -95,7 +95,7 @@ update_status ModuleUI::Update()
 	if (timesec2 < 0) timesec2 = 9;
 
 	timef1++;
-	if (timef1 == 1200)
+	if (timef1 == 600)
 	{
 		timesec1--;
 		timef1 = 0;
@@ -103,14 +103,14 @@ update_status ModuleUI::Update()
 	if (timesec1 < 0) timesec1 = 5;
 
 	timef3++;
-	if (timef3 == 1200*6)
+	if (timef3 == 600*6)
 	{
 		timemin--;
 		timef3 = 0;
 	}
 
 	time1p++;
-	if (time1p == 200)
+	if (time1p == 40)
 	{
 		if (blue) blue = false;
 		else blue = true;
