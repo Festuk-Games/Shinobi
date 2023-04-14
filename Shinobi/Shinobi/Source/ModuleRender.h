@@ -58,7 +58,7 @@ public:
 	bool changedirection = false;
 
 	// The speed at which the camera will be moving
-	int cameraSpeed = 3;
+	int cameraSpeed = 9;
 };
 
 #endif //__MODULE_RENDER_H__

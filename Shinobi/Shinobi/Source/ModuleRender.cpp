@@ -1,3 +1,5 @@
+#include <iostream>
+using namespace std;
 #include "ModuleRender.h"
 
 #include "Application.h"
@@ -66,31 +68,25 @@ update_status ModuleRender::Update()
 
 	//Handle horizontal movement of the camera
 
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && camera.x <=-1)
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
-		if (changedirection && App->player->position.x <= 200)
+		if (camera.x <= -1)
 		{
-			auxpos = 0;
-			changedirection = false;
-		}
-		else if(App->player->position.x <= 2350)
-		{
-			camera.x += cameraSpeed;
-			
+			if (App->player->position.x <= 2390)
+			{
+				camera.x += cameraSpeed;
+			}
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && camera.x >= -6655)
-	{
-		if (!changedirection && App->player->position.x <= 200)
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+	{	
+		if (camera.x >= -6655)
 		{
-			auxpos = 0;
-			changedirection = true;
-		}
-		else
-		{
-			if (auxpos == 100) camera.x -= cameraSpeed;
-			else auxpos++;
+			if (App->player->position.x >= 180)
+			{
+				camera.x -= cameraSpeed;
+			}
 		}
 	}
 	
@@ -103,7 +99,10 @@ update_status ModuleRender::PostUpdate()
 	//Update the screen
 	SDL_RenderPresent(renderer);
 
-	SDL_Delay(16.666);
+	cout << App->player->position.x << endl;
+	cout << camera.x << endl;
+
+	//SDL_Delay(16.666);
 
 	return update_status::UPDATE_CONTINUE;
 }

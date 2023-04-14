@@ -60,7 +60,7 @@ update_status ModuleHostage::Update()
 		currentAnimation->Update();
 	}
 
-	if (App->player->position.x == 200 && App->player->position.y == 208)
+	if (App->player->position.x == 198 && App->player->position.y == 208)
 	{
 		if (!h[0].col)
 		{
@@ -88,7 +88,7 @@ update_status ModuleHostage::PostUpdate()
 	{
 		if (!h[i].col)
 		{
-			App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, &rect, 2.0f);
+			App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, &rect, 0.75f);
 		}
 	}
 
