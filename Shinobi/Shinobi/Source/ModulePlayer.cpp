@@ -1,4 +1,6 @@
 #include "ModulePlayer.h"
+#include <iostream>
+using namespace std;
 
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -131,7 +133,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/main.png"); 
-	App->collisions->AddCollider({ 180, 150, 35, 58 }, Collider::Type::PLAYER);
+	/*collider = App->collisions->AddCollider({ position.x, position.y, 35, 58 }, Collider::Type::PLAYER, this);*/
 
 	return ret;
 } 
@@ -226,7 +228,7 @@ update_status ModulePlayer::Update()
 				currentAnimation->Reset();
 			}
 			App->audio->PlayFx(App->audio->shuriken);
-			App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50);
+			App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
 		
 		}
 
@@ -370,7 +372,7 @@ update_status ModulePlayer::Update()
 					currentAnimation->Reset();
 				}
 				App->audio->PlayFx(App->audio->shuriken);
-				App->particles->AddParticle(App->particles->shuriken, position.x + 35 , position.y - 30);
+				App->particles->AddParticle(App->particles->shuriken, position.x + 35 , position.y - 30, Collider::Type::PLAYER_SHOT);
 			}
 			else if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_DOWN && !isWalking)
 			{
@@ -479,7 +481,10 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	/*collider->SetPos(position.x, position.y-50);*/
+
 	currentAnimation->Update();
+
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -490,4 +495,11 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(texture, position.x, position.y - rect.h, &rect);
 
 	return update_status::UPDATE_CONTINUE;
+}
+
+void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
+{
+
+		cout << "collision" << endl;
+	
 }

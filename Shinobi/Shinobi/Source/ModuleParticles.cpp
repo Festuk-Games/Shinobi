@@ -4,6 +4,7 @@
 
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "ModuleCollisions.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -24,12 +25,18 @@ bool ModuleParticles::Start()
 	texture = App->textures->Load("Assets/main.png");
 
 	// shuriken particle
-	shuriken.anim.PushBack({ 105, 290, 20, 19 });
-	shuriken.anim.PushBack({ 124, 290, 20, 19 });
-	shuriken.anim.PushBack({ 145, 290, 20, 19 });
+	shuriken.anim.PushBack({ 109, 293, 12, 8 });
+	shuriken.anim.PushBack({ 129, 293, 12, 8 });
+	shuriken.anim.PushBack({ 149, 293, 12, 8 });
 	shuriken.speed = iPoint(5, 0);
 	shuriken.anim.loop = true;
 	shuriken.anim.speed = 0.2f;
+
+	hit.anim.PushBack({ 384, 329, 14, 14 });
+	hit.anim.PushBack({ 406, 329, 14, 14 });
+	hit.anim.PushBack({ 426, 329, 14, 14 });
+	hit.anim.loop = false;
+	hit.anim.speed = 0.3f;
 
 
 	return true;
@@ -87,14 +94,40 @@ update_status ModuleParticles::PostUpdate()
 	return update_status::UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, uint delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType, uint delay)
 {
-	Particle* p = new Particle(particle);
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		//Finding an empty slot for a new particle
+		if (particles[i] == nullptr)
+		{
+			Particle* p = new Particle(particle);
 
-	p->frameCount = -(int)delay;			// We start the frameCount as the negative delay
-	p->position.x = x;						// so when frameCount reaches 0 the particle will be activated
-	p->position.y = y;
+			p->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+			p->position.x = x;						// so when frameCount reaches 0 the particle will be activated
+			p->position.y = y;
 
-	particles[lastParticle++] = p;
-	lastParticle %= MAX_ACTIVE_PARTICLES;
+			//Adding the particle's collider
+			if (colliderType != Collider::Type::NONE)
+				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);
+
+			particles[i] = p;
+			break;
+		}
+	}
+}
+
+void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		// Always destroy particles that collide
+		if (particles[i] != nullptr && particles[i]->collider == c1)
+		{
+			AddParticle(hit, particles[i]->position.x, particles[i]->position.y);
+			delete particles[i];
+			particles[i] = nullptr;
+			break;
+		}
+	}
 }

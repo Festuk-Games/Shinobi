@@ -68,15 +68,37 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	stageTexture = App->textures->Load("Assets/layer_a.png");
-	stageTextureL2 = App->textures->Load("Assets/layer_aa.png");
-	skyTexture = App->textures->Load("Assets/layer_b.png");
-	stageTexture2 = App->textures->Load("Assets/layer_a1.png");
-	skyTexture2 = App->textures->Load("Assets/layer_b1.png");
-	stageTexture3 = App->textures->Load("Assets/layer_a2.png");
-	skyTexture3 = App->textures->Load("Assets/layer_b2.png");
 
-	App->collisions->AddCollider({ 416, 208-32, 32, 32 }, Collider::Type::BOX);
+	if (stage1)
+	{
+		stageTexture = App->textures->Load("Assets/layer_a.png");
+		stageTextureL2 = App->textures->Load("Assets/layer_aa.png");
+		skyTexture = App->textures->Load("Assets/layer_b.png");
+		stageTexture2 = App->textures->Load("Assets/layer_a1.png");
+		skyTexture2 = App->textures->Load("Assets/layer_b1.png");
+		stageTexture3 = App->textures->Load("Assets/layer_a2.png");
+		skyTexture3 = App->textures->Load("Assets/layer_b2.png");
+
+		App->collisions->AddCollider({ 416, 176, 32, 32 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 704, 176, 32, 32 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 864, 176, 32, 32 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 1408, 144, 32, 32 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 1408, 176, 32, 32 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 1440, 176, 32, 32 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 1472, 176, 32, 32 }, Collider::Type::BOX);
+
+		App->collisions->AddCollider({ 544, 64, 32, 32 }, Collider::Type::WALL);
+
+		App->collisions->AddCollider({ 0, 208, 2048, 16 }, Collider::Type::WALL);
+		App->collisions->AddCollider({ 96, 96, 992, 6 }, Collider::Type::WALL);
+		App->collisions->AddCollider({ 1296, 96, 656, 6 }, Collider::Type::WALL);
+
+		App->collisions->AddCollider({ 80, -90, 16, 186 }, Collider::Type::WALL);
+		App->collisions->AddCollider({ 1088, -90, 16, 186 }, Collider::Type::WALL);
+		App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
+		App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
+	}
+
 
 	return ret;
 }

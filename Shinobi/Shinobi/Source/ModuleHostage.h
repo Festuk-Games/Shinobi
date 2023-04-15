@@ -10,6 +10,7 @@
 
 class Hostage;
 struct SDL_Texture;
+struct Collider;
 
 class ModuleHostage : public Module
 {
@@ -40,6 +41,7 @@ public:
 		Animation idleAnim, exitAnim;
 		iPoint hostageposition;
 		bool col = false;
+		Collider* collider = nullptr;
 	}h[2];
 
 

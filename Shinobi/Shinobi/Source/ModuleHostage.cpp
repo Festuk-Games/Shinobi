@@ -10,6 +10,7 @@
 #include "ModuleScene.h"
 #include "ModulePlayer.h"
 #include "ModuleUI.h"
+#include "ModuleCollisions.h"
 
 #include "SDL/include/SDL_scancode.h"
 
@@ -48,6 +49,10 @@ bool ModuleHostage::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/hostage.png");
+
+
+	h[0].collider = App->collisions->AddCollider({ 200, 180, 24, 28 }, Collider::Type::HOSTAGE);
+	h[1].collider = App->collisions->AddCollider({ 300, 180, 24, 28 }, Collider::Type::HOSTAGE);
 
 	return ret;
 }

@@ -9,6 +9,7 @@
 #pragma comment( lib, "SDL/libx86/SDL2main.lib")
 
 struct SDL_Texture;
+struct Collider;
 
 class ModulePlayer : public Module
 {
@@ -31,6 +32,8 @@ public:
 	// Performs the render call of the player sprite
 	update_status PostUpdate() override;
 
+	void OnCollision(Collider* c1, Collider* c2) override;
+
 public:
 	// Position of the player in the map
 	iPoint position;
@@ -41,6 +44,8 @@ public:
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
 	
+	Collider* collider = nullptr;
+
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
