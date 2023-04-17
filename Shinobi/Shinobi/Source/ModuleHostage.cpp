@@ -65,7 +65,7 @@ update_status ModuleHostage::Update()
 		currentAnimation->Update();
 	}
 
-	if (App->player->position.x == 198 && App->player->position.y == 208)
+	if (App->player->position.x == 180 && App->player->position.y == 208)
 	{
 		if (!h[0].col)
 		{

@@ -157,6 +157,7 @@ update_status ModulePlayer::Update()
 					currentAnimation = &jumpAnim1;
 					currentAnimation->Reset();
 					position.y -= 4;
+					collider->SetPos(position.x, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 					{
 						position.x += speed;
@@ -178,6 +179,7 @@ update_status ModulePlayer::Update()
 					currentAnimation = &jumpAnim2;
 					currentAnimation->Reset();
 					position.y += 4;
+					collider->SetPos(position.x, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 					{
 						position.x += speed;
@@ -266,8 +268,8 @@ update_status ModulePlayer::Update()
 
 					currentAnimation = &jumpUpAnim;
 					currentAnimation->Update();
-
 					position.y -= speed;
+					collider->SetPos(position.x, position.y - 58);
 				}
 				if (position.y == 70)
 				{
@@ -277,14 +279,14 @@ update_status ModulePlayer::Update()
 			else
 			{
 				L2 = true;
-				if (position.y >= 70 && position.y <= 100)
+				if (position.y >= 70 && position.y <= 96)
 				{
 					currentAnimation = &jumpUpAnim;
 					currentAnimation->Update();
 					position.y += 1.2;
-					
+					collider->SetPos(position.x, position.y - 58);
 				}
-				if (position.y == 100)
+				if (position.y == 96)
 				{
 					isJumpingUp1 = false;
 					isJumpingUp2 = false;
@@ -305,14 +307,14 @@ update_status ModulePlayer::Update()
 		{
 			if (!jumpState)
 			{
-				if (position.y >= 70)
+				if (position.y >= 69)
 				{
 					currentAnimation = &jumpUpAnim;
 					currentAnimation->Update();
 					position.y -= speed;
-					
+					collider->SetPos(position.x, position.y - 58);
 				}
-				if (position.y == 70)
+				if (position.y == 69)
 				{
 					jumpState = true;
 				}
@@ -320,12 +322,12 @@ update_status ModulePlayer::Update()
 			else
 			{
 				L2 = false;
-				if (position.y >= 70 && position.y <= 208)
+				if (position.y >= 69 && position.y <= 208)
 				{
 					currentAnimation = &jumpUpAnim;
 					currentAnimation->Update();
 					position.y += 1.2;
-					
+					collider->SetPos(position.x, position.y - 58);
 				}
 				if (position.y == 208)
 				{

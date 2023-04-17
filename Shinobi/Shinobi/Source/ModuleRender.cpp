@@ -70,7 +70,7 @@ update_status ModuleRender::Update()
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 	{	
-		if (camera.x >= -6650)
+		if (camera.x >= -4980)
 		{
 			if (App->player->position.x >= 180)
 			{
@@ -170,45 +170,6 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}
-
-	return ret;
-}
-
-bool ModuleRender::DrawQuadPlayer(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed)
-{
-	bool ret = true;
-
-	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(renderer, r, g, b, a);
-
-	if (App->player->position.x <= 180)
-	{
-		SDL_Rect dstRect{
-		(int)((App->player->position.x -180 )* speed) + rect.x * SCREEN_SIZE,
-		(int)((App->player->position.y - 208) * speed) + rect.y * SCREEN_SIZE,
-		rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
-
-		if (SDL_RenderFillRect(renderer, &dstRect) != 0)
-		{
-			LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
-			ret = false;
-		}
-	}
-	else
-	{
-		SDL_Rect dstRect{
-		(int)rect.x * SCREEN_SIZE,
-		(int)((App->player->position.y - 208)* speed) + rect.y * SCREEN_SIZE,
-		rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
-
-		if (SDL_RenderFillRect(renderer, &dstRect) != 0)
-		{
-			LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
-			ret = false;
-		}
-	}
-
-	
 
 	return ret;
 }

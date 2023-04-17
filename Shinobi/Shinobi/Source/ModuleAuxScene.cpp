@@ -81,7 +81,7 @@ update_status ModuleAuxScene::PostUpdate()
 	// Draw everything --------------------------------------
 	if (stage1)
 	{
-		if (App->player->L2) App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // groundL2
+		if (App->player->L2) App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), &ground, 1.0f); // groundL2
 	}
 
 	return update_status::UPDATE_CONTINUE;
