@@ -18,6 +18,7 @@ class ModuleAuxScene;
 class ModuleUI;
 class ModuleHostage;
 class ModuleCollisions;
+class ModuleEnemies;
 
 
 class Application
@@ -58,6 +59,8 @@ public:
 	ModuleUI* ui = nullptr;
 	ModuleRender* render = nullptr;
 	ModuleCollisions* collisions = nullptr;
+
+	ModuleEnemies* enemies = nullptr;
 
 	ModuleHostage* hostage = nullptr;
 

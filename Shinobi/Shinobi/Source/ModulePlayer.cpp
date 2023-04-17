@@ -133,7 +133,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/main.png"); 
-	/*collider = App->collisions->AddCollider({ position.x, position.y, 35, 58 }, Collider::Type::PLAYER, this);*/
+	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 
 	return ret;
 } 
@@ -481,7 +481,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	/*collider->SetPos(position.x, position.y-50);*/
+	collider->SetPos(position.x, position.y-58);
 
 	currentAnimation->Update();
 

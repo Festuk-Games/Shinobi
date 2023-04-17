@@ -13,6 +13,7 @@
 #include "ModuleUI.h"
 #include "ModuleHostage.h"
 #include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
 
 Application::Application()
 {
@@ -26,6 +27,7 @@ Application::Application()
 	modules[3] = scene = new ModuleScene();
 	modules[4] = player = new ModulePlayer();
 	modules[5] = hostage = new ModuleHostage();
+	modules[6] = enemies = new ModuleEnemies();
 
 	modules[6] = auxscene = new ModuleAuxScene();
 	modules[7] = ui = new ModuleUI();

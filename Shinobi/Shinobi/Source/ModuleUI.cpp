@@ -117,11 +117,11 @@ update_status ModuleUI::Update()
 		time1p = 0;
 	}
 
-	if (hostages == 0)
-	{
-		App->scene->nextStage = true;
+	//if (hostages == 0)
+	//{
+	//	App->scene->nextStage = true;
 
-	}
+	//}
 
 	return update_status::UPDATE_CONTINUE;
 }

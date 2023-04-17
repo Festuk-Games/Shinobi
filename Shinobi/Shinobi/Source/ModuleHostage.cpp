@@ -93,7 +93,7 @@ update_status ModuleHostage::PostUpdate()
 	{
 		if (!h[i].col)
 		{
-			App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, &rect, 0.75f);
+			App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, &rect, 1.0f);
 		}
 	}
 

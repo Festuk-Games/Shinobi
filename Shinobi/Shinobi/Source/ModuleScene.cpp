@@ -145,8 +145,8 @@ update_status ModuleScene::PostUpdate()
 	// Draw everything --------------------------------------
 	if (stage1)
 	{
-		App->render->Blit(skyTexture, 0, -265, &sky, 0.375f); // sky
-		App->render->Blit(stageTexture, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // ground
+		App->render->Blit(skyTexture, 0, -265, &sky, 0.5f); // sky
+		App->render->Blit(stageTexture, 0, -(512 - SCREEN_HEIGHT), &ground, 1.0f); // ground
 
 
 		if (App->audio->isPlaying);
