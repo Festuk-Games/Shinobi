@@ -79,6 +79,8 @@ public:
 	bool isCrouching = false;
 	bool alive = true;
 
+	bool isColliding = false;
+
 	bool L2 = false;
 };
 

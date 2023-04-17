@@ -49,7 +49,6 @@ ModuleAuxScene::ModuleAuxScene()
 		sky.w = 512;
 		sky.h = 256;
 	}
-
 }
 
 ModuleAuxScene::~ModuleAuxScene()

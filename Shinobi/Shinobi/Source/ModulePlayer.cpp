@@ -199,7 +199,7 @@ update_status ModulePlayer::Update()
 			currentAnimation->Update();
 			return update_status::UPDATE_CONTINUE;
 		}
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && position.x < 2550)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && !isColliding && position.x < 2010)
 		{
 			isWalking = true;
 			if (currentAnimation != &forwardAnim)
@@ -486,7 +486,7 @@ update_status ModulePlayer::Update()
 	collider->SetPos(position.x, position.y-58);
 
 	currentAnimation->Update();
-
+	
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -501,7 +501,10 @@ update_status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-
+	if (c2->type == Collider::Type::BOX)
+	{
+		isColliding = true;
 		cout << "collision" << endl;
-	
+	}
+
 }

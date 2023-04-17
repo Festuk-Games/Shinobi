@@ -72,24 +72,22 @@ update_status ModuleRender::Update()
 	{	
 		if (camera.x >= -4980)
 		{
-			if (App->player->position.x >= 180)
+			if (App->player->position.x >= 180 && !App->player->isColliding)
 			{
 				camera.x -= cameraSpeed;
 			}
 		}
-		playercamera.x -= cameraSpeed;
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
 		if (camera.x <= -1)
 		{
-			if (App->player->position.x <= 2390)
+			if (App->player->position.x <= 1840 && !App->player->isColliding)
 			{
 				camera.x += cameraSpeed;
 			}
 		}
-		playercamera.x += cameraSpeed;
 	}
 	
 
