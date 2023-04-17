@@ -189,12 +189,12 @@ update_status ModulePlayer::Update()
 						position.x -= speed;
 					}
 				}
-				if (position.y == 208)
-				{
-					isJumping = false;
-					jumpState = false;
-					currentAnimation = &idleAnim;
-				}
+				//if (position.y == 208)
+				//{
+				//	isJumping = false;
+				//	jumpState = false;
+				//	currentAnimation = &idleAnim;
+				//}
 			}
 			currentAnimation->Update();
 			return update_status::UPDATE_CONTINUE;
@@ -482,11 +482,12 @@ update_status ModulePlayer::Update()
 			}
 		}
 	}
+	
+	if (!ground && !isJumping) position.y++;
 
 	collider->SetPos(position.x, position.y-58);
 
 	currentAnimation->Update();
-	
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -495,16 +496,25 @@ update_status ModulePlayer::PostUpdate()
 {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	App->render->Blit(texture, position.x, position.y - rect.h, &rect);
-
+	isColliding = false;
+	ground = false;
 	return update_status::UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
+
 	if (c2->type == Collider::Type::BOX)
 	{
 		isColliding = true;
+		//position.x--;
+		//App->render->camera.x++;
 		cout << "collision" << endl;
 	}
-
+	if (c2->type == Collider::Type::WALL)
+	{
+		ground = true;
+		isJumping = false;
+		jumpState = false;
+	}
 }

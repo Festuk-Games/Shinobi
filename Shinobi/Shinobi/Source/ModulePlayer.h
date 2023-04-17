@@ -64,6 +64,7 @@ public:
 	Animation crouchAttackAnim , crouchKickAnim, crouchKatanaAnim;
 
 	iPoint diePosition;
+	iPoint camera;
 	int kick = 0;
 	bool diePos = false;
 	bool dieState = false;
@@ -80,8 +81,10 @@ public:
 	bool alive = true;
 
 	bool isColliding = false;
-
 	bool L2 = false;
+	bool ground = false;
+	int col = 0;
+	int col2 = 0;
 };
 
 #endif //!__MODULE_PLAYER_H__
