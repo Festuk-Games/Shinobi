@@ -17,6 +17,8 @@ struct Collider
 		ENEMY_SHOT,
 		HOSTAGE,
 		BOX,
+		GROUND,
+		FEET,
 
 		MAX
 	};

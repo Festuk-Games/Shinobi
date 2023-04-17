@@ -134,6 +134,7 @@ bool ModulePlayer::Start()
 
 	texture = App->textures->Load("Assets/main.png"); 
 	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
+	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, this);
 
 	return ret;
 } 
@@ -143,21 +144,23 @@ update_status ModulePlayer::Update()
 	if (alive)
 	{
 
-		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && !isJumpingUp1 && !isJumpingDown1 && position.y >= 150)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && !isJumpingUp1 && !isJumpingDown1)
 		{
 			isJumping = true;
+			jumpPosition.y = position.y;
 		}
 
 		if (isJumping)
 		{
 			if (!jumpState)
 			{
-				if (position.y >= 152)
+				if (position.y >= jumpPosition.y-72)
 				{
 					currentAnimation = &jumpAnim1;
 					currentAnimation->Reset();
 					position.y -= 4;
 					collider->SetPos(position.x, position.y - 58);
+					feet->SetPos(position.x, position.y-1);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 					{
 						position.x += speed;
@@ -166,20 +169,25 @@ update_status ModulePlayer::Update()
 					{
 						position.x -= speed;
 					}
+					if (position.y <= 90)
+					{
+						App->render->camera.y+=speed;
+					}
 				}
-				if (position.y == 152)
+				if (position.y == jumpPosition.y - 72)
 				{
 					jumpState = true;
 				}
 			}
 			else
 			{
-				if (position.y >= 152 && position.y <= 208)
+				if (position.y >= jumpPosition.y - 72 && position.y <= 208)
 				{
 					currentAnimation = &jumpAnim2;
 					currentAnimation->Reset();
-					position.y += 4;
+					position.y += 4.2;
 					collider->SetPos(position.x, position.y - 58);
+					feet->SetPos(position.x, position.y-1);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 					{
 						position.x += speed;
@@ -187,6 +195,10 @@ update_status ModulePlayer::Update()
 					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 					{
 						position.x -= speed;
+					}
+					if (position.y <= 90)
+					{
+						App->render->camera.y-=speed;
 					}
 				}
 				//if (position.y == 208)
@@ -257,6 +269,7 @@ update_status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && isJumpingUp1 && App->scene->stage1)
 		{
 			isJumpingUp2 = true;
+			jumpPosition.y = position.y;
 		}
 
 		if (isJumpingUp2)
@@ -270,6 +283,7 @@ update_status ModulePlayer::Update()
 					currentAnimation->Update();
 					position.y -= speed;
 					collider->SetPos(position.x, position.y - 58);
+					feet->SetPos(position.x, position.y - 1);
 				}
 				if (position.y == 70)
 				{
@@ -285,6 +299,7 @@ update_status ModulePlayer::Update()
 					currentAnimation->Update();
 					position.y += 1.2;
 					collider->SetPos(position.x, position.y - 58);
+					feet->SetPos(position.x, position.y - 1);
 				}
 				if (position.y == 96)
 				{
@@ -301,6 +316,7 @@ update_status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && isJumpingDown1)
 		{
 			isJumpingDown2 = true;
+			jumpPosition.y = position.y;
 		}
 
 		if (isJumpingDown2)
@@ -313,6 +329,7 @@ update_status ModulePlayer::Update()
 					currentAnimation->Update();
 					position.y -= speed;
 					collider->SetPos(position.x, position.y - 58);
+					feet->SetPos(position.x, position.y - 1);
 				}
 				if (position.y == 69)
 				{
@@ -328,6 +345,7 @@ update_status ModulePlayer::Update()
 					currentAnimation->Update();
 					position.y += 1.2;
 					collider->SetPos(position.x, position.y - 58);
+					feet->SetPos(position.x, position.y - 1);
 				}
 				if (position.y == 208)
 				{
@@ -483,9 +501,10 @@ update_status ModulePlayer::Update()
 		}
 	}
 	
-	if (!ground && !isJumping) position.y++;
+	if (!ground && !isJumping) position.y+=2;
 
 	collider->SetPos(position.x, position.y-58);
+	feet->SetPos(position.x, position.y-1);
 
 	currentAnimation->Update();
 
@@ -511,7 +530,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		//App->render->camera.x++;
 		cout << "collision" << endl;
 	}
-	if (c2->type == Collider::Type::WALL)
+	if (c1->type == Collider::Type::FEET && c2->type == Collider::Type::GROUND)
 	{
 		ground = true;
 		isJumping = false;

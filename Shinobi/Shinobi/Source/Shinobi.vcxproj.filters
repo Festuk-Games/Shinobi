@@ -70,11 +70,21 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleHostage.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="ModuleCollisions.h" />
-    <ClInclude Include="ModuleEnemies.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="ModuleHostage.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEnemies.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCollisions.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Source Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Source Files\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -123,19 +133,19 @@
       <Filter>Source Files\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleHostage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleCollisions.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleEnemies.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCollisions.cpp">
+      <Filter>Source Files\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

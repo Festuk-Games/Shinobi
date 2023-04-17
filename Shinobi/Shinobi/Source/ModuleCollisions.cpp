@@ -22,6 +22,10 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::HOSTAGE] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::BOX] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::FEET] = true;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
@@ -52,6 +56,15 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::BOX][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::BOX][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::BOX][Collider::Type::ENEMY_SHOT] = true;
+
+	matrix[Collider::Type::GROUND][Collider::Type::WALL] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::GROUND][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::GROUND][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::ENEMY_SHOT] = false;
+
+	matrix[Collider::Type::FEET][Collider::Type::GROUND] = true;
+
 }
 
 // Destructor
@@ -155,6 +168,12 @@ void ModuleCollisions::DebugDraw()
 			break;
 			case Collider::Type::BOX: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha, -1.0f);
+			break;
+			case Collider::Type::GROUND: // magenta
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, -1.0f);
+			break;
+			case Collider::Type::FEET: // magenta
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, -1.0f);
 			break;
 		}
 	}

@@ -45,6 +45,7 @@ public:
 	SDL_Texture* texture = nullptr;
 	
 	Collider* collider = nullptr;
+	Collider* feet = nullptr;
 
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -64,7 +65,8 @@ public:
 	Animation crouchAttackAnim , crouchKickAnim, crouchKatanaAnim;
 
 	iPoint diePosition;
-	iPoint camera;
+	iPoint jumpPosition;
+
 	int kick = 0;
 	bool diePos = false;
 	bool dieState = false;
@@ -83,8 +85,7 @@ public:
 	bool isColliding = false;
 	bool L2 = false;
 	bool ground = false;
-	int col = 0;
-	int col2 = 0;
+
 };
 
 #endif //!__MODULE_PLAYER_H__
