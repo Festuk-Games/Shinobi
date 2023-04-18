@@ -85,12 +85,6 @@
     <ClInclude Include="Collider.h">
       <Filter>Source Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\Desktop\Path.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\Desktop\Enemy_Gunner.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -152,12 +146,6 @@
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\Desktop\Path.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\Desktop\Enemy_Gunner.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
