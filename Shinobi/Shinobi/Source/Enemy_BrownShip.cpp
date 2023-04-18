@@ -1,9 +1,9 @@
-#include "Enemy_Gunner.h"
+#include "Enemy_BrownShip.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Enemy_BrownShip::Enemy_Gunner(int x, int y) : Enemy(x, y)
+Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 {
 	fly.PushBack({5,72,21,22});
 	currentAnim = &fly;
