@@ -221,7 +221,7 @@ update_status ModulePlayer::Update()
 			}
 			position.x += speed;
 		}
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && position.x > 20 )
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && !isColliding && position.x > 20 )
 		{
 			isWalking = true;
 			if (currentAnimation != &backwardAnim)
@@ -534,6 +534,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		ground = true;
 		isJumping = false;
-		jumpState = false;
+		if (!isJumpingDown2)
+		{
+			jumpState = false;
+		}
 	}
 }

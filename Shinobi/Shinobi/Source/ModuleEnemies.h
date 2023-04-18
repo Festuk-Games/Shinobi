@@ -5,13 +5,14 @@
 
 #define MAX_ENEMIES 100
 
-// TODO 4: Create a new enemy type: the Mech
-
 enum class ENEMY_TYPE
 {
 	NO_TYPE,
-	REDBIRD,
-	BROWNSHIP,
+	GUNNER,
+	FIGHTER,
+	COMBAT,
+	PURPLE,
+	KENOH,
 };
 
 struct EnemySpawnpoint

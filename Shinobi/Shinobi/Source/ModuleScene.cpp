@@ -83,7 +83,7 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 704, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 864, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 1408, 143, 32, 1 }, Collider::Type::GROUND);
-		App->collisions->AddCollider({ 1408, 175, 32, 1 }, Collider::Type::GROUND);
+		/*App->collisions->AddCollider({ 1408, 175, 32, 1 }, Collider::Type::GROUND);*/
 		App->collisions->AddCollider({ 1440, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 1472, 175, 32, 1 }, Collider::Type::GROUND);
 

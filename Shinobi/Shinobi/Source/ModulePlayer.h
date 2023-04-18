@@ -86,6 +86,9 @@ public:
 	bool L2 = false;
 	bool ground = false;
 
+	bool right = false;
+	bool left = false;
+
 };
 
 #endif //!__MODULE_PLAYER_H__

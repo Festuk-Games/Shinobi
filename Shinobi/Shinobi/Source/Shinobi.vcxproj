@@ -74,6 +74,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\Desktop\Enemy_Gunner.h" />
+    <ClInclude Include="..\..\..\..\..\..\Desktop\Path.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Collider.h" />
@@ -98,6 +100,8 @@
     <ClInclude Include="Particle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\Desktop\Enemy_Gunner.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Desktop\Path.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Enemy.cpp" />
