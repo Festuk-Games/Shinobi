@@ -69,7 +69,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 600, 80);
+	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 20, 80);
 	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 625, 80);
 	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 640, 80);
 	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 665, 80);

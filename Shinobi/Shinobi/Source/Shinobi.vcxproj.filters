@@ -82,6 +82,8 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ModuleEnemies.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="Enemy_RedBird.h" />
+    <ClInclude Include="Enemy_BrownShip.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">

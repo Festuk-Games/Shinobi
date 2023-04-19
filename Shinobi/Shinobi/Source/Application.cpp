@@ -58,7 +58,9 @@ bool Application::Init()
 
 	//By now we will consider that all modules are always active
 	for (int i = 0; i < NUM_MODULES && ret; ++i)
+	{
 		ret = modules[i]->Start();
+	}
 
 	return ret;
 }

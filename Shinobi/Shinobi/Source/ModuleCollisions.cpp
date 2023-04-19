@@ -65,6 +65,9 @@ ModuleCollisions::ModuleCollisions()
 
 	matrix[Collider::Type::FEET][Collider::Type::GROUND] = true;
 
+
+
+
 }
 
 // Destructor

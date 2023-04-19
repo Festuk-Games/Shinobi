@@ -90,7 +90,6 @@ update_status ModuleRender::Update()
 		}
 	}
 	
-
 	return update_status::UPDATE_CONTINUE;
 }
 

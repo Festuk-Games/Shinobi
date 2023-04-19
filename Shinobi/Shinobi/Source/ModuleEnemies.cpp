@@ -16,17 +16,16 @@ ModuleEnemies::ModuleEnemies()
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 		enemies[i] = nullptr;
+	LOG("Loading enemies");
 }
 
 ModuleEnemies::~ModuleEnemies()
 {
-
+	
 }
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/enemies.png");
-	enemyDestroyedFx = App->audio->LoadFx("Assets/explosion.wav");
 	LOG("Loading enemies");
 	return true;
 }

@@ -33,17 +33,16 @@ public:
 
 	SDL_Texture* texture = nullptr;
 
-
-	Animation* currentAnimation = nullptr;
-
 	struct hostages
 	{
+		Animation* currentAnimation = nullptr;
 		Animation idleAnim, exitAnim;
 		iPoint hostageposition;
 		bool col = false;
 		Collider* collider = nullptr;
 	}h[2];
 
+	int time = 0;
 
 };
 
