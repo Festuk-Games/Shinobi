@@ -29,12 +29,12 @@ Application::Application()
 	modules[5] = hostage = new ModuleHostage();
 	modules[6] = enemies = new ModuleEnemies();
 
-	modules[6] = auxscene = new ModuleAuxScene();
-	modules[7] = ui = new ModuleUI();
-	modules[8] = particles = new ModuleParticles();
-	modules[9] = collisions = new ModuleCollisions();
-	modules[10] = render = new ModuleRender();
-	modules[11] = audio = new ModuleAudio();
+	modules[7] = auxscene = new ModuleAuxScene();
+	modules[8] = ui = new ModuleUI();
+	modules[9] = particles = new ModuleParticles();
+	modules[10] = collisions = new ModuleCollisions();
+	modules[11] = render = new ModuleRender();
+	modules[12] = audio = new ModuleAudio();
 
 }
 

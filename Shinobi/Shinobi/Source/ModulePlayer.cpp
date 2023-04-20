@@ -213,6 +213,7 @@ update_status ModulePlayer::Update()
 		}
 		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && !isColliding && position.x < 2010)
 		{
+			right = true;
 			isWalking = true;
 			if (currentAnimation != &forwardAnim)
 			{
@@ -223,6 +224,7 @@ update_status ModulePlayer::Update()
 		}
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && !isColliding && position.x > 20 )
 		{
+			right = false;
 			isWalking = true;
 			if (currentAnimation != &backwardAnim)
 			{
@@ -242,6 +244,8 @@ update_status ModulePlayer::Update()
 				currentAnimation->Reset();
 			}
 			App->audio->PlayFx(App->audio->shuriken);
+			if (right) App->particles->shuriken.speed = iPoint(5, 0);
+			else App->particles->shuriken.speed = iPoint(-5, 0);
 			App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
 		
 		}
@@ -365,6 +369,7 @@ update_status ModulePlayer::Update()
 			isCrouching = true;
 			if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 			{
+				right = true;
 				isWalking = true;
 				if (currentAnimation != &crouchForwardAnim)
 				{
@@ -375,6 +380,7 @@ update_status ModulePlayer::Update()
 			}
 			else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 			{
+				right = false;
 				isWalking = true;
 				if (currentAnimation != &crouchBackwardAnim)
 				{
@@ -392,7 +398,9 @@ update_status ModulePlayer::Update()
 					currentAnimation->Reset();
 				}
 				App->audio->PlayFx(App->audio->shuriken);
-				App->particles->AddParticle(App->particles->shuriken, position.x + 35 , position.y - 30, Collider::Type::PLAYER_SHOT);
+				if (right) App->particles->shuriken.speed = iPoint(5, 0);
+				else App->particles->shuriken.speed = iPoint(-5, 0);
+				App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
 			}
 			else if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_DOWN && !isWalking)
 			{
@@ -514,7 +522,8 @@ update_status ModulePlayer::Update()
 update_status ModulePlayer::PostUpdate()
 {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	App->render->Blit(texture, position.x, position.y - rect.h, &rect);
+	if(right) App->render->Blit(texture, position.x, position.y - rect.h, SDL_FLIP_NONE, &rect);
+	else App->render->Blit(texture, position.x, position.y - rect.h, SDL_FLIP_HORIZONTAL, &rect);
 	isColliding = false;
 	ground = false;
 	return update_status::UPDATE_CONTINUE;

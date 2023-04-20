@@ -7,7 +7,7 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
+#include "Enemy_Gunner.h"
 
 #define SPAWN_MARGIN 50
 
@@ -27,6 +27,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	LOG("Loading enemies");
+	texture = App->textures->Load("Assets/gun.png");
 	return true;
 }
 
@@ -139,8 +140,8 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case ENEMY_TYPE::REDBIRD:
-					enemies[i] = new Enemy_RedBird(info.x, info.y);
+				case ENEMY_TYPE::GUNNER:
+					enemies[i] = new Enemy_Gunner(info.x, info.y);
 					break;
 			}
 			enemies[i]->texture = texture;

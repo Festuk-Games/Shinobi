@@ -1,15 +1,16 @@
-#ifndef __ENEMY_REDBIRD_H__
-#define __ENEMY_REDBIRD_H__
+#ifndef __ENEMY_GUNNER_H__
+#define __ENEMY_GUNNER_H__
 
 #include "Enemy.h"
+#include "Path.h"
 
-class Enemy_RedBird : public Enemy
+class Enemy_Gunner : public Enemy
 {
 public:
 
 	// Constructor (x y coordinates in the world)
 	// Creates animation data and the collider
-	Enemy_RedBird(int x, int y);
+	Enemy_Gunner(int x, int y);
 
 	// The enemy is going to perform a sinusoidal movement
 	void Update() override;
@@ -27,8 +28,12 @@ private:
 	// The total height of the wave
 	int waveHeight = 15;
 
+	Path path;
+
 	// The enemy animation
-	Animation flyAnim;
+	Animation idleAnim;
+	Animation walkAnim;
+	bool changedirection;
 };
 
-#endif // __ENEMY_REDBIRD_H__
+#endif // __ENEMY_GUNNER_H__

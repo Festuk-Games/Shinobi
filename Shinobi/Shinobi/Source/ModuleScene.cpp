@@ -69,10 +69,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 20, 80);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 625, 80);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 640, 80);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 665, 80);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 20, 80);
 
 	if (stage1)
 	{
@@ -158,8 +155,8 @@ update_status ModuleScene::PostUpdate()
 	// Draw everything --------------------------------------
 	if (stage1)
 	{
-		App->render->Blit(skyTexture, 0, -265, &sky, 0.5f); // sky
-		App->render->Blit(stageTexture, 0, -(512 - SCREEN_HEIGHT), &ground, 1.0f); // ground
+		App->render->Blit(skyTexture, 0, -265, SDL_FLIP_NONE, &sky, 0.5f); // sky
+		App->render->Blit(stageTexture, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 1.0f); // ground
 
 
 		if (App->audio->isPlaying);
@@ -171,14 +168,14 @@ update_status ModuleScene::PostUpdate()
 	}
 	if (stage2)
 	{
-		App->render->Blit(skyTexture2, 0, -265, &sky, 0.375f); // sky
-		App->render->Blit(stageTexture2, 0, -(512 - SCREEN_HEIGHT), &ground, 0.75f); // ground
+		App->render->Blit(skyTexture2, 0, -265, SDL_FLIP_NONE, &sky, 0.375f); // sky
+		App->render->Blit(stageTexture2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 0.75f); // ground
 
 	}
 	if (stage3)
 	{
-		App->render->Blit(skyTexture3, 0, 0, &sky, 0.75); // sky
-		App->render->Blit(stageTexture3, 0, 0, &ground, 0.75f); // ground
+		App->render->Blit(skyTexture3, 0, 0, SDL_FLIP_NONE, &sky, 0.75); // sky
+		App->render->Blit(stageTexture3, 0, 0, SDL_FLIP_NONE, &ground, 0.75f); // ground
 
 	}
 

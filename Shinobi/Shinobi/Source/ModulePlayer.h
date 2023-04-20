@@ -86,8 +86,8 @@ public:
 	bool L2 = false;
 	bool ground = false;
 
-	bool right = false;
-	bool left = false;
+	bool right = true;
+	//bool left = false;
 
 };
 

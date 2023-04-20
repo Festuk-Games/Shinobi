@@ -82,8 +82,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ModuleEnemies.h" />
     <ClInclude Include="Path.h" />
-    <ClInclude Include="Enemy_RedBird.h" />
-    <ClInclude Include="Enemy_BrownShip.h" />
+    <ClInclude Include="Enemy_Gunner.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -143,10 +142,7 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy_BrownShip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_RedBird.cpp">
+    <ClCompile Include="Enemy_Gunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModuleEnemies.cpp">

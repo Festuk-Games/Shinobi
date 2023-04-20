@@ -109,7 +109,7 @@ update_status ModuleHostage::PostUpdate()
 			if (!h[i].col)
 			{
 				SDL_Rect rect = h[i].currentAnimation->GetCurrentFrame();
-				App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, &rect, 1.0f);
+				App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, SDL_FLIP_NONE, &rect, 1.0f);
 			}
 			else
 			{
@@ -118,7 +118,7 @@ update_status ModuleHostage::PostUpdate()
 				{
 					SDL_Rect rect = h[i].currentAnimation->GetCurrentFrame();
 					h[i].hostageposition.y-=2;
-					App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, &rect, 1.0f);
+					App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, SDL_FLIP_NONE, &rect, 1.0f);
 				}
 			}
 			

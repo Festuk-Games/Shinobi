@@ -134,42 +134,42 @@ update_status ModuleUI::PostUpdate()
 	//Draw the hostages
 	for (int i = 0; i < hostages; i++)
 	{
-		App->render->Blit(hostage, 40 + 8 * i, 200, &host, 0.0f);
+		App->render->Blit(hostage, 40 + 8 * i, 200, SDL_FLIP_NONE, &host, 0.0f);
 	}
 
 	//Draw the lifes
 	for (int i = 0; i < 2; i++)
 	{
-		App->render->Blit(lifes, 16 + 8 * i, 20, &life, 0.0f);
+		App->render->Blit(lifes, 16 + 8 * i, 20, SDL_FLIP_NONE, &life, 0.0f);
 	}
 
 	//Draw the skills icons
 	if (sk1)
 	{
-		App->render->Blit(skill1, 266, 200, &skill, 0.0f);
+		App->render->Blit(skill1, 266, 200, SDL_FLIP_NONE, &skill, 0.0f);
 	}
 	else if (sk2)
 	{
-		App->render->Blit(skill2, 266, 200, &skill, 0.0f);
+		App->render->Blit(skill2, 266, 200, SDL_FLIP_NONE, &skill, 0.0f);
 	}
 	else if (sk3)
 	{
-		App->render->Blit(skill3, 266, 200, &skill, 0.0f);
+		App->render->Blit(skill3, 266, 200, SDL_FLIP_NONE, &skill, 0.0f);
 	}
 
 	if (!App->scene->nextStage)
 	{
-		App->render->Blit(nums, 24, 200, &savet, 0.0f);
+		App->render->Blit(nums, 24, 200, SDL_FLIP_NONE, &savet, 0.0f);
 	}
 	
-	App->render->Blit(nums, 286, 200, &timer[timemin], 0.0f);
-	App->render->Blit(nums, 295, 203, &points, 0.0f);
-	App->render->Blit(nums, 295, 208, &points, 0.0f);
-	App->render->Blit(nums, 300, 200, &timer[timesec1], 0.0f);
-	App->render->Blit(nums, 308, 200, &timer[timesec2], 0.0f);
+	App->render->Blit(nums, 286, 200, SDL_FLIP_NONE, &timer[timemin], 0.0f);
+	App->render->Blit(nums, 295, 203, SDL_FLIP_NONE, &points, 0.0f);
+	App->render->Blit(nums, 295, 208, SDL_FLIP_NONE, &points, 0.0f);
+	App->render->Blit(nums, 300, 200, SDL_FLIP_NONE, &timer[timesec1], 0.0f);
+	App->render->Blit(nums, 308, 200, SDL_FLIP_NONE, &timer[timesec2], 0.0f);
 	
-	if (blue) App->render->Blit(nums, 16, 12, &blue1p, 0.0f);
-	else App->render->Blit(nums, 16, 12, &white1p, 0.0f);
+	if (blue) App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &blue1p, 0.0f);
+	else App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &white1p, 0.0f);
 	
 
 	return update_status::UPDATE_CONTINUE;
