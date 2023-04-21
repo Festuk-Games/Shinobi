@@ -16,7 +16,7 @@ class ModuleParticles : public Module
 public:
 	// Constructor
 	// Initializes all the particles in the array to nullptr
-	ModuleParticles();
+	ModuleParticles(bool startEnabled);
 
 	//Destructor
 	~ModuleParticles();
@@ -28,11 +28,11 @@ public:
 	// Called at the middle of the application loop
 	// Iterates all the particles and calls its Update()
 	// Removes any "dead" particles
-	update_status Update() override;
+	Update_Status Update() override;
 
 	// Called at the end of the application loop
 	// Iterates all the particles and draws them
-	update_status PostUpdate() override;
+	Update_Status PostUpdate() override;
 
 	// Called on application exit
 	// Destroys all active particles left in the array

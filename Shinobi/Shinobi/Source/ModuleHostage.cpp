@@ -15,7 +15,7 @@
 #include "SDL/include/SDL_scancode.h"
 
 
-ModuleHostage::ModuleHostage()
+ModuleHostage::ModuleHostage(bool startEnabled) : Module(startEnabled)
 {
 	for (int i = 0; i < 2; i++)
 	{
@@ -64,7 +64,7 @@ bool ModuleHostage::Start()
 	return ret;
 }
 
-update_status ModuleHostage::Update()
+Update_Status ModuleHostage::Update()
 {
 	for (int i = 0; i < 2; i++)
 	{
@@ -98,10 +98,10 @@ update_status ModuleHostage::Update()
 		}
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleHostage::PostUpdate()
+Update_Status ModuleHostage::PostUpdate()
 {
 	for (int i = 0; i < 2; i++)
 	{
@@ -125,5 +125,5 @@ update_status ModuleHostage::PostUpdate()
 
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }

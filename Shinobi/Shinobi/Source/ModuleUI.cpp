@@ -5,7 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleScene.h"
 
-ModuleUI::ModuleUI()
+ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	host.x = 0;
 	host.y = 0;
@@ -83,7 +83,7 @@ bool ModuleUI::Start()
 	return ret;
 }
 
-update_status ModuleUI::Update()
+Update_Status ModuleUI::Update()
 {
 	//Timer one number every second
 	timef2++;
@@ -123,12 +123,12 @@ update_status ModuleUI::Update()
 
 	//}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 
 // Update: draw background
-update_status ModuleUI::PostUpdate()
+Update_Status ModuleUI::PostUpdate()
 {
 	
 	//Draw the hostages
@@ -172,5 +172,5 @@ update_status ModuleUI::PostUpdate()
 	else App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &white1p, 0.0f);
 	
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }

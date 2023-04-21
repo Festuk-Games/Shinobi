@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 13
+#define NUM_MODULES 14
 
 class Module;
 class ModuleWindow;
@@ -19,6 +19,7 @@ class ModuleUI;
 class ModuleHostage;
 class ModuleCollisions;
 class ModuleEnemies;
+class ModuleFadeToBlack;
 
 
 class Application
@@ -36,7 +37,7 @@ public:
 	bool Init();
 
 	//Updates all modules (PreUpdate, Update and PostUpdate)
-	update_status Update();
+	Update_Status Update();
 
 	//Releases all the application data
 	bool CleanUp();
@@ -63,6 +64,8 @@ public:
 	ModuleEnemies* enemies = nullptr;
 
 	ModuleHostage* hostage = nullptr;
+
+	ModuleFadeToBlack* fade = nullptr;
 
 };
 

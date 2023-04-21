@@ -26,7 +26,7 @@ class ModuleEnemies : public Module
 {
 public:
 	// Constructor
-	ModuleEnemies();
+	ModuleEnemies(bool startEnabled);
 
 	// Destructor
 	~ModuleEnemies();
@@ -37,11 +37,11 @@ public:
 
 	// Called at the middle of the application loop
 	// Handles all enemies logic and spawning/despawning
-	update_status Update() override;
+	Update_Status Update() override;
 
 	// Called at the end of the application loop
 	// Iterates all the enemies and draws them
-	update_status PostUpdate() override;
+	Update_Status PostUpdate() override;
 
 	// Called on application exit
 	// Destroys all active enemies left in the array

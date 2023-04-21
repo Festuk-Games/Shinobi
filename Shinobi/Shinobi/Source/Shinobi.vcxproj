@@ -83,6 +83,7 @@
     <ClInclude Include="ModuleAuxScene.h" />
     <ClInclude Include="ModuleCollisions.h" />
     <ClInclude Include="ModuleEnemies.h" />
+    <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleHostage.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModuleScene.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="SceneIntro.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -109,6 +111,7 @@
     <ClCompile Include="ModuleAuxScene.cpp" />
     <ClCompile Include="ModuleCollisions.cpp" />
     <ClCompile Include="ModuleEnemies.cpp" />
+    <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleHostage.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModuleScene.cpp" />
@@ -122,6 +125,7 @@
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="SceneIntro.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

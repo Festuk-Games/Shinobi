@@ -1,7 +1,7 @@
 #include "ModuleAudio.h"
 #include "Application.h"
 
-ModuleAudio::ModuleAudio()
+ModuleAudio::ModuleAudio(bool startEnabled) : Module(startEnabled)
 {
 	for (int i = 0; i < MAX_FX; ++i)
 		fx[i] = nullptr;

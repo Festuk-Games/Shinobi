@@ -16,16 +16,16 @@ class ModuleHostage : public Module
 {
 public:
 
-	ModuleHostage();
+	ModuleHostage(bool startEnabled);
 
 	~ModuleHostage();
 
 
 	bool Start() override;
 
-	update_status Update() override;
+	Update_Status Update() override;
 
-	update_status PostUpdate() override;
+	Update_Status PostUpdate() override;
 
 public:
 

@@ -10,7 +10,7 @@ class ModuleUI : public Module
 {
 public:
 	//Constructor
-	ModuleUI();
+	ModuleUI(bool startEnabled);
 
 	//Destructor
 	~ModuleUI();
@@ -21,11 +21,11 @@ public:
 
 	// Called at the middle of the application loop
 	// Updates the scene's background animations
-	update_status Update();
+	Update_Status Update();
 
 	// Called at the end of the application loop.
 	// Performs the render call of all the parts of the scene's background
-	update_status PostUpdate();
+	Update_Status PostUpdate();
 
 public:
 

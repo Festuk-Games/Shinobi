@@ -16,7 +16,7 @@ using namespace std;
 #include "SDL/include/SDL_scancode.h"
 
 
-ModulePlayer::ModulePlayer()
+ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	position.x = 30;
 	position.y = 208;
@@ -139,7 +139,7 @@ bool ModulePlayer::Start()
 	return ret;
 } 
 
-update_status ModulePlayer::Update()
+Update_Status ModulePlayer::Update()
 {
 	if (alive)
 	{
@@ -209,7 +209,7 @@ update_status ModulePlayer::Update()
 				//}
 			}
 			currentAnimation->Update();
-			return update_status::UPDATE_CONTINUE;
+			return Update_Status::UPDATE_CONTINUE;
 		}
 		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && !isColliding && position.x < 2010)
 		{
@@ -314,7 +314,7 @@ update_status ModulePlayer::Update()
 				}
 			}
 			currentAnimation->Update();
-			return update_status::UPDATE_CONTINUE;
+			return Update_Status::UPDATE_CONTINUE;
 		}
 
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && isJumpingDown1)
@@ -360,7 +360,7 @@ update_status ModulePlayer::Update()
 				}
 			}
 			currentAnimation->Update();
-			return update_status::UPDATE_CONTINUE;
+			return Update_Status::UPDATE_CONTINUE;
 		}
 
 		//crouch animation
@@ -516,17 +516,17 @@ update_status ModulePlayer::Update()
 
 	currentAnimation->Update();
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModulePlayer::PostUpdate()
+Update_Status ModulePlayer::PostUpdate()
 {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	if(right) App->render->Blit(texture, position.x, position.y - rect.h, SDL_FLIP_NONE, &rect);
 	else App->render->Blit(texture, position.x, position.y - rect.h, SDL_FLIP_HORIZONTAL, &rect);
 	isColliding = false;
 	ground = false;
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)

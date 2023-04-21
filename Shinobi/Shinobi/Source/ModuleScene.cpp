@@ -7,7 +7,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 
-ModuleScene::ModuleScene()
+ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
 	
 	if (stage1)
@@ -113,7 +113,7 @@ bool ModuleScene::Start()
 	return ret;
 }
 
-update_status ModuleScene::Update()
+Update_Status ModuleScene::Update()
 {
 
 	//next stage condition
@@ -146,11 +146,11 @@ update_status ModuleScene::Update()
 
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
-update_status ModuleScene::PostUpdate()
+Update_Status ModuleScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	if (stage1)
@@ -183,5 +183,5 @@ update_status ModuleScene::PostUpdate()
 	
 	//App->render->Blit(stageTexture, 0, 0, &ground);
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }

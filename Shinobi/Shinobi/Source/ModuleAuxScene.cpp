@@ -4,7 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 
-ModuleAuxScene::ModuleAuxScene()
+ModuleAuxScene::ModuleAuxScene(bool startEnabled) : Module(startEnabled)
 {
 
 	if (stage1)
@@ -68,14 +68,14 @@ bool ModuleAuxScene::Start()
 	return ret;
 }
 
-update_status ModuleAuxScene::Update()
+Update_Status ModuleAuxScene::Update()
 {
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
-update_status ModuleAuxScene::PostUpdate()
+Update_Status ModuleAuxScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	if (stage1)
@@ -83,5 +83,5 @@ update_status ModuleAuxScene::PostUpdate()
 		if (App->player->L2) App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 1.0f); // groundL2
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
