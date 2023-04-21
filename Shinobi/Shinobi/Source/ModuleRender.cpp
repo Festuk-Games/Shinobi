@@ -98,8 +98,9 @@ Update_Status ModuleRender::PostUpdate()
 	//Update the screen
 	SDL_RenderPresent(renderer);
 
-	cout << App->player->position.x << endl;
-	cout << camera.x << endl;
+	cout << "Player.x: " << App->player->position.x << endl;
+	cout << "Player.y: " << App->player->position.y << endl;
+	cout << "Camera.x: " << camera.x << endl;
 
 	//SDL_Delay(16.666);
 
