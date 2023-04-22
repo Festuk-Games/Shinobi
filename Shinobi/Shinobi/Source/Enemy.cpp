@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
+#include "Enemy_Gunner.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {
@@ -34,7 +35,17 @@ void Enemy::Update()
 void Enemy::Draw()
 {
 	if (currentAnim != nullptr)
-		App->render->Blit(texture, position.x, position.y, SDL_FLIP_NONE, &(currentAnim->GetCurrentFrame()));
+	{
+		if (flip)
+		{
+			App->render->Blit(texture, position.x, position.y, SDL_FLIP_NONE, &(currentAnim->GetCurrentFrame()));
+		}
+		else
+		{
+			App->render->Blit(texture, position.x, position.y, SDL_FLIP_HORIZONTAL, &(currentAnim->GetCurrentFrame()));
+		}
+	}
+
 }
 
 void Enemy::OnCollision(Collider* collider)

@@ -46,8 +46,7 @@ public:
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_RendererFlip flip, SDL_Rect* section = nullptr, float speed = 1.0f);
 
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f);
-	bool DrawQuadPlayer(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f);
-
+	
 public:
 	// Rendering context used for any rendering action
 	SDL_Renderer* renderer = nullptr;

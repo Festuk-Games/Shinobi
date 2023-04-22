@@ -50,6 +50,8 @@ protected:
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
+
+	bool flip = true;
 };
 
 #endif // __ENEMY_H__

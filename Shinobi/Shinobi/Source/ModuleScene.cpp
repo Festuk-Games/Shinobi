@@ -69,7 +69,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 20, 80);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 0, 80);
 
 	if (stage1)
 	{
