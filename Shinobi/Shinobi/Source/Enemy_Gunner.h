@@ -33,12 +33,19 @@ private:
 	// The enemy animation
 	Animation idleAnim;
 	Animation walkAnim;
+	Animation shootAnim, reloadAnim;
+
 	bool changedirection = true;
 
 	bool pl = false;
 
 	int pos1 = 500, pos2 = 650;
 	int pdistance = 100;
+	int shot = 0;
+	bool shooting = false, reloading = false, walking = true;
+	int time = 0;
+
+	int bullets = 3;
 };
 
 #endif // __ENEMY_GUNNER_H__
