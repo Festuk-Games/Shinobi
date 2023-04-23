@@ -41,12 +41,15 @@ public:
 	// Sound fx when destroyed
 	int destroyedFx = 0;
 
+	bool ground = false;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
 	// The enemy's collider
 	Collider* collider = nullptr;
+	Collider* feet = nullptr;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;

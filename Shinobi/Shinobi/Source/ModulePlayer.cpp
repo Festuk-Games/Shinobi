@@ -10,6 +10,7 @@ using namespace std;
 
 #include "ModuleAudio.h"
 #include "ModuleScene.h"
+#include "ModuleUi.h"
 
 #include "ModuleCollisions.h"
 
@@ -507,6 +508,15 @@ Update_Status ModulePlayer::Update()
 				currentAnimation->Reset();
 			}
 		}
+		if (App->ui->lifenum >=1 && dietime >= 100)
+		{
+			alive = true;
+			position.x = 30;
+			position.y = 208;
+			App->render->camera.x = 0;
+			dietime=0;
+		}
+		dietime++;
 	}
 	
 	if (!ground && !isJumping) position.y+=2;
@@ -550,6 +560,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT)
 	{
+		App->ui->lifenum--;
 		alive = false;
 	}
 }

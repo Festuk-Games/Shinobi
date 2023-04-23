@@ -138,7 +138,7 @@ Update_Status ModuleUI::PostUpdate()
 	}
 
 	//Draw the lifes
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < lifenum; i++)
 	{
 		App->render->Blit(lifes, 16 + 8 * i, 20, SDL_FLIP_NONE, &life, 0.0f);
 	}

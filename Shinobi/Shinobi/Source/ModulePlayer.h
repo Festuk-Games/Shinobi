@@ -89,6 +89,8 @@ public:
 	bool right = true;
 	//bool left = false;
 
+	int dietime = 0;
+
 };
 
 #endif //!__MODULE_PLAYER_H__

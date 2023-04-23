@@ -30,6 +30,13 @@ void Enemy::Update()
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
+
+	if (!ground)
+	{
+		position.y++;
+	}
+
+	ground = false;
 }
 
 void Enemy::Draw()

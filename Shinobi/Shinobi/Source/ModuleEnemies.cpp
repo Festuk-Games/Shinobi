@@ -167,6 +167,15 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				enemies[i] = nullptr;
 				break;
 			}
+			if (c2->type == Collider::Type::GROUND)
+			{
+				enemies[i]->ground = true;
+			}
+			if (c2->type == Collider::Type::BOX)
+			{
+				enemies[i]->ground = true;
+				enemies[i]->position.y--;
+			}
 		}
 	}
 }

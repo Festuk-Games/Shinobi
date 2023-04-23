@@ -29,6 +29,7 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 	reloadAnim.speed = 0.05f;
 
 	collider = App->collisions->AddCollider({0, 0, 36, 59}, Collider::Type::ENEMY, (Module*)App->enemies);
+	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, (Module*)App->enemies);
 
 	position.x = 550;
 	position.y = 148;
