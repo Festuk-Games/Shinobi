@@ -8,7 +8,7 @@
 
 Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 {
-	idleAnim.PushBack({ 11,165,36,59 });
+	idleAnim.PushBack({ 0,6,54,59 });
 
 	walkAnim.PushBack({11,165,36,59});
 	walkAnim.PushBack({ 68,165,36,59 });
@@ -20,13 +20,15 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 
 	shootAnim.PushBack({ 0,6,54,59 });
 	shootAnim.PushBack({ 64,6,54,59 });
-	shootAnim.speed = 0.05f;
+	shootAnim.PushBack({ 0,6,54,59 });
+	shootAnim.speed = 0.1f;
+	shootAnim.loop = false;
 
 	reloadAnim.PushBack({ 143,6,54,59 });
 	reloadAnim.PushBack({ 206,6,54,59 });
 	reloadAnim.speed = 0.05f;
 
-	collider = App->collisions->AddCollider({0, 0, 36, 59}, Collider::Type::NONE, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({0, 0, 36, 59}, Collider::Type::ENEMY, (Module*)App->enemies);
 
 	position.x = 550;
 	position.y = 148;
@@ -44,9 +46,10 @@ void Enemy_Gunner::Update()
 		if (shot >= 100 && !reloading && bullets >= 1)
 		{
 			currentAnim = &shootAnim;
+			currentAnim->Reset();
 			App->audio->PlayFx(App->audio->shuriken);
 			App->particles->shuriken.speed = iPoint(-5, 0);
-			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 20, Collider::Type::NONE);
+			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 20, Collider::Type::ENEMY_SHOT);
 			shot = 0;
 			shooting = true;
 			bullets--;
@@ -55,7 +58,7 @@ void Enemy_Gunner::Update()
 		{
 			flip = true;
 
-			if (position.x - App->player->position.x >= 50)
+			if (position.x - App->player->position.x >= pdistance-40)
 			{
 				currentAnim = &walkAnim;
 				position.x--;
@@ -80,9 +83,10 @@ void Enemy_Gunner::Update()
 		if (shot >= 100 && !reloading && bullets >= 1)
 		{
 			currentAnim = &shootAnim;
+			currentAnim->Reset();
 			App->audio->PlayFx(App->audio->shuriken);
 			App->particles->shuriken.speed = iPoint(5, 0);
-			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 20, Collider::Type::NONE);
+			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 20, Collider::Type::ENEMY_SHOT);
 			shot = 0;
 			shooting = true;
 			bullets--;
@@ -91,7 +95,7 @@ void Enemy_Gunner::Update()
 		{
 			flip = false;
 
-			if (position.x - App->player->position.x <= -50)
+			if (position.x - App->player->position.x <= -(pdistance - 40))
 			{
 				currentAnim = &walkAnim;
 				position.x++;

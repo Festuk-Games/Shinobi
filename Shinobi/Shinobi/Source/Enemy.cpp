@@ -50,5 +50,8 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
+	if (collider->type == Collider::Type::PLAYER_SHOT)
+	{
 
+	}
 }

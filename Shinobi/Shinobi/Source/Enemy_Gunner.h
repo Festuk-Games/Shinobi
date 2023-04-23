@@ -40,7 +40,7 @@ private:
 	bool pl = false;
 
 	int pos1 = 500, pos2 = 650;
-	int pdistance = 100;
+	int pdistance = 200;
 	int shot = 0;
 	bool shooting = false, reloading = false, walking = true;
 	int time = 0;

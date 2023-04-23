@@ -9,6 +9,8 @@
 #include "Enemy.h"
 #include "Enemy_Gunner.h"
 
+#include "ModuleCollisions.h"
+
 #define SPAWN_MARGIN 50
 
 
@@ -157,11 +159,14 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 	{
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
+			if (c2->type == Collider::Type::PLAYER_SHOT)
+			{
+				enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
-			delete enemies[i];
-			enemies[i] = nullptr;
-			break;
+				delete enemies[i];
+				enemies[i] = nullptr;
+				break;
+			}
 		}
 	}
 }

@@ -111,9 +111,9 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	dieAnim2.PushBack({ 194,650,62,44 });
 	dieAnim2.PushBack({ 262,650,72,44 });
 	dieAnim1.loop = false;
-	dieAnim1.speed = 0.1f;
+	dieAnim1.speed = 0.05f;
 	dieAnim2.loop = false;
-	dieAnim2.speed = 0.1f;
+	dieAnim2.speed = 0.08f;
 
 	//back animation
 	backAnim.PushBack({ 127,735,46,52 });
@@ -489,7 +489,7 @@ Update_Status ModulePlayer::Update()
 			diePosition = position;
 			diePos = true;
 		}
-		if (position.x >= diePosition.x - 20 )
+		if (position.x >= diePosition.x - 25 )
 		{
 			if (currentAnimation != &dieAnim1)
 			{
@@ -497,9 +497,9 @@ Update_Status ModulePlayer::Update()
 				currentAnimation->Reset();
 			}
 			position.x -= speed;
-			App->render->camera.x -= speed;
+			App->render->camera.x += speed;
 		}
-		else if (position.x <= diePosition.x - 20)
+		else if (position.x <= diePosition.x - 25)
 		{
 			if (currentAnimation != &dieAnim2)
 			{
@@ -547,5 +547,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		{
 			jumpState = false;
 		}
+	}
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT)
+	{
+		alive = false;
 	}
 }
