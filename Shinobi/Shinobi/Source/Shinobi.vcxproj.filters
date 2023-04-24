@@ -109,6 +109,7 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="SceneMission.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -182,6 +183,9 @@
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMission.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

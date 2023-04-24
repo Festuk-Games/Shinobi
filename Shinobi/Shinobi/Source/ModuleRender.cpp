@@ -25,7 +25,7 @@ ModuleRender::~ModuleRender()
 bool ModuleRender::Init()
 {
 	LOG("Creating Renderer context");
-	bool ret = true;	
+	bool ret = true;
 	Uint32 flags = 0;
 
 	if (VSYNC == true)
@@ -66,10 +66,15 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 		camera.y -= cameraSpeed;
 
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_REPEAT)
+
+		posiciones = !posiciones;
+
+
 	//Handle horizontal movement of the camera
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{	
+	{
 		if (camera.x >= -4980)
 		{
 			if (App->player->position.x >= 180 && !App->player->isColliding)
@@ -89,22 +94,31 @@ Update_Status ModuleRender::Update()
 			}
 		}
 	}
-	
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModuleRender::PostUpdate()
 {
+	if (posiciones)
+	{
+		printPos();
+	}
 	//Update the screen
 	SDL_RenderPresent(renderer);
 
-	cout << "Player.x: " << App->player->position.x << endl;
-	cout << "Player.y: " << App->player->position.y << endl;
-	cout << "Camera.x: " << camera.x << endl;
+
 
 	//SDL_Delay(16.666);
 
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+void ModuleRender::printPos() {
+	cout << "Player.x: " << App->player->position.x << endl;
+	cout << "Player.y: " << App->player->position.y << endl;
+	cout << "Camera.x: " << camera.x << endl;
+
 }
 
 bool ModuleRender::CleanUp()
@@ -122,8 +136,8 @@ bool ModuleRender::CleanUp()
 bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_RendererFlip flip, SDL_Rect* section, float speed)
 {
 	bool ret = true;
-	
-	SDL_Rect rect {
+
+	SDL_Rect rect{
 		(int)(camera.x * speed) + x * SCREEN_SIZE,
 		(int)(camera.y * speed) + y * SCREEN_SIZE,
 		0, 0 };
@@ -131,7 +145,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_RendererFlip fli
 	SDL_Point center = { rect.w / 2, rect.h / 2 };
 
 	double angle = 0;
-	
+
 	if (section != nullptr)
 	{
 		rect.w = section->w;

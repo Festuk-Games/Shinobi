@@ -7,6 +7,12 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 
+#include "ModulePlayer.h"
+#include "ModuleUI.h"
+#include "ModuleAuxScene.h"
+#include "ModuleParticles.h"
+#include "ModuleHostage.h"
+
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
 	
@@ -69,6 +75,14 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	App->player->Enable();
+	App->hostage->Enable();
+	App->auxscene->Enable();
+	App->enemies->Enable();
+	App->ui->Enable();
+	App->collisions->Enable();
+	App->particles->Enable();
+
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 0, 80);
 
 	if (stage1)
@@ -108,7 +122,6 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
 		App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
 	}
-
 
 	return ret;
 }

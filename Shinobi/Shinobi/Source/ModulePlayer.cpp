@@ -132,7 +132,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 
 	bool ret = true;
-
+	currentAnimation = &idleAnim;
 	texture = App->textures->Load("Assets/main.png"); 
 	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, this);
@@ -160,7 +160,7 @@ Update_Status ModulePlayer::Update()
 					currentAnimation = &jumpAnim1;
 					currentAnimation->Reset();
 					position.y -= 8;
-					collider->SetPos(position.x, position.y - 58);
+					collider->SetPos(position.x, position.y - 58); 
 					feet->SetPos(position.x, position.y-1);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 					{

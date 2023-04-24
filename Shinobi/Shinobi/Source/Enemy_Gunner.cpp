@@ -50,7 +50,7 @@ void Enemy_Gunner::Update()
 			currentAnim->Reset();
 			App->audio->PlayFx(App->audio->shuriken);
 			App->particles->shuriken.speed = iPoint(-5, 0);
-			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 20, Collider::Type::ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 10, Collider::Type::ENEMY_SHOT);
 			shot = 0;
 			shooting = true;
 			bullets--;
@@ -87,7 +87,7 @@ void Enemy_Gunner::Update()
 			currentAnim->Reset();
 			App->audio->PlayFx(App->audio->shuriken);
 			App->particles->shuriken.speed = iPoint(5, 0);
-			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 20, Collider::Type::ENEMY_SHOT);
+			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 10, Collider::Type::ENEMY_SHOT);
 			shot = 0;
 			shooting = true;
 			bullets--;

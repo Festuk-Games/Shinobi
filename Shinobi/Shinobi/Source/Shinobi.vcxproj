@@ -79,6 +79,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Gunner.h" />
+    <ClInclude Include="SceneMission.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleAuxScene.h" />
     <ClInclude Include="ModuleCollisions.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Gunner.cpp" />
     <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="SceneMission.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleAuxScene.cpp" />
     <ClCompile Include="ModuleCollisions.cpp" />

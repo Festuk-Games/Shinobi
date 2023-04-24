@@ -55,8 +55,10 @@ bool ModuleHostage::Start()
 
 	bool ret = true;
 
-	texture = App->textures->Load("Assets/hostage.png");
+	h[0].currentAnimation = &h[0].idleAnim;
+	h[1].currentAnimation = &h[1].idleAnim;
 
+	texture = App->textures->Load("Assets/hostage.png");
 
 	h[0].collider = App->collisions->AddCollider({ 200, 180, 24, 28 }, Collider::Type::HOSTAGE);
 	h[1].collider = App->collisions->AddCollider({ 300, 180, 24, 28 }, Collider::Type::HOSTAGE);
