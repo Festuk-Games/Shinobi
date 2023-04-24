@@ -66,6 +66,11 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 		camera.y -= cameraSpeed;
 
+	if (App->input->keys[SDL_SCANCODE_F2]== KEY_REPEAT)
+	
+		posiciones = !posiciones;
+	
+
 	//Handle horizontal movement of the camera
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
@@ -91,20 +96,29 @@ Update_Status ModuleRender::Update()
 	}
 	
 	return Update_Status::UPDATE_CONTINUE;
-}
+}aa
 
 Update_Status ModuleRender::PostUpdate()
 {
+	if (posiciones)
+	{
+		printPos();
+	}
 	//Update the screen
 	SDL_RenderPresent(renderer);
 
-	cout << "Player.x: " << App->player->position.x << endl;
-	cout << "Player.y: " << App->player->position.y << endl;
-	cout << "Camera.x: " << camera.x << endl;
+	
 
 	//SDL_Delay(16.666);
 
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+void ModuleRender::printPos() {
+	cout << "Player.x: " << App->player->position.x << endl;
+	cout << "Player.y: " << App->player->position.y << endl;
+	cout << "Camera.x: " << camera.x << endl;
+
 }
 
 bool ModuleRender::CleanUp()
