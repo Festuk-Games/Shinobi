@@ -13,6 +13,8 @@
 #include "ModuleParticles.h"
 #include "ModuleHostage.h"
 
+#include "ModuleFadeToBlack.h"
+
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
 	
@@ -132,14 +134,15 @@ Update_Status ModuleScene::Update()
 	//next stage condition
 	if (nextStage && stage1)
 	{
-		if (App->player->position.x >= 500)
+		if (App->player->position.x >= 2000)
 		{
+			App->fade->FadeToBlack(this, this, 100);
 			stage1 = false;
 			stage2 = true;
 			App->player->position.x = 30;
 			App->render->camera.x = 0;
 			nextStage = false;
-			App->audio->PlayMusic("Audio/music/mission_2.ogg", 2.0f);
+			App->audio->PlayMusic("Audio/music/mission_2.ogg", 0.5f);
 		}
 	}
 	if (nextStage && stage2)
@@ -197,4 +200,17 @@ Update_Status ModuleScene::PostUpdate()
 	//App->render->Blit(stageTexture, 0, 0, &ground);
 
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+bool ModuleScene::CleanUp()
+{
+	App->player->Disable();
+	App->hostage->Disable();
+	App->auxscene->Disable();
+	App->enemies->Disable();
+	App->ui->Disable();
+	App->collisions->Disable();
+	App->particles->Disable();
+
+	return true;
 }

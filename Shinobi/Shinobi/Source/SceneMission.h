@@ -35,10 +35,7 @@ public:
 	SDL_Texture* mission1_1 = nullptr;
 
 	// The sprite rectangle for the ground
-	SDL_Rect ground, sky;
-
-	// The sprite section for the background
-	SDL_Rect background;
+	SDL_Rect ground;
 
 	// The different sprite sections for the flag
 	Animation flag;

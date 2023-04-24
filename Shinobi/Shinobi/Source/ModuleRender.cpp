@@ -12,6 +12,8 @@ using namespace std;
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_scancode.h"
 
+#include "SceneIntro.h"
+
 ModuleRender::ModuleRender(bool startEnabled) : Module(startEnabled)
 {
 
@@ -66,10 +68,15 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 		camera.y -= cameraSpeed;
 
-	if (App->input->keys[SDL_SCANCODE_F2]== KEY_REPEAT)
-	
+	if (App->input->keys[SDL_SCANCODE_F2]== KEY_DOWN)
 		posiciones = !posiciones;
 	
+	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN)
+	{
+		/*system("cls");
+		cout << "logo.x: " << App->intro->logopos.x << endl;
+		cout << "logo.y: " << App->intro->logopos.y << endl;*/
+	}
 
 	//Handle horizontal movement of the camera
 
@@ -94,9 +101,9 @@ Update_Status ModuleRender::Update()
 			}
 		}
 	}
-	
+
 	return Update_Status::UPDATE_CONTINUE;
-}aa
+}
 
 Update_Status ModuleRender::PostUpdate()
 {
@@ -106,10 +113,6 @@ Update_Status ModuleRender::PostUpdate()
 	}
 	//Update the screen
 	SDL_RenderPresent(renderer);
-
-	
-
-	//SDL_Delay(16.666);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
