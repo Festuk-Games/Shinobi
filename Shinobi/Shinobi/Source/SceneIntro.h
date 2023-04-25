@@ -5,6 +5,10 @@
 #include "Animation.h"
 #include "p2Point.h"
 
+const int SQUARE_SIZE = 40;
+const int ROWS = 16;
+const int COLUMNS = 16;
+
 struct SDL_Texture;
 
 class SceneIntro : public Module

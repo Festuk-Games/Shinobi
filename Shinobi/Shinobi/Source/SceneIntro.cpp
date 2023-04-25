@@ -72,7 +72,7 @@ Update_Status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->mission, 90);
+		App->fade->FadeToBlack(this, (Module*)App->mission, 50);
 	}
 
 	//if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) logopos.y--;
@@ -104,9 +104,9 @@ Update_Status SceneIntro::Update()
 Update_Status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	if (delay <= 80 || delay >= 200) App->render->Blit(introimage1, 24, 0, SDL_FLIP_NONE, NULL);
-	else if (delay >= 80 && delay <= 140) App->render->Blit(introimage2, 24, 0, SDL_FLIP_NONE, NULL);
-	else if (delay >= 140 && delay <= 200) App->render->Blit(introimage3, 24, 0, SDL_FLIP_NONE, NULL);
+	if (delay <= 80 || delay >= 200) App->render->Blit(introimage1, 0, 0, SDL_FLIP_NONE, NULL);
+	else if (delay >= 80 && delay <= 140) App->render->Blit(introimage2, 0, 0, SDL_FLIP_NONE, NULL);
+	else if (delay >= 140 && delay <= 200) App->render->Blit(introimage3, 0, 0, SDL_FLIP_NONE, NULL);
 
 	if (delay >= 15) App->render->Blit(logo6, logos[5].logopos.x, logos[5].logopos.y, SDL_FLIP_NONE, NULL);
 	if (delay >= 12) App->render->Blit(logo5, logos[4].logopos.x, logos[4].logopos.y, SDL_FLIP_NONE, NULL);
@@ -121,7 +121,6 @@ Update_Status SceneIntro::PostUpdate()
 
 	App->render->Blit(text, 242, 208, SDL_FLIP_NONE, &segarect);
 	App->render->Blit(text, 290, 207, SDL_FLIP_NONE, &nums);
-
 
 	return Update_Status::UPDATE_CONTINUE;
 }

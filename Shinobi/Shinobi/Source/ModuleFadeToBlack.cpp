@@ -19,6 +19,16 @@ bool ModuleFadeToBlack::Start()
 {
 	LOG("Preparing Fade Screen");
 
+	fadeout[0].fade = App->textures->Load("Assets/fade/out/fadeout1.png");
+	fadeout[1].fade = App->textures->Load("Assets/fade/out/fadeout2.png");
+	fadeout[2].fade = App->textures->Load("Assets/fade/out/fadeout3.png");
+	fadeout[3].fade = App->textures->Load("Assets/fade/out/fadeout4.png");
+	fadeout[4].fade = App->textures->Load("Assets/fade/out/fadeout5.png");
+	fadeout[5].fade = App->textures->Load("Assets/fade/out/fadeout6.png");
+	fadeout[6].fade = App->textures->Load("Assets/fade/out/fadeout7.png");
+	fadeout[7].fade = App->textures->Load("Assets/fade/out/fadeout8.png");
+	fadeout[8].fade = App->textures->Load("Assets/fade/black.png");
+
 	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
 	return true;
@@ -34,7 +44,6 @@ Update_Status ModuleFadeToBlack::Update()
 		++frameCount;
 		if (frameCount >= maxFadeFrames)
 		{
-			// TODO 1: Enable / Disable the modules received when FadeToBlacks(...) gets called
 			moduleToDisable->Disable();
 			moduleToEnable->Enable();
 			currentStep = Fade_Step::FROM_BLACK;
@@ -58,10 +67,25 @@ Update_Status ModuleFadeToBlack::PostUpdate()
 	if (currentStep == Fade_Step::NONE) return Update_Status::UPDATE_CONTINUE;
 
 	float fadeRatio = (float)frameCount / (float)maxFadeFrames;
+	
+	if (currentStep == Fade_Step::TO_BLACK)
+	{
+		if (frameCount >= 5) App->render->Blit(fadeout[0].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 10) App->render->Blit(fadeout[1].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 15) App->render->Blit(fadeout[2].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 20) App->render->Blit(fadeout[3].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 25) App->render->Blit(fadeout[4].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 30) App->render->Blit(fadeout[5].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 35) App->render->Blit(fadeout[6].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 40) App->render->Blit(fadeout[7].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 45) App->render->Blit(fadeout[8].fade, 0, 0, SDL_FLIP_NONE, NULL);
+	}
 
 	// Render the black square with alpha on the screen
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(App->render->renderer, &screenRect);
+
+
 
 	return Update_Status::UPDATE_CONTINUE;
 }

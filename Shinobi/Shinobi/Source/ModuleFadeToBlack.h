@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "SDL\include\SDL_rect.h"
+#include "ModuleTextures.h"
 
 class ModuleFadeToBlack : public Module
 {
@@ -49,6 +50,15 @@ private:
 	// The modules that should be switched after the first step
 	Module* moduleToEnable = nullptr;
 	Module* moduleToDisable = nullptr;
+
+	struct fadeout
+	{
+		SDL_Texture* fade = nullptr;
+	}fadeout[9];
+
+	int t = 0;
+	bool out = false;
+
 };
 
 #endif //__MODULEFADETOBLACK_H__

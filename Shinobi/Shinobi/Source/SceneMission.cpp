@@ -40,20 +40,16 @@ bool SceneMission::Start()
 Update_Status SceneMission::Update()
 {
 	timer++;
-	if (timer == 10)
-	{
-		s1 = false;
-	}
+	changescene++;
+	if (timer == 10) s1 = false;
 	if (timer == 20)
 	{
 		s1 = true;
 		timer = 0;
 	}
-	changescene++;
 	if (changescene >= 200)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene, 40);
-		/*App->scene->Enable();*/
 	}
 	return Update_Status::UPDATE_CONTINUE;
 }

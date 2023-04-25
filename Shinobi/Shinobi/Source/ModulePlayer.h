@@ -91,6 +91,8 @@ public:
 
 	int dietime = 0;
 
+
+	iPoint directionpos;
 };
 
 #endif //!__MODULE_PLAYER_H__
