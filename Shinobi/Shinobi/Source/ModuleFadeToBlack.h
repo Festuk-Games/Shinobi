@@ -29,7 +29,7 @@ public:
 	// Called from another module
 	// Starts the fade process which has two steps, fade_out and fade_in
 	// After the first step, the modules should be switched
-	bool FadeToBlack(Module* toDisable, Module* toEnable, float frames = 60);
+	bool FadeToBlack(Module* toDisable, Module* toEnable, bool fadeOut, bool fadeIn, float frames = 60);
 
 private:
 
@@ -54,11 +54,11 @@ private:
 	struct fadeout
 	{
 		SDL_Texture* fade = nullptr;
-	}fadeout[9];
+	}fadeout[8];
 
 	int t = 0;
-	bool out = false;
-
+	bool fOut = false;
+	bool fIn = false;
 };
 
 #endif //__MODULEFADETOBLACK_H__

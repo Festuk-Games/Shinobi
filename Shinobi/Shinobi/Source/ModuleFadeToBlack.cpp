@@ -67,8 +67,12 @@ Update_Status ModuleFadeToBlack::PostUpdate()
 	if (currentStep == Fade_Step::NONE) return Update_Status::UPDATE_CONTINUE;
 
 	float fadeRatio = (float)frameCount / (float)maxFadeFrames;
-	
-	if (currentStep == Fade_Step::TO_BLACK)
+
+	// Render the black square with alpha on the screen
+	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
+	SDL_RenderFillRect(App->render->renderer, &screenRect);
+
+	if (currentStep == Fade_Step::TO_BLACK && fOut)
 	{
 		if (frameCount >= 5) App->render->Blit(fadeout[0].fade, 0, 0, SDL_FLIP_NONE, NULL);
 		if (frameCount >= 10) App->render->Blit(fadeout[1].fade, 0, 0, SDL_FLIP_NONE, NULL);
@@ -78,19 +82,23 @@ Update_Status ModuleFadeToBlack::PostUpdate()
 		if (frameCount >= 30) App->render->Blit(fadeout[5].fade, 0, 0, SDL_FLIP_NONE, NULL);
 		if (frameCount >= 35) App->render->Blit(fadeout[6].fade, 0, 0, SDL_FLIP_NONE, NULL);
 		if (frameCount >= 40) App->render->Blit(fadeout[7].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 45) App->render->Blit(fadeout[8].fade, 0, 0, SDL_FLIP_NONE, NULL);
 	}
-
-	// Render the black square with alpha on the screen
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
-	SDL_RenderFillRect(App->render->renderer, &screenRect);
-
-
+	else if (currentStep == Fade_Step::FROM_BLACK && fIn)
+	{
+		if (frameCount >= 40) App->render->Blit(fadeout[7].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 35) App->render->Blit(fadeout[6].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 30) App->render->Blit(fadeout[5].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 25) App->render->Blit(fadeout[4].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 20) App->render->Blit(fadeout[3].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 15) App->render->Blit(fadeout[2].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 10) App->render->Blit(fadeout[1].fade, 0, 0, SDL_FLIP_NONE, NULL);
+		if (frameCount >= 5) App->render->Blit(fadeout[0].fade, 0, 0, SDL_FLIP_NONE, NULL);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEnable, float frames)
+bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEnable, bool fadeOut, bool fadeIn, float frames)
 {
 	bool ret = false;
 
@@ -101,7 +109,12 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 		frameCount = 0;
 		maxFadeFrames = frames;
 
-		// TODO 1: How do we keep track of the modules received in this function?
+		if (fadeOut) fOut = true;
+		else fOut = false;
+
+		if (fadeIn) fIn = true;
+		else fIn = false;
+
 		this->moduleToDisable = moduleToDisable;
 		this->moduleToEnable = moduleToEnable;
 		ret = true;

@@ -141,7 +141,7 @@ Update_Status ModuleScene::Update()
 	{
 		if (App->player->position.x >= 2000)
 		{
-			App->fade->FadeToBlack(this, this, 100);
+			App->fade->FadeToBlack(this, this, true, true, 100);
 			stage1 = false;
 			stage2 = true;
 			App->player->position.x = 30;

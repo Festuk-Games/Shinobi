@@ -47,6 +47,8 @@ public:
 	bool s1 = true;
 	int changescene = 0;
 
+	int imageX = -50, imageY = 224;
+
 };
 
 #endif 

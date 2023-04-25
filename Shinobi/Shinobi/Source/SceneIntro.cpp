@@ -72,7 +72,7 @@ Update_Status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->mission, 50);
+		App->fade->FadeToBlack(this, (Module*)App->mission, true, false, 50);
 	}
 
 	//if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) logopos.y--;

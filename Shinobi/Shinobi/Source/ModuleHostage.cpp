@@ -33,13 +33,8 @@ ModuleHostage::ModuleHostage(bool startEnabled) : Module(startEnabled)
 		h[i].exitAnim.PushBack({ 36, 64, 26, 48 });
 		h[i].exitAnim.PushBack({ 66, 64, 26, 48 });
 		h[i].exitAnim.PushBack({ 96, 64, 26, 48 });
-		h[i].exitAnim.loop = true;
-		h[i].exitAnim.speed = 0.1f;
-
-		h[i].exitAnim.PushBack({ 7, 12, 24, 29 });
 		h[i].exitAnim.loop = false;
 		h[i].exitAnim.speed = 0.2f;
-
 	}
 
 }
@@ -107,7 +102,6 @@ Update_Status ModuleHostage::PostUpdate()
 {
 	for (int i = 0; i < 2; i++)
 	{
-	
 			if (!h[i].col)
 			{
 				SDL_Rect rect = h[i].currentAnimation->GetCurrentFrame();
@@ -115,16 +109,14 @@ Update_Status ModuleHostage::PostUpdate()
 			}
 			else
 			{
-				time++;
-				if (time <= 18)
+				if (h[i].time <= 18)
 				{
 					SDL_Rect rect = h[i].currentAnimation->GetCurrentFrame();
 					h[i].hostageposition.y-=2;
 					App->render->Blit(texture, h[i].hostageposition.x, h[i].hostageposition.y - rect.h, SDL_FLIP_NONE, &rect, 1.0f);
+					h[i].time++;
 				}
 			}
-			
-
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

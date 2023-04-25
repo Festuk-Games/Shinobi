@@ -40,9 +40,8 @@ public:
 		iPoint hostageposition;
 		bool col = false;
 		Collider* collider = nullptr;
+		int time = 0;
 	}h[2];
-
-	int time = 0;
 
 };
 
