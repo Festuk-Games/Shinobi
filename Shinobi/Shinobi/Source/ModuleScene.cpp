@@ -17,7 +17,7 @@
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
-	
+	//stage1 rects
 	if (stage1)
 	{
 		// ground
@@ -33,6 +33,8 @@ ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 		sky.h = 512;
 
 	}
+
+	//stage2 rects
 	if (stage2)
 	{
 		// ground
@@ -47,6 +49,8 @@ ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 		sky.w = 1312;
 		sky.h = 512;
 	}
+
+	//stage3 rects
 	if (stage3)
 	{
 		// ground
@@ -77,6 +81,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	//enable modules
 	App->player->Enable();
 	App->hostage->Enable();
 	App->auxscene->Enable();
@@ -182,28 +187,25 @@ Update_Status ModuleScene::PostUpdate()
 			App->audio->PlayMusic("Audio/music/mission_1.ogg", 2.0f);
 		}
 	}
-	if (stage2)
+	else if (stage2)
 	{
 		App->render->Blit(skyTexture2, 0, -265, SDL_FLIP_NONE, &sky, 0.375f); // sky
 		App->render->Blit(stageTexture2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 0.75f); // ground
 
 	}
-	if (stage3)
+	else if (stage3)
 	{
 		App->render->Blit(skyTexture3, 0, 0, SDL_FLIP_NONE, &sky, 0.75); // sky
 		App->render->Blit(stageTexture3, 0, 0, SDL_FLIP_NONE, &ground, 0.75f); // ground
 
 	}
 
-	//App->render->Blit(stageTexture, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
-	
-	//App->render->Blit(stageTexture, 0, 0, &ground);
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 bool ModuleScene::CleanUp()
 {
+	//disable modules
 	App->player->Disable();
 	App->hostage->Disable();
 	App->auxscene->Disable();

@@ -23,12 +23,12 @@ ModuleHostage::ModuleHostage(bool startEnabled) : Module(startEnabled)
 		h[i].hostageposition.y = 208;
 
 		// idle animation
-
 		h[i].idleAnim.PushBack({ 7, 12, 24, 29 });
 		h[i].idleAnim.PushBack({ 36, 12, 24, 29 });
 		h[i].idleAnim.loop = true;
 		h[i].idleAnim.speed = 0.1f;
 
+		// exit animation
 		h[i].exitAnim.PushBack({ 7, 64, 26, 48 });
 		h[i].exitAnim.PushBack({ 36, 64, 26, 48 });
 		h[i].exitAnim.PushBack({ 66, 64, 26, 48 });

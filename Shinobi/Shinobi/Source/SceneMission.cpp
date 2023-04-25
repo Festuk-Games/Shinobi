@@ -9,13 +9,12 @@
 
 SceneMission::SceneMission(bool startEnabled) : Module(startEnabled)
 {
-
-
+	//rects
+	
 	ground.x = 0;
 	ground.y = 0;
 	ground.w = 160;
 	ground.h = 208;
-	
 	
 }
 

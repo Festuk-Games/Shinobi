@@ -7,6 +7,7 @@
 ModuleAuxScene::ModuleAuxScene(bool startEnabled) : Module(startEnabled)
 {
 
+	//stage1 rects
 	if (stage1)
 	{
 		// ground
@@ -21,6 +22,8 @@ ModuleAuxScene::ModuleAuxScene(bool startEnabled) : Module(startEnabled)
 		sky.w = 1312;
 		sky.h = 512;
 	}
+
+	//stage2 rects
 	if (stage2)
 	{
 		// ground
@@ -35,6 +38,8 @@ ModuleAuxScene::ModuleAuxScene(bool startEnabled) : Module(startEnabled)
 		sky.w = 1312;
 		sky.h = 512;
 	}
+
+	//stage3 rects
 	if (stage3)
 	{
 		// ground

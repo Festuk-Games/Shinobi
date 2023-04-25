@@ -8,8 +8,10 @@
 
 Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 {
+	//idle animation
 	idleAnim.PushBack({ 0,6,54,59 });
 
+	//walk animation
 	walkAnim.PushBack({11,165,36,59});
 	walkAnim.PushBack({ 68,165,36,59 });
 	walkAnim.PushBack({ 143,165,36,59 });
@@ -18,19 +20,23 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 
 	currentAnim = &walkAnim;
 
+	//shoot animation
 	shootAnim.PushBack({ 0,6,54,59 });
 	shootAnim.PushBack({ 64,6,54,59 });
 	shootAnim.PushBack({ 0,6,54,59 });
 	shootAnim.speed = 0.1f;
 	shootAnim.loop = false;
 
+	//reload animation
 	reloadAnim.PushBack({ 143,6,54,59 });
 	reloadAnim.PushBack({ 206,6,54,59 });
 	reloadAnim.speed = 0.05f;
 
+	//colliders
 	collider = App->collisions->AddCollider({0, 0, 36, 59}, Collider::Type::ENEMY, (Module*)App->enemies);
 	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, (Module*)App->enemies);
 
+	//initial position
 	position.x = 550;
 	position.y = 148;
 }
@@ -41,6 +47,7 @@ void Enemy_Gunner::Update()
 	//waveRatio += waveRatioSpeed;
 	//position.x = spawnPos.x + (waveHeight * sinf(waveRatio));
 	
+	//walk right
 	if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0)
 	{
 		shot++;
@@ -78,6 +85,7 @@ void Enemy_Gunner::Update()
 		}
 		
 	}
+	//walk left
 	else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0)
 	{
 		shot++;
@@ -114,6 +122,7 @@ void Enemy_Gunner::Update()
 		}
 
 	}
+	//walk path
 	else if (!pl && !reloading && !shooting)
 	{
 		currentAnim = &walkAnim;
@@ -143,6 +152,8 @@ void Enemy_Gunner::Update()
 		{
 			shooting = false;
 			time = 0;
+
+			//reload
 			if (bullets <= 0)
 			{
 				currentAnim = &reloadAnim;
@@ -152,6 +163,7 @@ void Enemy_Gunner::Update()
 		}
 	}
 
+	//reload delay
 	if (reloading)
 	{
 		time++;
