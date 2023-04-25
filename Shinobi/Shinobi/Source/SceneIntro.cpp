@@ -19,6 +19,16 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 	lightAnim.PushBack({ 0,0,0,0 });
 	lightAnim.speed = 0.35f;
 	lightAnim.loop = false;
+
+	nums.x = 0;
+	nums.y = 36;
+	nums.h = 10;
+	nums.w = 34;
+
+	segarect.x = 0;
+	segarect.y = 17;
+	segarect.h = 10;
+	segarect.w = 42;
 }
 
 SceneIntro::~SceneIntro()
@@ -44,6 +54,7 @@ bool SceneIntro::Start()
 	logo6 = App->textures->Load("Assets/logo6.png");
 	sega = App->textures->Load("Assets/sega.png");
 	light = App->textures->Load("Assets/light.png");
+	text = App->textures->Load("Assets/ui/nums.png");
 	/*App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);*/
 
 	App->render->camera.x = 0;
@@ -84,7 +95,7 @@ Update_Status SceneIntro::Update()
 		}
 	}
 
-	if (delay >= 240) currentAnimation->Update();
+	if (delay >= 260) currentAnimation->Update();
 	
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -108,6 +119,8 @@ Update_Status SceneIntro::PostUpdate()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	App->render->Blit(light, 145, 114, SDL_FLIP_NONE, &rect);
 
+	App->render->Blit(text, 242, 208, SDL_FLIP_NONE, &segarect);
+	App->render->Blit(text, 290, 207, SDL_FLIP_NONE, &nums);
 
 
 	return Update_Status::UPDATE_CONTINUE;

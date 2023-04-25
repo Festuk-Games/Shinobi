@@ -41,6 +41,9 @@ public:
 	SDL_Texture* logo5 = nullptr;
 	SDL_Texture* logo6 = nullptr;
 	SDL_Texture* light = nullptr;
+	SDL_Texture* text = nullptr;
+
+	SDL_Rect segarect, nums;
 
 	Animation* currentAnimation = nullptr;
 	Animation lightAnim;
