@@ -2,48 +2,78 @@
 #define __MODULE_HOSTAGE_H__
 
 #include "Module.h"
-#include "Animation.h"
-#include "p2Point.h"
-#include "SDL/include/SDL.h"
-#pragma comment( lib, "SDL/libx86/SDL2.lib")
-#pragma comment( lib, "SDL/libx86/SDL2main.lib")
+
+#define MAX_HOSTAGES 20
+
+enum class HOSTAGE_TYPE
+{
+	NO_TYPE,
+	HOSTAGE,
+};
+
+struct HostageSpawnpoint
+{
+	HOSTAGE_TYPE type = HOSTAGE_TYPE::NO_TYPE;
+	int x, y;
+};
 
 class Hostage;
 struct SDL_Texture;
-struct Collider;
 
 class ModuleHostage : public Module
 {
 public:
-
+	// Constructor
 	ModuleHostage(bool startEnabled);
 
+	// Destructor
 	~ModuleHostage();
 
-
+	// Called when the module is activated
+	// Loads the necessary textures for the enemies
 	bool Start() override;
 
+	// Called at the middle of the application loop
+	// Handles all enemies logic and spawning/despawning
 	Update_Status Update() override;
 
+	// Called at the end of the application loop
+	// Iterates all the enemies and draws them
 	Update_Status PostUpdate() override;
 
-public:
+	// Called on application exit
+	// Destroys all active enemies left in the array
+	bool CleanUp() override;
 
-	int speed = 1;
+	// Called when an enemi collider hits another collider
+	// The hostage is destroyed and an explosion particle is fired
+	void OnCollision(Collider* c1, Collider* c2) override;
 
+	// Add an hostage into the queue to be spawned later
+	bool AddHostage(HOSTAGE_TYPE type, int x, int y);
+
+	// Iterates the queue and checks for camera position
+	void HandleHostageSpawn();
+
+	// Destroys any enemies that have moved outside the camera limits
+	void HandleHostageDespawn();
+
+private:
+	// Spawns a new hostage using the data from the queue
+	void SpawnHostage(const HostageSpawnpoint& info);
+
+private:
+	// A queue with all spawn points information
+	HostageSpawnpoint spawnQueue[MAX_HOSTAGES];
+
+	// All spawned enemies in the scene
+	Hostage* hostages[MAX_HOSTAGES] = { nullptr };
+
+	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;
 
-	struct hostages
-	{
-		Animation* currentAnimation = nullptr;
-		Animation idleAnim, exitAnim;
-		iPoint hostageposition;
-		bool col = false;
-		Collider* collider = nullptr;
-		int time = 0;
-	}h[2];
-
+	// The audio fx for destroying an hostage
+	int hostageDestroyedFx = 0;
 };
 
-
-#endif // __ModuleHostage_H__
+#endif // __MODULE_ENEMIES_H__

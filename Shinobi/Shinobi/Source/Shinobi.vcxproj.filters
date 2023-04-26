@@ -110,6 +110,8 @@
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneMission.h" />
+    <ClInclude Include="Hostage.h" />
+    <ClInclude Include="Hostage_Hostage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -185,6 +187,12 @@
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="SceneMission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hostage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hostage_Hostage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -576,4 +576,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->ui->lifenum--;
 		alive = false;
 	}
+	if (c2->type == Collider::Type::HOSTAGE)
+	{
+		cout << "collision" << endl;
+	}
 }

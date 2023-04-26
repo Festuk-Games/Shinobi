@@ -91,6 +91,7 @@ bool ModuleScene::Start()
 	App->particles->Enable();
 
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 0, 80);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208-29);
 
 	if (stage1)
 	{

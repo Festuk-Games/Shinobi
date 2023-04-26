@@ -173,7 +173,7 @@ void ModuleCollisions::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, -1.0f);
 			break;
 			case Collider::Type::HOSTAGE: // green
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha, -1.0);
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha, -1.0f);
 			break;
 			case Collider::Type::BOX: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha, -1.0f);
