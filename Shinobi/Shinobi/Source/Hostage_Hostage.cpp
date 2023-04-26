@@ -12,7 +12,7 @@ Hostage_Hostage::Hostage_Hostage(int x, int y) : Hostage(x, y)
 	idleAnim.PushBack({ 7, 12, 24, 29 });
 	idleAnim.PushBack({ 36, 12, 24, 29 });
 	idleAnim.loop = true;
-	idleAnim.speed = 0.1f;
+	idleAnim.speed = 0.08f;
 
 	// exit animation
 	exitAnim.PushBack({ 7, 64, 26, 48 });

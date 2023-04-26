@@ -164,11 +164,11 @@ Update_Status ModulePlayer::Update()
 					position.y -= 8;
 					collider->SetPos(position.x, position.y - 58); 
 					feet->SetPos(position.x, position.y-1);
-					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isColliding)
 					{
 						position.x += speed;
 					}
-					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20 && !isColliding)
 					{
 						position.x -= speed;
 					}
@@ -191,11 +191,11 @@ Update_Status ModulePlayer::Update()
 					position.y += 4.2;
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x, position.y-1);
-					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010)
 					{
 						position.x += speed;
 					}
-					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20)
 					{
 						position.x -= speed;
 					}
@@ -371,7 +371,7 @@ Update_Status ModulePlayer::Update()
 		{
 			isCrouching = true;
 			//coruch right
-			if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+			if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isColliding)
 			{
 				right = true;
 				isWalking = true;
@@ -383,7 +383,7 @@ Update_Status ModulePlayer::Update()
 				position.x += speed;
 			}
 			//crouch left
-			else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+			else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20 && !isColliding)
 			{
 				right = false;
 				isWalking = true;

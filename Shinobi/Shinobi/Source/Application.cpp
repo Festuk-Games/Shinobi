@@ -17,6 +17,7 @@
 #include "ModuleFadeToBlack.h"
 #include "SceneMission.h"
 #include "SceneIntro.h"
+#include "InitialScene.h"
 
 Application::Application()
 {
@@ -27,21 +28,22 @@ Application::Application()
 	modules[1] = input = new ModuleInput(true);
 	modules[2] = textures = new ModuleTextures(true);
 
-	modules[3] = intro = new SceneIntro(true);
-	modules[4] = mission = new SceneMission(false);
+	modules[3] = initial = new InitialScene(true);
+	modules[4] = intro = new SceneIntro(false);
+	modules[5] = mission = new SceneMission(false);
 
-	modules[5] = scene = new ModuleScene(false);
-	modules[6] = player = new ModulePlayer(false);
-	modules[7] = hostage = new ModuleHostage(false);
-	modules[8] = enemies = new ModuleEnemies(false);
+	modules[6] = scene = new ModuleScene(false);
+	modules[7] = player = new ModulePlayer(false);
+	modules[8] = hostage = new ModuleHostage(false);
+	modules[9] = enemies = new ModuleEnemies(false);
 
-	modules[9] = auxscene = new ModuleAuxScene(false);
-	modules[10] = ui = new ModuleUI(false);
-	modules[11] = particles = new ModuleParticles(false);
-	modules[12] = collisions = new ModuleCollisions(false);
-	modules[13] = fade = new ModuleFadeToBlack(true);
-	modules[14] = render = new ModuleRender(true);
-	modules[15] = audio = new ModuleAudio(true);
+	modules[10] = auxscene = new ModuleAuxScene(false);
+	modules[11] = ui = new ModuleUI(false);
+	modules[12] = particles = new ModuleParticles(false);
+	modules[13] = collisions = new ModuleCollisions(false);
+	modules[14] = fade = new ModuleFadeToBlack(true);
+	modules[15] = render = new ModuleRender(true);
+	modules[16] = audio = new ModuleAudio(true);
 
 }
 

@@ -92,6 +92,7 @@ bool ModuleScene::Start()
 
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 0, 80);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208-29);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
 
 	if (stage1)
 	{
@@ -103,7 +104,7 @@ bool ModuleScene::Start()
 		stageTexture3 = App->textures->Load("Assets/layer_a2.png");
 		skyTexture3 = App->textures->Load("Assets/layer_b2.png");
 
-		App->collisions->AddCollider({ 416, 175, 32, 1 }, Collider::Type::GROUND);
+		App->collisions->AddCollider({ 420, 175, 26, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 704, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 864, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 1408, 143, 32, 1 }, Collider::Type::GROUND);

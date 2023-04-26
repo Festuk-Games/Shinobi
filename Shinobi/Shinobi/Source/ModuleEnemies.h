@@ -11,6 +11,7 @@ enum class ENEMY_TYPE
 {
 	NO_TYPE,
 	GUNNER,
+	FIGHTER,
 };
 
 struct EnemySpawnpoint
@@ -72,7 +73,8 @@ private:
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* gunner = nullptr;
+	SDL_Texture* fighter = nullptr;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

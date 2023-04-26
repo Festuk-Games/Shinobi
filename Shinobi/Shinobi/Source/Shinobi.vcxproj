@@ -78,9 +78,11 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemy_Fighter.h" />
     <ClInclude Include="Enemy_Gunner.h" />
     <ClInclude Include="Hostage.h" />
     <ClInclude Include="Hostage_Hostage.h" />
+    <ClInclude Include="InitialScene.h" />
     <ClInclude Include="SceneMission.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleAuxScene.h" />
@@ -108,10 +110,12 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Enemy_Fighter.cpp" />
     <ClCompile Include="Enemy_Gunner.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Hostage.cpp" />
     <ClCompile Include="Hostage_Hostage.cpp" />
+    <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="SceneMission.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleAuxScene.cpp" />

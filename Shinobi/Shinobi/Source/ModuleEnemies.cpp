@@ -8,6 +8,7 @@
 
 #include "Enemy.h"
 #include "Enemy_Gunner.h"
+#include "Enemy_Fighter.h"
 
 #include "ModuleCollisions.h"
 
@@ -29,7 +30,8 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	LOG("Loading enemies");
-	texture = App->textures->Load("Assets/gun.png");
+	gunner = App->textures->Load("Assets/gun.png");
+	fighter = App->textures->Load("Assets/fighter.png");
 	return true;
 }
 
@@ -144,10 +146,15 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			{
 				case ENEMY_TYPE::GUNNER:
 					enemies[i] = new Enemy_Gunner(info.x, info.y);
+					enemies[i]->texture = gunner;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
+				case ENEMY_TYPE::FIGHTER:
+					enemies[i] = new Enemy_Fighter(info.x, info.y);
+					enemies[i]->texture = gunner;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
 					break;
 			}
-			enemies[i]->texture = texture;
-			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}
 	}
