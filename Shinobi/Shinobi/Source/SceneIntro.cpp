@@ -46,12 +46,12 @@ bool SceneIntro::Start()
 	introimage1 = App->textures->Load("Assets/intro.png");
 	introimage2 = App->textures->Load("Assets/intro2.png");
 	introimage3 = App->textures->Load("Assets/intro3.png");
-	logo1 = App->textures->Load("Assets/logo.png");
-	logo2 = App->textures->Load("Assets/logo2.png");
-	logo3 = App->textures->Load("Assets/logo3.png");
-	logo4 = App->textures->Load("Assets/logo4.png");
-	logo5 = App->textures->Load("Assets/logo5.png");
-	logo6 = App->textures->Load("Assets/logo6.png");
+	logos[0].logo = App->textures->Load("Assets/logo.png");
+	logos[1].logo = App->textures->Load("Assets/logo2.png");
+	logos[2].logo = App->textures->Load("Assets/logo3.png");
+	logos[3].logo = App->textures->Load("Assets/logo4.png");
+	logos[4].logo = App->textures->Load("Assets/logo5.png");
+	logos[5].logo = App->textures->Load("Assets/logo6.png");
 	sega = App->textures->Load("Assets/sega.png");
 	light = App->textures->Load("Assets/light.png");
 	text = App->textures->Load("Assets/ui/nums.png");
@@ -108,12 +108,11 @@ Update_Status SceneIntro::PostUpdate()
 	else if (delay >= 80 && delay <= 140) App->render->Blit(introimage2, 0, 0, SDL_FLIP_NONE, NULL);
 	else if (delay >= 140 && delay <= 200) App->render->Blit(introimage3, 0, 0, SDL_FLIP_NONE, NULL);
 
-	if (delay >= 15) App->render->Blit(logo6, logos[5].logopos.x, logos[5].logopos.y, SDL_FLIP_NONE, NULL);
-	if (delay >= 12) App->render->Blit(logo5, logos[4].logopos.x, logos[4].logopos.y, SDL_FLIP_NONE, NULL);
-	if (delay >= 9) App->render->Blit(logo4, logos[3].logopos.x, logos[3].logopos.y, SDL_FLIP_NONE, NULL);
-	if (delay >= 6) App->render->Blit(logo3, logos[2].logopos.x, logos[2].logopos.y, SDL_FLIP_NONE, NULL);
-	if (delay >= 3) App->render->Blit(logo2, logos[1].logopos.x, logos[1].logopos.y, SDL_FLIP_NONE, NULL);
-	App->render->Blit(logo1, logos[0].logopos.x, logos[0].logopos.y, SDL_FLIP_NONE, NULL);
+	for (int i = 5; i >= 0; i--)
+	{
+		if (delay >= i*3) App->render->Blit(logos[i].logo, logos[i].logopos.x, logos[i].logopos.y, SDL_FLIP_NONE, NULL);
+	}
+	
 	App->render->Blit(sega, 150, 170, SDL_FLIP_NONE, NULL);
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();

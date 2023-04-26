@@ -27,7 +27,17 @@ bool ModuleFadeToBlack::Start()
 	fadeout[5].fade = App->textures->Load("Assets/fade/out/fadeout6.png");
 	fadeout[6].fade = App->textures->Load("Assets/fade/out/fadeout7.png");
 	fadeout[7].fade = App->textures->Load("Assets/fade/out/fadeout8.png");
-	fadeout[8].fade = App->textures->Load("Assets/fade/black.png");
+
+	fadein[0].fade = App->textures->Load("Assets/fade/out/fadein1.png");
+	fadein[1].fade = App->textures->Load("Assets/fade/out/fadein2.png");
+	fadein[2].fade = App->textures->Load("Assets/fade/out/fadein3.png");
+	fadein[3].fade = App->textures->Load("Assets/fade/out/fadein4.png");
+	fadein[4].fade = App->textures->Load("Assets/fade/out/fadein5.png");
+	fadein[5].fade = App->textures->Load("Assets/fade/out/fadein6.png");
+	fadein[6].fade = App->textures->Load("Assets/fade/out/fadein7.png");
+	fadein[7].fade = App->textures->Load("Assets/fade/out/fadein8.png");
+
+	//fadeout[8].fade = App->textures->Load("Assets/fade/black.png");
 
 	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
@@ -72,28 +82,22 @@ Update_Status ModuleFadeToBlack::PostUpdate()
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(App->render->renderer, &screenRect);
 
-	if (currentStep == Fade_Step::TO_BLACK && fOut)
-	{
-		if (frameCount >= 5) App->render->Blit(fadeout[0].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 10) App->render->Blit(fadeout[1].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 15) App->render->Blit(fadeout[2].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 20) App->render->Blit(fadeout[3].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 25) App->render->Blit(fadeout[4].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 30) App->render->Blit(fadeout[5].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 35) App->render->Blit(fadeout[6].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 40) App->render->Blit(fadeout[7].fade, 0, 0, SDL_FLIP_NONE, NULL);
-	}
-	else if (currentStep == Fade_Step::FROM_BLACK && fIn)
-	{
-		if (frameCount >= 40) App->render->Blit(fadeout[7].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 35) App->render->Blit(fadeout[6].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 30) App->render->Blit(fadeout[5].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 25) App->render->Blit(fadeout[4].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 20) App->render->Blit(fadeout[3].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 15) App->render->Blit(fadeout[2].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 10) App->render->Blit(fadeout[1].fade, 0, 0, SDL_FLIP_NONE, NULL);
-		if (frameCount >= 5) App->render->Blit(fadeout[0].fade, 0, 0, SDL_FLIP_NONE, NULL);
-	}
+
+		if (currentStep == Fade_Step::TO_BLACK && fOut)
+		{
+			for (int i = 0; i < 8; i++)
+			{
+				if (frameCount >= (i + 1) * 4) App->render->Blit(fadeout[i].fade, 0, 0, SDL_FLIP_NONE, NULL);
+			}
+		}
+
+		else if (currentStep == Fade_Step::FROM_BLACK && fIn)
+		{
+			for (int i = 0; i < 8; i++)
+			{
+				if (frameCount >= (i + 1) * 4) App->render->Blit(fadeout[i].fade, 0, 0, SDL_FLIP_NONE, NULL);
+			}
+		}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

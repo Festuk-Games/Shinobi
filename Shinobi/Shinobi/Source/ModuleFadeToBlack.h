@@ -56,6 +56,11 @@ private:
 		SDL_Texture* fade = nullptr;
 	}fadeout[8];
 
+	struct fadein
+	{
+		SDL_Texture* fade = nullptr;
+	}fadein[8];
+
 	int t = 0;
 	bool fOut = false;
 	bool fIn = false;

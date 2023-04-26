@@ -38,12 +38,6 @@ public:
 	SDL_Texture* introimage2 = nullptr;
 	SDL_Texture* introimage3 = nullptr;
 	SDL_Texture* sega = nullptr;
-	SDL_Texture* logo1 = nullptr;
-	SDL_Texture* logo2 = nullptr;
-	SDL_Texture* logo3 = nullptr;
-	SDL_Texture* logo4 = nullptr;
-	SDL_Texture* logo5 = nullptr;
-	SDL_Texture* logo6 = nullptr;
 	SDL_Texture* light = nullptr;
 	SDL_Texture* text = nullptr;
 
@@ -54,6 +48,7 @@ public:
 
 	struct logos
 	{
+		SDL_Texture* logo = nullptr;
 		int centerX = 141;
 		int centerY = 16;
 		float radius = 200.0f;
