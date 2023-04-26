@@ -54,8 +54,11 @@ public:
 
 	int lifenum = 2;
 
-	SDL_Rect life, savet, host, skill, timer[10], points, sega, coin, t1987, blue1p, white1p;
+	SDL_Rect life, savet, host, skill, timer[10], points, sega, coin, t1987, blue1p, white1p, score[10];
 
+	int digit = 0;
+	int xpos = 0;
+	int scoreCounter = 0;
 };
 
 #endif

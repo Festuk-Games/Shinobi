@@ -1,5 +1,7 @@
 #include "ModuleUI.h"
-
+#include <iostream>
+#include <string>
+using namespace std;
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -59,6 +61,18 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 
 	points = { 81, 12, 3, 3 };
 
+	for (int i = 0; i < 10; i++)
+	{
+		score[i] = { 1 + 8 * i, 1, 7, 14 };
+	}
+
+
+	scoreCounter = 0;
+
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	score[i] = { 1 + 8 * i, 1, 7, 14 };
+	//}
 }
 
 ModuleUI::~ModuleUI()
@@ -123,6 +137,11 @@ Update_Status ModuleUI::Update()
 
 	}
 
+	if (scoreCounter < 2000)
+	{
+		scoreCounter++;
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -171,6 +190,18 @@ Update_Status ModuleUI::PostUpdate()
 	if (blue) App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &blue1p, 0.0f);
 	else App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &white1p, 0.0f);
 	
+
+	string scoreString = to_string(scoreCounter);
+
+	xpos = 80 - (scoreString.size() * 8);
+
+	for (int i = 0; i < scoreString.size(); i++)
+	{
+		digit = scoreString[i] - '0';
+
+		App->render->Blit(nums, xpos + (i * 8), 10, SDL_FLIP_NONE, &score[digit], 0.0f);
+	}
+
 
 	return Update_Status::UPDATE_CONTINUE;
 }
