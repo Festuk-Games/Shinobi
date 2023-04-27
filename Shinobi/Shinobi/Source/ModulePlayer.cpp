@@ -121,6 +121,20 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	backAnim.PushBack({ 542, 402, 76, 66 });
 	backAnim.loop = false;
 	backAnim.speed = 0.1f;
+
+	//katana animation
+	katanaAnim.PushBack({586, 497, 76, 66});
+	katanaAnim.PushBack({ 661, 497, 76, 66 });
+	katanaAnim.PushBack({ 736, 497, 76, 66 });
+	katanaAnim.PushBack({ 811, 497, 76, 66 });
+	katanaAnim.PushBack({ 211, 593, 76, 66 });
+	katanaAnim.PushBack({ 286, 593, 76, 66 });
+	katanaAnim.PushBack({ 361, 593, 76, 66 });
+	katanaAnim.PushBack({ 436, 593, 76, 66 });
+	katanaAnim.loop = false;
+	katanaAnim.speed = 0.3f;
+
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -137,6 +151,7 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/main.png"); 
 	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, this);
+	enemyNearCollider = App->collisions->AddCollider({ position.x-50, position.y, 135, 58 }, Collider::Type::ENEMY_NEAR, this);
 
 	return ret;
 } 
@@ -246,15 +261,26 @@ Update_Status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !isCrouching)
 		{
 			isShooting = true;
-			if (currentAnimation != &shootAnim)
+			if (!enemyNear)
 			{
-				currentAnimation = &shootAnim;
-				currentAnimation->Reset();
+				if (currentAnimation != &shootAnim)
+				{
+					currentAnimation = &shootAnim;
+					currentAnimation->Reset();
+				}
+				App->audio->PlayFx(App->audio->shuriken);
+				if (right) App->particles->shuriken.speed = iPoint(5, 0);
+				else App->particles->shuriken.speed = iPoint(-5, 0);
+				App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
 			}
-			App->audio->PlayFx(App->audio->shuriken);
-			if (right) App->particles->shuriken.speed = iPoint(5, 0);
-			else App->particles->shuriken.speed = iPoint(-5, 0);
-			App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+			else
+			{
+				if (currentAnimation != &katanaAnim)
+				{
+					currentAnimation = &katanaAnim;
+					currentAnimation->Reset();
+				}
+			}
 		
 		}
 		//jumping to second floor input
@@ -541,7 +567,7 @@ Update_Status ModulePlayer::Update()
 	//update colliders position
 	collider->SetPos(position.x, position.y-58);
 	feet->SetPos(position.x, position.y-1);
-
+	enemyNearCollider->SetPos(position.x-50, position.y-58);
 	currentAnimation->Update();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -554,6 +580,7 @@ Update_Status ModulePlayer::PostUpdate()
 	else App->render->Blit(texture, flipPos.x, position.y - rect.h, SDL_FLIP_HORIZONTAL, &rect);
 	isColliding = false;
 	ground = false;
+	enemyNear = false;
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -571,7 +598,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	//box collider
-	if (c2->type == Collider::Type::BOX)
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::BOX)
 	{
 		if (!collision)
 		{
@@ -597,7 +624,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			alive = false;
 		}
 	}
-	if (c2->type == Collider::Type::HOSTAGE)
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::HOSTAGE)
 	{
 		if (!collision)
 		{
@@ -606,5 +633,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 		cout << "collision" << endl;
 		
+	}
+	if (c1->type == Collider::Type::ENEMY_NEAR && c2->type == Collider::Type::ENEMY)
+	{
+		enemyNear = true;
+		cout << "near" << endl;
 	}
 }

@@ -19,6 +19,7 @@ struct Collider
 		BOX,
 		GROUND,
 		FEET,
+		ENEMY_NEAR,
 
 		MAX
 	};

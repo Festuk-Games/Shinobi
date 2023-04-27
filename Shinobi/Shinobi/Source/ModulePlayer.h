@@ -47,6 +47,7 @@ public:
 	
 	Collider* collider = nullptr;
 	Collider* feet = nullptr;
+	Collider* enemyNearCollider = nullptr;
 
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -64,6 +65,7 @@ public:
 	Animation dieAnim1, dieAnim2, dieAnim3;
 	Animation backAnim;
 	Animation crouchAttackAnim , crouchKickAnim, crouchKatanaAnim;
+	Animation katanaAnim;
 
 	iPoint diePosition;
 	iPoint jumpPosition;
@@ -92,6 +94,7 @@ public:
 
 	int dietime = 0;
 
+	bool enemyNear = false;
 
 	iPoint flipPos;
 };
