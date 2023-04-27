@@ -24,63 +24,63 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	position.y = 208;
 
 	// idle animation
-	idleAnim.PushBack({13, 39, 48 - 13, 99 - 39 });
+	idleAnim.PushBack({211, 116, 76, 66});
 
 	// walk forward animation
-	forwardAnim.PushBack({5, 112, 40 - 5, 172 - 112});
-	forwardAnim.PushBack({ 41, 112, 72 - 41, 172 - 112 });
-	forwardAnim.PushBack({ 73, 112, 108 - 73, 172 - 112 });
-	forwardAnim.PushBack({ 109, 112, 144 - 109, 172 - 112 });
-	forwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
-	forwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
+	forwardAnim.PushBack({ 30, 30, 76, 66 });
+	forwardAnim.PushBack({ 105, 30, 76, 66 });
+	forwardAnim.PushBack({ 180, 30, 76, 66 });
+	forwardAnim.PushBack({ 255, 30, 76, 66 });
+	forwardAnim.PushBack({ 330, 30, 76, 66 });
+	forwardAnim.PushBack({ 405, 30, 76, 66 });
 	forwardAnim.loop = true;
 	forwardAnim.speed = 0.2f;
 
 	//walk backward animation
-	backwardAnim.PushBack({ 5, 112, 40 - 5, 172 - 112 });
-	backwardAnim.PushBack({ 41, 112, 72 - 41, 172 - 112 });
-	backwardAnim.PushBack({ 73, 112, 108 - 73, 172 - 112 });
-	backwardAnim.PushBack({ 109, 112, 144 - 109, 172 - 112 });
-	backwardAnim.PushBack({ 145, 112, 177 - 145, 172 - 112 });
-	backwardAnim.PushBack({ 178, 112, 213 - 178, 172 - 112 });
+	backwardAnim.PushBack({ 30, 30, 76, 66 });
+	backwardAnim.PushBack({ 105, 30, 76, 66 });
+	backwardAnim.PushBack({ 180, 30, 76, 66 });
+	backwardAnim.PushBack({ 255, 30, 76, 66 });
+	backwardAnim.PushBack({ 330, 30, 76, 66 });
+	backwardAnim.PushBack({ 405, 30, 76, 66 });
 	backwardAnim.loop = true;
 	backwardAnim.speed = 0.2f;
 
 	//jump animation
-	jumpAnim1.PushBack({ 11, 410, 46 - 11, 470 - 410 });
-	jumpAnim2.PushBack({ 47, 384, 82 - 47, 470 - 410 });
+	jumpAnim1.PushBack({ 30, 210, 76, 66 });
+	jumpAnim2.PushBack({ 105, 210, 76, 66 });
 	jumpAnim1.loop = false;
 	jumpAnim1.speed = 0.1f;
 	jumpAnim2.loop = false;
 	jumpAnim2.speed = 0.1f;
 
 	//jump up animation
-	jumpUpAnim.PushBack({ 172, 745, 45, 42});
-	jumpUpAnim.PushBack({ 216, 745, 46, 42});
+	jumpUpAnim.PushBack({ 617, 402, 76, 66 });
+	jumpUpAnim.PushBack({ 692, 402, 76, 66 });
 	jumpUpAnim.loop = false;
 	jumpUpAnim.speed = 0.03f;
 
 	//crouch animation
-	crouchAnim.PushBack({15,186,37,61});
+	crouchAnim.PushBack({30, 116, 76, 66 });
 	crouchAnim.loop = false;
 	crouchAnim.speed = 0.1f;
 
 	//crouch right animation
-	crouchForwardAnim.PushBack({ 180,186,43,61 });
-	crouchForwardAnim.PushBack({ 229,186,31,61 });
-	crouchForwardAnim.PushBack({ 266,186,37,61 });
+	crouchForwardAnim.PushBack({ 30, 401, 76, 66 });
+	crouchForwardAnim.PushBack({ 105, 401, 76, 66 });
+	crouchForwardAnim.PushBack({ 180, 401, 76, 66 });
 	crouchForwardAnim.loop = true;
 	crouchForwardAnim.speed = 0.1f;
 
 	//crouch left animation
-	crouchBackwardAnim.PushBack({ 180,186,43,61 });
-	crouchBackwardAnim.PushBack({ 229,186,31,61 });
-	crouchBackwardAnim.PushBack({ 266,186,37,61 });
+	crouchBackwardAnim.PushBack({ 30, 401, 76, 66 });
+	crouchBackwardAnim.PushBack({ 105, 401, 76, 66 });
+	crouchBackwardAnim.PushBack({ 180, 401, 76, 66 });
 	crouchBackwardAnim.loop = true;
 	crouchBackwardAnim.speed = 0.1f;
 
 	//crouch attack animation
-	crouchAttackAnim.PushBack({ 760,186,53,61 });
+	crouchAttackAnim.PushBack({ 1054, 402, 76, 66 });
 	crouchAttackAnim.loop = false;
 	crouchAttackAnim.speed = 0.1f;
 
@@ -92,18 +92,18 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	crouchKickAnim.speed = 0.1f;
 
 	//crouch katana animation
-	crouchKatanaAnim.PushBack({ 15,825,50,52 });
-	crouchKatanaAnim.PushBack({ 64,825,55,52 });
-	crouchKatanaAnim.PushBack({ 118,825,66,52 });
-	crouchKatanaAnim.PushBack({ 183,825,77,52 });
-	crouchKatanaAnim.PushBack({ 259,825,48,52 });
-	crouchKatanaAnim.PushBack({ 306,825,50,52 });
-	crouchKatanaAnim.PushBack({ 355,825,38,52 });
+	crouchKatanaAnim.PushBack({ 30,497,76,66 });
+	crouchKatanaAnim.PushBack({ 105,497,76,66 });
+	crouchKatanaAnim.PushBack({ 180,497,76,66 });
+	crouchKatanaAnim.PushBack({ 255,497,76,66 });
+	crouchKatanaAnim.PushBack({ 330,497,76,66 });
+	crouchKatanaAnim.PushBack({ 405,497,76,66 });
+	crouchKatanaAnim.PushBack({ 480,497,76,66 });
 	crouchKatanaAnim.loop = false;
 	crouchKatanaAnim.speed = 0.2f;
 
 	//shoot animation
-	shootAnim.PushBack({ 13,283,49,60 });
+	shootAnim.PushBack({ 392, 116, 76, 66 });
 	shootAnim.loop = false;
 	shootAnim.speed = 0.1f;
 
@@ -118,7 +118,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	dieAnim2.speed = 0.08f;
 
 	//back animation
-	backAnim.PushBack({ 127,735,46,52 });
+	backAnim.PushBack({ 542, 402, 76, 66 });
 	backAnim.loop = false;
 	backAnim.speed = 0.1f;
 }
