@@ -16,6 +16,10 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::HOSTAGE] = false;
+	matrix[Collider::Type::WALL][Collider::Type::BOX] = false;
+	matrix[Collider::Type::WALL][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::WALL][Collider::Type::FEET] = false;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
@@ -32,7 +36,6 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
-	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::HOSTAGE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::BOX] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::FEET] = true;
@@ -43,33 +46,60 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = false;
-
-	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::NONE] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::HOSTAGE] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::BOX] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::FEET] = false;
+	
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::HOSTAGE] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::BOX] = true;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::FEET] = false;
 
 	matrix[Collider::Type::HOSTAGE][Collider::Type::WALL] = false;
 	matrix[Collider::Type::HOSTAGE][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::HOSTAGE][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::HOSTAGE][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::HOSTAGE][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::HOSTAGE][Collider::Type::HOSTAGE] = false;
+	matrix[Collider::Type::HOSTAGE][Collider::Type::BOX] = false;
+	matrix[Collider::Type::HOSTAGE][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::HOSTAGE][Collider::Type::FEET] = false;
 
 	matrix[Collider::Type::BOX][Collider::Type::WALL] = false;
 	matrix[Collider::Type::BOX][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::BOX][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::BOX][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::BOX][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::BOX][Collider::Type::HOSTAGE] = false;
+	matrix[Collider::Type::BOX][Collider::Type::BOX] = true;
+	matrix[Collider::Type::BOX][Collider::Type::GROUND] = true;
+	matrix[Collider::Type::BOX][Collider::Type::FEET] = true;
 
 	matrix[Collider::Type::GROUND][Collider::Type::WALL] = false;
 	matrix[Collider::Type::GROUND][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::GROUND][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::GROUND][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::GROUND][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::HOSTAGE] = true;
+	matrix[Collider::Type::GROUND][Collider::Type::BOX] = true;
+	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::FEET] = true;
 
 	matrix[Collider::Type::FEET][Collider::Type::GROUND] = true;
+	matrix[Collider::Type::FEET][Collider::Type::WALL] = false;
+	matrix[Collider::Type::FEET][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::FEET][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::FEET][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::FEET][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::FEET][Collider::Type::HOSTAGE] = false;
+	matrix[Collider::Type::FEET][Collider::Type::BOX] = true;
+	matrix[Collider::Type::FEET][Collider::Type::FEET] = false;
 
 
 
