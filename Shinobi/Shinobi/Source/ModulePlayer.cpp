@@ -146,6 +146,10 @@ Update_Status ModulePlayer::Update()
 	//Player movement
 	if (alive)
 	{
+		if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN)
+		{
+			collision = !collision;
+		}
 		//Jumping input
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && !isJumpingUp1 && !isJumpingDown1)
 		{
@@ -554,12 +558,6 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	//box collider
-	if (c2->type == Collider::Type::BOX)
-	{
-		isColliding = true;
-		cout << "collision" << endl;
-	}
 	//ground collider
 	if (c1->type == Collider::Type::FEET && c2->type == Collider::Type::GROUND)
 	{
@@ -570,14 +568,42 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			jumpState = false;
 		}
 	}
+
+	//box collider
+	if (c2->type == Collider::Type::BOX)
+	{
+		if (!collision)
+		{
+			isColliding = false;
+		}
+		else
+		{
+			isColliding = true;
+			cout << "collision" << endl;
+		}
+		
+	}
+	
 	//enemy shot collider
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT)
 	{
-		App->ui->lifenum--;
-		alive = false;
+		if (!collision)
+		{
+			isColliding = false;
+		}
+		else {
+			App->ui->lifenum--;
+			alive = false;
+		}
 	}
 	if (c2->type == Collider::Type::HOSTAGE)
 	{
+		if (!collision)
+		{
+			isColliding = false;
+			
+		}
 		cout << "collision" << endl;
+		
 	}
 }

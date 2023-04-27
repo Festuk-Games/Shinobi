@@ -63,6 +63,7 @@ private:
 	void SpawnHostage(const HostageSpawnpoint& info);
 
 private:
+	bool collision = true;
 	// A queue with all spawn points information
 	HostageSpawnpoint spawnQueue[MAX_HOSTAGES];
 

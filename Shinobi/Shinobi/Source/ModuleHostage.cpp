@@ -8,6 +8,7 @@
 #include "Hostage.h"
 #include "ModuleCollisions.h"
 #include "Hostage_Hostage.h"
+#include "ModuleInput.h"
 
 #define SPAWN_MARGIN 50
 
@@ -38,6 +39,10 @@ Update_Status ModuleHostage::Update()
 	{
 		if (hostages[i] != nullptr)
 			hostages[i]->Update();
+	}
+	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN)
+	{
+		collision = !collision;
 	}
 
 	HandleHostageDespawn();
@@ -158,9 +163,13 @@ void ModuleHostage::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (c2->type == Collider::Type::PLAYER)
 			{
-				hostages[i]->OnCollision(c2); //Notify the hostage of a collision
-				c1->pendingToDelete = true;
-				break;
+				if (collision)
+				{
+					hostages[i]->OnCollision(c2); //Notify the hostage of a collision
+					c1->pendingToDelete = true;
+					break;
+				}
+				
 			}
 		}
 	}
