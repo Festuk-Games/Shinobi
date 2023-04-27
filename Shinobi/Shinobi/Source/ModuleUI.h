@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "Animation.h"
 
+using namespace std;
+
 struct SDL_Texture;
 
 class ModuleUI : public Module

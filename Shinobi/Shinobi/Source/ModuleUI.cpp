@@ -7,6 +7,8 @@ using namespace std;
 #include "ModuleRender.h"
 #include "ModuleScene.h"
 
+#include <fstream>
+
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	host.x = 0;
@@ -99,6 +101,7 @@ bool ModuleUI::Start()
 
 Update_Status ModuleUI::Update()
 {
+
 	//Timer one number every second
 	timef2++;
 	if (timef2 == 60)
@@ -190,14 +193,32 @@ Update_Status ModuleUI::PostUpdate()
 	if (blue) App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &blue1p, 0.0f);
 	else App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &white1p, 0.0f);
 	
-
-	string scoreString = to_string(scoreCounter);
-
-	xpos = 80 - (scoreString.size() * 8);
-
-	for (int i = 0; i < scoreString.size(); i++)
+	fstream file;
+	string sc;
+	string highScore = to_string(scoreCounter);
+	cout << (sc.size()) << endl;
+	cout << (highScore.size()) << endl;
+	file.open("score.txt", ios::in);
+	if (file.is_open())
 	{
-		digit = scoreString[i] - '0';
+		getline(file, sc);
+	}
+	file.close();
+	/*if (highScore >= sc)
+	{
+		file.open("score.txt", ios::out);
+		if (file.is_open())
+		{
+			file << highScore;
+		}
+		file.close();
+	}*/
+
+	xpos = 80 - (sc.size() * 8);
+
+	for (int i = 0; i < sc.size(); i++)
+	{
+		digit = sc[i] - '0';
 
 		App->render->Blit(nums, xpos + (i * 8), 10, SDL_FLIP_NONE, &score[digit], 0.0f);
 	}

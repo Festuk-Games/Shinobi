@@ -3,9 +3,7 @@
 
 #include "Module.h"
 
-#define MAX_ENEMIES 100
-
-// TODO 4: Create a new enemy type: the Mech
+#define MAX_ENEMIES 50
 
 enum class ENEMY_TYPE
 {

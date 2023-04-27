@@ -47,7 +47,7 @@ public:
 		SDL_Texture* logo = nullptr;
 		int centerX = 141;
 		int centerY = 16;
-		float radius = 200.0f;
+		float radius = 150.0f;
 		float angularVelocity = 0.2f;
 		float angularStep = 0.05f;
 		float posX = centerX + radius;
