@@ -1,7 +1,9 @@
 #include "ModuleUI.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
+
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -65,16 +67,16 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 
 	for (int i = 0; i < 10; i++)
 	{
-		score[i] = { 1 + 8 * i, 1, 7, 14 };
+		score[i] = {  1 + 8 * i, 60, 7, 8 };
 	}
 
+	for (int i = 0; i < 10; i++)
+	{
+		h_score[i] = { 1 + 8 * i, 81, 7, 8 };
+	}
 
 	scoreCounter = 0;
 
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	score[i] = { 1 + 8 * i, 1, 7, 14 };
-	//}
 }
 
 ModuleUI::~ModuleUI()
@@ -95,6 +97,14 @@ bool ModuleUI::Start()
 	skill2 = App->textures->Load("Assets/UI/skill2.png");
 	skill3 = App->textures->Load("Assets/UI/skill3.png");
 	nums = App->textures->Load("Assets/UI/nums.png");
+
+	fstream file;
+	file.open("score.txt", ios::in);
+
+	file >> highScore;
+	cout << highScore;
+
+	file.close();
 
 	return ret;
 }
@@ -140,9 +150,14 @@ Update_Status ModuleUI::Update()
 
 	}
 
-	if (scoreCounter < 2000)
+	if (scoreCounter > highScore)
 	{
-		scoreCounter++;
+		highScore = scoreCounter;
+		fstream file;
+		file.open("score.txt", ios::out);
+		file.seekp(0);
+		file << highScore;
+		file.close();
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -193,27 +208,8 @@ Update_Status ModuleUI::PostUpdate()
 	if (blue) App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &blue1p, 0.0f);
 	else App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &white1p, 0.0f);
 	
-	fstream file;
-	string sc;
-	string highScore = to_string(scoreCounter);
-	cout << (sc.size()) << endl;
-	cout << (highScore.size()) << endl;
-	file.open("score.txt", ios::in);
-	if (file.is_open())
-	{
-		getline(file, sc);
-	}
-	file.close();
-	/*if (highScore >= sc)
-	{
-		file.open("score.txt", ios::out);
-		if (file.is_open())
-		{
-			file << highScore;
-		}
-		file.close();
-	}*/
 
+	string sc = to_string(scoreCounter);
 	xpos = 80 - (sc.size() * 8);
 
 	for (int i = 0; i < sc.size(); i++)
@@ -223,6 +219,15 @@ Update_Status ModuleUI::PostUpdate()
 		App->render->Blit(nums, xpos + (i * 8), 10, SDL_FLIP_NONE, &score[digit], 0.0f);
 	}
 
+	string hscore = to_string(highScore);
+	xpos = 120 - (hscore.size() * 8);
+
+	for (int i = 0; i < hscore.size(); i++)
+	{
+		digit = hscore[i] - '0';
+
+		App->render->Blit(nums, xpos + (i * 8), 10, SDL_FLIP_NONE, &h_score[digit], 0.0f);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

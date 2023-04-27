@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
 #include "Enemy_Gunner.h"
+#include "ModuleUI.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {
@@ -59,6 +60,6 @@ void Enemy::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::PLAYER_SHOT)
 	{
-
+		App->ui->scoreCounter+= 200;
 	}
 }
