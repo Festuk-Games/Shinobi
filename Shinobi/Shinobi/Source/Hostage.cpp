@@ -56,6 +56,7 @@ void Hostage::Draw()
 
 void Hostage::OnCollision(Collider* collider)
 {
+	App->ui->scoreCounter += 200;
 	App->ui->hostages--;
 	col = true;
 }

@@ -143,6 +143,7 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	flipPos.x = position.x - 25;
 	//Player movement
 	if (alive)
 	{
@@ -550,7 +551,7 @@ Update_Status ModulePlayer::PostUpdate()
 {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	if(right) App->render->Blit(texture, position.x, position.y - rect.h, SDL_FLIP_NONE, &rect);
-	else App->render->Blit(texture, position.x, position.y - rect.h, SDL_FLIP_HORIZONTAL, &rect);
+	else App->render->Blit(texture, flipPos.x, position.y - rect.h, SDL_FLIP_HORIZONTAL, &rect);
 	isColliding = false;
 	ground = false;
 	return Update_Status::UPDATE_CONTINUE;
