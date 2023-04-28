@@ -15,7 +15,7 @@ InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 
 InitialScene::~InitialScene()
 {
-
+	
 }
 
 // Load assets
@@ -51,4 +51,11 @@ Update_Status InitialScene::PostUpdate()
 
 
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+bool InitialScene::CleanUp()
+{
+	App->textures->Unload(logo);
+
+	return true;
 }

@@ -75,11 +75,6 @@ Update_Status SceneIntro::Update()
 		App->fade->FadeToBlack(this, (Module*)App->mission, true, false, 50);
 	}
 
-	//if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) logopos.y--;
-	//if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) logopos.y++;
-	//if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) logopos.x++;
-	//if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) logopos.x--;
-
 	delay++;
 
 	for (size_t i = 0; i <= 5; i++)
@@ -122,4 +117,20 @@ Update_Status SceneIntro::PostUpdate()
 	App->render->Blit(text, 290, 207, SDL_FLIP_NONE, &nums);
 
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+bool SceneIntro::CleanUp()
+{
+	App->textures->Unload(introimage1);
+	App->textures->Unload(introimage2);
+	App->textures->Unload(introimage3);
+	for (int i = 0; i < 6; i++)
+	{
+		App->textures->Unload(logos[i].logo);
+	}
+	App->textures->Unload(sega);
+	App->textures->Unload(light);
+	App->textures->Unload(text);
+
+	return true;
 }
