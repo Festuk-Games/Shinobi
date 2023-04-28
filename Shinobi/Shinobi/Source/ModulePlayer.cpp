@@ -640,3 +640,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		cout << "near" << endl;
 	}
 }
+
+bool ModulePlayer::CleanUp()
+{
+	App->textures->Unload(texture);
+
+	return true;
+}

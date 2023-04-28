@@ -112,15 +112,21 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMission.h" />
     <ClInclude Include="Hostage.h">
       <Filter>Source Files\Entities\Hostage</Filter>
     </ClInclude>
     <ClInclude Include="Hostage_Hostage.h">
       <Filter>Source Files\Entities\Hostage</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy_Fighter.h" />
-    <ClInclude Include="InitialScene.h" />
+    <ClInclude Include="InitialScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMission.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Fighter.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -195,20 +201,20 @@
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMission.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Hostage.cpp">
       <Filter>Source Files\Entities\Hostage</Filter>
     </ClCompile>
     <ClCompile Include="Hostage_Hostage.cpp">
       <Filter>Source Files\Entities\Hostage</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy_Fighter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InitialScene.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMission.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Fighter.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

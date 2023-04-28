@@ -72,3 +72,10 @@ Update_Status SceneMission::PostUpdate()
 
 	return Update_Status::UPDATE_CONTINUE;
 }
+
+bool SceneMission::CleanUp()
+{
+	App->textures->Unload(mission1_0);
+	App->textures->Unload(mission1_1);
+	return true;
+}

@@ -56,8 +56,8 @@ void Enemy_Fighter::Update()
 			currentAnim = &shootAnim;
 			currentAnim->Reset();
 			App->audio->PlayFx(App->audio->shuriken);
-			App->particles->shuriken.speed = iPoint(-5, 0);
-			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 10, Collider::Type::ENEMY_SHOT);
+			App->particles->enemyshot.speed = iPoint(-5, 0);
+			App->particles->AddParticle(App->particles->enemyshot, position.x, position.y + 10, Collider::Type::ENEMY_SHOT);
 			shot = 0;
 			shooting = true;
 			bullets--;
@@ -94,8 +94,8 @@ void Enemy_Fighter::Update()
 			currentAnim = &shootAnim;
 			currentAnim->Reset();
 			App->audio->PlayFx(App->audio->shuriken);
-			App->particles->shuriken.speed = iPoint(5, 0);
-			App->particles->AddParticle(App->particles->shuriken, position.x, position.y + 10, Collider::Type::ENEMY_SHOT);
+			App->particles->enemyshot.speed = iPoint(5, 0);
+			App->particles->AddParticle(App->particles->enemyshot, position.x, position.y + 10, Collider::Type::ENEMY_SHOT);
 			shot = 0;
 			shooting = true;
 			bullets--;

@@ -75,6 +75,9 @@ bool ModuleEnemies::CleanUp()
 		}
 	}
 
+	App->textures->Unload(gunner);
+	App->textures->Unload(fighter);
+
 	return true;
 }
 

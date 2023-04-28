@@ -22,21 +22,27 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/main.png");
+	texture = App->textures->Load("Assets/bullets.png");
 
 	// shuriken particle
-	shuriken.anim.PushBack({ 109, 293, 12, 8 });
-	shuriken.anim.PushBack({ 129, 293, 12, 8 });
-	shuriken.anim.PushBack({ 149, 293, 12, 8 });
+	shuriken.anim.PushBack({ 287, 15, 16, 13 });
+	shuriken.anim.PushBack({ 302, 15, 16, 13 });
+	shuriken.anim.PushBack({ 317, 15, 16, 13 });
 	shuriken.speed = iPoint(5, 0);
 	shuriken.anim.loop = true;
 	shuriken.anim.speed = 0.2f;
 
-	hit.anim.PushBack({ 384, 329, 14, 14 });
-	hit.anim.PushBack({ 406, 329, 14, 14 });
-	hit.anim.PushBack({ 426, 329, 14, 14 });
+	hit.anim.PushBack({ 202, 12, 24, 18 });
+	hit.anim.PushBack({ 225, 12, 24, 18 });
+	hit.anim.PushBack({ 248, 12, 24, 18 });
 	hit.anim.loop = false;
 	hit.anim.speed = 0.3f;
+
+	enemyshot.anim.PushBack({ 162, 15, 16, 11 });
+	enemyshot.anim.PushBack({ 177, 15, 16, 11 });
+	enemyshot.anim.loop = true;
+	enemyshot.anim.speed = 0.3f;
+
 
 
 	return true;

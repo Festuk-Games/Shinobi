@@ -36,7 +36,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::HOSTAGE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::BOX] = true;

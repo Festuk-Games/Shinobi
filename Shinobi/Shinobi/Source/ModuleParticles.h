@@ -59,7 +59,7 @@ private:
 public:
 	//Template particle for an shuriken
 	Particle shuriken;
-
+	Particle enemyshot;
 	Particle hit;
 };
 
