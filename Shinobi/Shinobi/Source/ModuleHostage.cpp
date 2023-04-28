@@ -10,7 +10,7 @@
 #include "Hostage_Hostage.h"
 #include "ModuleInput.h"
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 1000
 
 ModuleHostage::ModuleHostage(bool startEnabled) : Module(startEnabled)
 {

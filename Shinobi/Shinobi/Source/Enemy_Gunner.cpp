@@ -5,9 +5,14 @@
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include <iostream>
 
 Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 {
+	//initial position
+	//position.x = 550;
+	//position.y = 148;
+
 	//idle animation
 	idleAnim.PushBack({ 0,6,54,59 });
 
@@ -34,15 +39,13 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 
 	//colliders
 	collider = App->collisions->AddCollider({0, 0, 36, 59}, Collider::Type::ENEMY, (Module*)App->enemies);
-	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, (Module*)App->enemies);
+	feet = App->collisions->AddCollider({ 0, -58, 35, 1 }, Collider::Type::FEET, (Module*)App->enemies);
 
-	//initial position
-	position.x = 550;
-	position.y = 148;
 }
 
 void Enemy_Gunner::Update()
 {
+	std::cout << position.x << std::endl;
 
 	//waveRatio += waveRatioSpeed;
 	//position.x = spawnPos.x + (waveHeight * sinf(waveRatio));
@@ -126,12 +129,12 @@ void Enemy_Gunner::Update()
 	else if (!pl && !reloading && !shooting)
 	{
 		currentAnim = &walkAnim;
-		if (position.x >= pos2)
+		if (position.x >= spawnPos.x+100)
 		{
 			changedirection = true;
 			flip = true;
 		}
-		else if (position.x <= pos1)
+		else if (position.x <= spawnPos.x - 50)
 		{
 			changedirection = false;
 			flip = false;

@@ -12,7 +12,7 @@
 
 #include "ModuleCollisions.h"
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 1000
 
 
 ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)

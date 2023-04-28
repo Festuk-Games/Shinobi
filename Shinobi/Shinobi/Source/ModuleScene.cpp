@@ -90,10 +90,6 @@ bool ModuleScene::Start()
 	App->collisions->Enable();
 	App->particles->Enable();
 
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 0, 80);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208-29);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
-
 	if (stage1)
 	{
 		stageTexture = App->textures->Load("Assets/layer_a.png");
@@ -131,6 +127,10 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
 		App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
 	}
+
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 550, 148);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208 - 29);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
 
 	return ret;
 }
