@@ -38,8 +38,9 @@ public:
 	SDL_Texture* sega = nullptr;
 	SDL_Texture* light = nullptr;
 	SDL_Texture* text = nullptr;
+	SDL_Texture* text2 = nullptr;
 
-	SDL_Rect segarect, nums, coin;
+	SDL_Rect segarect, nums, coin, shinobi, shinobi2;
 
 	Animation* currentAnimation = nullptr;
 	Animation lightAnim;
@@ -49,7 +50,7 @@ public:
 	{
 		SDL_Texture* logo = nullptr;
 		int centerX = 141;
-		int centerY = 16;
+		int centerY = 14;
 		float radius = 150.0f;
 		float angularVelocity = 0.2f;
 		float angularStep = 0.05f;
@@ -63,6 +64,7 @@ public:
 	
 	int delay = 0;
 	int counter = 0;
+	int scount = 0;
 };
 
 #endif

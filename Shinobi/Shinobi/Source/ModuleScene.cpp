@@ -143,13 +143,13 @@ Update_Status ModuleScene::Update()
 	{
 		if (App->player->position.x >= 2000)
 		{
-			App->fade->FadeToBlack(this, this, true, true, 100);
-			stage1 = false;
-			stage2 = true;
-			App->player->position.x = 30;
-			App->render->camera.x = 0;
-			nextStage = false;
-			App->audio->PlayMusic("Audio/music/mission_2.ogg", 0.5f);
+			App->fade->FadeToBlack(this, (Module*)App->intro, true, true, 60);
+			//stage1 = false;
+			//stage2 = true;
+			//App->player->position.x = 30;
+			//App->render->camera.x = 0;
+			//nextStage = false;
+			//App->audio->PlayMusic("Audio/music/mission_2.ogg", 0.5f);
 		}
 	}
 	if (nextStage && stage2)

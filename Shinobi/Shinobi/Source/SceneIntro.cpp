@@ -35,6 +35,15 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 	coin.w = 92;
 	coin.h = 10;
 
+	shinobi.x = 1;
+	shinobi.y = 1;
+	shinobi.w = 95;
+	shinobi.h = 17;
+
+	shinobi2.x = 1;
+	shinobi2.y = 18;
+	shinobi2.w = 95;
+	shinobi2.h = 17;
 }
 
 SceneIntro::~SceneIntro()
@@ -61,6 +70,7 @@ bool SceneIntro::Start()
 	sega = App->textures->Load("Assets/sega.png");
 	light = App->textures->Load("Assets/light.png");
 	text = App->textures->Load("Assets/ui/nums.png");
+	text2 = App->textures->Load("Assets/ui/text2.png");
 	/*App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);*/
 
 	App->render->camera.x = 0;
@@ -87,7 +97,7 @@ Update_Status SceneIntro::Update()
 	{
 		if (logos[i].radius >= 0 && delay >= i*3)
 		{
-			logos[i].time += 3;
+			logos[i].time += 4;
 
 			logos[i].radius -= logos[i].angularVelocity * 4;
 			logos[i].logopos.x = logos[i].centerX + logos[i].radius * sin(logos[i].angularStep * logos[i].time);
@@ -101,7 +111,8 @@ Update_Status SceneIntro::Update()
 	counter++;
 	if (counter == 60) counter = 0;
 	
-
+	if (scount <= 8) scount++;
+	else scount = 0;
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -127,6 +138,9 @@ Update_Status SceneIntro::PostUpdate()
 	App->render->Blit(text, 290, 207, SDL_FLIP_NONE, &nums);
 	if (counter <= 30) App->render->Blit(text, 144, 144, SDL_FLIP_NONE, &coin);
 
+	if (scount <= 4) App->render->Blit(text2, 140, 64, SDL_FLIP_NONE, &shinobi);
+	else App->render->Blit(text2, 140, 64, SDL_FLIP_NONE, &shinobi2);
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -142,6 +156,6 @@ bool SceneIntro::CleanUp()
 	App->textures->Unload(sega);
 	App->textures->Unload(light);
 	App->textures->Unload(text);
-
+	App->textures->Unload(text2);
 	return true;
 }

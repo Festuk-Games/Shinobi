@@ -135,6 +135,16 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	katanaAnim.speed = 0.3f;
 
 
+	attackJumpAnim1.PushBack({ 286, 209, 76, 66 });
+	attackJumpAnim1.loop = false;
+	attackJumpAnim1.speed = 0.1f;
+	attackJumpAnim2.PushBack({ 361, 209, 76, 66 });
+	attackJumpAnim2.loop = false;
+	attackJumpAnim2.speed = 0.1f;
+
+	katanaJumpAnim.PushBack({ 286, 209, 76, 66 });
+	katanaJumpAnim.loop = false;
+	katanaJumpAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -179,8 +189,11 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= jumpPosition.y-72)
 				{
-					currentAnimation = &jumpAnim1;
-					currentAnimation->Reset();
+					if (jumpAttackDelay <= 0)
+					{
+						currentAnimation = &jumpAnim1;
+					}
+					else jumpAttackDelay--;
 					position.y -= 8;
 					collider->SetPos(position.x, position.y - 58); 
 					feet->SetPos(position.x, position.y-1);
@@ -196,6 +209,23 @@ Update_Status ModulePlayer::Update()
 					{
 						App->render->camera.y+=speed;
 					}
+					if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN)
+					{
+						if (!enemyNear)
+						{
+							currentAnimation = &attackJumpAnim1;
+							App->audio->PlayFx(App->audio->shuriken);
+							if (right) App->particles->shuriken.speed = iPoint(5, 0);
+							else App->particles->shuriken.speed = iPoint(-5, 0);
+							App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+						}
+						else
+						{
+							currentAnimation = &katanaJumpAnim;
+						}
+						jumpAttackDelay+=5;
+					}
+
 				}
 				if (position.y == jumpPosition.y - 72)
 				{
@@ -206,8 +236,11 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= jumpPosition.y - 72 && position.y <= 208)
 				{
-					currentAnimation = &jumpAnim2;
-					currentAnimation->Reset();
+					if (jumpAttackDelay <= 0)
+					{
+						currentAnimation = &jumpAnim2;
+					}
+					else jumpAttackDelay--;
 					position.y += 4.2;
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x, position.y-1);
@@ -222,6 +255,22 @@ Update_Status ModulePlayer::Update()
 					if (position.y <= 97)
 					{
 						App->render->camera.y-=speed;
+					}
+					if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN)
+					{
+						if (!enemyNear)
+						{
+							currentAnimation = &attackJumpAnim2;
+							App->audio->PlayFx(App->audio->shuriken);
+							if (right) App->particles->shuriken.speed = iPoint(5, 0);
+							else App->particles->shuriken.speed = iPoint(-5, 0);
+							App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+						}
+						else
+						{
+							currentAnimation = &katanaJumpAnim;
+						}
+						jumpAttackDelay+=5;
 					}
 				}
 				//if (position.y == 208)
@@ -238,22 +287,14 @@ Update_Status ModulePlayer::Update()
 		{
 			right = true;
 			isWalking = true;
-			if (currentAnimation != &forwardAnim)
-			{
-				currentAnimation = &forwardAnim;
-				currentAnimation->Reset();
-			}
+			currentAnimation = &forwardAnim;
 			position.x += speed;
 		}
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && !isColliding && position.x > 20 )
 		{
 			right = false;
 			isWalking = true;
-			if (currentAnimation != &backwardAnim)
-			{
-				currentAnimation = &backwardAnim;
-				currentAnimation->Reset();
-			}
+			currentAnimation = &backwardAnim;
 			position.x -= speed;
 		}
 
@@ -263,11 +304,7 @@ Update_Status ModulePlayer::Update()
 			isShooting = true;
 			if (!enemyNear)
 			{
-				if (currentAnimation != &shootAnim)
-				{
-					currentAnimation = &shootAnim;
-					currentAnimation->Reset();
-				}
+				currentAnimation = &shootAnim;
 				App->audio->PlayFx(App->audio->shuriken);
 				if (right) App->particles->shuriken.speed = iPoint(5, 0);
 				else App->particles->shuriken.speed = iPoint(-5, 0);
@@ -275,11 +312,7 @@ Update_Status ModulePlayer::Update()
 			}
 			else
 			{
-				if (currentAnimation != &katanaAnim)
-				{
-					currentAnimation = &katanaAnim;
-					currentAnimation->Reset();
-				}
+				currentAnimation = &katanaAnim;
 			}
 		
 		}
@@ -287,21 +320,15 @@ Update_Status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching)
 		{
 			isJumpingUp1 = true;
-			if (currentAnimation != &backAnim)
-			{
-				currentAnimation = &backAnim;
-				currentAnimation->Reset();
-			}
+			currentAnimation = &backAnim;
+
 		}
 		//jumping to first floor input
 		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && !isWalking && !isCrouching)
 		{
 			isJumpingDown1 = true;
-			if (currentAnimation != &backAnim)
-			{
-				currentAnimation = &backAnim;
-				currentAnimation->Reset();
-			}
+			currentAnimation = &backAnim;
+
 		}
 		//jumping input -> second floor
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && isJumpingUp1 && App->scene->stage1)
@@ -418,22 +445,14 @@ Update_Status ModulePlayer::Update()
 			{
 				right = false;
 				isWalking = true;
-				if (currentAnimation != &crouchBackwardAnim)
-				{
-					currentAnimation = &crouchBackwardAnim;
-					currentAnimation->Reset();
-				}
+				currentAnimation = &crouchBackwardAnim;
 				position.x -= speed;
 			}
 			//crouch attack
 			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking)
 			{
 				isShooting = true;
-				if (currentAnimation != &crouchAttackAnim)
-				{
-					currentAnimation = &crouchAttackAnim;
-					currentAnimation->Reset();
-				}
+				currentAnimation = &crouchAttackAnim;
 				App->audio->PlayFx(App->audio->shuriken);
 				if (right) App->particles->shuriken.speed = iPoint(5, 0);
 				else App->particles->shuriken.speed = iPoint(-5, 0);
@@ -443,30 +462,22 @@ Update_Status ModulePlayer::Update()
 			else if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_DOWN && !isWalking)
 			{
 				isKicking = true;
-				if (currentAnimation != &crouchKatanaAnim)
-				{
-					currentAnimation = &crouchKatanaAnim;
-					currentAnimation->Reset();
-				}
+				currentAnimation = &crouchKatanaAnim;
+
 			}
 			//crouch kick
 			else if (App->input->keys[SDL_SCANCODE_RSHIFT] == KEY_DOWN && !isWalking)
 			{
 				isKicking = true;
-				if (currentAnimation != &crouchKickAnim)
-				{
-					currentAnimation = &crouchKickAnim;
-					currentAnimation->Reset();
-				}
+				currentAnimation = &crouchKickAnim;
+
 			}
 			//crouch idle
 			else if(!isShooting && !isWalking && !isKicking)
 			{
-				if (currentAnimation != &crouchAnim)
-				{
-					currentAnimation = &crouchAnim;
-					currentAnimation->Reset();
-				}
+
+				currentAnimation = &crouchAnim;
+
 			}
 
 		}
@@ -598,7 +609,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	//box collider
-	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::BOX)
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::BOX || c2->type == Collider::Type::WALL)
 	{
 		if (!collision)
 		{

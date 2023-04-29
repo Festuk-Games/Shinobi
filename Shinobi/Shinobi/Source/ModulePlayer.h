@@ -68,6 +68,8 @@ public:
 	Animation backAnim;
 	Animation crouchAttackAnim , crouchKickAnim, crouchKatanaAnim;
 	Animation katanaAnim;
+	Animation katanaJumpAnim;
+	Animation attackJumpAnim1, attackJumpAnim2;
 
 	iPoint diePosition;
 	iPoint jumpPosition;
@@ -99,6 +101,8 @@ public:
 	bool enemyNear = false;
 
 	iPoint flipPos;
+
+	int jumpAttackDelay = 0;
 };
 
 #endif //!__MODULE_PLAYER_H__
