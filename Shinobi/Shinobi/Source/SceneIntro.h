@@ -39,10 +39,11 @@ public:
 	SDL_Texture* light = nullptr;
 	SDL_Texture* text = nullptr;
 
-	SDL_Rect segarect, nums;
+	SDL_Rect segarect, nums, coin;
 
 	Animation* currentAnimation = nullptr;
 	Animation lightAnim;
+
 
 	struct logos
 	{
@@ -61,6 +62,7 @@ public:
 	bool intro1 = true, intro2 = false, intro3 = false;
 	
 	int delay = 0;
+	int counter = 0;
 };
 
 #endif

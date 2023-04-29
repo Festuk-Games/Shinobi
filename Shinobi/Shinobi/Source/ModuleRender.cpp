@@ -118,9 +118,9 @@ Update_Status ModuleRender::PostUpdate()
 }
 
 void ModuleRender::printPos() {
-	cout << "Player.x: " << App->player->position.x << endl;
+	//cout << "Player.x: " << App->player->position.x << endl;
 	cout << "Player.y: " << App->player->position.y << endl;
-	cout << "Camera.x: " << camera.x << endl;
+	//cout << "Camera.x: " << camera.x << endl;
 
 }
 

@@ -40,8 +40,8 @@ Update_Status SceneMission::Update()
 {
 	timer++;
 	changescene++;
-	if (timer == 10) s1 = false;
-	if (timer == 20)
+	if (timer == 4) s1 = false;
+	else if (timer == 8)
 	{
 		s1 = true;
 		timer = 0;

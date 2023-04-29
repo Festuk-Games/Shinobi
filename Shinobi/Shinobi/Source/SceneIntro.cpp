@@ -29,6 +29,12 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 	segarect.y = 17;
 	segarect.h = 10;
 	segarect.w = 42;
+
+	coin.x = 1;
+	coin.y = 26;
+	coin.w = 92;
+	coin.h = 10;
+
 }
 
 SceneIntro::~SceneIntro()
@@ -92,6 +98,10 @@ Update_Status SceneIntro::Update()
 
 	if (delay >= 260) currentAnimation->Update();
 	
+	counter++;
+	if (counter == 60) counter = 0;
+	
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -108,13 +118,14 @@ Update_Status SceneIntro::PostUpdate()
 		if (delay >= i*3) App->render->Blit(logos[i].logo, logos[i].logopos.x, logos[i].logopos.y, SDL_FLIP_NONE, NULL);
 	}
 	
-	App->render->Blit(sega, 150, 170, SDL_FLIP_NONE, NULL);
+	App->render->Blit(sega, 150, 180, SDL_FLIP_NONE, NULL);
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	App->render->Blit(light, 145, 114, SDL_FLIP_NONE, &rect);
 
 	App->render->Blit(text, 242, 208, SDL_FLIP_NONE, &segarect);
 	App->render->Blit(text, 290, 207, SDL_FLIP_NONE, &nums);
+	if (counter <= 30) App->render->Blit(text, 144, 144, SDL_FLIP_NONE, &coin);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

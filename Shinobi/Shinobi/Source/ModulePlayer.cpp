@@ -192,7 +192,7 @@ Update_Status ModulePlayer::Update()
 					{
 						position.x -= speed;
 					}
-					if (position.y <= 90)
+					if (position.y <= 97)
 					{
 						App->render->camera.y+=speed;
 					}
@@ -219,7 +219,7 @@ Update_Status ModulePlayer::Update()
 					{
 						position.x -= speed;
 					}
-					if (position.y <= 90)
+					if (position.y <= 97)
 					{
 						App->render->camera.y-=speed;
 					}

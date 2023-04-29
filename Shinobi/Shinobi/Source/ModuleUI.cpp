@@ -58,6 +58,16 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	white1p.h = 8;
 	white1p.w = 14;
 	
+	playerReady.x = 0;
+	playerReady.y = 154;
+	playerReady.h = 10;
+	playerReady.w = 105;
+
+	hi.x = 0;
+	hi.y = 144;
+	hi.h = 10;
+	hi.w = 15;
+
 	for	(int i = 0; i < 10; i++)
 	{
 		timer[i] = { 1 + 8* i, 1, 7, 14 };
@@ -67,12 +77,17 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 
 	for (int i = 0; i < 10; i++)
 	{
-		score[i] = {  1 + 8 * i, 60, 7, 8 };
+		bscore[i] = {  1 + 8 * i, 81, 7, 8 };
 	}
 
 	for (int i = 0; i < 10; i++)
 	{
-		h_score[i] = { 1 + 8 * i, 81, 7, 8 };
+		wscore[i] = { 1 + 8 * i, 60, 7, 8 };
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		h_score[i] = { 1 + 8 * i, 71, 7, 8 };
 	}
 
 	scoreCounter = 0;
@@ -160,6 +175,10 @@ Update_Status ModuleUI::Update()
 		file.close();
 	}
 
+	if (counter <= 80)
+	{
+		counter++;
+	}
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -177,7 +196,7 @@ Update_Status ModuleUI::PostUpdate()
 	//Draw the lifes
 	for (int i = 0; i < lifenum; i++)
 	{
-		App->render->Blit(lifes, 16 + 8 * i, 20, SDL_FLIP_NONE, &life, 0.0f);
+		App->render->Blit(lifes, 22 + 8 * i, 19, SDL_FLIP_NONE, &life, 0.0f);
 	}
 
 	//Draw the skills icons
@@ -205,28 +224,36 @@ Update_Status ModuleUI::PostUpdate()
 	App->render->Blit(nums, 300, 200, SDL_FLIP_NONE, &timer[timesec1], 0.0f);
 	App->render->Blit(nums, 308, 200, SDL_FLIP_NONE, &timer[timesec2], 0.0f);
 	
-	if (blue) App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &blue1p, 0.0f);
-	else App->render->Blit(nums, 16, 12, SDL_FLIP_NONE, &white1p, 0.0f);
+	if (blue) App->render->Blit(nums, 16, 10, SDL_FLIP_NONE, &blue1p, 0.0f);
+	else App->render->Blit(nums, 16, 10, SDL_FLIP_NONE, &white1p, 0.0f);
 	
 
 	string sc = to_string(scoreCounter);
-	xpos = 80 - (sc.size() * 8);
+	xpos = 97 - (sc.size() * 8);
 
 	for (int i = 0; i < sc.size(); i++)
 	{
 		digit = sc[i] - '0';
 
-		App->render->Blit(nums, xpos + (i * 8), 10, SDL_FLIP_NONE, &score[digit], 0.0f);
+		if (blue) App->render->Blit(nums, xpos + (i * 8), 10, SDL_FLIP_NONE, &bscore[digit], 0.0f);
+		else App->render->Blit(nums, xpos + (i * 8), 10, SDL_FLIP_NONE, &wscore[digit], 0.0f);
 	}
 
 	string hscore = to_string(highScore);
-	xpos = 120 - (hscore.size() * 8);
+	xpos = 190 - (hscore.size() * 8);
 
 	for (int i = 0; i < hscore.size(); i++)
 	{
 		digit = hscore[i] - '0';
 
 		App->render->Blit(nums, xpos + (i * 8), 10, SDL_FLIP_NONE, &h_score[digit], 0.0f);
+	}
+
+	App->render->Blit(nums, 126, 9, SDL_FLIP_NONE, &hi, 0.0f);
+
+	if (counter <= 80)
+	{
+		App->render->Blit(nums, 110, 110, SDL_FLIP_NONE, &playerReady, 0.0f);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
