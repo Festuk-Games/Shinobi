@@ -12,36 +12,32 @@ Enemy_Soldier::Enemy_Soldier(int x, int y) : Enemy(x, y)
 	//initial position
 
 	//idle animation
-	idleAnim.PushBack({ 96,29,68,66 });
+	idleAnim.PushBack({ 123,29,48,62 });
 
 	//walk animation
-	walkAnim.PushBack({ 96,29,68,66 });
-	walkAnim.PushBack({ 29,29,68,66 });
-	walkAnim.PushBack({ 163,29,68,66 });
-	walkAnim.PushBack({ 29,29,68,66 });
+	walkAnim.PushBack({ 29,29,48,62 });
+	walkAnim.PushBack({ 123,29,48,62 });
+	walkAnim.PushBack({ 76,29,48,62 });
+	walkAnim.PushBack({ 123,29,48,62 });
 	walkAnim.speed = 0.1f;
 
 	currentAnim = &walkAnim;
 
 	//shoot animation
-	hitAnim.PushBack({ 29,123,68,66 });
-	hitAnim.PushBack({ 96,123,68,66 });
-	hitAnim.PushBack({ 163,123,68,66 });
-	hitAnim.PushBack({ 163,123,68,66 });
-	hitAnim.PushBack({ 96,123,68,66 });
-	hitAnim.PushBack({ 29,123,68,66 });
+	hitAnim.PushBack({ 29,119,48,62 });
+	hitAnim.PushBack({ 181,119,48,62 });
+	hitAnim.PushBack({ 29,119,48,62 });
 	hitAnim.speed = 0.14f;
 	hitAnim.loop = false;
 
-	dieAnim.PushBack({ 29,217,68,66 });
-	dieAnim.PushBack({ 96,217,68,66 });
-	dieAnim.PushBack({ 164,217,68,66 });
+	dieAnim.PushBack({ 199,29,48,62 });
+	dieAnim.PushBack({ 246,29,48,62 });
 	dieAnim.speed = 0.08f;
 	dieAnim.loop = false;
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x + 25, position.y + 8, 30, 61 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x, position.y, 30, 63}, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
 }
@@ -148,18 +144,10 @@ void Enemy_Soldier::Update()
 		if (shooting)
 		{
 			time++;
-			if (time >= 50)
+			if (time >= 20)
 			{
 				shooting = false;
 				time = 0;
-
-				////reload
-				//if (bullets <= 0)
-				//{
-				//	currentAnim = &reloadAnim;
-				//	reloading = true;
-				//	bullets = 3;
-				//}
 			}
 		}
 
@@ -173,11 +161,9 @@ void Enemy_Soldier::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x + 25, position.y + 8);
+		collider->SetPos(position.x, position.y);
 	}
 	else if (die) currentAnim = &dieAnim;
-
-	//feet->SetPos(position.x, position.y + 69);
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

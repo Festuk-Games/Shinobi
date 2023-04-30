@@ -129,7 +129,8 @@ bool ModuleScene::Start()
 	}
 
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 550, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 250, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 350, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 130);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208 - 29);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
 
