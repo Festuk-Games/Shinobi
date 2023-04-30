@@ -58,7 +58,13 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	jumpUpAnim.PushBack({ 617, 402, 76, 66 });
 	jumpUpAnim.PushBack({ 692, 402, 76, 66 });
 	jumpUpAnim.loop = false;
-	jumpUpAnim.speed = 0.03f;
+	jumpUpAnim.speed = 0.001f;
+
+	//jump down animation
+	jumpDownAnim.PushBack({ 798, 402, 76, 66 });
+	jumpDownAnim.PushBack({ 873, 402, 76, 66 });
+	jumpDownAnim.loop = false;
+	jumpDownAnim.speed = 0.03f;
 
 	//crouch animation
 	crouchAnim.PushBack({30, 116, 76, 66 });
@@ -85,9 +91,10 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	crouchAttackAnim.speed = 0.1f;
 
 	//crouch kick animation
-	crouchKickAnim.PushBack({ 380,654,45,40 });
-	crouchKickAnim.PushBack({ 431,654,67,40 });
-	crouchKickAnim.PushBack({ 504,654,45,40 });
+	crouchKickAnim.PushBack({ 542,593,76,66 });
+	crouchKickAnim.PushBack({ 617,593,76,66 });
+	crouchKickAnim.PushBack({ 542,593,76,66 });
+	crouchKickAnim.PushBack({ 30, 116, 76, 66 });
 	crouchKickAnim.loop = false;
 	crouchKickAnim.speed = 0.1f;
 
@@ -390,7 +397,7 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= 67)
 				{
-					currentAnimation = &jumpUpAnim;
+					currentAnimation = &jumpDownAnim;
 					currentAnimation->Update();
 					position.y -= 10;
 					collider->SetPos(position.x, position.y - 58);
@@ -406,7 +413,7 @@ Update_Status ModulePlayer::Update()
 				L2 = false;
 				if (position.y >= 67 && position.y <= 208)
 				{
-					currentAnimation = &jumpUpAnim;
+					currentAnimation = &jumpDownAnim;
 					currentAnimation->Update();
 					position.y += speed;
 					collider->SetPos(position.x, position.y - 58);
@@ -449,7 +456,7 @@ Update_Status ModulePlayer::Update()
 				position.x -= speed;
 			}
 			//crouch attack
-			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking)
+			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !enemyNear && !isPowerUp)
 			{
 				isShooting = true;
 				currentAnimation = &crouchAttackAnim;
@@ -458,29 +465,39 @@ Update_Status ModulePlayer::Update()
 				else App->particles->shuriken.speed = iPoint(-5, 0);
 				App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
 			}
-			//crouch katana
-			else if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_DOWN && !isWalking)
+			//crouch attack
+			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !enemyNear && isPowerUp)
 			{
-				isKicking = true;
-				currentAnimation = &crouchKatanaAnim;
-
+				isShooting = true;
+				currentAnimation = &crouchAttackAnim;
+				App->audio->PlayFx(App->audio->shuriken);
+				if (right) App->particles->shuriken.speed = iPoint(5, 0);
+				else App->particles->shuriken.speed = iPoint(-5, 0);
+				App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
 			}
 			//crouch kick
-			else if (App->input->keys[SDL_SCANCODE_RSHIFT] == KEY_DOWN && !isWalking)
+			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && enemyNear && !isPowerUp)
 			{
 				isKicking = true;
 				currentAnimation = &crouchKickAnim;
+				currentAnimation->Reset();
+
+			}
+			//crouch katana
+			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && enemyNear && isPowerUp)
+			{
+				isKicking = true;
+				currentAnimation = &crouchKatanaAnim;
+				currentAnimation->Reset();
 
 			}
 			//crouch idle
 			else if(!isShooting && !isWalking && !isKicking)
 			{
-
 				currentAnimation = &crouchAnim;
-
 			}
-
 		}
+		
 
 		//key conditions
 
@@ -507,17 +524,15 @@ Update_Status ModulePlayer::Update()
 			isShooting = false;
 		}
 		//not kicking
-		if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT 
-			|| App->input->keys[SDL_SCANCODE_RSHIFT] == KEY_IDLE
+		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE
 			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT)
 		{
-			kick++;
-			if (kick == 180)
-			{
+			//kick++;
+			//if (kick >= 180)
+			//{
 				isKicking = false;
-				kick = 0;
-			}
+			//	kick = 0;
+			//}
 		}
 		//idle
 		if (App->input->keys[SDL_SCANCODE_D] == KEY_IDLE

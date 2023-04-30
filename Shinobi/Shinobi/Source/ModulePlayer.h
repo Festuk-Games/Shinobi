@@ -61,7 +61,7 @@ public:
 	Animation backwardAnim;
 	Animation crouchAnim, crouchForwardAnim, crouchBackwardAnim;
 	Animation jumpAnim1, jumpAnim2;
-	Animation jumpUpAnim;
+	Animation jumpUpAnim, jumpDownAnim;
 	Animation shootAnim;
 	Animation gunAnim;
 	Animation dieAnim1, dieAnim2, dieAnim3;
@@ -88,6 +88,7 @@ public:
 	bool isWalking = false;
 	bool isCrouching = false;
 	bool alive = true;
+	bool isPowerUp = true;
 
 	bool isColliding = false;
 	bool L2 = false;
