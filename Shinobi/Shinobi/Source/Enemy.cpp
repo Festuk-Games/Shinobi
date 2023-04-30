@@ -29,8 +29,8 @@ void Enemy::Update()
 	if (currentAnim != nullptr)
 		currentAnim->Update();
 
-	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+	//if (collider != nullptr)
+	//	collider->SetPos(position.x, position.y);
 
 	if (!ground)
 	{
@@ -60,6 +60,7 @@ void Enemy::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::PLAYER_SHOT)
 	{
+		die = true;
 		App->ui->scoreCounter+= 200;
 	}
 }

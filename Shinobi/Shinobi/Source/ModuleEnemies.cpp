@@ -154,7 +154,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case ENEMY_TYPE::FIGHTER:
 					enemies[i] = new Enemy_Fighter(info.x, info.y);
-					enemies[i]->texture = gunner;
+					enemies[i]->texture = fighter;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					break;
 			}
@@ -173,11 +173,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
-				delete enemies[i];
-				enemies[i] = nullptr;
+				//delete enemies[i];
+				//enemies[i] = nullptr;
 				break;
 			}
-			if (c2->type == Collider::Type::GROUND)
+			if (/*c1->type == Collider::Type::FEET && */c2->type == Collider::Type::GROUND)
 			{
 				enemies[i]->ground = true;
 			}

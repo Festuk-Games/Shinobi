@@ -118,7 +118,7 @@ bool ModuleScene::Start()
 
 		App->collisions->AddCollider({ 544, 64, 32, 32 }, Collider::Type::WALL);
 
-		App->collisions->AddCollider({ 0, 207, 2048, 16 }, Collider::Type::GROUND);
+		App->collisions->AddCollider({ 0, 207, 2048, 2 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 96, 95, 992, 7 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 1296, 95, 656, 7 }, Collider::Type::GROUND);
 
@@ -128,7 +128,8 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
 	}
 
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 550, 148);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 550, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 250, 130);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208 - 29);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
 

@@ -1,4 +1,4 @@
-#include "Enemy_Gunner.h"
+#include "Enemy_Soldier.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
@@ -7,51 +7,46 @@
 #include "ModuleParticles.h"
 #include <iostream>
 
-Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
+Enemy_Soldier::Enemy_Soldier(int x, int y) : Enemy(x, y)
 {
 	//initial position
 
 	//idle animation
-	idleAnim.PushBack({ 30,30,83,69 });
+	idleAnim.PushBack({ 96,29,68,66 });
 
 	//walk animation
-	walkAnim.PushBack({30,224,83,69});
-	walkAnim.PushBack({ 112,224,83,69 });
-	walkAnim.PushBack({ 30,224,83,69 });
-	walkAnim.PushBack({ 195,224,83,69 });
-	walkAnim.speed = 0.05f;
+	walkAnim.PushBack({ 96,29,68,66 });
+	walkAnim.PushBack({ 29,29,68,66 });
+	walkAnim.PushBack({ 163,29,68,66 });
+	walkAnim.PushBack({ 29,29,68,66 });
+	walkAnim.speed = 0.1f;
 
 	currentAnim = &walkAnim;
 
 	//shoot animation
-	shootAnim.PushBack({ 30,30,83,69 });
-	shootAnim.PushBack({ 112,30,83,69 });
-	shootAnim.PushBack({ 30,30,83,69 });
-	shootAnim.speed = 0.1f;
-	shootAnim.loop = false;
+	hitAnim.PushBack({ 29,123,68,66 });
+	hitAnim.PushBack({ 96,123,68,66 });
+	hitAnim.PushBack({ 163,123,68,66 });
+	hitAnim.PushBack({ 163,123,68,66 });
+	hitAnim.PushBack({ 96,123,68,66 });
+	hitAnim.PushBack({ 29,123,68,66 });
+	hitAnim.speed = 0.14f;
+	hitAnim.loop = false;
 
-	preshootAnim.PushBack({ 389,30,83,69 });
-	preshootAnim.speed = 0.1f;
-	preshootAnim.loop = false;
-
-	//reload animation
-	reloadAnim.PushBack({ 225,30,83,69 });
-	reloadAnim.PushBack({ 307,30,83,69 });
-	reloadAnim.speed = 0.05f;
-
-	dieAnim.PushBack({ 30,418,83,69 });
-	dieAnim.PushBack({ 112,418,83,69 });
-	dieAnim.speed = 0.05f;
+	dieAnim.PushBack({ 29,217,68,66 });
+	dieAnim.PushBack({ 96,217,68,66 });
+	dieAnim.PushBack({ 164,217,68,66 });
+	dieAnim.speed = 0.08f;
 	dieAnim.loop = false;
 
 
 	//colliders
-	collider = App->collisions->AddCollider({position.x+25, position.y+8, 30, 61}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 25, position.y + 8, 30, 61 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
 }
 
-void Enemy_Gunner::Update()
+void Enemy_Soldier::Update()
 {
 	std::cout << position.x << std::endl;
 	if (!die)
@@ -59,26 +54,23 @@ void Enemy_Gunner::Update()
 		//walk right
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0)
 		{
-			shot++;
-			if (shot >= 100 && !reloading && bullets >= 1)
-			{
-				currentAnim = &shootAnim;
-				currentAnim->Reset();
-				App->audio->PlayFx(App->audio->shuriken);
-				App->particles->enemyshot.speed = iPoint(-5, 0);
-				App->particles->AddParticle(App->particles->enemyshot, position.x - 10, position.y + 25, Collider::Type::ENEMY_SHOT);
-				shot = 0;
-				shooting = true;
-				bullets--;
-			}
-			else if (position.x != App->player->position.x && !shooting && !reloading)
+			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
 				flip = true;
+				shot++;
 
-				if (position.x - App->player->position.x >= pdistance - 40)
+				if (position.x - App->player->position.x >= pdistance - 170)
 				{
 					currentAnim = &walkAnim;
 					position.x--;
+				}
+				else if (shot >= 100)
+				{
+					currentAnim = &hitAnim;
+					currentAnim->Reset();
+					App->audio->PlayFx(App->audio->shuriken);
+					shot = 0;
+					shooting = true;
 				}
 				else currentAnim = &idleAnim;
 
@@ -97,26 +89,25 @@ void Enemy_Gunner::Update()
 		//walk left
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0)
 		{
-			shot++;
-			if (shot >= 100 && !reloading && bullets >= 1)
+			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
-				currentAnim = &shootAnim;
-				currentAnim->Reset();
-				App->audio->PlayFx(App->audio->shuriken);
-				App->particles->enemyshot.speed = iPoint(5, 0);
-				App->particles->AddParticle(App->particles->enemyshot, position.x + 10, position.y + 25, Collider::Type::ENEMY_SHOT);
-				shot = 0;
-				shooting = true;
-				bullets--;
-			}
-			else if (position.x != App->player->position.x && !shooting && !reloading)
-			{
+
+				shot++;
+
 				flip = false;
 
-				if (position.x - App->player->position.x <= -(pdistance - 40))
+				if (position.x - App->player->position.x <= -(pdistance - 170))
 				{
 					currentAnim = &walkAnim;
 					position.x++;
+				}
+				else if (shot >= 100)
+				{
+					currentAnim = &hitAnim;
+					currentAnim->Reset();
+					App->audio->PlayFx(App->audio->shuriken);
+					shot = 0;
+					shooting = true;
 				}
 				else currentAnim = &idleAnim;
 
@@ -162,13 +153,13 @@ void Enemy_Gunner::Update()
 				shooting = false;
 				time = 0;
 
-				//reload
-				if (bullets <= 0)
-				{
-					currentAnim = &reloadAnim;
-					reloading = true;
-					bullets = 3;
-				}
+				////reload
+				//if (bullets <= 0)
+				//{
+				//	currentAnim = &reloadAnim;
+				//	reloading = true;
+				//	bullets = 3;
+				//}
 			}
 		}
 

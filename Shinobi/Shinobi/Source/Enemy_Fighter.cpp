@@ -5,180 +5,179 @@
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include <iostream>
 
 Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 {
+	//initial position
+
 	//idle animation
-	idleAnim.PushBack({ 0,6,54,59 });
+	idleAnim.PushBack({ 96,29,68,66 });
 
 	//walk animation
-	walkAnim.PushBack({ 11,165,36,59 });
-	walkAnim.PushBack({ 68,165,36,59 });
-	walkAnim.PushBack({ 143,165,36,59 });
-	walkAnim.PushBack({ 68,165,36,59 });
-	walkAnim.speed = 0.05f;
+	walkAnim.PushBack({ 96,29,68,66 });
+	walkAnim.PushBack({ 29,29,68,66 });
+	walkAnim.PushBack({ 163,29,68,66 });
+	walkAnim.PushBack({ 29,29,68,66 });
+	walkAnim.speed = 0.1f;
 
 	currentAnim = &walkAnim;
 
 	//shoot animation
-	shootAnim.PushBack({ 0,6,54,59 });
-	shootAnim.PushBack({ 64,6,54,59 });
-	shootAnim.PushBack({ 0,6,54,59 });
-	shootAnim.speed = 0.1f;
-	shootAnim.loop = false;
+	hitAnim.PushBack({ 29,123,68,66 });
+	hitAnim.PushBack({ 96,123,68,66 });
+	hitAnim.PushBack({ 163,123,68,66 });
+	hitAnim.PushBack({ 163,123,68,66 });
+	hitAnim.PushBack({ 96,123,68,66 });
+	hitAnim.PushBack({ 29,123,68,66 });
+	hitAnim.speed = 0.14f;
+	hitAnim.loop = false;
 
-	//reload animation
-	reloadAnim.PushBack({ 143,6,54,59 });
-	reloadAnim.PushBack({ 206,6,54,59 });
-	reloadAnim.speed = 0.05f;
+	dieAnim.PushBack({ 29,217,68,66 });
+	dieAnim.PushBack({ 96,217,68,66 });
+	dieAnim.PushBack({ 164,217,68,66 });
+	dieAnim.speed = 0.08f;
+	dieAnim.loop = false;
+
 
 	//colliders
-	collider = App->collisions->AddCollider({ 0, 0, 36, 59 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 25, position.y + 8, 30, 61 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
-	//initial position
-	position.x = 550;
-	position.y = 148;
 }
 
 void Enemy_Fighter::Update()
 {
-
-	//waveRatio += waveRatioSpeed;
-	//position.x = spawnPos.x + (waveHeight * sinf(waveRatio));
-
-	//walk right
-	if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0)
+	std::cout << position.x << std::endl;
+	if (!die)
 	{
-		shot++;
-		if (shot >= 100 && !reloading && bullets >= 1)
+		//walk right
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0)
 		{
-			currentAnim = &shootAnim;
-			currentAnim->Reset();
-			App->audio->PlayFx(App->audio->shuriken);
-			App->particles->enemyshot.speed = iPoint(-5, 0);
-			App->particles->AddParticle(App->particles->enemyshot, position.x, position.y + 10, Collider::Type::ENEMY_SHOT);
-			shot = 0;
-			shooting = true;
-			bullets--;
-		}
-		else if (position.x != App->player->position.x && !shooting && !reloading)
-		{
-			flip = true;
-
-			if (position.x - App->player->position.x >= pdistance - 40)
+			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
-				currentAnim = &walkAnim;
-				position.x--;
+				flip = true;
+				shot++;
+
+				if (position.x - App->player->position.x >= pdistance - 170)
+				{
+					currentAnim = &walkAnim;
+					position.x--;
+				}
+				else if (shot >= 100)
+				{
+					currentAnim = &hitAnim;
+					currentAnim->Reset();
+					App->audio->PlayFx(App->audio->shuriken);
+					shot = 0;
+					shooting = true;
+				}
+				else currentAnim = &idleAnim;
+
+				pl = true;
+
+				if (position.x <= pos2)
+				{
+					changedirection = true;
+					flip = true;
+				}
+				else changedirection = false;
+
 			}
-			else currentAnim = &idleAnim;
 
-			pl = true;
+		}
+		//walk left
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0)
+		{
+			 if (position.x != App->player->position.x && !shooting && !reloading)
+			{
 
-			if (position.x <= pos2)
+				shot++;
+
+				flip = false;
+
+				if (position.x - App->player->position.x <= -(pdistance - 170))
+				{
+					currentAnim = &walkAnim;
+					position.x++;
+				}
+				else if (shot >= 100)
+				{
+					currentAnim = &hitAnim;
+					currentAnim->Reset();
+					App->audio->PlayFx(App->audio->shuriken);
+					shot = 0;
+					shooting = true;
+				}
+				else currentAnim = &idleAnim;
+
+				pl = true;
+
+				if (position.x >= pos2) changedirection = true;
+				else
+				{
+					changedirection = false;
+					flip = false;
+				}
+			}
+
+		}
+		//walk path
+		else if (!pl && !reloading && !shooting)
+		{
+			currentAnim = &walkAnim;
+			if (position.x >= spawnPos.x + 100)
 			{
 				changedirection = true;
 				flip = true;
 			}
-			else changedirection = false;
-
-		}
-
-	}
-	//walk left
-	else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0)
-	{
-		shot++;
-		if (shot >= 100 && !reloading && bullets >= 1)
-		{
-			currentAnim = &shootAnim;
-			currentAnim->Reset();
-			App->audio->PlayFx(App->audio->shuriken);
-			App->particles->enemyshot.speed = iPoint(5, 0);
-			App->particles->AddParticle(App->particles->enemyshot, position.x, position.y + 10, Collider::Type::ENEMY_SHOT);
-			shot = 0;
-			shooting = true;
-			bullets--;
-		}
-		else if (position.x != App->player->position.x && !shooting && !reloading)
-		{
-			flip = false;
-
-			if (position.x - App->player->position.x <= -(pdistance - 40))
-			{
-				currentAnim = &walkAnim;
-				position.x++;
-			}
-			else currentAnim = &idleAnim;
-
-			pl = true;
-
-			if (position.x >= pos2) changedirection = true;
-			else
+			else if (position.x <= spawnPos.x - 50)
 			{
 				changedirection = false;
 				flip = false;
 			}
-		}
 
-	}
-	//walk path
-	else if (!pl && !reloading && !shooting)
-	{
-		currentAnim = &walkAnim;
-		if (position.x >= pos2)
-		{
-			changedirection = true;
-			flip = true;
-		}
-		else if (position.x <= pos1)
-		{
-			changedirection = false;
-			flip = false;
-		}
+			if (changedirection) position.x--;
+			else position.x++;
 
-		if (changedirection) position.x--;
-		else position.x++;
-
-		shooting = false;
-		reloading = false;
-	}
-	else pl = false;
-
-	if (shooting)
-	{
-		time++;
-		if (time >= 50)
-		{
 			shooting = false;
-			time = 0;
+			reloading = false;
+		}
+		else pl = false;
 
-			//reload
-			if (bullets <= 0)
+		if (shooting)
+		{
+			time++;
+			if (time >= 50)
 			{
-				currentAnim = &reloadAnim;
-				reloading = true;
-				bullets = 3;
+				shooting = false;
+				time = 0;
+
+				////reload
+				//if (bullets <= 0)
+				//{
+				//	currentAnim = &reloadAnim;
+				//	reloading = true;
+				//	bullets = 3;
+				//}
 			}
 		}
-	}
 
-	//reload delay
-	if (reloading)
-	{
-		time++;
-		if (time >= 100)
+		//reload delay
+		if (reloading)
 		{
-			reloading = false;
-			time = 0;
+			time++;
+			if (time >= 100)
+			{
+				reloading = false;
+				time = 0;
+			}
 		}
+		collider->SetPos(position.x + 25, position.y + 8);
 	}
+	else if (die) currentAnim = &dieAnim;
 
-	//if (!shooting && !reloading && !walking)
-	//{
-	//	currentAnim = &idleAnim;
-	//}
-
+	//feet->SetPos(position.x, position.y + 69);
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

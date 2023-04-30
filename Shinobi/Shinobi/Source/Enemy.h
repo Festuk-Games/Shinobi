@@ -55,6 +55,7 @@ protected:
 	iPoint spawnPos;
 
 	bool flip = true;
+	bool die = false;
 };
 
 #endif // __ENEMY_H__

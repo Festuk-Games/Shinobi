@@ -33,7 +33,8 @@ private:
 	// The enemy animation
 	Animation idleAnim;
 	Animation walkAnim;
-	Animation shootAnim, reloadAnim;
+	Animation hitAnim;
+	Animation dieAnim;
 
 	bool changedirection = true;
 
