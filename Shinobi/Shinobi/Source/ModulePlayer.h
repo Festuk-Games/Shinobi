@@ -57,11 +57,10 @@ public:
 
 	// A set of animations
 	Animation idleAnim;
-	Animation forwardAnim;
-	Animation backwardAnim;
-	Animation crouchAnim, crouchForwardAnim, crouchBackwardAnim;
-	Animation jumpAnim1, jumpAnim2;
+	Animation walkAnim;
+	Animation crouchIdleAnim, crouchAnim, crouchGunAnim;
 	Animation jumpUpAnim, jumpDownAnim;
+	Animation jumpUpFloorAnim, jumpDownFloorAnim;
 	Animation shootAnim;
 	Animation gunAnim;
 	Animation dieAnim1, dieAnim2, dieAnim3;
@@ -70,6 +69,7 @@ public:
 	Animation katanaAnim;
 	Animation katanaJumpAnim;
 	Animation attackJumpAnim1, attackJumpAnim2;
+	Animation walkGunAnim;
 
 	iPoint diePosition;
 	iPoint jumpPosition;

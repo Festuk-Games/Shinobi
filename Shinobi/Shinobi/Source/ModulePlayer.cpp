@@ -27,63 +27,46 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	idleAnim.PushBack({211, 116, 76, 66});
 
 	// walk forward animation
-	forwardAnim.PushBack({ 30, 30, 76, 66 });
-	forwardAnim.PushBack({ 105, 30, 76, 66 });
-	forwardAnim.PushBack({ 180, 30, 76, 66 });
-	forwardAnim.PushBack({ 255, 30, 76, 66 });
-	forwardAnim.PushBack({ 330, 30, 76, 66 });
-	forwardAnim.PushBack({ 405, 30, 76, 66 });
-	forwardAnim.loop = true;
-	forwardAnim.speed = 0.2f;
-
-	//walk backward animation
-	backwardAnim.PushBack({ 30, 30, 76, 66 });
-	backwardAnim.PushBack({ 105, 30, 76, 66 });
-	backwardAnim.PushBack({ 180, 30, 76, 66 });
-	backwardAnim.PushBack({ 255, 30, 76, 66 });
-	backwardAnim.PushBack({ 330, 30, 76, 66 });
-	backwardAnim.PushBack({ 405, 30, 76, 66 });
-	backwardAnim.loop = true;
-	backwardAnim.speed = 0.2f;
+	walkAnim.PushBack({ 30, 30, 76, 66 });
+	walkAnim.PushBack({ 105, 30, 76, 66 });
+	walkAnim.PushBack({ 180, 30, 76, 66 });
+	walkAnim.PushBack({ 255, 30, 76, 66 });
+	walkAnim.PushBack({ 330, 30, 76, 66 });
+	walkAnim.PushBack({ 405, 30, 76, 66 });
+	walkAnim.loop = true;
+	walkAnim.speed = 0.2f;
 
 	//jump animation
-	jumpAnim1.PushBack({ 30, 210, 76, 66 });
-	jumpAnim2.PushBack({ 105, 210, 76, 66 });
-	jumpAnim1.loop = false;
-	jumpAnim1.speed = 0.1f;
-	jumpAnim2.loop = false;
-	jumpAnim2.speed = 0.1f;
+	jumpUpAnim.PushBack({ 30, 210, 76, 66 });
+	jumpDownAnim.PushBack({ 105, 210, 76, 66 });
+	jumpUpAnim.loop = false;
+	jumpUpAnim.speed = 0.1f;
+	jumpDownAnim.loop = false;
+	jumpDownAnim.speed = 0.1f;
 
 	//jump up animation
-	jumpUpAnim.PushBack({ 617, 402, 76, 66 });
-	jumpUpAnim.PushBack({ 692, 402, 76, 66 });
-	jumpUpAnim.loop = false;
-	jumpUpAnim.speed = 0.001f;
+	jumpUpFloorAnim.PushBack({ 617, 402, 76, 66 });
+	jumpUpFloorAnim.PushBack({ 692, 402, 76, 66 });
+	jumpUpFloorAnim.loop = false;
+	jumpUpFloorAnim.speed = 0.001f;
 
 	//jump down animation
-	jumpDownAnim.PushBack({ 798, 402, 76, 66 });
-	jumpDownAnim.PushBack({ 873, 402, 76, 66 });
-	jumpDownAnim.loop = false;
-	jumpDownAnim.speed = 0.03f;
+	jumpDownFloorAnim.PushBack({ 798, 402, 76, 66 });
+	jumpDownFloorAnim.PushBack({ 873, 402, 76, 66 });
+	jumpDownFloorAnim.loop = false;
+	jumpDownFloorAnim.speed = 0.03f;
 
 	//crouch animation
-	crouchAnim.PushBack({30, 116, 76, 66 });
-	crouchAnim.loop = false;
-	crouchAnim.speed = 0.1f;
+	crouchIdleAnim.PushBack({30, 116, 76, 66 });
+	crouchIdleAnim.loop = false;
+	crouchIdleAnim.speed = 0.1f;
 
 	//crouch right animation
-	crouchForwardAnim.PushBack({ 30, 401, 76, 66 });
-	crouchForwardAnim.PushBack({ 105, 401, 76, 66 });
-	crouchForwardAnim.PushBack({ 180, 401, 76, 66 });
-	crouchForwardAnim.loop = true;
-	crouchForwardAnim.speed = 0.1f;
-
-	//crouch left animation
-	crouchBackwardAnim.PushBack({ 30, 401, 76, 66 });
-	crouchBackwardAnim.PushBack({ 105, 401, 76, 66 });
-	crouchBackwardAnim.PushBack({ 180, 401, 76, 66 });
-	crouchBackwardAnim.loop = true;
-	crouchBackwardAnim.speed = 0.1f;
+	crouchAnim.PushBack({ 30, 401, 76, 66 });
+	crouchAnim.PushBack({ 105, 401, 76, 66 });
+	crouchAnim.PushBack({ 180, 401, 76, 66 });
+	crouchAnim.loop = true;
+	crouchAnim.speed = 0.1f;
 
 	//crouch attack animation
 	crouchAttackAnim.PushBack({ 1054, 402, 76, 66 });
@@ -196,10 +179,7 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= jumpPosition.y-72)
 				{
-					if (jumpAttackDelay <= 0)
-					{
-						currentAnimation = &jumpAnim1;
-					}
+					if (jumpAttackDelay <= 0) currentAnimation = &jumpUpAnim;
 					else jumpAttackDelay--;
 					position.y -= 8;
 					collider->SetPos(position.x, position.y - 58); 
@@ -245,7 +225,7 @@ Update_Status ModulePlayer::Update()
 				{
 					if (jumpAttackDelay <= 0)
 					{
-						currentAnimation = &jumpAnim2;
+						currentAnimation = &jumpDownAnim;
 					}
 					else jumpAttackDelay--;
 					position.y += 4.2;
@@ -294,14 +274,16 @@ Update_Status ModulePlayer::Update()
 		{
 			right = true;
 			isWalking = true;
-			currentAnimation = &forwardAnim;
+			if (!isPowerUp) currentAnimation = &walkAnim;
+			else currentAnimation = &walkGunAnim;
 			position.x += speed;
 		}
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && !isColliding && position.x > 20 )
 		{
 			right = false;
 			isWalking = true;
-			currentAnimation = &backwardAnim;
+			if (!isPowerUp) currentAnimation = &walkAnim;
+			else currentAnimation = &walkGunAnim;
 			position.x -= speed;
 		}
 
@@ -351,7 +333,7 @@ Update_Status ModulePlayer::Update()
 				if (position.y >= 68)
 				{
 
-					currentAnimation = &jumpUpAnim;
+					currentAnimation = &jumpUpFloorAnim;
 					currentAnimation->Update();
 					position.y -= 10;
 					collider->SetPos(position.x, position.y - 58);
@@ -367,7 +349,7 @@ Update_Status ModulePlayer::Update()
 				L2 = true;
 				if (position.y >= 68 && position.y <= 95)
 				{
-					currentAnimation = &jumpUpAnim;
+					currentAnimation = &jumpUpFloorAnim;
 					currentAnimation->Update();
 					position.y += speed;
 					collider->SetPos(position.x, position.y - 58);
@@ -397,7 +379,7 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= 67)
 				{
-					currentAnimation = &jumpDownAnim;
+					currentAnimation = &jumpDownFloorAnim;
 					currentAnimation->Update();
 					position.y -= 10;
 					collider->SetPos(position.x, position.y - 58);
@@ -413,7 +395,7 @@ Update_Status ModulePlayer::Update()
 				L2 = false;
 				if (position.y >= 67 && position.y <= 208)
 				{
-					currentAnimation = &jumpDownAnim;
+					currentAnimation = &jumpDownFloorAnim;
 					currentAnimation->Update();
 					position.y += speed;
 					collider->SetPos(position.x, position.y - 58);
@@ -440,11 +422,8 @@ Update_Status ModulePlayer::Update()
 			{
 				right = true;
 				isWalking = true;
-				if (currentAnimation != &crouchForwardAnim)
-				{
-					currentAnimation = &crouchForwardAnim;
-					currentAnimation->Reset();
-				}
+				if (!isPowerUp) currentAnimation = &crouchAnim;
+				else currentAnimation = &crouchGunAnim;
 				position.x += speed;
 			}
 			//crouch left
@@ -452,7 +431,8 @@ Update_Status ModulePlayer::Update()
 			{
 				right = false;
 				isWalking = true;
-				currentAnimation = &crouchBackwardAnim;
+				if (!isPowerUp) currentAnimation = &crouchAnim;
+				else currentAnimation = &crouchGunAnim;
 				position.x -= speed;
 			}
 			//crouch attack
@@ -475,26 +455,21 @@ Update_Status ModulePlayer::Update()
 				else App->particles->shuriken.speed = iPoint(-5, 0);
 				App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
 			}
-			//crouch kick
-			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && enemyNear && !isPowerUp)
+			//crouch kick / crouch katana
+			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && enemyNear)
 			{
 				isKicking = true;
-				currentAnimation = &crouchKickAnim;
+				if(!isPowerUp) currentAnimation = &crouchKickAnim;
+				else currentAnimation = &crouchKatanaAnim;
 				currentAnimation->Reset();
 
 			}
-			//crouch katana
-			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && enemyNear && isPowerUp)
-			{
-				isKicking = true;
-				currentAnimation = &crouchKatanaAnim;
-				currentAnimation->Reset();
 
-			}
 			//crouch idle
 			else if(!isShooting && !isWalking && !isKicking)
 			{
-				currentAnimation = &crouchAnim;
+				if (!isPowerUp) currentAnimation = &crouchIdleAnim;
+				else currentAnimation = &crouchGunAnim;
 			}
 		}
 		
