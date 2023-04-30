@@ -50,13 +50,18 @@ void Hostage::Draw()
 			App->render->Blit(texture, position.x, position.y, SDL_FLIP_NONE, &rect, 1.0f);
 			time++;
 		}
+		if (time == 18)
+		{
+			App->particles->AddParticle(App->particles->bonus500, position.x - 20, position.y - 20, Collider::Type::NONE);
+			time++;
+		}
 	}
 
 }
 
 void Hostage::OnCollision(Collider* collider)
 {
-	App->ui->scoreCounter += 200;
+	App->ui->scoreCounter += 500;
 	App->ui->hostages--;
 	col = true;
 }

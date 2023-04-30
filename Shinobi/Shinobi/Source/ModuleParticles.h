@@ -61,6 +61,7 @@ public:
 	Particle shuriken;
 	Particle enemyshot;
 	Particle hit;
+	Particle bonus500;
 };
 
 #endif // !__MODULEPARTICLES_H__

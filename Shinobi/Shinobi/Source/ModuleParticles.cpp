@@ -43,7 +43,10 @@ bool ModuleParticles::Start()
 	enemyshot.anim.loop = true;
 	enemyshot.anim.speed = 0.3f;
 
-
+	bonus500.anim.PushBack({ 110, 98, 39, 18 });
+	bonus500.anim.PushBack({ 0, 0, 0, 0 });
+	bonus500.anim.loop = false;
+	bonus500.anim.speed = 0.01f;
 
 	return true;
 }
