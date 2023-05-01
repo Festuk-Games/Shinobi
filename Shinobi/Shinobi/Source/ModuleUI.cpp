@@ -68,6 +68,16 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	hi.h = 10;
 	hi.w = 15;
 
+	gameoverRed.x = 1;
+	gameoverRed.y = 69;
+	gameoverRed.h = 17;
+	gameoverRed.w = 136;
+
+	gameoverWhite.x = 1;
+	gameoverWhite.y = 86;
+	gameoverWhite.h = 17;
+	gameoverWhite.w = 136;
+
 	for	(int i = 0; i < 10; i++)
 	{
 		timer[i] = { 1 + 8* i, 1, 7, 14 };
@@ -112,6 +122,7 @@ bool ModuleUI::Start()
 	skill2 = App->textures->Load("Assets/UI/skill2.png");
 	skill3 = App->textures->Load("Assets/UI/skill3.png");
 	nums = App->textures->Load("Assets/UI/nums.png");
+	text2 = App->textures->Load("Assets/UI/text2.png");
 
 	fstream file;
 	file.open("score.txt", ios::in);
@@ -179,6 +190,12 @@ Update_Status ModuleUI::Update()
 	{
 		counter++;
 	}
+
+	if (lose && losecounter <= 8)
+	{
+		losecounter++;
+	}
+	else losecounter = 0;
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -254,6 +271,12 @@ Update_Status ModuleUI::PostUpdate()
 	if (counter <= 80)
 	{
 		App->render->Blit(nums, 110, 110, SDL_FLIP_NONE, &playerReady, 0.0f);
+	}
+
+	if (lose)
+	{
+		if (losecounter <=4) App->render->Blit(text2, 110, 110, SDL_FLIP_NONE, &gameoverRed, 0.0f);
+		else App->render->Blit(text2, 110, 110, SDL_FLIP_NONE, &gameoverWhite, 0.0f);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

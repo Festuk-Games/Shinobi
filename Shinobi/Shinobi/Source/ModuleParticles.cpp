@@ -46,7 +46,7 @@ bool ModuleParticles::Start()
 	bonus500.anim.PushBack({ 110, 98, 39, 18 });
 	bonus500.anim.PushBack({ 0, 0, 0, 0 });
 	bonus500.anim.loop = false;
-	bonus500.anim.speed = 0.01f;
+	bonus500.anim.speed = 0.04f;
 
 	return true;
 }

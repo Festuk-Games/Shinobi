@@ -551,13 +551,18 @@ Update_Status ModulePlayer::Update()
 				currentAnimation->Reset();
 			}
 		}
-		if (App->ui->lifenum >=1 && dietime >= 100)
+		if (App->ui->lifenum >=1 && dietime >= 60)
 		{
 			alive = true;
 			position.x = 30;
 			position.y = 208;
 			App->render->camera.x = 0;
 			dietime=0;
+		}
+		else if (App->ui->lifenum <= 0 && dietime >= 20)
+		{
+			App->ui->lose = true;
+			dietime = 0;
 		}
 		dietime++;
 	}

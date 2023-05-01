@@ -171,6 +171,12 @@ Update_Status ModuleScene::Update()
 
 	}
 
+	if (App->ui->lose)
+	{
+		if (losecounter <= 120) losecounter++;
+		else App->fade->FadeToBlack(this, (Module*)App->intro, true, true, 60);
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 

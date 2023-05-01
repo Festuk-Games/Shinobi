@@ -37,6 +37,7 @@ public:
 	SDL_Texture* skill2 = nullptr;
 	SDL_Texture* skill3 = nullptr;
 	SDL_Texture* nums = nullptr;
+	SDL_Texture* text2 = nullptr;
 
 
 
@@ -71,7 +72,9 @@ public:
 			wscore[10], 
 			h_score[10], 
 			playerReady, 
-			hi;
+			hi,
+			gameoverRed,
+			gameoverWhite;
 
 	int digit = 0;
 	int xpos = 0;
@@ -80,6 +83,9 @@ public:
 	int highScore = 0;
 
 	int counter = 0;
+
+	int losecounter = 0;
+	bool lose = false;
 };
 
 #endif
