@@ -84,6 +84,7 @@
     <ClInclude Include="Hostage.h" />
     <ClInclude Include="Hostage_Hostage.h" />
     <ClInclude Include="InitialScene.h" />
+    <ClInclude Include="LogoScene.h" />
     <ClInclude Include="SceneMission.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleAuxScene.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="Hostage.cpp" />
     <ClCompile Include="Hostage_Hostage.cpp" />
     <ClCompile Include="InitialScene.cpp" />
+    <ClCompile Include="LogoScene.cpp" />
     <ClCompile Include="SceneMission.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleAuxScene.cpp" />

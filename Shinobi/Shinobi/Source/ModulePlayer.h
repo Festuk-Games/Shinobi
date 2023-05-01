@@ -88,7 +88,7 @@ public:
 	bool isWalking = false;
 	bool isCrouching = false;
 	bool alive = true;
-	bool isPowerUp = true;
+	bool isPowerUp = false;
 
 	bool isColliding = false;
 	bool L2 = false;
