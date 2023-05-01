@@ -32,9 +32,11 @@ public:
 
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* logo = nullptr;
+	SDL_Texture* members = nullptr;
 
-	SDL_Rect logorect;
+	Animation membersAnim, membersAnim2;
+	
+	Animation* currentAnimation = nullptr;
 
 	int delay = 0;
 };

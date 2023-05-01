@@ -127,8 +127,12 @@
     <ClInclude Include="Enemy_Fighter.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy_Soldier.h" />
-    <ClInclude Include="LogoScene.h" />
+    <ClInclude Include="Enemy_Soldier.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="LogoScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -219,10 +223,10 @@
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Enemy_Soldier.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="LogoScene.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

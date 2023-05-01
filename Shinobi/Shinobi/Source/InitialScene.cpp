@@ -10,7 +10,27 @@
 
 InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 {
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			membersAnim.PushBack({ 384*j + 5*j, 224*i + 5*i, 384, 224 });
+		}
+	}
 
+	for (int i = 2; i < 4; i++) 
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			membersAnim2.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
+		}
+	}
+
+	membersAnim.speed = 0.2f;
+	membersAnim.loop = false;
+	membersAnim2.speed = 0.2f;
+	membersAnim2.loop = false;
+	currentAnimation = &membersAnim;
 }
 
 InitialScene::~InitialScene()
@@ -25,7 +45,7 @@ bool InitialScene::Start()
 
 	bool ret = true;
 
-	logo = App->textures->Load("Assets/festuk_logo.png");
+	members = App->textures->Load("Assets/names_intro.png");
 	
 	/*App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);*/
 
@@ -37,8 +57,11 @@ bool InitialScene::Start()
 
 Update_Status InitialScene::Update()
 {
+	if (delay <= 100) currentAnimation = &membersAnim;
+	else currentAnimation = &membersAnim2;
+	currentAnimation->Update();
 	delay++;
-	if (delay >= 40) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
+	if (delay >= 220) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -47,7 +70,9 @@ Update_Status InitialScene::Update()
 Update_Status InitialScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(logo, 0, 0, SDL_FLIP_NONE, NULL);
+
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	App->render->Blit(members, 0, 0, SDL_FLIP_NONE, &rect);
 
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -55,7 +80,7 @@ Update_Status InitialScene::PostUpdate()
 
 bool InitialScene::CleanUp()
 {
-	App->textures->Unload(logo);
+	App->textures->Unload(members);
 
 	return true;
 }

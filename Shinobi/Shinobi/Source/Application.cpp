@@ -30,7 +30,7 @@ Application::Application()
 	modules[2] = textures = new ModuleTextures(true);
 
 	modules[3] = logo = new LogoScene(true);
-	modules[4] = initial = new InitialScene(true);
+	modules[4] = initial = new InitialScene(false);
 	modules[5] = intro = new SceneIntro(false);
 	modules[6] = mission = new SceneMission(false);
 
