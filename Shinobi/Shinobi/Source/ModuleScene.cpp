@@ -134,6 +134,8 @@ bool ModuleScene::Start()
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208 - 29);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
 
+	App->ui->lose = false;
+
 	return ret;
 }
 

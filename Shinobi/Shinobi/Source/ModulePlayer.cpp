@@ -98,10 +98,10 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	shootAnim.speed = 0.1f;
 
 	//die animation
-	dieAnim1.PushBack({ 99,650,42,44 });
-	dieAnim2.PushBack({ 147,650,42,44 });
-	dieAnim2.PushBack({ 194,650,62,44 });
-	dieAnim2.PushBack({ 262,650,72,44 });
+	dieAnim1.PushBack({ 798,593,76,66 });
+	dieAnim2.PushBack({ 873,593,76,66 });
+	dieAnim2.PushBack({ 948,593,76,66 });
+	dieAnim2.PushBack({ 1023,593,76,66 });
 	dieAnim1.loop = false;
 	dieAnim1.speed = 0.05f;
 	dieAnim2.loop = false;
@@ -152,6 +152,8 @@ bool ModulePlayer::Start()
 	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, this);
 	enemyNearCollider = App->collisions->AddCollider({ position.x-50, position.y, 135, 58 }, Collider::Type::ENEMY_NEAR, this);
+
+	App->ui->lifenum = 2;
 
 	return ret;
 } 
@@ -558,6 +560,7 @@ Update_Status ModulePlayer::Update()
 			position.y = 208;
 			App->render->camera.x = 0;
 			dietime=0;
+			diePos = false;
 		}
 		else if (App->ui->lifenum <= 0 && dietime >= 20)
 		{
