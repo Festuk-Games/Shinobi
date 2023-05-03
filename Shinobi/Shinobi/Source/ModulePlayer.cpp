@@ -19,9 +19,6 @@ using namespace std;
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
-	//initial position
-	position.x = 30;
-	position.y = 208;
 
 	// idle animation
 	idleAnim.PushBack({211, 116, 76, 66});
@@ -147,6 +144,10 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 
 	bool ret = true;
+	
+	//initial position
+	position.x = 30;
+	position.y = 208;
 	currentAnimation = &idleAnim;
 	texture = App->textures->Load("Assets/main.png"); 
 	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
@@ -304,18 +305,19 @@ Update_Status ModulePlayer::Update()
 			else
 			{
 				currentAnimation = &katanaAnim;
+				currentAnimation->Reset();
 			}
 		
 		}
 		//jumping to second floor input
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching)
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching && !L2)
 		{
 			isJumpingUp1 = true;
 			currentAnimation = &backAnim;
 
 		}
 		//jumping to first floor input
-		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && !isWalking && !isCrouching)
+		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && !isWalking && !isCrouching && L2)
 		{
 			isJumpingDown1 = true;
 			currentAnimation = &backAnim;
