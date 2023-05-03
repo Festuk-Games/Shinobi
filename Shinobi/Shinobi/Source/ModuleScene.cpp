@@ -135,6 +135,7 @@ bool ModuleScene::Start()
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
 
 	App->ui->lose = false;
+	nextStage = false;
 
 	return ret;
 }
@@ -147,8 +148,7 @@ Update_Status ModuleScene::Update()
 	{
 		if (App->player->position.x >= 2000)
 		{
-			App->fade->FadeToBlack(this, (Module*)App->intro, true, false, 60);
-			nextStage = false;
+			App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
 			//stage1 = false;
 			//stage2 = true;
 			//App->player->position.x = 30;
@@ -177,7 +177,7 @@ Update_Status ModuleScene::Update()
 	if (App->ui->lose)
 	{
 		if (losecounter <= 120) losecounter++;
-		else App->fade->FadeToBlack(this, (Module*)App->intro, true, false, 60);
+		else App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
