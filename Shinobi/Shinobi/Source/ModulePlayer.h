@@ -105,6 +105,8 @@ public:
 	iPoint flipPos;
 
 	int jumpAttackDelay = 0;
+
+	bool canjump = true;
 };
 
 #endif //!__MODULE_PLAYER_H__

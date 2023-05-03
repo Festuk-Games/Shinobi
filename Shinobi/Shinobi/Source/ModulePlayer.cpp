@@ -322,14 +322,14 @@ Update_Status ModulePlayer::Update()
 		
 		}
 		//jumping to second floor input
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching && !L2)
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching && !L2 && canjump)
 		{
 			isJumpingUp1 = true;
 			currentAnimation = &backAnim;
 
 		}
 		//jumping to first floor input
-		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && !isWalking && !isCrouching && L2)
+		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && !isWalking && !isCrouching && L2 && canjump)
 		{
 			isJumpingDown1 = true;
 			currentAnimation = &backAnim;
@@ -549,6 +549,21 @@ Update_Status ModulePlayer::Update()
 			isKicking = false;
 			currentAnimation = &idleAnim;
 		}
+
+
+		if (position.x >= 90 && position.x <= 360|| position.x >= 380 && position.x <= 500 || position.x >= 560 && position.x <= 1020)
+		{
+			canjump = true;
+		}
+		else
+		{
+			canjump = false;
+		}
+
+
+
+
+
 	}
 	else
 	{	//die
