@@ -50,7 +50,7 @@ void Enemy::Draw()
 		}
 		else
 		{
-			App->render->Blit(texture, position.x, position.y, SDL_FLIP_HORIZONTAL, &(currentAnim->GetCurrentFrame()));
+			App->render->Blit(texture, flipPos.x, position.y, SDL_FLIP_HORIZONTAL, &(currentAnim->GetCurrentFrame()));
 		}
 	}
 

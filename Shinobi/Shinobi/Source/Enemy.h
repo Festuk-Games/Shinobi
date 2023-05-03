@@ -35,6 +35,8 @@ public:
 	// The current position in the world
 	iPoint position;
 
+	iPoint flipPos;
+
 	// The enemy's texture
 	SDL_Texture* texture = nullptr;
 

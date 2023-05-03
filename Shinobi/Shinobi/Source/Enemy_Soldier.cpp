@@ -44,6 +44,7 @@ Enemy_Soldier::Enemy_Soldier(int x, int y) : Enemy(x, y)
 
 void Enemy_Soldier::Update()
 {
+	flipPos.x = position.x + 20;
 	std::cout << position.x << std::endl;
 	if (!die)
 	{

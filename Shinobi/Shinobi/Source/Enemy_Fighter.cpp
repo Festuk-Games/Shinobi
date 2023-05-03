@@ -41,39 +41,38 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x, position.y, 35, 64}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 25, position.y, 35, 64}, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
 }
 
 void Enemy_Fighter::Update()
 {
+	flipPos.x = position.x + 20;
 	std::cout << position.x << std::endl;
 	if (!die)
 	{
 		//walk right
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0)
 		{
-			shot++;
-			if (shot >= 100)
-			{
-				currentAnim = &hitAnim;
-				currentAnim->Reset();
-				App->audio->PlayFx(App->audio->shuriken);
-				shot = 0;
-				shooting = true;
-			}
-			else if (position.x != App->player->position.x && !shooting && !reloading)
+			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
 				flip = true;
 				shot++;
 
-				if (position.x - App->player->position.x >= (pdistance - 170))
+				if (position.x - App->player->position.x >= pdistance - 175)
 				{
 					currentAnim = &walkAnim;
 					position.x--;
 				}
-				 
+				else if (shot >= 100)
+				{
+					currentAnim = &hitAnim;
+					currentAnim->Reset();
+					App->audio->PlayFx(App->audio->shuriken);
+					shot = 0;
+					shooting = true;
+				}
 				else currentAnim = &idleAnim;
 
 				pl = true;
@@ -86,30 +85,31 @@ void Enemy_Fighter::Update()
 				else changedirection = false;
 
 			}
-			
+
 		}
 		//walk left
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0)
 		{
-			shot++;
-			if (shot >= 100)
+			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
-				currentAnim = &hitAnim;
-				currentAnim->Reset();
-				App->audio->PlayFx(App->audio->shuriken);
-				shot = 0;
-				shooting = true;
-			}
-			else if (position.x != App->player->position.x && !shooting && !reloading)
-			{
+
+				shot++;
+
 				flip = false;
 
-				if (position.x - App->player->position.x <= -(pdistance - 170))
+				if (position.x - App->player->position.x <= -(pdistance - 140))
 				{
 					currentAnim = &walkAnim;
 					position.x++;
 				}
-				 
+				else if (shot >= 100)
+				{
+					currentAnim = &hitAnim;
+					currentAnim->Reset();
+					App->audio->PlayFx(App->audio->shuriken);
+					shot = 0;
+					shooting = true;
+				}
 				else currentAnim = &idleAnim;
 
 				pl = true;
@@ -121,6 +121,7 @@ void Enemy_Fighter::Update()
 					flip = false;
 				}
 			}
+
 		}
 		//walk path
 		else if (!pl && !reloading && !shooting)
@@ -173,7 +174,7 @@ void Enemy_Fighter::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x, position.y);
+		collider->SetPos(position.x + 25, position.y);
 	}
 	else if (die) {
 		currentAnim = &dieAnim;
