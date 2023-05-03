@@ -197,7 +197,8 @@ Update_Status ModulePlayer::Update()
 					}
 					if (position.y <= 97)
 					{
-						App->render->camera.y+=speed;
+						App->render->camera.y+=8;
+						App->render->jumpcam+=2;
 					}
 					if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN)
 					{
@@ -242,9 +243,10 @@ Update_Status ModulePlayer::Update()
 					{
 						position.x -= speed;
 					}
-					if (position.y <= 97)
+					if (position.y <= 97 && App->render->jumpcam >= 1)
 					{
-						App->render->camera.y-=speed;
+						App->render->camera.y-=4;
+						App->render->jumpcam--;
 					}
 					if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN)
 					{
@@ -263,12 +265,6 @@ Update_Status ModulePlayer::Update()
 						jumpAttackDelay+=5;
 					}
 				}
-				//if (position.y == 208)
-				//{
-				//	isJumping = false;
-				//	jumpState = false;
-				//	currentAnimation = &idleAnim;
-				//}
 			}
 			currentAnimation->Update();
 			return Update_Status::UPDATE_CONTINUE;
