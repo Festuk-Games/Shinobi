@@ -38,13 +38,14 @@ Enemy_Soldier::Enemy_Soldier(int x, int y) : Enemy(x, y)
 
 	//colliders
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 63}, Collider::Type::ENEMY, (Module*)App->enemies);
+	attack = App->collisions->AddCollider({ position.x, position.y + 30, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
 }
 
 void Enemy_Soldier::Update()
 {
-	flipPos.x = position.x + 20;
+	flipPos.x = position.x -15;
 	std::cout << position.x << std::endl;
 	if (!die)
 	{
@@ -56,7 +57,7 @@ void Enemy_Soldier::Update()
 				flip = true;
 				shot++;
 
-				if (position.x - App->player->position.x >= pdistance - 170)
+				if (position.x - App->player->position.x >= pdistance - 160)
 				{
 					currentAnim = &walkAnim;
 					position.x--;
@@ -65,12 +66,18 @@ void Enemy_Soldier::Update()
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
+					attack->rect.w = 10;
+					attack->rect.h = 10;
+					attack->SetPos(position.x, position.y + 30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
 				}
-				else currentAnim = &idleAnim;
-
+				else {
+					currentAnim = &idleAnim;
+					attack->rect.w = 0;
+					attack->rect.h = 0;
+				}
 				pl = true;
 
 				if (position.x <= pos2)
@@ -93,7 +100,7 @@ void Enemy_Soldier::Update()
 
 				flip = false;
 
-				if (position.x - App->player->position.x <= -(pdistance - 170))
+				if (position.x - App->player->position.x <= -(pdistance - 180))
 				{
 					currentAnim = &walkAnim;
 					position.x++;
@@ -102,12 +109,18 @@ void Enemy_Soldier::Update()
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
+					attack->rect.w = 10;
+					attack->rect.h = 10;
+					attack->SetPos(position.x + 25, position.y + 30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
 				}
-				else currentAnim = &idleAnim;
-
+				else {
+					currentAnim = &idleAnim;
+					attack->rect.w = 0;
+					attack->rect.h = 0;
+				}
 				pl = true;
 
 				if (position.x >= pos2) changedirection = true;

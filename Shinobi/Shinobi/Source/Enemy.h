@@ -51,6 +51,7 @@ protected:
 
 	// The enemy's collider
 	Collider* collider = nullptr;
+	Collider* attack = nullptr;
 	Collider* feet = nullptr;
 
 	// Original spawn position. Stored for movement calculations

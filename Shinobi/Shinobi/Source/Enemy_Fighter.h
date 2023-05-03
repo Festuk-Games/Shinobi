@@ -39,7 +39,7 @@ private:
 	bool changedirection = true;
 
 	bool pl = false;
-
+	int hitTimer = 0;
 	int pos1 = 500, pos2 = 650;
 	int pdistance = 200;
 	int shot = 0;
