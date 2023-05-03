@@ -78,6 +78,11 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	gameoverWhite.h = 17;
 	gameoverWhite.w = 136;
 
+	nextstage.x = 0;
+	nextstage.y = 91;
+	nextstage.h = 10;
+	nextstage.w = 111;
+
 	for	(int i = 0; i < 10; i++)
 	{
 		timer[i] = { 1 + 8* i, 1, 7, 14 };
@@ -126,11 +131,13 @@ bool ModuleUI::Start()
 
 	fstream file;
 	file.open("score.txt", ios::in);
-
 	file >> highScore;
 	cout << highScore;
-
 	file.close();
+
+	nextCounter = 0;
+	counter = 0;
+	nextframe = 0;
 
 	return ret;
 }
@@ -186,16 +193,17 @@ Update_Status ModuleUI::Update()
 		file.close();
 	}
 
-	if (counter <= 80)
-	{
-		counter++;
-	}
+	if (counter <= 80) counter++;
 
-	if (lose && losecounter <= 8)
-	{
-		losecounter++;
-	}
+	if (lose && losecounter <= 8) losecounter++;
 	else losecounter = 0;
+
+	if (App->scene->nextStage && nextCounter <= 80) nextCounter++;
+	if (App->scene->nextStage && nextframe <= 10) nextframe++;
+	else nextframe = 0;
+
+
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -277,6 +285,14 @@ Update_Status ModuleUI::PostUpdate()
 	{
 		if (losecounter <=4) App->render->Blit(text2, 110, 110, SDL_FLIP_NONE, &gameoverRed, 0.0f);
 		else App->render->Blit(text2, 110, 110, SDL_FLIP_NONE, &gameoverWhite, 0.0f);
+	}
+
+	if (App->scene->nextStage)
+	{
+		if (nextCounter <= 80)
+		{
+			if (nextframe <= 5) App->render->Blit(nums, 140, 60, SDL_FLIP_NONE, &nextstage, 0.0f);
+		}
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

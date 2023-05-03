@@ -74,7 +74,8 @@ public:
 			playerReady, 
 			hi,
 			gameoverRed,
-			gameoverWhite;
+			gameoverWhite,
+			nextstage;
 
 	int digit = 0;
 	int xpos = 0;
@@ -86,6 +87,9 @@ public:
 
 	int losecounter = 0;
 	bool lose = false;
+
+	int nextCounter = 0, nextframe = 0;
+
 };
 
 #endif
