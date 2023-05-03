@@ -150,6 +150,7 @@ bool ModulePlayer::Start()
 	position.y = 208;
 	currentAnimation = &idleAnim;
 	texture = App->textures->Load("Assets/main.png"); 
+	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
 	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, this);
 	enemyNearCollider = App->collisions->AddCollider({ position.x-50, position.y, 135, 58 }, Collider::Type::ENEMY_NEAR, this);
@@ -298,11 +299,26 @@ Update_Status ModulePlayer::Update()
 				else App->particles->shuriken.speed = iPoint(-5, 0);
 				App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
 			}
-			else
+			else if(enemyNear)
 			{
 				currentAnimation = &katanaAnim;
 				currentAnimation->Reset();
+				if (right)
+				{
+					katana->rect.w = 20;
+					katana->rect.h = 20;
+					katana->SetPos(position.x+55, position.y - 50);
+				}
+				else
+				{
+					katana->rect.w = 20;
+					katana->rect.h = 20;
+					katana->SetPos(position.x-20, position.y - 50);
+				}
+				/*katana->rect.w = 0;
+				katana->rect.h = 0;*/
 			}
+			
 		
 		}
 		//jumping to second floor input
@@ -460,8 +476,16 @@ Update_Status ModulePlayer::Update()
 			{
 				isKicking = true;
 				if(!isPowerUp) currentAnimation = &crouchKickAnim;
-				else currentAnimation = &crouchKatanaAnim;
-				currentAnimation->Reset();
+				else {
+					currentAnimation = &crouchKatanaAnim;
+					currentAnimation->Reset();
+					/*katana->rect.w = 10;
+					katana->rect.h = 20;
+					katana->SetPos(position.x, position.y);*/
+				}
+				/*katana->rect.w = 0;
+				katana->rect.h = 0;*/
+
 
 			}
 
