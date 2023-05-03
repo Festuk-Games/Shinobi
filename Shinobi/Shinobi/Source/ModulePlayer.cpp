@@ -310,14 +310,14 @@ Update_Status ModulePlayer::Update()
 		
 		}
 		//jumping to second floor input
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching)
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching && !L2)
 		{
 			isJumpingUp1 = true;
 			currentAnimation = &backAnim;
 
 		}
 		//jumping to first floor input
-		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && !isWalking && !isCrouching)
+		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && !isWalking && !isCrouching && L2)
 		{
 			isJumpingDown1 = true;
 			currentAnimation = &backAnim;
