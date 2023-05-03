@@ -81,6 +81,9 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	App->ui->lose = false;
+	nextStage = false;
+
 	//enable modules
 	App->player->Enable();
 	App->hostage->Enable();
@@ -93,12 +96,12 @@ bool ModuleScene::Start()
 	if (stage1)
 	{
 		stageTexture = App->textures->Load("Assets/layer_a.png");
-		stageTextureL2 = App->textures->Load("Assets/layer_aa.png");
+		//stageTextureL2 = App->textures->Load("Assets/layer_aa.png");
 		skyTexture = App->textures->Load("Assets/layer_b.png");
-		stageTexture2 = App->textures->Load("Assets/layer_a1.png");
+		/*stageTexture2 = App->textures->Load("Assets/layer_a1.png");
 		skyTexture2 = App->textures->Load("Assets/layer_b1.png");
 		stageTexture3 = App->textures->Load("Assets/layer_a2.png");
-		skyTexture3 = App->textures->Load("Assets/layer_b2.png");
+		skyTexture3 = App->textures->Load("Assets/layer_b2.png");*/
 
 		App->collisions->AddCollider({ 420, 175, 26, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 704, 175, 32, 1 }, Collider::Type::GROUND);
@@ -133,9 +136,6 @@ bool ModuleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 130);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208 - 29);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
-
-	App->ui->lose = false;
-	nextStage = false;
 
 	return ret;
 }
@@ -226,6 +226,7 @@ bool ModuleScene::CleanUp()
 	App->ui->Disable();
 	App->collisions->Disable();
 	App->particles->Disable();
-
+	App->textures->Unload(skyTexture);
+	App->textures->Unload(stageTexture);
 	return true;
 }

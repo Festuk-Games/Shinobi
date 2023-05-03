@@ -106,7 +106,6 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	}
 
 	scoreCounter = 0;
-
 }
 
 ModuleUI::~ModuleUI()
@@ -138,6 +137,7 @@ bool ModuleUI::Start()
 	nextCounter = 0;
 	counter = 0;
 	nextframe = 0;
+	hostages = 2;
 
 	return ret;
 }
