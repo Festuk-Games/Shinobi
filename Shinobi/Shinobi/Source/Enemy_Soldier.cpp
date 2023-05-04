@@ -32,6 +32,8 @@ Enemy_Soldier::Enemy_Soldier(int x, int y) : Enemy(x, y)
 
 	dieAnim.PushBack({ 199,29,48,62 });
 	dieAnim.PushBack({ 246,29,48,62 });
+	dieAnim.PushBack({ 246,29,48,62 });
+	dieAnim.PushBack({ 0,0,0,0 });
 	dieAnim.speed = 0.08f;
 	dieAnim.loop = false;
 
@@ -77,6 +79,7 @@ void Enemy_Soldier::Update()
 					currentAnim = &idleAnim;
 					attack->rect.w = 0;
 					attack->rect.h = 0;
+					attack->SetPos(0, 0);
 				}
 				pl = true;
 
@@ -120,6 +123,7 @@ void Enemy_Soldier::Update()
 					currentAnim = &idleAnim;
 					attack->rect.w = 0;
 					attack->rect.h = 0;
+					attack->SetPos(0, 0);
 				}
 				pl = true;
 
