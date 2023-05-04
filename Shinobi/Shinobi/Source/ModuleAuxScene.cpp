@@ -24,36 +24,36 @@ ModuleAuxScene::ModuleAuxScene(bool startEnabled) : Module(startEnabled)
 	}
 
 	//stage2 rects
-	if (stage2)
-	{
-		// ground
-		ground.x = 0;
-		ground.y = 0;
-		ground.w = 2048;
-		ground.h = 512;
+	//if (stage2)
+	//{
+	//	// ground
+	//	ground.x = 0;
+	//	ground.y = 0;
+	//	ground.w = 2048;
+	//	ground.h = 512;
 
-		//sky
-		sky.x = 0;
-		sky.y = 0;
-		sky.w = 1312;
-		sky.h = 512;
-	}
+	//	//sky
+	//	sky.x = 0;
+	//	sky.y = 0;
+	//	sky.w = 1312;
+	//	sky.h = 512;
+	//}
 
-	//stage3 rects
-	if (stage3)
-	{
-		// ground
-		ground.x = 0;
-		ground.y = 0;
-		ground.w = 512;
-		ground.h = 256;
+	////stage3 rects
+	//if (stage3)
+	//{
+	//	// ground
+	//	ground.x = 0;
+	//	ground.y = 0;
+	//	ground.w = 512;
+	//	ground.h = 256;
 
-		//sky
-		sky.x = 0;
-		sky.y = 0;
-		sky.w = 512;
-		sky.h = 256;
-	}
+	//	//sky
+	//	sky.x = 0;
+	//	sky.y = 0;
+	//	sky.w = 512;
+	//	sky.h = 256;
+	//}
 }
 
 ModuleAuxScene::~ModuleAuxScene()

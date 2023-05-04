@@ -60,6 +60,7 @@ public:
 
 	int powerup = 0;
 
+
 private:
 	// Spawns a new hostage using the data from the queue
 	void SpawnHostage(const HostageSpawnpoint& info);

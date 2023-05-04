@@ -14,6 +14,7 @@ using namespace std;
 
 #include "SceneIntro.h"
 #include "ModuleScene.h"
+#include "ModuleUI.h"
 
 ModuleRender::ModuleRender(bool startEnabled) : Module(startEnabled)
 {
@@ -76,6 +77,11 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN)
 	{
 		App->scene->clear = true;
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F5] == KEY_DOWN)
+	{
+		App->ui->lose = true;
 	}
 
 	//Handle horizontal movement of the camera
