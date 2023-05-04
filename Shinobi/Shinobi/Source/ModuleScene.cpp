@@ -104,13 +104,14 @@ bool ModuleScene::Start()
 		stageTexture3 = App->textures->Load("Assets/Scenes/layer_a2.png");
 		skyTexture3 = App->textures->Load("Assets/Scenes/layer_b2.png");*/
 
-		App->collisions->AddCollider({ 420, 175, 26, 1 }, Collider::Type::GROUND);
+		App->collisions->AddCollider({ 419, 175, 28, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 704, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 864, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 1408, 143, 32, 1 }, Collider::Type::GROUND);
-		/*App->collisions->AddCollider({ 1408, 175, 32, 1 }, Collider::Type::GROUND);*/
+		App->collisions->AddCollider({ 1408, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 1440, 175, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 1472, 175, 32, 1 }, Collider::Type::GROUND);
+		App->collisions->AddCollider({ 544, 63, 32, 1 }, Collider::Type::GROUND);
 
 		App->collisions->AddCollider({ 416, 176, 32, 32 }, Collider::Type::BOX);
 		App->collisions->AddCollider({ 704, 176, 32, 32 }, Collider::Type::BOX);
@@ -120,7 +121,7 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1440, 176, 32, 32 }, Collider::Type::BOX);
 		App->collisions->AddCollider({ 1472, 176, 32, 32 }, Collider::Type::BOX);
 
-		App->collisions->AddCollider({ 544, 64, 32, 32 }, Collider::Type::WALL);
+		//App->collisions->AddCollider({ 544, 64, 32, 32 }, Collider::Type::WALL);
 
 		App->collisions->AddCollider({ 0, 207, 2048, 2 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 96, 95, 992, 7 }, Collider::Type::GROUND);
@@ -132,11 +133,19 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
 	}
 
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 550, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 850, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1600, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 350, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 500, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1800, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 130);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 200, 208 - 29);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 300, 208 - 29);
+	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 1200, 130);
+
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 800, 208 - 29);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1200, 208 - 29);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
 
 	return ret;
 }
