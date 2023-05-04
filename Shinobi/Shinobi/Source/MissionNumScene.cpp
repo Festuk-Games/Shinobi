@@ -46,6 +46,7 @@ MissionNumScene::MissionNumScene(bool startEnabled) : Module(startEnabled)
 
 	missionAnim.speed = 0.2f;
 	missionAnim.loop = false;
+
 }
 
 MissionNumScene::~MissionNumScene()
@@ -67,7 +68,12 @@ bool MissionNumScene::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	counter = 0;
+	changescene = 0;
+	writefx = 10;
+
 	currentAnim = &missionAnim;
+	currentAnim->Reset();
 	return ret;
 }
 

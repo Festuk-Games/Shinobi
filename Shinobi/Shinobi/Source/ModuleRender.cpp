@@ -60,13 +60,13 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
-	//Handle positive vertical movement
-	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
-		camera.y += cameraSpeed;
+	////Handle positive vertical movement
+	//if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
+	//	camera.y += cameraSpeed;
 
-	//Handle negative vertical movement
-	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
-		camera.y -= cameraSpeed;
+	////Handle negative vertical movement
+	//if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
+	//	camera.y -= cameraSpeed;
 
 	if (App->input->keys[SDL_SCANCODE_F2]== KEY_DOWN)
 		posiciones = !posiciones;
@@ -80,7 +80,7 @@ Update_Status ModuleRender::Update()
 
 	//Handle horizontal movement of the camera
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
 	{	
 		if (camera.x >= -4980)
 		{
@@ -91,7 +91,7 @@ Update_Status ModuleRender::Update()
 		}
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+	else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE)
 	{
 		if (camera.x <= -1)
 		{

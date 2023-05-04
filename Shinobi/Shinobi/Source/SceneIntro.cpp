@@ -80,6 +80,23 @@ bool SceneIntro::Start()
 	logopos.y = 100;*/
 
 	currentAnimation = &lightAnim;
+	currentAnimation->Reset();
+
+	delay = 0;
+	counter = 0;
+
+	for (int i = 0; i <= 5; i++)
+	{
+		if (logos[i].radius >= 0 && delay >= i * 3)
+		{
+			logos[i].time = 0;
+
+			logos[i].radius = 150.0f;
+			logos[i].logopos.x = logos[i].centerX;
+			logos[i].logopos.y = logos[i].centerY;
+
+		}
+	}
 
 	return ret;
 }
@@ -94,7 +111,7 @@ Update_Status SceneIntro::Update()
 
 	delay++;
 
-	for (size_t i = 0; i <= 5; i++)
+	for (int i = 0; i <= 5; i++)
 	{
 		if (logos[i].radius >= 0 && delay >= i*3)
 		{

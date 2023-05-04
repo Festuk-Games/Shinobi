@@ -150,6 +150,8 @@ bool ModulePlayer::Start()
 	position.y = 208;
 	App->ui->lifenum = 2;
 	currentAnimation = &idleAnim;
+	currentAnimation->Reset();
+
 	texture = App->textures->Load("Assets/main.png"); 
 	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
 	collider = App->collisions->AddCollider({ position.x+5, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);

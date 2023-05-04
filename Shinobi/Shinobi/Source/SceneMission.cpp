@@ -33,6 +33,9 @@ bool SceneMission::Start()
 	mission1_0 = App->textures->Load("Assets/Scenes/mission1_0.png");
 	mission1_1 = App->textures->Load("Assets/Scenes/mission1_1.png");
 
+	timer = 0;
+	changescene = 0;
+
 	return ret;
 }
 
