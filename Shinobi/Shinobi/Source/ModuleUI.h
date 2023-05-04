@@ -75,7 +75,8 @@ public:
 			hi,
 			gameoverRed,
 			gameoverWhite,
-			nextstage;
+			nextstage,
+			clear;
 
 	int digit = 0;
 	int xpos = 0;

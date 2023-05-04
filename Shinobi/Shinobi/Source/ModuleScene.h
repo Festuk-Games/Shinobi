@@ -57,6 +57,8 @@ public:
 
 	int losecounter = 0;
 
+	bool clear = false;
+	int clearcount = 0;
 };
 
 #endif

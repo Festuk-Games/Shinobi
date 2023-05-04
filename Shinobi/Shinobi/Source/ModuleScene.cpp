@@ -83,6 +83,7 @@ bool ModuleScene::Start()
 
 	App->ui->lose = false;
 	nextStage = false;
+	clear = false;
 
 	//enable modules
 	App->player->Enable();
@@ -95,13 +96,13 @@ bool ModuleScene::Start()
 
 	if (stage1)
 	{
-		stageTexture = App->textures->Load("Assets/layer_a.png");
-		//stageTextureL2 = App->textures->Load("Assets/layer_aa.png");
-		skyTexture = App->textures->Load("Assets/layer_b.png");
-		/*stageTexture2 = App->textures->Load("Assets/layer_a1.png");
-		skyTexture2 = App->textures->Load("Assets/layer_b1.png");
-		stageTexture3 = App->textures->Load("Assets/layer_a2.png");
-		skyTexture3 = App->textures->Load("Assets/layer_b2.png");*/
+		stageTexture = App->textures->Load("Assets/Scenes/layer_a.png");
+		//stageTextureL2 = App->textures->Load("Assets/Scenes/layer_aa.png");
+		skyTexture = App->textures->Load("Assets/Scenes/layer_b.png");
+		/*stageTexture2 = App->textures->Load("Assets/Scenes/layer_a1.png");
+		skyTexture2 = App->textures->Load("Assets/Scenes/layer_b1.png");
+		stageTexture3 = App->textures->Load("Assets/Scenes/layer_a2.png");
+		skyTexture3 = App->textures->Load("Assets/Scenes/layer_b2.png");*/
 
 		App->collisions->AddCollider({ 420, 175, 26, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 704, 175, 32, 1 }, Collider::Type::GROUND);
@@ -148,7 +149,9 @@ Update_Status ModuleScene::Update()
 	{
 		if (App->player->position.x >= 2000)
 		{
-			App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
+			clear = true;
+			clearcount++;
+			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
 			//stage1 = false;
 			//stage2 = true;
 			//App->player->position.x = 30;

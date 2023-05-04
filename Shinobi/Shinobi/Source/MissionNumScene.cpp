@@ -76,9 +76,9 @@ Update_Status MissionNumScene::Update()
 	currentAnim->Update();
 
 	changescene++;
-	if (changescene >= 200)
+	if (changescene >= 180)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->mission, false, true, 40);
+		App->fade->FadeToBlack(this, (Module*)App->mission, true, false, 50);
 	}
 
 	if (counter <= 8) counter++;

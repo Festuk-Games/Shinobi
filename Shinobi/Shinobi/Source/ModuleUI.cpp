@@ -83,6 +83,11 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	nextstage.h = 10;
 	nextstage.w = 111;
 
+	clear.x = 0;
+	clear.y = 103;
+	clear.h = 10;
+	clear.w = 88;
+
 	for	(int i = 0; i < 10; i++)
 	{
 		timer[i] = { 1 + 8* i, 1, 7, 14 };
@@ -295,5 +300,9 @@ Update_Status ModuleUI::PostUpdate()
 		}
 	}
 
+	if (App->scene->clear)
+	{
+		App->render->Blit(nums, 140, 60, SDL_FLIP_NONE, &clear, 0.0f);
+	}
 	return Update_Status::UPDATE_CONTINUE;
 }

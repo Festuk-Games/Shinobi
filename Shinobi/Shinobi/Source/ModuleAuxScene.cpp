@@ -68,7 +68,7 @@ bool ModuleAuxScene::Start()
 
 	bool ret = true;
 
-	stageTextureL2 = App->textures->Load("Assets/layer_aa.png");
+	stageTextureL2 = App->textures->Load("Assets/Scenes/layer_aa.png");
 	
 	return ret;
 }
