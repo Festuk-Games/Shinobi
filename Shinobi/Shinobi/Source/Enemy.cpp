@@ -7,6 +7,7 @@
 #include "ModuleRender.h"
 #include "Enemy_Gunner.h"
 #include "ModuleUI.h"
+#include "ModuleEnemies.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {
@@ -37,7 +38,9 @@ void Enemy::Update()
 		position.y++;
 	}
 
-	ground = false;
+	if (!die) ground = false;
+	else ground = true;
+	
 }
 
 void Enemy::Draw()
