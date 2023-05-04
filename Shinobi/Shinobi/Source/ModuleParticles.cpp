@@ -32,6 +32,9 @@ bool ModuleParticles::Start()
 	shuriken.anim.loop = true;
 	shuriken.anim.speed = 0.2f;
 
+	patada.anim.PushBack ({0, 0, 0, 0}) ;
+
+
 	hit.anim.PushBack({ 202, 12, 24, 18 });
 	hit.anim.PushBack({ 225, 12, 24, 18 });
 	hit.anim.PushBack({ 248, 12, 24, 18 });
@@ -119,7 +122,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 			//Adding the particle's collider
 			
 			if (colliderType == Collider::Type::ENEMY_SHOT) {
-				p->collider = App->collisions->AddCollider({ 0,0,1,1 }, colliderType, this);
+				p->collider = App->collisions->AddCollider({ 0,0,5,5 }, colliderType, this);
 			}
 			else if (colliderType != Collider::Type::NONE)
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);
