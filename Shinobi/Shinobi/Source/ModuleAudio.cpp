@@ -42,6 +42,7 @@ bool ModuleAudio::Init()
 	}
 	
 	shuriken = LoadFx("Audio/FX/Shuriken.wav");
+	write = LoadFx("Audio/FX/write.wav");
 
 	return ret;
 }

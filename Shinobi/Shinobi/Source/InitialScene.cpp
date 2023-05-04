@@ -56,13 +56,37 @@ bool InitialScene::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	writefx = 0;
 	return ret;
 }
 
 Update_Status InitialScene::Update()
 {
+	if (writefx <= 23 && delay <= 300)
+	{
+		if (aux == 10)
+		{
+			App->audio->PlayFx(App->audio->write);
+			aux = 0;
+			writefx++;
+		}
+		aux++;
+	}
+	else if (writefx <= 16)
+	{
+		if (aux == 10)
+		{
+			App->audio->PlayFx(App->audio->write);
+			aux = 0;
+			writefx++;
+		}
+		aux++;
+	}
 
-	if (delay <= 300) currentAnimation = &infoAnim;
+	
+	if (delay == 306) writefx = 0;
+
+	if (delay <= 300)currentAnimation = &infoAnim;
 	else currentAnimation = &membersAnim;
 
 	currentAnimation->Update();

@@ -80,6 +80,17 @@ Update_Status MissionNumScene::Update()
 	{
 		App->fade->FadeToBlack(this, (Module*)App->mission, true, false, 50);
 	}
+	
+	if (writefx <= 10)
+	{
+		if (aux == 10)
+		{
+			App->audio->PlayFx(App->audio->write);
+			aux = 0;
+			writefx++;
+		}
+		aux++;
+	}
 
 	if (counter <= 8) counter++;
 	else counter = 0;

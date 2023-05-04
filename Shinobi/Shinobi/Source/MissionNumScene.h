@@ -42,6 +42,9 @@ public:
 
 	Animation missionAnim;
 	Animation* currentAnim = nullptr;
+
+	int writefx = 0;
+	int aux = 10;
 };
 
 #endif 

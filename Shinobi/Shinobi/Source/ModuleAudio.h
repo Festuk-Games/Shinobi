@@ -34,6 +34,8 @@ public:
 	bool isPlaying = false;
 
 	unsigned int shuriken;
+	unsigned int write;
+
 private:
 
 	Mix_Music* music = nullptr;

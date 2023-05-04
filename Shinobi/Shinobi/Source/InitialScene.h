@@ -40,6 +40,8 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	int delay = 0;
+	int writefx = 0;
+	int aux = 10;
 };
 
 #endif
