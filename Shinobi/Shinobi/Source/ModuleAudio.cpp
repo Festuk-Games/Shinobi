@@ -44,6 +44,7 @@ bool ModuleAudio::Init()
 	shuriken = LoadFx("Audio/FX/Shuriken.wav");
 	write = LoadFx("Audio/FX/write.wav");
 	coin = LoadFx("Audio/FX/coin.wav");
+	jump = LoadFx("Audio/FX/jump.wav");
 	return ret;
 }
 

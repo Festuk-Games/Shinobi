@@ -150,6 +150,20 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	katanaJumpAnim.PushBack({ 286, 209, 76, 66 });
 	katanaJumpAnim.loop = false;
 	katanaJumpAnim.speed = 0.1f;
+
+	crouchPowAttackAnim.PushBack({ 286, 401, 76, 66 });
+	crouchPowAttackAnim.loop = false;
+	crouchPowAttackAnim.speed = 0.1f;
+
+	crouchGunIdleAnim.PushBack({ 286, 401, 76, 66 });
+	crouchGunIdleAnim.loop = true;
+	crouchGunIdleAnim.speed = 0.1f;
+
+	crouchGunAnim.PushBack({ 361, 401, 76, 66 });
+	crouchGunAnim.PushBack({ 436, 401, 76, 66 });
+	crouchGunAnim.PushBack({ 286, 401, 76, 66 });
+	crouchGunAnim.loop = true;
+	crouchGunAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -194,6 +208,7 @@ Update_Status ModulePlayer::Update()
 		//Jumping input
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && !isJumpingUp1 && !isJumpingDown1)
 		{
+			App->audio->PlayFx(App->audio->jump);
 			isJumping = true;
 			jumpPosition.y = position.y;
 		}
@@ -588,7 +603,7 @@ Update_Status ModulePlayer::Update()
 			else if(!isShooting && !isWalking && !isKicking)
 			{
 				if (!isPowerUp) currentAnimation = &crouchIdleAnim;
-				else currentAnimation = &crouchGunAnim;
+				else currentAnimation = &crouchGunIdleAnim;
 			}
 		}
 		

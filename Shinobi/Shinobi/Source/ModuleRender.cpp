@@ -84,6 +84,11 @@ Update_Status ModuleRender::Update()
 		App->ui->lose = true;
 	}
 
+	if (App->input->keys[SDL_SCANCODE_F6] == KEY_DOWN)
+	{
+		App->player->isPowerUp = !App->player->isPowerUp;
+	}
+
 	//Handle horizontal movement of the camera
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)

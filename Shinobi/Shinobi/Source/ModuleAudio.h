@@ -36,6 +36,7 @@ public:
 	unsigned int shuriken;
 	unsigned int write;
 	unsigned int coin;
+	unsigned int jump;
 
 private:
 
