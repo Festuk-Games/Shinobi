@@ -88,6 +88,7 @@ Update_Status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
+		App->audio->PlayFx(App->audio->coin);
 		App->fade->FadeToBlack(this, (Module*)App->missionNum, true, false, 50);
 	}
 
