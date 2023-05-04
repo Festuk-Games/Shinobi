@@ -58,7 +58,7 @@ void Enemy_Gunner::Update()
 	if (!die)
 	{
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0)
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110)
 		{
 			shot++;
 			if (shot >= 100 && !reloading && bullets >= 1)
@@ -96,7 +96,7 @@ void Enemy_Gunner::Update()
 
 		}
 		//walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0)
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110)
 		{
 			shot++;
 			if (shot >= 100 && !reloading && bullets >= 1)
