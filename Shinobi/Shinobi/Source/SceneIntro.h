@@ -54,8 +54,6 @@ public:
 		float radius = 150.0f;
 		float angularVelocity = 0.2f;
 		float angularStep = 0.05f;
-		float posX = centerX + radius;
-		float posY = centerY;
 		float time = 0.0f;
 		iPoint logopos;
 	}logos[6];

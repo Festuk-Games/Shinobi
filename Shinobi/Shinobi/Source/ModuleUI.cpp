@@ -298,6 +298,7 @@ Update_Status ModuleUI::PostUpdate()
 		{
 			if (nextframe <= 5) App->render->Blit(nums, 140, 60, SDL_FLIP_NONE, &nextstage, 0.0f);
 		}
+
 	}
 
 	if (App->scene->clear)
