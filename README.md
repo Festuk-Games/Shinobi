@@ -84,15 +84,15 @@ https://github.com/Festuk-Games/Shinobi
         </td>
     </tr>
     <tr>
-        <th>S+Space</th>
+        <th>W+Space</th>
         <td>       
             <li>Jump at second floor</li>
         </td>
     </tr>
     <tr>
-        <th>W+Space</th>
+        <th>S+Space</th>
         <td>       
-            <li>Jump downstairs</li>
+            <li>Jump at first floor</li>
         </td>
     </tr>
     <tr>
