@@ -84,7 +84,7 @@ Update_Status ModuleRender::Update()
 	{	
 		if (camera.x >= -4980)
 		{
-			if (App->player->position.x >= 180 && !App->player->isColliding)
+			if (App->player->position.x >= 180 && !App->player->isCollidingRight)
 			{
 				camera.x -= cameraSpeed;
 			}
@@ -95,7 +95,7 @@ Update_Status ModuleRender::Update()
 	{
 		if (camera.x <= -1)
 		{
-			if (App->player->position.x <= 1840 && !App->player->isColliding)
+			if (App->player->position.x <= 1840 && !App->player->isCollidingLeft)
 			{
 				camera.x += cameraSpeed;
 			}

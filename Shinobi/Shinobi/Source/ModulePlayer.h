@@ -91,7 +91,8 @@ public:
 	bool alive = true;
 	bool isPowerUp = false;
 
-	bool isColliding = false;
+	bool isCollidingRight = false;
+	bool isCollidingLeft = false;
 	bool L2 = false;
 	bool ground = false;
 

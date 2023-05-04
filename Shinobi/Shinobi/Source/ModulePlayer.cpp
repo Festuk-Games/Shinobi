@@ -189,11 +189,12 @@ Update_Status ModulePlayer::Update()
 					position.y -= 8;
 					collider->SetPos(position.x, position.y - 58); 
 					feet->SetPos(position.x, position.y-1);
-					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isColliding)
+					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
+					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isCollidingRight)
 					{
 						position.x += speed;
 					}
-					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20 && !isColliding)
+					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20 && !isCollidingLeft)
 					{
 						position.x -= speed;
 					}
@@ -237,6 +238,7 @@ Update_Status ModulePlayer::Update()
 					position.y += 4.2;
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x, position.y-1);
+					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010)
 					{
 						position.x += speed;
@@ -271,7 +273,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation->Update();
 			return Update_Status::UPDATE_CONTINUE;
 		}
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && !isColliding && position.x < 2010)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && !isCollidingRight && position.x < 2010)
 		{
 			right = true;
 			isWalking = true;
@@ -279,7 +281,7 @@ Update_Status ModulePlayer::Update()
 			else currentAnimation = &walkGunAnim;
 			position.x += speed;
 		}
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && !isColliding && position.x > 20 )
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && !isCollidingLeft && position.x > 20 )
 		{
 			right = false;
 			isWalking = true;
@@ -417,6 +419,7 @@ Update_Status ModulePlayer::Update()
 					position.y += speed;
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x, position.y - 1);
+					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
 				}
 				if (position.y == 208)
 				{
@@ -447,7 +450,7 @@ Update_Status ModulePlayer::Update()
 			
 			
 			//coruch right
-			if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isColliding)
+			if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isCollidingRight)
 			{
 				right = true;
 				isWalking = true;
@@ -456,7 +459,7 @@ Update_Status ModulePlayer::Update()
 				position.x += speed;
 			}
 			//crouch left
-			else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20 && !isColliding)
+			else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20 && !isCollidingLeft)
 			{
 				right = false;
 				isWalking = true;
@@ -488,7 +491,11 @@ Update_Status ModulePlayer::Update()
 			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && enemyNear)
 			{
 				isKicking = true;
-				if(!isPowerUp) currentAnimation = &crouchKickAnim;
+				if (!isPowerUp)
+				{
+					currentAnimation = &crouchKickAnim;
+					currentAnimation->Reset();
+				}
 				else {
 					currentAnimation = &crouchKatanaAnim;
 					currentAnimation->Reset();
@@ -639,7 +646,8 @@ Update_Status ModulePlayer::PostUpdate()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	if(right) App->render->Blit(texture, position.x, position.y - rect.h, SDL_FLIP_NONE, &rect);
 	else App->render->Blit(texture, flipPos.x, position.y - rect.h, SDL_FLIP_HORIZONTAL, &rect);
-	isColliding = false;
+	isCollidingRight = false;
+	isCollidingLeft = false;
 	ground = false;
 	enemyNear = false;
 	return Update_Status::UPDATE_CONTINUE;
@@ -663,11 +671,20 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (!collision)
 		{
-			isColliding = false;
+			isCollidingLeft = false;
+			isCollidingRight = false;
+		}
+		else if (right && collision)
+		{
+			isCollidingRight = true;
+			isCollidingLeft = false;
+			cout << "collision" << endl;
 		}
 		else
 		{
-			isColliding = true;
+			
+			isCollidingLeft = true;
+			isCollidingRight = false;
 			cout << "collision" << endl;
 		}
 		
@@ -678,7 +695,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (!collision)
 		{
-			isColliding = false;
+			isCollidingLeft = false;
+			isCollidingRight = false;
 		}
 		else {
 			App->ui->lifenum--;
@@ -689,7 +707,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (!collision)
 		{
-			isColliding = false;
+			isCollidingLeft = false;
+			isCollidingRight = false;
 			
 		}
 		cout << "collision" << endl;
