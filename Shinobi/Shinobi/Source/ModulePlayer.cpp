@@ -565,7 +565,13 @@ Update_Status ModulePlayer::Update()
 		}
 
 
-		if (position.x >= 90 && position.x <= 360|| position.x >= 380 && position.x <= 500 || position.x >= 560 && position.x <= 1020)
+		if (position.x >= 90 && position.x <= 360
+			|| position.x >= 440 && position.x <= 500 
+			|| position.x >= 570 && position.x <= 660
+			|| position.x >= 740 && position.x <= 820
+			|| position.x >= 895 && position.x <= 1040
+			|| position.x >= 1300 && position.x <= 1370
+			|| position.x >= 1500 && position.x <= 1910)
 		{
 			canjump = true;
 		}

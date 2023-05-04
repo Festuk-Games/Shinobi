@@ -54,7 +54,7 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 void Enemy_Gunner::Update()
 {
 	flipPos.x = position.x + 20;
-	std::cout << position.x << std::endl;
+	//std::cout << position.x << std::endl;
 	if (!die)
 	{
 		//walk right

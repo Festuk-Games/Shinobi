@@ -231,5 +231,14 @@ bool ModuleScene::CleanUp()
 	App->particles->Disable();
 	App->textures->Unload(skyTexture);
 	App->textures->Unload(stageTexture);
+	App->textures->Unload(App->auxscene->stageTextureL2);
+	App->textures->Unload(App->ui->hostage);
+	App->textures->Unload(App->ui->lifes);
+	App->textures->Unload(App->ui->skill1);
+	App->textures->Unload(App->ui->skill2);
+	App->textures->Unload(App->ui->skill3);
+	App->textures->Unload(App->ui->nums);
+	App->textures->Unload(App->ui->text2);
+
 	return true;
 }
