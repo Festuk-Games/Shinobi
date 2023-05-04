@@ -148,14 +148,15 @@ bool ModulePlayer::Start()
 	//initial position
 	position.x = 30;
 	position.y = 208;
+	App->ui->lifenum = 2;
 	currentAnimation = &idleAnim;
 	texture = App->textures->Load("Assets/main.png"); 
 	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
-	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x+5, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, this);
 	enemyNearCollider = App->collisions->AddCollider({ position.x-50, position.y, 135, 58 }, Collider::Type::ENEMY_NEAR, this);
 
-	App->ui->lifenum = 2;
+	
 
 	return ret;
 } 
@@ -428,11 +429,23 @@ Update_Status ModulePlayer::Update()
 			currentAnimation->Update();
 			return Update_Status::UPDATE_CONTINUE;
 		}
-
+		//collision update
+		if (isCrouching)
+			{
+				collider->rect.h = 35;
+				collider->SetPos(position.x+5, position.y-35);
+			}
+		else
+		{
+			collider->rect.h = 58;
+			collider->SetPos(position.x+5, position.y - 58);
+		}
 		//crouch animation
 		if (App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT)
 		{
 			isCrouching = true;
+			
+			
 			//coruch right
 			if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isColliding)
 			{
@@ -497,6 +510,7 @@ Update_Status ModulePlayer::Update()
 			}
 		}
 		
+		
 
 		//key conditions
 
@@ -559,11 +573,6 @@ Update_Status ModulePlayer::Update()
 		{
 			canjump = false;
 		}
-
-
-
-
-
 	}
 	else
 	{	//die
@@ -611,7 +620,7 @@ Update_Status ModulePlayer::Update()
 	if (!ground && !isJumping) position.y+=2;
 
 	//update colliders position
-	collider->SetPos(position.x, position.y-58);
+	//collider->SetPos(position.x, position.y-58);
 	feet->SetPos(position.x, position.y-1);
 	enemyNearCollider->SetPos(position.x-50, position.y-58);
 	currentAnimation->Update();
@@ -684,6 +693,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		enemyNear = true;
 		cout << "near" << endl;
+	}
+	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)
+	{
+		katana->rect.w = 0;
+		katana->rect.h = 0;
+		katana->SetPos(0, 0);
+		
 	}
 }
 
