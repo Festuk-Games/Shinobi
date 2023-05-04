@@ -33,9 +33,9 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 	hitAnim.speed = 0.14f;
 	hitAnim.loop = false;
 
-	dieAnim.PushBack({ 29,217,68,66 });
-	dieAnim.PushBack({ 96,217,68,66 });
 	dieAnim.PushBack({ 164,217,68,66 });
+	dieAnim.PushBack({ 164,217,68,66 });
+	dieAnim.PushBack({ 0,0,0,0 });
 	dieAnim.speed = 0.08f;
 	dieAnim.loop = false;
 
@@ -70,6 +70,7 @@ void Enemy_Fighter::Update()
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
+					//App->particles->AddParticle(App->particles->patada, position.x, position.y + 30, Collider::Type::ENEMY_SHOT);
 					attack->rect.w = 10;
 					attack->rect.h = 10;
 					attack->SetPos(position.x, position.y + 30);
@@ -81,8 +82,8 @@ void Enemy_Fighter::Update()
 					currentAnim = &idleAnim;
 					attack->rect.w = 0;
 					attack->rect.h = 0;
+					attack->SetPos(0, 0);
 				}
-
 				pl = true;
 
 				if (position.x <= pos2)
@@ -114,6 +115,7 @@ void Enemy_Fighter::Update()
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
+					//App->particles->AddParticle(App->particles->patada, position.x+80, position.y + 30, Collider::Type::ENEMY_SHOT);
 					attack->rect.w = 10;
 					attack->rect.h = 10;
 					attack->SetPos(position.x+80, position.y+30);
@@ -125,6 +127,7 @@ void Enemy_Fighter::Update()
 					currentAnim = &idleAnim;
 					attack->rect.w = 0;
 					attack->rect.h = 0;
+					attack->SetPos(0, 0);
 				}
 				pl = true;
 
