@@ -13,6 +13,7 @@ using namespace std;
 #include "SDL/include/SDL_scancode.h"
 
 #include "SceneIntro.h"
+#include "ModuleScene.h"
 
 ModuleRender::ModuleRender(bool startEnabled) : Module(startEnabled)
 {
@@ -71,11 +72,10 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_F2]== KEY_DOWN)
 		posiciones = !posiciones;
 	
-	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN)
+
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN)
 	{
-		/*system("cls");
-		cout << "logo.x: " << App->intro->logopos.x << endl;
-		cout << "logo.y: " << App->intro->logopos.y << endl;*/
+		App->scene->clear = true;
 	}
 
 	//Handle horizontal movement of the camera
