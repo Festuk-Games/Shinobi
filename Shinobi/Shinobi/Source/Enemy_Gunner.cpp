@@ -46,11 +46,9 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({position.x+25, position.y+8, 30, 61}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({position.x+30, position.y+8, 45, 61}, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
-
 }
-
 void Enemy_Gunner::Update()
 {
 	flipPos.x = position.x + 20;
@@ -183,7 +181,7 @@ void Enemy_Gunner::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x + 25, position.y + 8);
+		collider->SetPos(position.x+30, position.y + 8);
 	}
 	else if (die) currentAnim = &dieAnim;
 
