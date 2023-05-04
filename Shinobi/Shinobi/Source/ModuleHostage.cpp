@@ -28,6 +28,7 @@ bool ModuleHostage::Start()
 {
 	LOG("Loading hostages");
 	texture = App->textures->Load("Assets/hostage.png");
+	powerup = 0;
 	return true;
 }
 

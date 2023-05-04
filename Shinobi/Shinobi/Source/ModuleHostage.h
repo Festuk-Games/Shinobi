@@ -58,6 +58,8 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleHostageDespawn();
 
+	int powerup = 0;
+
 private:
 	// Spawns a new hostage using the data from the queue
 	void SpawnHostage(const HostageSpawnpoint& info);

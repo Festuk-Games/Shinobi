@@ -71,6 +71,7 @@ public:
 	Animation katanaJumpAnim;
 	Animation attackJumpAnim1, attackJumpAnim2;
 	Animation walkGunAnim;
+	Animation idlePowAnim;
 
 	iPoint diePosition;
 	iPoint jumpPosition;

@@ -63,6 +63,7 @@ public:
 	Particle enemyshot;
 	Particle hit;
 	Particle bonus500;
+	Particle pow;
 };
 
 #endif // !__MODULEPARTICLES_H__

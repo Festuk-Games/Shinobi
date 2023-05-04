@@ -23,6 +23,9 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	// idle animation
 	idleAnim.PushBack({211, 116, 76, 66});
 
+	// idle pow animation
+	idlePowAnim.PushBack({ 286, 116, 76, 66 });
+
 	// walk forward animation
 	walkAnim.PushBack({ 30, 30, 76, 66 });
 	walkAnim.PushBack({ 105, 30, 76, 66 });
@@ -382,7 +385,8 @@ Update_Status ModulePlayer::Update()
 					isJumpingUp1 = false;
 					isJumpingUp2 = false;
 					jumpState = false;
-					currentAnimation = &idleAnim;
+					if (!isPowerUp) currentAnimation = &idleAnim;
+					else currentAnimation = &idlePowAnim;
 				}
 			}
 			currentAnimation->Update();
@@ -429,7 +433,8 @@ Update_Status ModulePlayer::Update()
 					isJumpingDown1 = false;
 					isJumpingDown2 = false;
 					jumpState = false;
-					currentAnimation = &idleAnim;
+					if (!isPowerUp) currentAnimation = &idleAnim;
+					else currentAnimation = &idlePowAnim;
 				}
 			}
 			currentAnimation->Update();
@@ -554,7 +559,8 @@ Update_Status ModulePlayer::Update()
 			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_IDLE)
 		{
 			isCrouching = false;
-			currentAnimation = &idleAnim;
+			if (!isPowerUp) currentAnimation = &idleAnim;
+			else currentAnimation = &idlePowAnim;
 		}
 		//not walking
 		if (isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
@@ -594,7 +600,8 @@ Update_Status ModulePlayer::Update()
 			isShooting = false;
 			isCrouching = false;
 			isKicking = false;
-			currentAnimation = &idleAnim;
+			if (!isPowerUp) currentAnimation = &idleAnim;
+			else currentAnimation = &idlePowAnim;
 		}
 
 
