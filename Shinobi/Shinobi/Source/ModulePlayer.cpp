@@ -497,18 +497,24 @@ Update_Status ModulePlayer::Update()
 				{
 					currentAnimation = &crouchKickAnim;
 					currentAnimation->Reset();
+					if (right)
+					{
+						katana->rect.w = 20;
+						katana->rect.h = 20;
+						katana->SetPos(position.x + 55, position.y - 50);
+					}
+					else
+					{
+						katana->rect.w = 20;
+						katana->rect.h = 20;
+						katana->SetPos(position.x - 20, position.y - 50);
+					}
+
 				}
 				else {
 					currentAnimation = &crouchKatanaAnim;
 					currentAnimation->Reset();
-					/*katana->rect.w = 10;
-					katana->rect.h = 20;
-					katana->SetPos(position.x, position.y);*/
 				}
-				/*katana->rect.w = 0;
-				katana->rect.h = 0;*/
-
-
 			}
 
 			//crouch idle

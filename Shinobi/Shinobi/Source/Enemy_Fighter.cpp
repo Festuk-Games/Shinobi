@@ -124,10 +124,11 @@ void Enemy_Fighter::Update()
 					shooting = true;
 				}
 				else {
-					currentAnim = &idleAnim;
 					attack->rect.w = 0;
 					attack->rect.h = 0;
 					attack->SetPos(0, 0);
+					currentAnim = &idleAnim;
+					
 				}
 				pl = true;
 
@@ -199,6 +200,9 @@ void Enemy_Fighter::Update()
 		collider->SetPos(position.x-10, position.y + 30);
 		collider->rect.w = 37;
 		collider->rect.h = 20;
+		attack->rect.w = 0;
+		attack->rect.h = 0;
+		attack->SetPos(0, 0);
 	}
 
 	//feet->SetPos(position.x, position.y + 69);
