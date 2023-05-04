@@ -35,7 +35,7 @@ public:
 	SDL_Texture* members = nullptr;
 	SDL_Texture* info = nullptr;
 
-	Animation membersAnim, membersAnim2, infoAnim1, infoAnim2, infoAnim3;
+	Animation membersAnim, infoAnim;
 	
 	Animation* currentAnimation = nullptr;
 

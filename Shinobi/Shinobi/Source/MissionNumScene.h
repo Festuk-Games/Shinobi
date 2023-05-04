@@ -32,8 +32,16 @@ public:
 
 public:
 
+	SDL_Texture* grey = nullptr;
+	SDL_Texture* name = nullptr;
+	SDL_Texture* mission = nullptr;
 
+	SDL_Rect missionrect, namerect, missionrect2;
+	int counter = 0;
+	int changescene = 0;
 
+	Animation missionAnim;
+	Animation* currentAnim = nullptr;
 };
 
 #endif 

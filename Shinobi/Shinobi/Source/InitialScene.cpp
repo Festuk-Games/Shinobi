@@ -10,7 +10,7 @@
 
 InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 {
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
@@ -18,51 +18,22 @@ InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 		}
 	}
 
-	for (int i = 2; i < 4; i++) 
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			membersAnim2.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
-		}
-	}
-
 	membersAnim.speed = 0.2f;
 	membersAnim.loop = false;
-	membersAnim2.speed = 0.2f;
-	membersAnim2.loop = false;
 
-	for (int i = 0; i < 2; i++)
+
+	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			infoAnim1.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
+			infoAnim.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
 		}
 	}
 
-	for (int i = 2; i < 4; i++)
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			infoAnim2.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
-		}
-	}
+	infoAnim.speed = 0.2f;
+	infoAnim.loop = false;
 
-	for (int i = 4; i < 5; i++)
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			infoAnim3.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
-		}
-	}
-
-	infoAnim1.speed = 0.2f;
-	infoAnim1.loop = false;
-	infoAnim2.speed = 0.2f;
-	infoAnim2.loop = false;
-	infoAnim3.speed = 0.2f;
-	infoAnim3.loop = false;
-
-	currentAnimation = &infoAnim1;
+	currentAnimation = &infoAnim;
 }
 
 InitialScene::~InitialScene()
@@ -91,12 +62,8 @@ bool InitialScene::Start()
 Update_Status InitialScene::Update()
 {
 
-	if (delay <= 100) currentAnimation = &infoAnim1;
-	else if (delay <= 200 && delay > 100) currentAnimation = &infoAnim2;
-	else if (delay <= 300 && delay > 200) currentAnimation = &infoAnim3;
-
-	else if (delay <= 400 && delay > 300) currentAnimation = &membersAnim;
-	else currentAnimation = &membersAnim2;
+	if (delay <= 300) currentAnimation = &infoAnim;
+	else currentAnimation = &membersAnim;
 
 	currentAnimation->Update();
 	delay++;

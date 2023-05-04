@@ -88,7 +88,7 @@ Update_Status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->mission, true, false, 50);
+		App->fade->FadeToBlack(this, (Module*)App->missionNum, true, false, 50);
 	}
 
 	delay++;
