@@ -38,7 +38,7 @@ public:
 	SDL_Texture* skill3 = nullptr;
 	SDL_Texture* nums = nullptr;
 	SDL_Texture* text2 = nullptr;
-
+	SDL_Texture* go = nullptr;
 
 
 	bool sk1 = false, sk2 = true, sk3 = false;
@@ -90,7 +90,7 @@ public:
 	bool lose = false;
 
 	int nextCounter = 0, nextframe = 0;
-
+	int goposx = 1900;
 };
 
 #endif

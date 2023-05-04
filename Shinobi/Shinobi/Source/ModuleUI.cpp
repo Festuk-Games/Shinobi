@@ -132,6 +132,7 @@ bool ModuleUI::Start()
 	skill3 = App->textures->Load("Assets/UI/skill3.png");
 	nums = App->textures->Load("Assets/UI/nums.png");
 	text2 = App->textures->Load("Assets/UI/text2.png");
+	go = App->textures->Load("Assets/UI/go.png");
 
 	fstream file;
 	file.open("score.txt", ios::in);
@@ -207,7 +208,11 @@ Update_Status ModuleUI::Update()
 	if (App->scene->nextStage && nextframe <= 10) nextframe++;
 	else nextframe = 0;
 
-
+	if (App->scene->nextStage)
+	{
+		if (goposx <= 1980) goposx++;
+		else goposx = 1900;
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -298,7 +303,7 @@ Update_Status ModuleUI::PostUpdate()
 		{
 			if (nextframe <= 5) App->render->Blit(nums, 140, 60, SDL_FLIP_NONE, &nextstage, 0.0f);
 		}
-
+		App->render->Blit(go, goposx, 140, SDL_FLIP_NONE, NULL, 1.0f);
 	}
 
 	if (App->scene->clear)
