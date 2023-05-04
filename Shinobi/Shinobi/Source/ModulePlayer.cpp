@@ -322,6 +322,7 @@ Update_Status ModulePlayer::Update()
 				}
 				katana->rect.w = 0;
 				katana->rect.h = 0;
+				//katana->SetPos(0, 0);
 			}
 			
 		
@@ -509,11 +510,28 @@ Update_Status ModulePlayer::Update()
 						katana->rect.h = 20;
 						katana->SetPos(position.x - 20, position.y - 50);
 					}
-
+					katana->rect.w = 0;
+					katana->rect.h = 0;
+					//katana->SetPos(0, 0);
 				}
 				else {
 					currentAnimation = &crouchKatanaAnim;
 					currentAnimation->Reset();
+					if (right)
+					{
+						katana->rect.w = 20;
+						katana->rect.h = 20;
+						katana->SetPos(position.x + 55, position.y - 50);
+					}
+					else
+					{
+						katana->rect.w = 20;
+						katana->rect.h = 20;
+						katana->SetPos(position.x - 20, position.y - 50);
+					}
+					katana->rect.w = 0;
+					katana->rect.h = 0;
+					//katana->SetPos(0, 0);
 				}
 			}
 
