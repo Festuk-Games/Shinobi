@@ -34,8 +34,9 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* members = nullptr;
 	SDL_Texture* info = nullptr;
+	SDL_Texture* description = nullptr;
 
-	Animation membersAnim, infoAnim;
+	Animation membersAnim, infoAnim, descriptionAnim;
 	
 	Animation* currentAnimation = nullptr;
 
