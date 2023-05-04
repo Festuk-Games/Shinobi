@@ -70,7 +70,8 @@ bool MissionNumScene::Start()
 
 	counter = 0;
 	changescene = 0;
-	writefx = 10;
+	writefx = 0;
+	aux = 10;
 
 	currentAnim = &missionAnim;
 	currentAnim->Reset();
