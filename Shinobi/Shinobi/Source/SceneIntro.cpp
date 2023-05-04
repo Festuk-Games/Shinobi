@@ -79,7 +79,7 @@ bool SceneIntro::Start()
 	currentAnimation = &lightAnim;
 	currentAnimation->Reset();
 
-	delay = 0;
+	/*delay = 0;
 	counter = 0;
 	scount = 0;
 
@@ -96,7 +96,7 @@ bool SceneIntro::Start()
 			logos[i].logopos.x = logos[i].centerX + logos[i].radius * sin(logos[i].angularStep * logos[i].time);
 			logos[i].logopos.y = logos[i].centerY + logos[i].radius * cos(logos[i].angularStep * logos[i].time);
 		}
-	}
+	}*/
 
 	return ret;
 }

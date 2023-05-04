@@ -143,7 +143,7 @@ bool ModuleUI::Start()
 	nextCounter = 0;
 	counter = 0;
 	nextframe = 0;
-	hostages = 2;
+	hostages = 3;
 
 	return ret;
 }

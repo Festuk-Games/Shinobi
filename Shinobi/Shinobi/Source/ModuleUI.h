@@ -50,7 +50,7 @@ public:
 	int timef1 = 0;
 	int timef3 = 0;
 
-	int hostages = 2;
+	int hostages = 3;
 
 	int time1p = 0;
 	bool blue = false;
