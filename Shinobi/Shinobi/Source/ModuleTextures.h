@@ -11,7 +11,7 @@ class ModuleTextures : public Module
 {
 public:
 	//Constructor
-	ModuleTextures();
+	ModuleTextures(bool startEnabled);
 
 	//Destructor
 	~ModuleTextures();
@@ -29,6 +29,8 @@ public:
 	// First creates an SDL_Surface, then converts it into SDL_Texture
 	// Returns nullptr if the texture could not be created
 	SDL_Texture* const Load(const char* path);
+
+	bool Unload(SDL_Texture* texture);
 
 public:
 	// An array of all the loaded textures

@@ -1,3 +1,5 @@
+#include <iostream>
+using namespace std;
 #include "ModuleRender.h"
 
 #include "Application.h"
@@ -5,11 +7,16 @@
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
 
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_scancode.h"
 
-ModuleRender::ModuleRender() : Module()
+#include "SceneIntro.h"
+#include "ModuleScene.h"
+#include "ModuleUI.h"
+
+ModuleRender::ModuleRender(bool startEnabled) : Module(startEnabled)
 {
 
 }
@@ -38,11 +45,13 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
+	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH*3, SCREEN_HEIGHT*3);
+
 	return ret;
 }
 
 // Called every draw update
-update_status ModuleRender::PreUpdate()
+Update_Status ModuleRender::PreUpdate()
 {
 	//Set the color used for drawing operations
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -50,35 +59,83 @@ update_status ModuleRender::PreUpdate()
 	//Clear rendering target
 	SDL_RenderClear(renderer);
 
-	return update_status::UPDATE_CONTINUE;
+
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::Update()
+Update_Status ModuleRender::Update()
 {
-	//Handle positive vertical movement
-	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
-		camera.y += cameraSpeed;
+	////Handle positive vertical movement
+	//if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
+	//	camera.y += cameraSpeed;
 
-	//Handle negative vertical movement
-	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
-		camera.y -= cameraSpeed;
+	////Handle negative vertical movement
+	//if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
+	//	camera.y -= cameraSpeed;
+
+	if (App->input->keys[SDL_SCANCODE_F2]== KEY_DOWN)
+		posiciones = !posiciones;
+	
+
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN)
+	{
+		App->scene->clear = true;
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F5] == KEY_DOWN)
+	{
+		App->ui->lose = true;
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F6] == KEY_DOWN)
+	{
+		App->player->isPowerUp = !App->player->isPowerUp;
+	}
 
 	//Handle horizontal movement of the camera
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && camera.x <=-1)
-		camera.x += cameraSpeed;
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && camera.x >= -6655)
-		camera.x -= cameraSpeed;
 
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
+	{	
+		if (camera.x >= -4980)
+		{
+			if (App->player->position.x >= 180 && !App->player->isCollidingRight)
+			{
+				camera.x -= cameraSpeed;
+			}
+		}
+	}
 
-	return update_status::UPDATE_CONTINUE;
+	else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE)
+	{
+		if (camera.x <= -1)
+		{
+			if (App->player->position.x <= 1840 && !App->player->isCollidingLeft)
+			{
+				camera.x += cameraSpeed;
+			}
+		}
+	}
+
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::PostUpdate()
+Update_Status ModuleRender::PostUpdate()
 {
+	if (posiciones)
+	{
+		printPos();
+	}
 	//Update the screen
 	SDL_RenderPresent(renderer);
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
+}
+
+void ModuleRender::printPos() {
+	cout << "Player.x: " << App->player->position.x << endl;
+	//cout << "Player.y: " << App->player->position.y << endl;
+	//cout << "Camera.x: " << camera.x << endl;
+
 }
 
 bool ModuleRender::CleanUp()
@@ -93,14 +150,18 @@ bool ModuleRender::CleanUp()
 }
 
 // Blit to screen
-bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed)
+bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_RendererFlip flip, SDL_Rect* section, float speed)
 {
 	bool ret = true;
-
+	
 	SDL_Rect rect {
 		(int)(camera.x * speed) + x * SCREEN_SIZE,
 		(int)(camera.y * speed) + y * SCREEN_SIZE,
 		0, 0 };
+
+	SDL_Point center = { rect.w / 2, rect.h / 2 };
+
+	double angle = 0;
 	
 	if (section != nullptr)
 	{
@@ -116,9 +177,30 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 	rect.w *= SCREEN_SIZE;
 	rect.h *= SCREEN_SIZE;
 
-	if (SDL_RenderCopy(renderer, texture, section, &rect) != 0)
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, &center, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
+bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed)
+{
+	bool ret = true;
+
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+	SDL_Rect dstRect{
+		(int)(-camera.x * speed) + rect.x * SCREEN_SIZE,
+		(int)(-camera.y * speed) + rect.y * SCREEN_SIZE,
+		rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
+
+	if (SDL_RenderFillRect(renderer, &dstRect) != 0)
+	{
+		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}
 
