@@ -45,6 +45,8 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
+	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH*3, SCREEN_HEIGHT*3);
+
 	return ret;
 }
 
@@ -56,6 +58,7 @@ Update_Status ModuleRender::PreUpdate()
 
 	//Clear rendering target
 	SDL_RenderClear(renderer);
+
 
 	return Update_Status::UPDATE_CONTINUE;
 }
