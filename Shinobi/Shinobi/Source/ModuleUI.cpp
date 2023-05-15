@@ -225,7 +225,7 @@ Update_Status ModuleUI::PostUpdate()
 	//Draw the hostages
 	for (int i = 0; i < hostages; i++)
 	{
-		App->render->Blit(hostage, 40 + 8 * i, 200, SDL_FLIP_NONE, &host, 0.0f);
+		App->render->Blit(hostage, 40 + 8 * i, 205, SDL_FLIP_NONE, &host, 0.0f);
 	}
 
 	//Draw the lifes
@@ -235,29 +235,28 @@ Update_Status ModuleUI::PostUpdate()
 	}
 
 	//Draw the skills icons
-	if (sk1)
-	{
-		App->render->Blit(skill1, 266, 200, SDL_FLIP_NONE, &skill, 0.0f);
-	}
-	else if (sk2)
-	{
-		App->render->Blit(skill2, 266, 200, SDL_FLIP_NONE, &skill, 0.0f);
-	}
-	else if (sk3)
-	{
-		App->render->Blit(skill3, 266, 200, SDL_FLIP_NONE, &skill, 0.0f);
-	}
+	if (sk1) App->render->Blit(skill1, 246, 210, SDL_FLIP_NONE, &skill, 0.0f);
+	
+	else if (sk2) App->render->Blit(skill2, 246, 210, SDL_FLIP_NONE, &skill, 0.0f);
+
+	else if (sk3) App->render->Blit(skill3, 246, 210, SDL_FLIP_NONE, &skill, 0.0f);
 
 	if (!App->scene->nextStage)
 	{
-		App->render->Blit(nums, 24, 200, SDL_FLIP_NONE, &savet, 0.0f);
+		App->render->Blit(nums, 24, 205, SDL_FLIP_NONE, &savet, 0.0f);
 	}
 	
-	App->render->Blit(nums, 286, 200, SDL_FLIP_NONE, &timer[timemin], 0.0f);
-	App->render->Blit(nums, 295, 203, SDL_FLIP_NONE, &points, 0.0f);
-	App->render->Blit(nums, 295, 208, SDL_FLIP_NONE, &points, 0.0f);
-	App->render->Blit(nums, 300, 200, SDL_FLIP_NONE, &timer[timesec1], 0.0f);
-	App->render->Blit(nums, 308, 200, SDL_FLIP_NONE, &timer[timesec2], 0.0f);
+	//App->render->Blit(nums, 286, 200, SDL_FLIP_NONE, &timer[timemin], 0.0f);
+	//App->render->Blit(nums, 295, 203, SDL_FLIP_NONE, &points, 0.0f);
+	//App->render->Blit(nums, 295, 208, SDL_FLIP_NONE, &points, 0.0f);
+	//App->render->Blit(nums, 300, 200, SDL_FLIP_NONE, &timer[timesec1], 0.0f);
+	//App->render->Blit(nums, 308, 200, SDL_FLIP_NONE, &timer[timesec2], 0.0f);
+
+	App->render->Blit(nums, 266, 210, SDL_FLIP_NONE, &timer[timemin], 0.0f);
+	App->render->Blit(nums, 275, 213, SDL_FLIP_NONE, &points, 0.0f);
+	App->render->Blit(nums, 275, 218, SDL_FLIP_NONE, &points, 0.0f);
+	App->render->Blit(nums, 280, 210, SDL_FLIP_NONE, &timer[timesec1], 0.0f);
+	App->render->Blit(nums, 288, 210, SDL_FLIP_NONE, &timer[timesec2], 0.0f);
 	
 	if (blue) App->render->Blit(nums, 16, 10, SDL_FLIP_NONE, &blue1p, 0.0f);
 	else App->render->Blit(nums, 16, 10, SDL_FLIP_NONE, &white1p, 0.0f);

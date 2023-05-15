@@ -82,7 +82,7 @@ Update_Status MissionNumScene::Update()
 {
 	currentAnim->Update();
 
-	changescene++;
+	/*changescene++;*/
 	if (changescene >= 180)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->mission, true, false, 50);
@@ -113,10 +113,10 @@ Update_Status MissionNumScene::PostUpdate()
 	App->render->Blit(grey, 0, 0, SDL_FLIP_NONE, NULL);
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
-	App->render->Blit(name, 100, 120, SDL_FLIP_NONE, &rect);
+	App->render->Blit(name, 65, 120, SDL_FLIP_NONE, &rect);
 
-	if (counter <= 4) App->render->Blit(mission, 130, 60, SDL_FLIP_NONE, &missionrect, 0.0f);
-	else App->render->Blit(mission, 130, 60, SDL_FLIP_NONE, &missionrect2, 0.0f);
+	if (counter <= 4) App->render->Blit(mission, 100, 60, SDL_FLIP_NONE, &missionrect, 0.0f);
+	else App->render->Blit(mission, 100, 60, SDL_FLIP_NONE, &missionrect2, 0.0f);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

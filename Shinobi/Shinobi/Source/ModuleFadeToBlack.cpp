@@ -28,14 +28,14 @@ bool ModuleFadeToBlack::Start()
 	fadeout[6].fade = App->textures->Load("Assets/fade/out/fadeout7.png");
 	fadeout[7].fade = App->textures->Load("Assets/fade/out/fadeout8.png");
 
-	fadein[0].fade = App->textures->Load("Assets/fade/out/fadein1.png");
-	fadein[1].fade = App->textures->Load("Assets/fade/out/fadein2.png");
-	fadein[2].fade = App->textures->Load("Assets/fade/out/fadein3.png");
-	fadein[3].fade = App->textures->Load("Assets/fade/out/fadein4.png");
-	fadein[4].fade = App->textures->Load("Assets/fade/out/fadein5.png");
-	fadein[5].fade = App->textures->Load("Assets/fade/out/fadein6.png");
-	fadein[6].fade = App->textures->Load("Assets/fade/out/fadein7.png");
-	fadein[7].fade = App->textures->Load("Assets/fade/out/fadein8.png");
+	fadein[0].fade = App->textures->Load("Assets/fade/in/fadein7.png");
+	fadein[1].fade = App->textures->Load("Assets/fade/in/fadein6.png");
+	fadein[2].fade = App->textures->Load("Assets/fade/in/fadein5.png");
+	fadein[3].fade = App->textures->Load("Assets/fade/in/fadein4.png");
+	fadein[4].fade = App->textures->Load("Assets/fade/in/fadein3.png");
+	fadein[5].fade = App->textures->Load("Assets/fade/in/fadein2.png");
+	fadein[6].fade = App->textures->Load("Assets/fade/in/fadein1.png");
+	fadein[7].fade = App->textures->Load("Assets/fade/in/fadein.png");
 
 	//fadeout[8].fade = App->textures->Load("Assets/fade/black.png");
 
@@ -95,7 +95,7 @@ Update_Status ModuleFadeToBlack::PostUpdate()
 		{
 			for (int i = 0; i < 8; i++)
 			{
-				if (frameCount >= (i + 1) * 4) App->render->Blit(fadeout[i].fade, 0, 0, SDL_FLIP_NONE, NULL);
+				if (frameCount >= (i + 1) * 4) App->render->Blit(fadein[i].fade, 0, 0, SDL_FLIP_NONE, NULL);
 			}
 		}
 
