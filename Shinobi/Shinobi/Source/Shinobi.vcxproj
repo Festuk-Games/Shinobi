@@ -86,6 +86,7 @@
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="LogoScene.h" />
     <ClInclude Include="MissionNumScene.h" />
+    <ClInclude Include="ModuleScene2.h" />
     <ClInclude Include="SceneMission.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleAuxScene.h" />
@@ -122,6 +123,7 @@
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="LogoScene.cpp" />
     <ClCompile Include="MissionNumScene.cpp" />
+    <ClCompile Include="ModuleScene2.cpp" />
     <ClCompile Include="SceneMission.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleAuxScene.cpp" />

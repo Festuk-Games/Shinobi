@@ -20,6 +20,7 @@
 #include "InitialScene.h"
 #include "LogoScene.h"
 #include "MissionNumScene.h"
+#include "ModuleScene2.h"
 
 Application::Application()
 {
@@ -37,17 +38,18 @@ Application::Application()
 	modules[7] = mission = new SceneMission(false);
 
 	modules[8] = scene = new ModuleScene(false);
-	modules[9] = player = new ModulePlayer(false);
-	modules[10] = hostage = new ModuleHostage(false);
-	modules[11] = enemies = new ModuleEnemies(false);
+	modules[9] = scene2 = new ModuleScene2(false);
+	modules[10] = player = new ModulePlayer(false);
+	modules[11] = hostage = new ModuleHostage(false);
+	modules[12] = enemies = new ModuleEnemies(false);
 
-	modules[12] = auxscene = new ModuleAuxScene(false);
-	modules[13] = ui = new ModuleUI(false);
-	modules[14] = particles = new ModuleParticles(false);
-	modules[15] = collisions = new ModuleCollisions(false);
-	modules[16] = fade = new ModuleFadeToBlack(true);
-	modules[17] = render = new ModuleRender(true);
-	modules[18] = audio = new ModuleAudio(true);
+	modules[13] = auxscene = new ModuleAuxScene(false);
+	modules[14] = ui = new ModuleUI(false);
+	modules[15] = particles = new ModuleParticles(false);
+	modules[16] = collisions = new ModuleCollisions(false);
+	modules[17] = fade = new ModuleFadeToBlack(true);
+	modules[18] = render = new ModuleRender(true);
+	modules[19] = audio = new ModuleAudio(true);
 
 }
 

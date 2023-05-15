@@ -34,38 +34,6 @@ ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 
 	}
 
-	//stage2 rects
-	if (stage2)
-	{
-		// ground
-		ground.x = 0;
-		ground.y = 0;
-		ground.w = 2048;
-		ground.h = 512;
-
-		//sky
-		sky.x = 0;
-		sky.y = 0;
-		sky.w = 1312;
-		sky.h = 512;
-	}
-
-	//stage3 rects
-	if (stage3)
-	{
-		// ground
-		ground.x = 0;
-		ground.y = 0;
-		ground.w = 512;
-		ground.h = 256;
-
-		//sky
-		sky.x = 0;
-		sky.y = 0;
-		sky.w = 512;
-		sky.h = 256;
-
-	}
 
 }
 
@@ -158,34 +126,21 @@ Update_Status ModuleScene::Update()
 	{
 		if (App->player->position.x >= 2000)
 		{
-			clear = true;
+			//clear = true;
 			clearcount++;
-			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
-			//stage1 = false;
-			//stage2 = true;
-			//App->player->position.x = 30;
-			//App->render->camera.x = 0;
-			//nextStage = false;
-			//App->audio->PlayMusic("Audio/music/mission_2.ogg", 0.5f);
-		}
-	}
-	if (nextStage && stage2)
-	{
-		if (App->player->position.x >= 500)
-		{
-			stage2 = false;
-			stage3 = true;
-			App->player->position.x = 30;
-			App->render->camera.x = 0;
+			if (clearcount >= 60)
+			{
+				App->fade->FadeToBlack(this, (Module*)App->scene2, false, false, 60);
+				App->player->position.x = 30;
+				App->render->camera.x = 0;
+			}
+			/*stage1 = false;
+			stage2 = true;
 			nextStage = false;
-			App->audio->PlayMusic("Audio/music/mission_3.ogg", 2.0f);
+			App->audio->PlayMusic("Audio/music/mission_2.ogg", 0.5f);*/
 		}
 	}
-	if (nextStage && stage3)
-	{
-
-	}
-
+	
 	if (App->ui->lose)
 	{
 		if (losecounter <= 120) losecounter++;
@@ -204,25 +159,12 @@ Update_Status ModuleScene::PostUpdate()
 		App->render->Blit(skyTexture, 0, -265, SDL_FLIP_NONE, &sky, 0.5f); // sky
 		App->render->Blit(stageTexture, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 1.0f); // ground
 
-
 		if (App->audio->isPlaying);
 		else
 		{
 			App->audio->isPlaying = true;
 			App->audio->PlayMusic("Audio/music/mission_1.ogg", 2.0f);
 		}
-	}
-	else if (stage2)
-	{
-		App->render->Blit(skyTexture2, 0, -265, SDL_FLIP_NONE, &sky, 0.375f); // sky
-		App->render->Blit(stageTexture2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 0.75f); // ground
-
-	}
-	else if (stage3)
-	{
-		App->render->Blit(skyTexture3, 0, 0, SDL_FLIP_NONE, &sky, 0.75); // sky
-		App->render->Blit(stageTexture3, 0, 0, SDL_FLIP_NONE, &ground, 0.75f); // ground
-
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

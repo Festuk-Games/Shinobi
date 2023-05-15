@@ -74,6 +74,12 @@ bool InitialScene::Start()
 
 Update_Status InitialScene::Update()
 {
+
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	{
+		App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 50);
+	}
+
 	if (writefx <= 28 && delay <= 320)
 	{
 		if (aux == 10)

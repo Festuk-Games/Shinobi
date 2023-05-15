@@ -79,24 +79,21 @@ bool SceneIntro::Start()
 	currentAnimation = &lightAnim;
 	currentAnimation->Reset();
 
-	/*delay = 0;
+	delay = 0;
 	counter = 0;
 	scount = 0;
 
 	for (int i = 0; i <= 5; i++)
 	{
-		if (logos[i].radius >= 0 && delay >= i * 3)
-		{
-			logos[i].centerX = 141;
-			logos[i].centerY = 14;
-			logos[i].time = 0.0f;
-			logos[i].radius = 150.0f;
-			logos[i].angularStep = 0.05f;
-			logos[i].angularVelocity = 0.2f;
-			logos[i].logopos.x = logos[i].centerX + logos[i].radius * sin(logos[i].angularStep * logos[i].time);
-			logos[i].logopos.y = logos[i].centerY + logos[i].radius * cos(logos[i].angularStep * logos[i].time);
-		}
-	}*/
+		logos[i].centerX = 141;
+		logos[i].centerY = 14;
+		logos[i].time = 0.0f;
+		logos[i].radius = 150.0f;
+		logos[i].angularStep = 0.05f;
+		logos[i].angularVelocity = 0.2f;
+		logos[i].logopos.x = 0;
+		logos[i].logopos.y = 0;
+	}
 
 	return ret;
 }
