@@ -62,49 +62,32 @@ bool ModuleScene2::Start()
 	stageTexture2 = App->textures->Load("Assets/Scenes/layer_a1.png");
 	skyTexture2 = App->textures->Load("Assets/Scenes/layer_b1.png");
 
-	//App->collisions->AddCollider({ 419, 175, 28, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 704, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 864, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1408, 143, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1408, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1440, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1472, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 544, 63, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 288, 175, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 576, 175, 64, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 896, 175, 64, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 960, 143, 352, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1024, 111, 224, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1120, 79, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1312, 175, 96, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1568, 175, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1600, 143, 96, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1600, 111, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1696, 175, 32, 1 }, Collider::Type::GROUND);
 
-	//App->collisions->AddCollider({ 416, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 704, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 864, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 1408, 144, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 1408, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 1440, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 1472, 176, 32, 32 }, Collider::Type::BOX);
-
-	////App->collisions->AddCollider({ 544, 64, 32, 32 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 288, 176, 32, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 576, 176, 64, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 896, 176, 64, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 960, 144, 352, 64 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1024, 112, 224, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1120, 80, 32, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1312, 176, 96, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1568, 176, 32, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1600, 144, 96, 64 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1600, 112, 32, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1696, 176, 32, 32 }, Collider::Type::BOX);
 
 	App->collisions->AddCollider({ 0, 207, 2048, 2 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 96, 95, 992, 7 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1296, 95, 656, 7 }, Collider::Type::GROUND);
-
-	//App->collisions->AddCollider({ 80, -90, 16, 186 }, Collider::Type::WALL);
-	//App->collisions->AddCollider({ 1088, -90, 16, 186 }, Collider::Type::WALL);
-	//App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
-	//App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
-	//
-
-	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1000, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1600, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 350, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 500, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1800, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 1200, 130);
-
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 800, 208 - 29);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1200, 208 - 29);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
-
+	
 	return ret;
 }
 
