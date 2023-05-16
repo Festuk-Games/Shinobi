@@ -136,7 +136,9 @@
     <ClInclude Include="MissionNumScene.h">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleScene2.h" />
+    <ClInclude Include="ModuleScene2.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -236,7 +238,7 @@
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScene2.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
