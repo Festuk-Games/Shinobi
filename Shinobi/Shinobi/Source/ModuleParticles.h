@@ -64,6 +64,8 @@ public:
 	Particle hit;
 	Particle bonus500;
 	Particle pow;
+	Particle ultimate, ultimate2;
+	Particle ulti, ulti2, ulti3, ulti4, ulti5, ulti6;
 };
 
 #endif // !__MODULEPARTICLES_H__

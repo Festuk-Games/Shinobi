@@ -22,7 +22,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/bullets.png");
+	texture = App->textures->Load("Assets/bullets2.png");
 
 	// shuriken particle
 	shuriken.anim.PushBack({ 287, 15, 16, 13 });
@@ -55,6 +55,54 @@ bool ModuleParticles::Start()
 	pow.anim.PushBack({ 0, 0, 0, 0 });
 	pow.anim.loop = false;
 	pow.anim.speed = 0.04f;
+
+	ultimate.anim.PushBack({ 6, 122, 38, 66 });
+	ultimate.anim.PushBack({ 0, 0, 0, 0 });
+	ultimate.anim.loop = false;
+	ultimate.speed = iPoint(1, 0);
+	ultimate.anim.speed = 0.02f;
+
+	ultimate2.anim.PushBack({ 6, 122, 38, 66 });
+	ultimate2.anim.PushBack({ 0, 0, 0, 0 });
+	ultimate2.anim.loop = false;
+	ultimate2.speed = iPoint(-1, 0);
+	ultimate2.anim.speed = 0.02f;
+
+	ulti.anim.PushBack({ 58, 122, 38, 66 });
+	ulti.anim.PushBack({ 0, 0, 0, 0 });
+	ulti.anim.loop = false;
+	ulti.speed = iPoint(0, -4);
+	ulti.anim.speed = 0.01f;
+
+	ulti2.anim.PushBack({ 108, 122, 45, 66 });
+	ulti2.anim.PushBack({ 0, 0, 0, 0 });
+	ulti2.anim.loop = false;
+	ulti2.speed = iPoint(4, -4);
+	ulti2.anim.speed = 0.01f;
+
+	ulti3.anim.PushBack({ 165, 137, 59, 34 });
+	ulti3.anim.PushBack({ 0, 0, 0, 0 });
+	ulti3.anim.loop = false;
+	ulti3.speed = iPoint(4, 0);
+	ulti3.anim.speed = 0.01f;
+
+	ulti4.anim.PushBack({ 58, 122, 38, 66 });
+	ulti4.anim.PushBack({ 0, 0, 0, 0 });
+	ulti4.anim.loop = false;
+	ulti4.speed = iPoint(0, 4);
+	ulti4.anim.speed = 0.01f;
+
+	ulti5.anim.PushBack({ 108, 122, 45, 66 });
+	ulti5.anim.PushBack({ 0, 0, 0, 0 });
+	ulti5.anim.loop = false;
+	ulti5.speed = iPoint(-4, -4);
+	ulti5.anim.speed = 0.01f;
+
+	ulti6.anim.PushBack({ 165, 137, 59, 34 });
+	ulti6.anim.PushBack({ 0, 0, 0, 0 });
+	ulti6.anim.loop = false;
+	ulti6.speed = iPoint(-4, 0);
+	ulti6.anim.speed = 0.01f;
 
 	return true;
 }
