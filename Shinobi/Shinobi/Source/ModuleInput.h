@@ -74,7 +74,7 @@ public:
 
 public:
 	// An array to fill in the state of all the keyboard keys
-	Key_State keys[MAX_KEYS] = { KEY_IDLE };
+	KEY_STATE keys[MAX_KEYS] = { KEY_IDLE };
 
 	// An array to fill in all detected gamepads
 	GamePad pads[MAX_PADS];
