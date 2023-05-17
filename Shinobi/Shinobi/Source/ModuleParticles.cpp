@@ -149,18 +149,25 @@ Update_Status ModuleParticles::PostUpdate()
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* particle = particles[i];
+		SDL_RendererFlip fliptype = SDL_FLIP_NONE;
 
 		if (particle != nullptr && particle->isAlive && !particle->fliph && !particle->flipv)
 		{
 			App->render->Blit(texture, particle->position.x, particle->position.y, SDL_FLIP_NONE, &(particle->anim.GetCurrentFrame()));
 		}
-		else if (particle != nullptr && particle->isAlive && particle->fliph)
+		else if (particle != nullptr && particle->isAlive && particle->fliph && !particle->flipv)
 		{
 			App->render->Blit(texture, particle->position.x, particle->position.y, SDL_FLIP_HORIZONTAL, &(particle->anim.GetCurrentFrame()));
 		}
-		else if (particle != nullptr && particle->isAlive && particle->flipv)
+		else if (particle != nullptr && particle->isAlive && particle->flipv && !particle->fliph)
 		{
 			App->render->Blit(texture, particle->position.x, particle->position.y, SDL_FLIP_VERTICAL, &(particle->anim.GetCurrentFrame()));
+		}
+		else if (particle != nullptr && particle->isAlive && particle->flipv && particle->fliph)
+		{
+			fliptype = static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+
+			App->render->Blit(texture, particle->position.x, particle->position.y, fliptype, &(particle->anim.GetCurrentFrame()));
 		}
 	}
 
@@ -213,18 +220,22 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			if (particles[i]->speed == iPoint(4, -4))
 			{
 				particles[i]->speed = iPoint(-4, -4);
+				particles[i]->fliph = true;
 			}
 			else if (particles[i]->speed == iPoint(-4, -4))
 			{
 				particles[i]->speed = iPoint(-4, 4);
+				particles[i]->flipv = true;
 			}
 			else if (particles[i]->speed == iPoint(-4, 4))
 			{
 				particles[i]->speed = iPoint(4, 4);
+				particles[i]->fliph = false;
 			}
 			else if (particles[i]->speed == iPoint(4, 4))
 			{
 				particles[i]->speed = iPoint(4, -4);
+				particles[i]->flipv = false;
 			}
 
 			else if (particles[i]->speed == iPoint(4, 0))
