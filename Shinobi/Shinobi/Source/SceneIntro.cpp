@@ -85,7 +85,7 @@ bool SceneIntro::Start()
 
 	for (int i = 0; i <= 5; i++)
 	{
-		logos[i].centerX = 141;
+		logos[i].centerX = 121;
 		logos[i].centerY = 14;
 		logos[i].time = 0.0f;
 		logos[i].radius = 150.0f;
@@ -143,17 +143,17 @@ Update_Status SceneIntro::PostUpdate()
 		if (delay >= i*3) App->render->Blit(logos[i].logo, logos[i].logopos.x, logos[i].logopos.y, SDL_FLIP_NONE, NULL);
 	}
 	
-	App->render->Blit(sega, 150, 180, SDL_FLIP_NONE, NULL);
+	App->render->Blit(sega, 128, 180, SDL_FLIP_NONE, NULL);
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	App->render->Blit(light, 145, 114, SDL_FLIP_NONE, &rect);
 
-	App->render->Blit(text, 242, 208, SDL_FLIP_NONE, &segarect);
-	App->render->Blit(text, 290, 207, SDL_FLIP_NONE, &nums);
-	if (counter <= 30) App->render->Blit(text, 144, 144, SDL_FLIP_NONE, &coin);
+	App->render->Blit(text, 232, 208, SDL_FLIP_NONE, &segarect);
+	App->render->Blit(text, 280, 207, SDL_FLIP_NONE, &nums);
+	if (counter <= 30) App->render->Blit(text, 122, 144, SDL_FLIP_NONE, &coin);
 
-	if (scount <= 4) App->render->Blit(text2, 140, 64, SDL_FLIP_NONE, &shinobi);
-	else App->render->Blit(text2, 140, 64, SDL_FLIP_NONE, &shinobi2);
+	if (scount <= 4) App->render->Blit(text2, 120, 64, SDL_FLIP_NONE, &shinobi);
+	else App->render->Blit(text2, 120, 64, SDL_FLIP_NONE, &shinobi2);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
