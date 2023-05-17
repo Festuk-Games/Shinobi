@@ -121,7 +121,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY_NEAR][Collider::Type::FEET] = false;
 
 	matrix[Collider::Type::ULTIMATE][Collider::Type::PLAYER_SHOT] = true;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::NONE] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ULTIMATE] = true;
 
 }
 
@@ -236,8 +236,8 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::ENEMY_NEAR: // white
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha, -1.0f);
 			break;
-			case Collider::Type::ULTIMATE: // white
-			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha, 0.0F);
+			case Collider::Type::ULTIMATE: // green
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha, 0.0f);
 			break;
 		}
 	}
