@@ -39,13 +39,13 @@ Application::Application()
 
 	modules[8] = scene = new ModuleScene(false);
 	modules[9] = scene2 = new ModuleScene2(false);
-	modules[10] = player = new ModulePlayer(false);
-	modules[11] = hostage = new ModuleHostage(false);
-	modules[12] = enemies = new ModuleEnemies(false);
+	modules[10] = particles = new ModuleParticles(false);
+	modules[11] = player = new ModulePlayer(false);
+	modules[12] = hostage = new ModuleHostage(false);
+	modules[13] = enemies = new ModuleEnemies(false);
 
-	modules[13] = auxscene = new ModuleAuxScene(false);
-	modules[14] = ui = new ModuleUI(false);
-	modules[15] = particles = new ModuleParticles(false);
+	modules[14] = auxscene = new ModuleAuxScene(false);
+	modules[15] = ui = new ModuleUI(false);
 	modules[16] = collisions = new ModuleCollisions(false);
 	modules[17] = fade = new ModuleFadeToBlack(true);
 	modules[18] = render = new ModuleRender(true);

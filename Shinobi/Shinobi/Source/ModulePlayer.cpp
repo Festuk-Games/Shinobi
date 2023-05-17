@@ -606,29 +606,42 @@ Update_Status ModulePlayer::Update()
 				else currentAnimation = &crouchGunIdleAnim;
 			}
 		}
-		
-		if (App->input->keys[SDL_SCANCODE_F] == KEY_DOWN)
-		{
-			App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 20, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 30, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 40, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 10, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 20, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 30, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 40, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 50, position.y - 60, Collider::Type::PLAYER_SHOT);
-		}
 
 		if (App->input->keys[SDL_SCANCODE_G] == KEY_DOWN)
 		{
-			App->particles->AddParticle(App->particles->ulti, position.x - 10, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ulti, position.x + 10, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ulti2, position.x + 15, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ulti2, position.x + 25, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ulti3, position.x + 30, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ulti3, position.x + 30, position.y - 70, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 42, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 18, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 34, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 26, position.y - 62, Collider::Type::PLAYER_SHOT);
+
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 50, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 10, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 42, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 18, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 34, position.y - 62, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 26, position.y - 62, Collider::Type::PLAYER_SHOT);
+
+
+			App->particles->AddParticle(App->particles->ulti, position.x - 10, position.y - 90, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti, position.x + 10, position.y - 90, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti2, position.x + 20, position.y - 90, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti2, position.x + 30, position.y - 80, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti3, position.x + 40, position.y - 80, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti3, position.x + 40, position.y - 70, Collider::Type::PLAYER_SHOT);
+
+			App->particles->AddParticle(App->particles->ulti4, position.x - 10, position.y - 70, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti4, position.x + 10, position.y - 70, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti5, position.x - 20, position.y - 90, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti5, position.x - 30, position.y - 80, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti6, position.x - 40, position.y - 80, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti6, position.x - 40, position.y - 70, Collider::Type::PLAYER_SHOT);
+
+			App->particles->AddParticle(App->particles->ulti7, position.x + 20, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti7, position.x + 30, position.y - 70, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti8, position.x + 20, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ulti8, position.x + 30, position.y - 70, Collider::Type::PLAYER_SHOT);
 		}
 
 		//key conditions

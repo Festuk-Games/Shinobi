@@ -146,7 +146,7 @@ Update_Status SceneIntro::PostUpdate()
 	App->render->Blit(sega, 128, 180, SDL_FLIP_NONE, NULL);
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	App->render->Blit(light, 145, 114, SDL_FLIP_NONE, &rect);
+	App->render->Blit(light, 126, 114, SDL_FLIP_NONE, &rect);
 
 	App->render->Blit(text, 232, 208, SDL_FLIP_NONE, &segarect);
 	App->render->Blit(text, 280, 207, SDL_FLIP_NONE, &nums);
