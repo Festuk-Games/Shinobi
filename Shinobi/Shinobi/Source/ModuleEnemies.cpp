@@ -10,6 +10,7 @@
 #include "Enemy_Gunner.h"
 #include "Enemy_Fighter.h"
 #include "Enemy_Soldier.h"
+#include "Enemy_Purple.h"
 
 #include "ModuleCollisions.h"
 
@@ -34,6 +35,7 @@ bool ModuleEnemies::Start()
 	gunner = App->textures->Load("Assets/gun.png");
 	fighter = App->textures->Load("Assets/fighter.png");
 	soldier = App->textures->Load("Assets/soldier.png");
+	purple = App->textures->Load("Assets/purple.png");
 	return true;
 }
 
@@ -80,6 +82,7 @@ bool ModuleEnemies::CleanUp()
 	App->textures->Unload(gunner);
 	App->textures->Unload(fighter);
 	App->textures->Unload(soldier);
+	App->textures->Unload(purple);
 
 	return true;
 }
@@ -163,6 +166,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case ENEMY_TYPE::SOLDIER:
 					enemies[i] = new Enemy_Soldier(info.x, info.y);
 					enemies[i]->texture = soldier;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
+				case ENEMY_TYPE::PURPLE:
+					enemies[i] = new Enemy_Purple(info.x, info.y);
+					enemies[i]->texture = purple;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					break;
 			}

@@ -8,6 +8,7 @@
 #include "Enemy_Gunner.h"
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
+#include "Enemy_Purple.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {

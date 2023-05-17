@@ -100,10 +100,10 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
 		App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
 	}
-
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 350, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1000, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1600, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 350, 130);
+	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 350, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 500, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1800, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 130);
