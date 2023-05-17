@@ -609,16 +609,16 @@ Update_Status ModulePlayer::Update()
 		
 		if (App->input->keys[SDL_SCANCODE_F] == KEY_DOWN)
 		{
-			App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 20, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 30, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 40, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 10, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 20, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 30, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 40, position.y - 60, Collider::Type::NONE);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 50, position.y - 60, Collider::Type::NONE);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 20, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 30, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 40, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 10, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 20, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 30, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 40, position.y - 60, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->ultimate2, position.x - 50, position.y - 60, Collider::Type::PLAYER_SHOT);
 		}
 
 		if (App->input->keys[SDL_SCANCODE_G] == KEY_DOWN)

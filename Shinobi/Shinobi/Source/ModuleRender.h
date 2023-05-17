@@ -63,6 +63,8 @@ public:
 
 	int jumpcam = 0;
 
+	Collider* cameracol = nullptr;
+
 };
 
 #endif //__MODULE_RENDER_H__

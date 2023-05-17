@@ -15,6 +15,7 @@ using namespace std;
 #include "SceneIntro.h"
 #include "ModuleScene.h"
 #include "ModuleUI.h"
+#include "ModuleCollisions.h"
 
 ModuleRender::ModuleRender(bool startEnabled) : Module(startEnabled)
 {
@@ -46,6 +47,8 @@ bool ModuleRender::Init()
 	}
 
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH*3, SCREEN_HEIGHT*3);
+
+	cameracol = App->collisions->AddCollider({ 0, 0, 320,  1}, Collider::Type::ULTIMATE);
 
 	return ret;
 }
