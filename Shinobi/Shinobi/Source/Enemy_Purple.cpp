@@ -111,6 +111,8 @@ void Enemy_Purple::Update()
 				if (position.x - App->player->position.x <= -(pdistance - 140))
 				{
 					currentAnim = &walkAnim;
+					collider->rect.h = 70;
+					collider->SetPos(position.x, position.y - 20);
 					position.x++;
 				}
 				else if (shot >= 100)
