@@ -64,6 +64,9 @@ public:
 	int jumpcam = 0;
 
 	Collider* cameracol = nullptr;
+	Collider* cameracol2 = nullptr;
+	Collider* cameracol3 = nullptr;
+	Collider* cameracol4 = nullptr;
 
 };
 

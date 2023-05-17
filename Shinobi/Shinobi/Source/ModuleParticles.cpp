@@ -70,37 +70,37 @@ bool ModuleParticles::Start()
 
 	ulti.anim.PushBack({ 58, 122, 38, 66 });
 	//ulti.anim.PushBack({ 0, 0, 0, 0 });
-	ulti.anim.loop = false;
+	ulti.anim.loop = true;
 	ulti.speed = iPoint(0, -4);
 	ulti.anim.speed = 0.01f;
 
 	ulti2.anim.PushBack({ 108, 122, 45, 66 });
 	/*ulti2.anim.PushBack({ 0, 0, 0, 0 });*/
-	ulti2.anim.loop = false;
+	ulti2.anim.loop = true;
 	ulti2.speed = iPoint(4, -4);
 	ulti2.anim.speed = 0.01f;
 
 	ulti3.anim.PushBack({ 165, 137, 59, 34 });
 	//ulti3.anim.PushBack({ 0, 0, 0, 0 });
-	ulti3.anim.loop = false;
+	ulti3.anim.loop = true;
 	ulti3.speed = iPoint(4, 0);
 	ulti3.anim.speed = 0.01f;
 
 	ulti4.anim.PushBack({ 58, 122, 38, 66 });
 	//ulti4.anim.PushBack({ 0, 0, 0, 0 });
-	ulti4.anim.loop = false;
+	ulti4.anim.loop = true;
 	ulti4.speed = iPoint(0, 4);
 	ulti4.anim.speed = 0.01f;
 
 	ulti5.anim.PushBack({ 108, 122, 45, 66 });
 	//ulti5.anim.PushBack({ 0, 0, 0, 0 });
-	ulti5.anim.loop = false;
+	ulti5.anim.loop = true;
 	ulti5.speed = iPoint(-4, -4);
 	ulti5.anim.speed = 0.01f;
 
 	ulti6.anim.PushBack({ 165, 137, 59, 34 });
 	//ulti6.anim.PushBack({ 0, 0, 0, 0 });
-	ulti6.anim.loop = false;
+	ulti6.anim.loop = true;
 	ulti6.speed = iPoint(-4, 0);
 	ulti6.anim.speed = 0.01f;
 
@@ -150,9 +150,17 @@ Update_Status ModuleParticles::PostUpdate()
 	{
 		Particle* particle = particles[i];
 
-		if (particle != nullptr && particle->isAlive)
+		if (particle != nullptr && particle->isAlive && !particle->fliph && !particle->flipv)
 		{
 			App->render->Blit(texture, particle->position.x, particle->position.y, SDL_FLIP_NONE, &(particle->anim.GetCurrentFrame()));
+		}
+		else if (particle != nullptr && particle->isAlive && particle->fliph)
+		{
+			App->render->Blit(texture, particle->position.x, particle->position.y, SDL_FLIP_HORIZONTAL, &(particle->anim.GetCurrentFrame()));
+		}
+		else if (particle != nullptr && particle->isAlive && particle->flipv)
+		{
+			App->render->Blit(texture, particle->position.x, particle->position.y, SDL_FLIP_VERTICAL, &(particle->anim.GetCurrentFrame()));
 		}
 	}
 
@@ -199,11 +207,47 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			particles[i] = nullptr;
 			break;
 		}
-		else if (particles[i] != nullptr && c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ULTIMATE)
+		else if (particles[i] != nullptr && particles[i]->collider == c1 && c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ULTIMATE)
 		{
-			particles[i]->speed = iPoint(0, 2);
-			particles[i+1]->speed = iPoint(0, 2);
-			break;
+
+			if (particles[i]->speed == iPoint(4, -4))
+			{
+				particles[i]->speed = iPoint(-4, -4);
+			}
+			else if (particles[i]->speed == iPoint(-4, -4))
+			{
+				particles[i]->speed = iPoint(-4, 4);
+			}
+			else if (particles[i]->speed == iPoint(-4, 4))
+			{
+				particles[i]->speed = iPoint(4, 4);
+			}
+			else if (particles[i]->speed == iPoint(4, 4))
+			{
+				particles[i]->speed = iPoint(4, -4);
+			}
+
+			else if (particles[i]->speed == iPoint(4, 0))
+			{
+				particles[i]->speed = iPoint(-4, 0);
+				particles[i]->fliph = true;
+			}
+			else if (particles[i]->speed == iPoint(-4, 0))
+			{
+				particles[i]->speed = iPoint(4, 0);
+				particles[i]->fliph = false;
+			}
+
+			else if (particles[i]->speed == iPoint(0, 4))
+			{
+				particles[i]->speed = iPoint(0, -4);
+				particles[i]->flipv = false;
+			}
+			else if (particles[i]->speed == iPoint(0, -4))
+			{
+				particles[i]->speed = iPoint(0, 4);
+				particles[i]->flipv = true;
+			}
 		}
 	}
 }

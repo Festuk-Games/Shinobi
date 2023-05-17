@@ -49,6 +49,9 @@ bool ModuleRender::Init()
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH*3, SCREEN_HEIGHT*3);
 
 	cameracol = App->collisions->AddCollider({ 0, 0, 320,  1}, Collider::Type::ULTIMATE);
+	cameracol2 = App->collisions->AddCollider({ 319, 0, 1,  224 }, Collider::Type::ULTIMATE);
+	cameracol3 = App->collisions->AddCollider({ 0, 223, 320,  1 }, Collider::Type::ULTIMATE);
+	cameracol4 = App->collisions->AddCollider({ 0, 0, 1,  224 }, Collider::Type::ULTIMATE);
 
 	return ret;
 }
