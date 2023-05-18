@@ -164,6 +164,10 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	crouchGunAnim.PushBack({ 286, 401, 76, 66 });
 	crouchGunAnim.loop = true;
 	crouchGunAnim.speed = 0.1f;
+
+	ultiAnim.PushBack({ 992, 30, 76, 66 });
+	ultiAnim.loop = false;
+	ultiAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -190,7 +194,7 @@ bool ModulePlayer::Start()
 	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, this);
 	enemyNearCollider = App->collisions->AddCollider({ position.x-50, position.y, 135, 58 }, Collider::Type::ENEMY_NEAR, this);
 
-	
+	ultiTimer = 0;
 
 	return ret;
 } 
@@ -310,6 +314,7 @@ Update_Status ModulePlayer::Update()
 		}
 		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && !isCollidingRight && position.x < 2010)
 		{
+			ulti = false;
 			right = true;
 			isWalking = true;
 			if (!isPowerUp) currentAnimation = &walkAnim;
@@ -628,6 +633,15 @@ Update_Status ModulePlayer::Update()
 
 		if (App->input->keys[SDL_SCANCODE_G] == KEY_DOWN)
 		{
+			ulti = true;
+			currentAnimation = &ultiAnim;
+			currentAnimation->Reset();
+			App->particles->AddParticle(App->particles->ultimateEffect, position.x - 10, position.y - 80, Collider::Type::NONE);
+		}
+			
+		if (ulti && ultiTimer <= 100) ultiTimer++;
+		if (ulti && ultiTimer == 80)
+		{
 			App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 62, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 62, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultimate, position.x + 42, position.y - 62, Collider::Type::PLAYER_SHOT);
@@ -641,8 +655,11 @@ Update_Status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->ultimate2, position.x - 18, position.y - 62, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultimate2, position.x - 34, position.y - 62, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultimate2, position.x - 26, position.y - 62, Collider::Type::PLAYER_SHOT);
-
-
+		}
+		if (ulti && ultiTimer == 100)
+		{
+			ulti = false;
+			ultiTimer = 0;
 			App->particles->AddParticle(App->particles->ulti, position.x - 10, position.y - 90, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ulti, position.x + 10, position.y - 90, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ulti9, position.x + 20, position.y - 90, Collider::Type::PLAYER_SHOT);
@@ -662,6 +679,7 @@ Update_Status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->ulti8, position.x - 20, position.y - 60, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ulti8, position.x - 30, position.y - 70, Collider::Type::PLAYER_SHOT);
 		}
+			
 
 		//key conditions
 
@@ -713,8 +731,8 @@ Update_Status ModulePlayer::Update()
 			isShooting = false;
 			isCrouching = false;
 			isKicking = false;
-			if (!isPowerUp) currentAnimation = &idleAnim;
-			else currentAnimation = &idlePowAnim;
+			if (!isPowerUp && !ulti) currentAnimation = &idleAnim;
+			else if (!ulti) currentAnimation = &idlePowAnim;
 		}
 
 

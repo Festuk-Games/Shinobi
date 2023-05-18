@@ -64,6 +64,21 @@ bool ModuleParticles::Start()
 	pow.anim.loop = false;
 	pow.anim.speed = 0.04f;
 
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 15; j++)
+		{
+			ultimateEffect.anim.PushBack({62*j,199 + 60*i,63,61});
+		}
+	}
+	//for (int j = 0; j < 11; j++)
+	//{
+	//	ultimateEffect.anim.PushBack({ 62 * j,199 + 60 * 6,63,61 });
+	//}
+	ultimateEffect.anim.loop = false;
+	ultimateEffect.anim.speed = 0.8f;
+
 	ultimate.anim.PushBack({ 4, 122, 46, 66 });
 	ultimate.anim.PushBack({ 0, 0, 0, 0 });
 	ultimate.anim.loop = false;

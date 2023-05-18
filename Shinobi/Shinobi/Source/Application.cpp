@@ -33,8 +33,8 @@ Application::Application()
 	modules[1] = input = new ModuleInput(true);
 	modules[2] = textures = new ModuleTextures(true);
 
-	modules[3] = ranking = new SceneRanking(true);
-	//modules[3] = logo = new LogoScene(true);
+	//modules[3] = ranking = new SceneRanking(true);
+	modules[3] = logo = new LogoScene(true);
 	modules[4] = initial = new InitialScene(false);
 	modules[5] = intro = new SceneIntro(false);
 	modules[6] = missionNum = new MissionNumScene(false);
@@ -43,10 +43,10 @@ Application::Application()
 	modules[8] = scene = new ModuleScene(false);
 	modules[9] = scene2 = new ModuleScene2(false);
 	modules[10] = sceneboss = new BossScene(false);
-	modules[11] = particles = new ModuleParticles(false);
-	modules[12] = hostage = new ModuleHostage(false);
-	modules[13] = enemies = new ModuleEnemies(false);
-	modules[14] = player = new ModulePlayer(false);
+	modules[11] = hostage = new ModuleHostage(false);
+	modules[12] = enemies = new ModuleEnemies(false);
+	modules[13] = player = new ModulePlayer(false);
+	modules[14] = particles = new ModuleParticles(false);
 
 	modules[15] = auxscene = new ModuleAuxScene(false);
 	modules[16] = ui = new ModuleUI(false);

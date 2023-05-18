@@ -75,6 +75,7 @@ public:
 	Animation powAttackAnim;
 	Animation crouchPowAttackAnim;
 	Animation crouchGunIdleAnim;
+	Animation ultiAnim;
 
 	iPoint diePosition;
 	iPoint jumpPosition;
@@ -99,6 +100,9 @@ public:
 	bool isCollidingLeft = false;
 	bool L2 = false;
 	bool ground = false;
+
+	bool ulti = false;
+	int ultiTimer = 0;
 
 	bool right = true;
 	//bool left = false;
