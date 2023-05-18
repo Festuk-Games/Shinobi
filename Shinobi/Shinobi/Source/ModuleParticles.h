@@ -64,6 +64,7 @@ public:
 	Particle hit;
 	Particle bonus500;
 	Particle pow;
+	Particle powgun;
 	Particle ultimate, ultimate2;
 	Particle ulti, ulti2, ulti3, ulti4, ulti5, ulti6, ulti7, ulti8, ulti9, ulti10;
 };

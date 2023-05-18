@@ -32,6 +32,14 @@ bool ModuleParticles::Start()
 	shuriken.anim.loop = true;
 	shuriken.anim.speed = 0.2f;
 
+	powgun.anim.PushBack({ 362, 19, 13, 6 });
+	powgun.anim.PushBack({ 345, 19, 13, 6 });
+	powgun.anim.PushBack({ 383, 19, 13, 6 });
+	powgun.anim.PushBack({ 345, 19, 13, 6 });
+	powgun.speed = iPoint(5, 0);
+	powgun.anim.loop = true;
+	powgun.anim.speed = 0.2f;
+
 	patada.anim.PushBack ({0, 0, 0, 0}) ;
 
 

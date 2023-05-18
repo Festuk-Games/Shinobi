@@ -350,13 +350,13 @@ Update_Status ModulePlayer::Update()
 				App->audio->PlayFx(App->audio->shuriken);
 				if (right)
 				{
-					App->particles->shuriken.speed = iPoint(5, 0);
-					App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+					App->particles->powgun.speed = iPoint(5, 0);
+					App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
 				}
 				else
 				{
-					App->particles->shuriken.speed = iPoint(-5, 0);
-					App->particles->AddParticle(App->particles->shuriken, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
+					App->particles->powgun.speed = iPoint(-5, 0);
+					App->particles->AddParticle(App->particles->powgun, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
 				}
 			}
 			else if(enemyNear)
@@ -528,24 +528,43 @@ Update_Status ModulePlayer::Update()
 				position.x -= speed;
 			}
 			//crouch attack
-			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !enemyNear && !isPowerUp)
+			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !enemyNear)
 			{
-				isShooting = true;
-				currentAnimation = &crouchAttackAnim;
-				App->audio->PlayFx(App->audio->shuriken);
-				if (right)
+				if (!enemyNear && !isPowerUp)
 				{
-					App->particles->shuriken.speed = iPoint(5, 0);
-					App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
+					isShooting = true;
+					currentAnimation = &crouchAttackAnim;
+					App->audio->PlayFx(App->audio->shuriken);
+					if (right)
+					{
+						App->particles->shuriken.speed = iPoint(5, 0);
+						App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
+					}
+					else
+					{
+						App->particles->shuriken.speed = iPoint(-5, 0);
+						App->particles->AddParticle(App->particles->shuriken, position.x, position.y - 30, Collider::Type::PLAYER_SHOT);
+					}
 				}
-				else
+				else if (!enemyNear && isPowerUp)
 				{
-					App->particles->shuriken.speed = iPoint(-5, 0);
-					App->particles->AddParticle(App->particles->shuriken, position.x, position.y - 30, Collider::Type::PLAYER_SHOT);
+					isShooting = true;
+					currentAnimation = &crouchAttackAnim;
+					App->audio->PlayFx(App->audio->shuriken);
+					if (right)
+					{
+						App->particles->powgun.speed = iPoint(5, 0);
+						App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
+					}
+					else
+					{
+						App->particles->powgun.speed = iPoint(-5, 0);
+						App->particles->AddParticle(App->particles->powgun, position.x, position.y - 30, Collider::Type::PLAYER_SHOT);
+					}
 				}
 			}
 			//crouch attack
-			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !enemyNear && isPowerUp)
+			/*else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !enemyNear && isPowerUp)
 			{
 				isShooting = true;
 				currentAnimation = &crouchPowAttackAnim;
@@ -553,7 +572,7 @@ Update_Status ModulePlayer::Update()
 				if (right) App->particles->shuriken.speed = iPoint(5, 0);
 				else App->particles->shuriken.speed = iPoint(-5, 0);
 				App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
-			}
+			}*/
 			//crouch kick / crouch katana
 			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && enemyNear)
 			{
