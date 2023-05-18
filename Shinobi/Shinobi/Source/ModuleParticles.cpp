@@ -130,6 +130,21 @@ bool ModuleParticles::Start()
 	ulti8.speed = iPoint(-4, 4);
 	ulti8.anim.speed = 0.01f;
 
+	ulti9.anim.PushBack({ 108, 122, 45, 66 });
+	ulti9.anim.PushBack({ 108, 122, 45, 66 });
+	ulti9.anim.PushBack({ 0, 0, 0, 0 });
+	ulti9.anim.loop = false;
+	ulti9.speed = iPoint(3, -4);
+	ulti9.anim.speed = 0.01f;
+
+	ulti10.anim.PushBack({ 108, 122, 45, 66 });
+	ulti10.anim.PushBack({ 108, 122, 45, 66 });
+	ulti10.anim.PushBack({ 0, 0, 0, 0 });
+	ulti10.fliph = true;
+	ulti10.anim.loop = false;
+	ulti10.speed = iPoint(-3, -4);
+	ulti10.anim.speed = 0.01f;
+
 	return true;
 }
 
@@ -284,6 +299,27 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			{
 				particles[i]->speed = iPoint(0, 4);
 				particles[i]->flipv = true;
+			}
+
+			else if (particles[i]->speed == iPoint(3, -4))
+			{
+				particles[i]->speed = iPoint(3, 4);
+				particles[i]->flipv = true;
+			}
+			else if (particles[i]->speed == iPoint(3, 4))
+			{
+				particles[i]->speed = iPoint(-3, 4);
+				particles[i]->fliph = true;
+			}
+			else if (particles[i]->speed == iPoint(-3, 4))
+			{
+				particles[i]->speed = iPoint(-3, -4);
+				particles[i]->flipv = false;
+			}
+			else if (particles[i]->speed == iPoint(-3, -4))
+			{
+				particles[i]->speed = iPoint(3, -4);
+				particles[i]->fliph = false;
 			}
 		}
 	}

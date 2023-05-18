@@ -65,7 +65,7 @@ public:
 	Particle bonus500;
 	Particle pow;
 	Particle ultimate, ultimate2;
-	Particle ulti, ulti2, ulti3, ulti4, ulti5, ulti6, ulti7, ulti8;
+	Particle ulti, ulti2, ulti3, ulti4, ulti5, ulti6, ulti7, ulti8, ulti9, ulti10;
 };
 
 #endif // !__MODULEPARTICLES_H__
