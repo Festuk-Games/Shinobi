@@ -81,15 +81,15 @@ bool ModuleInput::CleanUp()
 	LOG("Quitting SDL input event subsystem");
 
 	// Stop rumble from all gamepads and deactivate SDL functionallity
-	/*for (uint i = 0; i < MAX_PADS; ++i)
+	for (uint i = 0; i < MAX_PADS; ++i)
 	{
 		if (pads[i].haptic != nullptr)
 		{
 			SDL_HapticStopAll(pads[i].haptic);
 			SDL_HapticClose(pads[i].haptic);
 		}
-		if (pads[i].controller != nullptr) SDL_GameControllerClose(pads[i].controller);
-	}*/
+		/*if (pads[i].controller != nullptr) SDL_GameControllerClose(pads[i].controller);*/
+	}
 
 	SDL_QuitSubSystem(SDL_INIT_HAPTIC);
 	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);

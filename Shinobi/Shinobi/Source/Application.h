@@ -26,6 +26,7 @@ class InitialScene;
 class LogoScene;
 class MissionNumScene;
 class ModuleScene2;
+class SceneRanking;
 
 class Application
 {
@@ -80,6 +81,8 @@ public:
 	MissionNumScene* missionNum = nullptr;
 
 	ModuleScene2* scene2 = nullptr;
+
+	SceneRanking* ranking = nullptr;
 };
 
 // Global var made extern for Application ---

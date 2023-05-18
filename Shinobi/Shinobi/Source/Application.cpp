@@ -21,6 +21,7 @@
 #include "LogoScene.h"
 #include "MissionNumScene.h"
 #include "ModuleScene2.h"
+#include "SceneRanking.h"
 
 Application::Application()
 {
@@ -31,7 +32,8 @@ Application::Application()
 	modules[1] = input = new ModuleInput(true);
 	modules[2] = textures = new ModuleTextures(true);
 
-	modules[3] = logo = new LogoScene(true);
+	modules[3] = ranking = new SceneRanking(true);
+	//modules[3] = logo = new LogoScene(true);
 	modules[4] = initial = new InitialScene(false);
 	modules[5] = intro = new SceneIntro(false);
 	modules[6] = missionNum = new MissionNumScene(false);
