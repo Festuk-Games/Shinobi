@@ -35,7 +35,7 @@ bool SceneMission::Start()
 
 	timer = 0;
 	changescene = 0;
-	imageX = -50; 
+	imageX = -80; 
 	imageY = 224;
 
 	return ret;
