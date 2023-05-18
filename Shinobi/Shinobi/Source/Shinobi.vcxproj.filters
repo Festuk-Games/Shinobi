@@ -145,6 +145,9 @@
     <ClInclude Include="SceneRanking.h">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="BossScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -250,6 +253,9 @@
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="SceneRanking.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="BossScene.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
   </ItemGroup>

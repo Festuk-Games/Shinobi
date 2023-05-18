@@ -22,6 +22,7 @@
 #include "MissionNumScene.h"
 #include "ModuleScene2.h"
 #include "SceneRanking.h"
+#include "BossScene.h"
 
 Application::Application()
 {
@@ -41,17 +42,18 @@ Application::Application()
 
 	modules[8] = scene = new ModuleScene(false);
 	modules[9] = scene2 = new ModuleScene2(false);
-	modules[10] = particles = new ModuleParticles(false);
-	modules[11] = player = new ModulePlayer(false);
-	modules[12] = hostage = new ModuleHostage(false);
-	modules[13] = enemies = new ModuleEnemies(false);
+	modules[10] = sceneboss = new BossScene(false);
+	modules[11] = particles = new ModuleParticles(false);
+	modules[12] = player = new ModulePlayer(false);
+	modules[13] = hostage = new ModuleHostage(false);
+	modules[14] = enemies = new ModuleEnemies(false);
 
-	modules[14] = auxscene = new ModuleAuxScene(false);
-	modules[15] = ui = new ModuleUI(false);
-	modules[16] = collisions = new ModuleCollisions(false);
-	modules[17] = fade = new ModuleFadeToBlack(true);
-	modules[18] = render = new ModuleRender(true);
-	modules[19] = audio = new ModuleAudio(true);
+	modules[15] = auxscene = new ModuleAuxScene(false);
+	modules[16] = ui = new ModuleUI(false);
+	modules[17] = collisions = new ModuleCollisions(false);
+	modules[18] = fade = new ModuleFadeToBlack(true);
+	modules[19] = render = new ModuleRender(true);
+	modules[20] = audio = new ModuleAudio(true);
 
 }
 

@@ -111,6 +111,12 @@ Update_Status ModuleScene2::Update()
 		}
 	}
 	
+	if (App->player->position.x >= 2000)
+	{
+		App->fade->FadeToBlack(this, (Module*)App->sceneboss, false, false, 60);
+		App->player->position.x = 30;
+		App->render->camera.x = 0;
+	}
 
 	if (App->ui->lose)
 	{
