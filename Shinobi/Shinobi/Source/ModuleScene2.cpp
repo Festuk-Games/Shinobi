@@ -88,7 +88,34 @@ bool ModuleScene2::Start()
 
 	App->collisions->AddCollider({ 0, 207, 2048, 2 }, Collider::Type::GROUND);
 	
+	//rehenes
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 295, 208 - 29- 32);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 870, 208 - 29);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1640, 208 - 29-64);
+	//enemigos luchadores grises
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 325, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 335, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 340, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 525, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 841, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1064, 130-64-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1122, 130 - 64 - 64);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1154, 130 - 64 - 64);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1468, 130);
+
+	//enemigos gunner
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 471, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 576, 130-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 896, 130 - 32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1233, 130 - 32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1624, 130 - 32-64);
+
+	//Enemigos Tochos (purple...)
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 831, 130);
+
+
 	return ret;
+	
 }
 
 Update_Status ModuleScene2::Update()
