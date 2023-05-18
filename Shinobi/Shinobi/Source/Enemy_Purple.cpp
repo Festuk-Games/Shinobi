@@ -1,3 +1,5 @@
+
+using namespace std;
 #include "Enemy_Purple.h"
 
 #include "Application.h"
@@ -69,8 +71,6 @@ void Enemy_Purple::Update()
 				else if (shot >= 100)
 				{
 					currentAnim = &hitAnim;
-					collider->rect.h = 70;
-					collider->SetPos(position.x, position.y - 20);
 					currentAnim->Reset();
 					//App->particles->AddParticle(App->particles->patada, position.x, position.y + 30, Collider::Type::ENEMY_SHOT);
 					attack->rect.w = 10;
@@ -111,8 +111,6 @@ void Enemy_Purple::Update()
 				if (position.x - App->player->position.x <= -(pdistance - 140))
 				{
 					currentAnim = &walkAnim;
-					collider->rect.h = 70;
-					collider->SetPos(position.x, position.y - 20);
 					position.x++;
 				}
 				else if (shot >= 100)
@@ -170,6 +168,9 @@ void Enemy_Purple::Update()
 
 		if (shooting)
 		{
+			cout << position.y<<endl;
+			position.y=139;
+			collider->rect.h = 70;
 			time++;
 			if (time >= 50)
 			{
@@ -185,6 +186,13 @@ void Enemy_Purple::Update()
 				//}
 			}
 		}
+		else
+		{
+			position.y = 159;
+			collider->rect.h = 50;
+			collider->SetPos(position.x, position.y);
+		}
+
 
 		//reload delay
 		if (reloading)
@@ -196,7 +204,7 @@ void Enemy_Purple::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x, position.y );
+		//collider->SetPos(position.x, position.y);
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}
 	else if (die) {

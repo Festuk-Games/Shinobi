@@ -1,5 +1,5 @@
 #include "Enemy_Gunner.h"
-
+using namespace std;
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
@@ -46,18 +46,19 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({position.x+30, position.y+8, 45, 61}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({position.x+20, position.y+8, 45, 61}, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 }
 void Enemy_Gunner::Update()
 {
-	flipPos.x = position.x + 20;
+	flipPos.x = position.x;
 	//std::cout << position.x << std::endl;
 	if (!die)
 	{
 		//walk right
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110)
 		{
+			
 			shot++;
 			if (shot >= 100 && !reloading && bullets >= 1)
 			{
@@ -65,7 +66,7 @@ void Enemy_Gunner::Update()
 				currentAnim->Reset();
 				App->audio->PlayFx(App->audio->shuriken);
 				App->particles->enemyshot.speed = iPoint(-5, 0);
-				App->particles->AddParticle(App->particles->enemyshot, position.x - 10, position.y + 25, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemyshot, position.x, position.y + 25, Collider::Type::ENEMY_SHOT);
 				shot = 0;
 				shooting = true;
 				bullets--;
@@ -103,7 +104,7 @@ void Enemy_Gunner::Update()
 				currentAnim->Reset();
 				App->audio->PlayFx(App->audio->shuriken);
 				App->particles->enemyshot.speed = iPoint(5, 0);
-				App->particles->AddParticle(App->particles->enemyshot, position.x + 10, position.y + 25, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemyshot, position.x +69, position.y + 25, Collider::Type::ENEMY_SHOT);
 				shot = 0;
 				shooting = true;
 				bullets--;
@@ -181,7 +182,7 @@ void Enemy_Gunner::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x+30, position.y + 8);
+		collider->SetPos(position.x+20, position.y + 8);
 	}
 	else if (die) currentAnim = &dieAnim;
 
