@@ -44,9 +44,9 @@ Application::Application()
 	modules[9] = scene2 = new ModuleScene2(false);
 	modules[10] = sceneboss = new BossScene(false);
 	modules[11] = particles = new ModuleParticles(false);
-	modules[12] = player = new ModulePlayer(false);
-	modules[13] = hostage = new ModuleHostage(false);
-	modules[14] = enemies = new ModuleEnemies(false);
+	modules[12] = hostage = new ModuleHostage(false);
+	modules[13] = enemies = new ModuleEnemies(false);
+	modules[14] = player = new ModulePlayer(false);
 
 	modules[15] = auxscene = new ModuleAuxScene(false);
 	modules[16] = ui = new ModuleUI(false);

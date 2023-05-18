@@ -12,6 +12,8 @@
 #include "Enemy_Soldier.h"
 #include "Enemy_Purple.h"
 
+#include "ModuleScene.h"
+
 #include "ModuleCollisions.h"
 
 #define SPAWN_MARGIN 10000
@@ -22,6 +24,11 @@ ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 		enemies[i] = nullptr;
 	LOG("Loading enemies");
+
+	ground.x = 0;
+	ground.y = 0;
+	ground.w = 2048;
+	ground.h = 512;
 }
 
 ModuleEnemies::~ModuleEnemies()
@@ -36,6 +43,9 @@ bool ModuleEnemies::Start()
 	fighter = App->textures->Load("Assets/fighter.png");
 	soldier = App->textures->Load("Assets/soldier.png");
 	purple = App->textures->Load("Assets/purple.png");
+
+	stageTextureL2 = App->textures->Load("Assets/Scenes/layer_aa.png");
+
 	return true;
 }
 
@@ -60,6 +70,10 @@ Update_Status ModuleEnemies::PostUpdate()
 	{
 		if (enemies[i] != nullptr)
 			enemies[i]->Draw();
+	}
+	if (App->scene->IsEnabled())
+	{
+		App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 1.0f);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

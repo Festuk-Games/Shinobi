@@ -3,6 +3,8 @@
 
 #include "Module.h"
 
+#include "ModuleRender.h"
+
 #define MAX_ENEMIES 50
 
 enum class ENEMY_TYPE
@@ -78,6 +80,9 @@ private:
 	SDL_Texture* soldier = nullptr;
 	SDL_Texture* purple = nullptr;
 
+	SDL_Texture* stageTextureL2 = nullptr;
+
+	SDL_Rect ground;
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
 };
