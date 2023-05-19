@@ -4,10 +4,17 @@
 #include "SDL/include/SDL.h"
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
-{}
+{
+	for (uint i = 0; i < MAX_KEYS; ++i)
+		keys[i] = KEY_IDLE;
+
+	memset(&pads[0], 0, sizeof(GamePad) * MAX_PADS);
+}
 
 ModuleInput::~ModuleInput()
-{}
+{
+
+}
 
 bool ModuleInput::Init()
 {
@@ -20,6 +27,7 @@ bool ModuleInput::Init()
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+
 	if (SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) < 0)
 	{
 		LOG("SDL_INIT_GAMECONTROLLER could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -36,7 +44,8 @@ bool ModuleInput::Init()
 }
 
 Update_Status ModuleInput::PreUpdate()
-{//Read all keyboard data and update our custom array
+{
+	//Read all keyboard data and update our custom array
 	const Uint8* keyboard = SDL_GetKeyboardState(NULL);
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
@@ -52,21 +61,21 @@ Update_Status ModuleInput::PreUpdate()
 	{
 		switch (event.type)
 		{
-		case(SDL_CONTROLLERDEVICEADDED):
-		{
-			HandleDeviceConnection(event.cdevice.which);
-			break;
-		}
-		case(SDL_CONTROLLERDEVICEREMOVED):
-		{
-			HandleDeviceRemoval(event.cdevice.which);
-			break;
-		}
-		case(SDL_QUIT):
-		{
-			return Update_Status::UPDATE_STOP;
-			break;
-		}
+			case(SDL_CONTROLLERDEVICEADDED):
+			{
+				HandleDeviceConnection(event.cdevice.which);
+				break;
+			}
+			case(SDL_CONTROLLERDEVICEREMOVED):
+			{
+				HandleDeviceRemoval(event.cdevice.which);
+				break;
+			}
+			case(SDL_QUIT):
+			{
+				return Update_Status::UPDATE_STOP;
+				break;
+			}
 		}
 	}
 
@@ -74,7 +83,6 @@ Update_Status ModuleInput::PreUpdate()
 
 	return Update_Status::UPDATE_CONTINUE;
 }
-
 
 bool ModuleInput::CleanUp()
 {
@@ -88,7 +96,7 @@ bool ModuleInput::CleanUp()
 			SDL_HapticStopAll(pads[i].haptic);
 			SDL_HapticClose(pads[i].haptic);
 		}
-		/*if (pads[i].controller != nullptr) SDL_GameControllerClose(pads[i].controller);*/
+		if (pads[i].controller != nullptr) SDL_GameControllerClose(pads[i].controller);
 	}
 
 	SDL_QuitSubSystem(SDL_INIT_HAPTIC);
