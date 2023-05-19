@@ -1,6 +1,4 @@
-
-using namespace std;
-#include "Enemy_Purple.h"
+#include "Enemy_green.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
@@ -9,50 +7,51 @@ using namespace std;
 #include "ModuleParticles.h"
 #include <iostream>
 
-Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
+Enemy_green::Enemy_green(int x, int y) : Enemy(x, y)
 {
 	//initial position
 
 	//idle animation
-	idleAnim.PushBack({ 6,19,54,72 });
+	idleAnim.PushBack({ 389,74,96,72 });
 
 	//walk animation
-	walkAnim.PushBack({ 6,19,54,72 });
-	walkAnim.PushBack({ 61,19,54,72 });
-	walkAnim.PushBack({ 116,19,54,72 });
-	walkAnim.PushBack({ 171,19,54,72 });
-	walkAnim.speed = 0.05f;
+	walkAnim.PushBack({ 1,74,96,72 });
+	walkAnim.PushBack({ 98,74,96,72 });
+	walkAnim.PushBack({ 195,74,96,72 });
+	walkAnim.PushBack({ 292,74,96,72 });
+	walkAnim.speed = 0.1f;
 
 	currentAnim = &walkAnim;
 
 	//shoot animation
-	hitAnim.PushBack({ 6,92,54,72 });
-	hitAnim.PushBack({ 61,92,54,72 });
-	hitAnim.PushBack({ 116,92,54,72 });
-	hitAnim.PushBack({ 171,92,54,72 });
-	hitAnim.PushBack({ 6,165,54,72 });
-	hitAnim.PushBack({ 61,165,54,72 });
+	hitAnim.PushBack({ 389,74,96,72 });
+	hitAnim.PushBack({ 486,74,96,72 });
+	hitAnim.PushBack({ 389,1,96,72 });
+	hitAnim.PushBack({ 292,1,96,72 });
+	hitAnim.PushBack({ 195,1,96,72 });
+	hitAnim.PushBack({ 98,1,96,72 });
+	hitAnim.PushBack({ 1,1,96,72 });
 	hitAnim.speed = 0.14f;
 	hitAnim.loop = false;
 
-	dieAnim.PushBack({ 116,165,54,72 });
-	dieAnim.PushBack({ 171,165,54,72 });
-	dieAnim.PushBack({ 6,238,54,72 });
+	dieAnim.PushBack({ 1,147,96,72 });
+	dieAnim.PushBack({ 98,147,96,72 });
+	dieAnim.PushBack({ 195,147,96,72 });
 	dieAnim.speed = 0.08f;
 	dieAnim.loop = false;
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x, position.y, 40, 50 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 25, position.y + 4, 35, 62 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
 }
 
-void Enemy_Purple::Update()
+void Enemy_green::Update()
 {
-	flipPos.x = position.x;
+	flipPos.x = position.x + 20;
 	//std::cout << position.x << std::endl;
 	if (!die)
 	{
@@ -168,9 +167,6 @@ void Enemy_Purple::Update()
 
 		if (shooting)
 		{
-			cout << position.y<<endl;
-			position.y=139;
-			collider->rect.h = 70;
 			time++;
 			if (time >= 50)
 			{
@@ -186,13 +182,6 @@ void Enemy_Purple::Update()
 				//}
 			}
 		}
-		else
-		{
-			
-			collider->rect.h = 50;
-			collider->SetPos(position.x, position.y);
-		}
-
 
 		//reload delay
 		if (reloading)
@@ -204,7 +193,7 @@ void Enemy_Purple::Update()
 				time = 0;
 			}
 		}
-		//collider->SetPos(position.x, position.y);
+		collider->SetPos(position.x + 25, position.y + 4);
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}
 	else if (die) {
