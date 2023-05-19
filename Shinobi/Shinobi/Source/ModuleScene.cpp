@@ -109,9 +109,16 @@ bool ModuleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 1200, 130);
 
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 800, 208 - 29);
+	//Enemigos suelo arriba
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 610, 97-78);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 958, 97 - 78);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 982, 97 - 78);
+
+	
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1200, 208 - 29);
+	
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 705, 97 - 29);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1020, 97 - 29);
 	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
 	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
 
