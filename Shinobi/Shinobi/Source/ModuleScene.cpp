@@ -100,18 +100,27 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
 		App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
 	}
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 350, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1000, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1600, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 350, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 500, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1800, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 1200, 130);
+	
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 272, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 341, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 580, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 707, 130-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 726, 130-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 740, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 783, 130);
 
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 800, 208 - 29);
+
+
+	//Enemigos suelo arriba
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 610, 97-78);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 958, 97 - 78);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 982, 0);
+
+	
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1200, 208 - 29);
+	
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 705, 97 - 29);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1020, 97 - 29);
 	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
 	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
 

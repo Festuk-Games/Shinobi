@@ -67,7 +67,18 @@ public:
 	Particle powgun;
 	Particle ultimate, ultimate2;
 	Particle ultimateEffect;
-	Particle ulti, ulti2, ulti3, ulti4, ulti5, ulti6, ulti7, ulti8, ulti9, ulti10;
+	Particle ultiCenterUp, 
+			ultiUpRight, 
+			ultiUpRight2, 
+			ultiRight, 
+			ultiDownRight, 
+			ultiCenterDown, 
+			ultiDownLeft, 
+			ultiLeft, 
+			ultiUpLeft, 
+			ultiUpLeft2,
+			ultiDownLeft2,
+			ultiDownRight2;
 };
 
 #endif // !__MODULEPARTICLES_H__
