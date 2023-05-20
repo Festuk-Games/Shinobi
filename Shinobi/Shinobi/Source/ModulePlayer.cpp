@@ -672,7 +672,6 @@ Update_Status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->ultiCenterDown, position.x + 10, position.y - 70, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultiUpLeft2, position.x - 20, position.y - 90, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultiUpLeft, position.x - 30, position.y - 80, Collider::Type::PLAYER_SHOT);
-
 			App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 80, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 70, Collider::Type::PLAYER_SHOT);
 

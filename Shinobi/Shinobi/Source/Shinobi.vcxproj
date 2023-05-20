@@ -79,6 +79,7 @@
     <ClInclude Include="BossScene.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemy_Boss.h" />
     <ClInclude Include="Enemy_Fighter.h" />
     <ClInclude Include="Enemy_green.h" />
     <ClInclude Include="Enemy_Gunner.h" />
@@ -119,6 +120,7 @@
     <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Enemy_Boss.cpp" />
     <ClCompile Include="Enemy_Fighter.cpp" />
     <ClCompile Include="Enemy_green.cpp" />
     <ClCompile Include="Enemy_Gunner.cpp" />
