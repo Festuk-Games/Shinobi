@@ -89,6 +89,9 @@
     <ClInclude Include="Hostage_Hostage.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="LogoScene.h" />
+    <ClInclude Include="Mission2Scene.h" />
+    <ClInclude Include="MissionBossScene.h" />
+    <ClInclude Include="MissionCompleteScene.h" />
     <ClInclude Include="MissionNumScene.h" />
     <ClInclude Include="ModuleScene2.h" />
     <ClInclude Include="SceneMission.h" />
@@ -131,6 +134,9 @@
     <ClCompile Include="Hostage_Hostage.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="LogoScene.cpp" />
+    <ClCompile Include="Mission2Scene.cpp" />
+    <ClCompile Include="MissionBossScene.cpp" />
+    <ClCompile Include="MissionCompleteScene.cpp" />
     <ClCompile Include="MissionNumScene.cpp" />
     <ClCompile Include="ModuleScene2.cpp" />
     <ClCompile Include="SceneMission.cpp" />
