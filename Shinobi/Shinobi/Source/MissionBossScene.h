@@ -33,8 +33,8 @@ public:
 public:
 
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* mission1_0 = nullptr;
-	SDL_Texture* mission1_1 = nullptr;
+	SDL_Texture* mission1_2 = nullptr;
+	SDL_Texture* mission1_3 = nullptr;
 
 	// The sprite rectangle for the ground
 	SDL_Rect ground;

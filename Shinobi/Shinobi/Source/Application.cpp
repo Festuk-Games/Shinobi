@@ -23,6 +23,9 @@
 #include "ModuleScene2.h"
 #include "SceneRanking.h"
 #include "BossScene.h"
+#include "Mission2Scene.h"
+#include "MissionBossScene.h"
+#include "MissionCompleteScene.h"
 
 Application::Application()
 {
@@ -33,7 +36,6 @@ Application::Application()
 	modules[1] = input = new ModuleInput(true);
 	modules[2] = textures = new ModuleTextures(true);
 
-	//modules[3] = ranking = new SceneRanking(true);
 	modules[3] = logo = new LogoScene(true);
 	modules[4] = initial = new InitialScene(false);
 	modules[5] = intro = new SceneIntro(false);
@@ -41,19 +43,23 @@ Application::Application()
 	modules[7] = mission = new SceneMission(false);
 
 	modules[8] = scene = new ModuleScene(false);
-	modules[9] = scene2 = new ModuleScene2(false);
-	modules[10] = sceneboss = new BossScene(false);
-	modules[11] = hostage = new ModuleHostage(false);
-	modules[12] = enemies = new ModuleEnemies(false);
-	modules[13] = player = new ModulePlayer(false);
-	modules[14] = particles = new ModuleParticles(false);
+	modules[9] = mission2 = new Mission2Scene(false);
+	modules[10] = scene2 = new ModuleScene2(false);
+	modules[11] = missionBoss = new MissionBossScene(false);
+	modules[12] = sceneboss = new BossScene(false);
+	modules[13] = missionComplete = new MissionCompleteScene(false);
+	modules[14] = ranking = new SceneRanking(false);
+	modules[15] = hostage = new ModuleHostage(false);
+	modules[16] = enemies = new ModuleEnemies(false);
+	modules[17] = player = new ModulePlayer(false);
+	modules[18] = particles = new ModuleParticles(false);
 
-	modules[15] = auxscene = new ModuleAuxScene(false);
-	modules[16] = ui = new ModuleUI(false);
-	modules[17] = collisions = new ModuleCollisions(false);
-	modules[18] = fade = new ModuleFadeToBlack(true);
-	modules[19] = render = new ModuleRender(true);
-	modules[20] = audio = new ModuleAudio(true);
+	modules[19] = auxscene = new ModuleAuxScene(false);
+	modules[20] = ui = new ModuleUI(false);
+	modules[21] = collisions = new ModuleCollisions(false);
+	modules[22] = fade = new ModuleFadeToBlack(true);
+	modules[23] = render = new ModuleRender(true);
+	modules[24] = audio = new ModuleAudio(true);
 
 }
 

@@ -31,8 +31,8 @@ bool MissionCompleteScene::Start()
 
 	bool ret = true;
 
-	mission1_0 = App->textures->Load("Assets/Scenes/mission1_0.png");
-	mission1_1 = App->textures->Load("Assets/Scenes/mission1_1.png");
+	mission1_3 = App->textures->Load("Assets/Scenes/mission1_3.png");
+	mission1_boss = App->textures->Load("Assets/Scenes/mission1_boss.png");
 
 	timer = 0;
 	changescene = 0;
@@ -54,7 +54,7 @@ Update_Status MissionCompleteScene::Update()
 	}
 	if (changescene >= 100)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->scene, false, true, 40);
+		App->fade->FadeToBlack(this, (Module*)App->ranking, false, true, 40);
 		imageY -= 8;
 		imageX += 6;
 	}
@@ -73,15 +73,15 @@ Update_Status MissionCompleteScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
 
-	if (s1) App->render->Blit(mission1_0, imageX, imageY, SDL_FLIP_NONE, &ground, 1.0f);
-	else App->render->Blit(mission1_1, imageX, imageY, SDL_FLIP_NONE, &ground, 1.0f);
+	if (s1) App->render->Blit(mission1_3, imageX, imageY, SDL_FLIP_NONE, &ground, 1.0f);
+	else App->render->Blit(mission1_boss, imageX, imageY, SDL_FLIP_NONE, &ground, 1.0f);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 bool MissionCompleteScene::CleanUp()
 {
-	App->textures->Unload(mission1_0);
-	App->textures->Unload(mission1_1);
+	App->textures->Unload(mission1_3);
+	App->textures->Unload(mission1_boss);
 	return true;
 }

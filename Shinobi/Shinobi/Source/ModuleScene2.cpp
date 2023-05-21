@@ -128,7 +128,7 @@ Update_Status ModuleScene2::Update()
 		{
 			clear = true;
 			clearcount++;
-			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
+			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
 			//stage1 = false;
 			//stage2 = true;
 			//App->player->position.x = 30;
@@ -140,7 +140,7 @@ Update_Status ModuleScene2::Update()
 	
 	if (App->player->position.x >= 2000)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneboss, false, false, 60);
+		App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
 		App->player->position.x = 30;
 		App->render->camera.x = 0;
 	}

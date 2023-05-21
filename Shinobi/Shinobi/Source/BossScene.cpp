@@ -77,7 +77,7 @@ Update_Status BossScene::Update()
 		{
 			clear = true;
 			clearcount++;
-			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
+			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->missionComplete, false, false, 60);
 			//stage1 = false;
 			//stage2 = true;
 			//App->player->position.x = 30;
