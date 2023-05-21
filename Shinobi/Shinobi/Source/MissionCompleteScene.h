@@ -32,19 +32,24 @@ public:
 
 public:
 
-	SDL_Texture* grey = nullptr;
-	SDL_Texture* name = nullptr;
-	SDL_Texture* mission = nullptr;
+	// The scene sprite sheet loaded into an SDL_Texture
+	SDL_Texture* mission1_0 = nullptr;
+	SDL_Texture* mission1_1 = nullptr;
 
-	SDL_Rect missionrect, namerect, missionrect2;
-	int counter = 0;
+	// The sprite rectangle for the ground
+	SDL_Rect ground;
+
+	// The different sprite sections for the flag
+	Animation flag;
+
+	bool stage1 = true, stage1L2 = false, stage2 = false, stage3 = false;
+	bool nextStage = true;
+
+	int timer = 0;
+	bool s1 = true;
 	int changescene = 0;
 
-	Animation missionAnim;
-	Animation* currentAnim = nullptr;
-
-	int writefx = 0;
-	int aux = 10;
+	int imageX = -80, imageY = 224;
 };
 
 #endif 
