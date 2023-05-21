@@ -66,7 +66,7 @@ public:
 	Particle pow;
 	Particle powgun;
 	Particle ultimate, ultimate2;
-	Particle ultimateEffect;
+	Particle ultimateEffect, ultimateEffect2;
 	Particle ultiCenterUp, 
 			ultiUpRight, 
 			ultiUpRight2, 
