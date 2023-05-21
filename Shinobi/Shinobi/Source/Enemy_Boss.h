@@ -16,11 +16,6 @@ public:
 	void Update() override;
 
 private:
-	// The position (as ratio) in the wave at a specific moment
-	float waveRatio = 0.0f;
-
-	// The speed at which the wave ratio is increased
-	float waveRatioSpeed = 0.01f;
 
 	// The original spawning position. The wave will be calculated from that
 	int spawn_y = 0;
@@ -31,10 +26,15 @@ private:
 	Path path;
 
 	// The enemy animation
+
 	Animation idleAnim;
-	Animation walkAnim;
+	Animation headAnim;
+	Animation legsAnim;
+	Animation attackAnim1;
 	Animation hitAnim;
 	Animation dieAnim;
+
+
 
 	bool changedirection = true;
 
