@@ -54,6 +54,7 @@ void Enemy_Fighter::Update()
 	//std::cout << position.x << std::endl;
 	if (!die)
 	{
+		
 		//walk right
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y>=110 && App->player->alive && !isCollidingRight)
 		{
@@ -95,8 +96,8 @@ void Enemy_Fighter::Update()
 				else changedirection = false;
 
 			}
-
 		}
+
 		//walk left
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110 && App->player->alive && !isCollidingLeft)
 		{
@@ -105,7 +106,6 @@ void Enemy_Fighter::Update()
 			{
 
 				shot++;
-
 				flip = false;
 
 				if (position.x - App->player->position.x <= -(pdistance - 140))
@@ -141,7 +141,16 @@ void Enemy_Fighter::Update()
 					flip = false;
 				}
 			}
-
+		}
+		if (isCollidingLeft&& !isCollidingRight)
+		{
+			currentAnim = &walkAnim;
+			position.x++;
+		}
+		if (isCollidingRight&& !isCollidingLeft)
+		{
+			currentAnim = &walkAnim;
+			position.x--;
 		}
 		//walk path
 		else if (!pl && !reloading && !shooting)
@@ -149,13 +158,11 @@ void Enemy_Fighter::Update()
 			currentAnim = &walkAnim;
 			if (position.x >= spawnPos.x + 100 && !isCollidingRight)
 			{
-				isCollidingLeft = false;
 				changedirection = true;
 				flip = true;
 			}
 			else if (position.x <= spawnPos.x - 50 && !isCollidingLeft)
 			{
-				isCollidingRight = false;
 				changedirection = false;
 				flip = false;
 			}

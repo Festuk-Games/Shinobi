@@ -81,7 +81,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Boss.h" />
     <ClInclude Include="Enemy_Fighter.h" />
-    <ClInclude Include="Enemy_green.h" />
+    <ClInclude Include="Enemy_Green.h" />
     <ClInclude Include="Enemy_Gunner.h" />
     <ClInclude Include="Enemy_Purple.h" />
     <ClInclude Include="Enemy_Soldier.h" />
@@ -125,7 +125,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Boss.cpp" />
     <ClCompile Include="Enemy_Fighter.cpp" />
-    <ClCompile Include="Enemy_green.cpp" />
+    <ClCompile Include="Enemy_Green.cpp" />
     <ClCompile Include="Enemy_Gunner.cpp" />
     <ClCompile Include="Enemy_Purple.cpp" />
     <ClCompile Include="Enemy_Soldier.cpp" />
