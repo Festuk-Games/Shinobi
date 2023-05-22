@@ -204,7 +204,7 @@ bool ModulePlayer::Start()
 
 	texture = App->textures->Load("Assets/main.png"); 
 	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
-	collider = App->collisions->AddCollider({ position.x+5, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 	feet = App->collisions->AddCollider({ position.x+5, position.y, 35, 1 }, Collider::Type::FEET, this);
 	enemyNearCollider = App->collisions->AddCollider({ position.x-50, position.y, 135, 58 }, Collider::Type::ENEMY_NEAR, this);
 
@@ -241,7 +241,7 @@ Update_Status ModulePlayer::Update()
 					else if (jumpAttackDelay <= 0 && isPowerUp) currentAnimation = &jumpUpPowAnim;
 					else jumpAttackDelay--;
 					position.y -= 8;
-					collider->SetPos(position.x, position.y - 58); 
+					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x+5, position.y-1);
 					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isCollidingRight)
@@ -570,8 +570,16 @@ Update_Status ModulePlayer::Update()
 			}
 		else
 		{
-			collider->rect.h = 58;
-			collider->SetPos(position.x+5, position.y - 58);
+			if (right)
+			{
+				collider->rect.h = 58;
+				collider->SetPos(position.x + 3, position.y - 58);
+			}
+			else
+			{
+				collider->rect.h = 58;
+				collider->SetPos(position.x - 3, position.y - 58);
+			}
 		}
 		//crouch animation
 		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
@@ -858,6 +866,9 @@ Update_Status ModulePlayer::Update()
 	//ground
 	if (!ground && !isJumping) position.y+=2;
 
+	if (isCollidingRight) cout << "collision right" << endl;
+	if (isCollidingLeft) cout << "collision left" << endl;
+
 	//update colliders position
 	//collider->SetPos(position.x, position.y-58);
 	feet->SetPos(position.x+5, position.y-1);
@@ -904,14 +915,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		{
 			isCollidingRight = true;
 			isCollidingLeft = false;
-			cout << "collision right" << endl;
 		}
-		else
+		else if (!right && collision)
 		{
-			
 			isCollidingLeft = true;
 			isCollidingRight = false;
-			cout << "collision left" << endl;
 		}
 		
 	}

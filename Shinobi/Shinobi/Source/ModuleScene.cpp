@@ -97,9 +97,9 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1296, 95, 656, 7 }, Collider::Type::GROUND);
 
 		App->collisions->AddCollider({ 80, -90, 16, 186 }, Collider::Type::WALL);
-		App->collisions->AddCollider({ 1088, -90, 16, 186 }, Collider::Type::WALL);
+		App->collisions->AddCollider({ 1086, -90, 16, 186 }, Collider::Type::WALL);
 		App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
-		App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
+		App->collisions->AddCollider({ 1950, -90, 16, 186 }, Collider::Type::WALL);
 	}
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 272, 150);
 
