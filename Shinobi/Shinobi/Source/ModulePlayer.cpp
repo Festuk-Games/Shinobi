@@ -641,7 +641,7 @@ Update_Status ModulePlayer::Update()
 		}
 			
 		if (ulti && ultiTimer <= 120) ultiTimer++;
-		/*if (ulti && ultiTimer == 100)
+		if (ulti && ultiTimer == 100)
 		{
 			App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 62, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 62, Collider::Type::PLAYER_SHOT);
@@ -680,7 +680,7 @@ Update_Status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->ultiDownRight, position.x + 30, position.y - 70, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultiDownLeft2, position.x - 20, position.y - 60, Collider::Type::PLAYER_SHOT);
 			App->particles->AddParticle(App->particles->ultiDownLeft, position.x - 30, position.y - 70, Collider::Type::PLAYER_SHOT);
-		}*/
+		}
 			
 
 		//key conditions
