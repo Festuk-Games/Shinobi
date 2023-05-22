@@ -8,6 +8,7 @@ using namespace std;
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
 
 #include <fstream>
 
@@ -127,9 +128,9 @@ bool ModuleUI::Start()
 
 	hostage = App->textures->Load("Assets/UI/hostage.png");
 	lifes = App->textures->Load("Assets/UI/lifes.png");
-	skill1 = App->textures->Load("Assets/UI/skill1.png");
+	/*skill1 = App->textures->Load("Assets/UI/skill1.png");
 	skill2 = App->textures->Load("Assets/UI/skill2.png");
-	skill3 = App->textures->Load("Assets/UI/skill3.png");
+	skill3 = App->textures->Load("Assets/UI/skill3.png");*/
 	nums = App->textures->Load("Assets/UI/nums.png");
 	text2 = App->textures->Load("Assets/UI/text2.png");
 	go = App->textures->Load("Assets/UI/go.png");
@@ -143,8 +144,27 @@ bool ModuleUI::Start()
 	nextCounter = 0;
 	counter = 0;
 	nextframe = 0;
-	hostages = 3;
-
+	if (App->scene->IsEnabled())
+	{
+		App->scene->nextStage = false;
+		App->scene->clear = false;
+		if (lifenum >=2)
+		{
+			hostages = 3;
+		}
+		skill1 = App->textures->Load("Assets/UI/skill2.png");
+	}
+	else if (App->scene2->IsEnabled())
+	{
+		App->scene->nextStage = false;
+		App->scene->clear = false;
+		if (lifenum >= 2)
+		{
+			hostages = 3;
+		}
+		skill1 = App->textures->Load("Assets/UI/skill3.png");
+	}
+	App->scene->nextStage = false;
 	return ret;
 }
 
@@ -237,9 +257,6 @@ Update_Status ModuleUI::PostUpdate()
 	//Draw the skills icons
 	if (sk1) App->render->Blit(skill1, 246, 210, SDL_FLIP_NONE, &skill, 0.0f);
 	
-	else if (sk2) App->render->Blit(skill2, 246, 210, SDL_FLIP_NONE, &skill, 0.0f);
-
-	else if (sk3) App->render->Blit(skill3, 246, 210, SDL_FLIP_NONE, &skill, 0.0f);
 
 	if (!App->scene->nextStage)
 	{

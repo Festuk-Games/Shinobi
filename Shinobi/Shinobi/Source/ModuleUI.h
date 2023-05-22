@@ -41,7 +41,7 @@ public:
 	SDL_Texture* go = nullptr;
 
 
-	bool sk1 = false, sk2 = true, sk3 = false;
+	bool sk1 = true;
 
 	int timesec2 = 9;
 	int timesec1 = 5;
