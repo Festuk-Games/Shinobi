@@ -185,6 +185,7 @@ bool ModulePlayer::Start()
 	position.x = 30;
 	position.y = 208;
 	App->ui->lifenum = 2;
+	alive = true;
 	currentAnimation = &idleAnim;
 	currentAnimation->Reset();
 
