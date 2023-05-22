@@ -294,13 +294,37 @@ Update_Status ModulePlayer::Update()
 					}
 					if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN)
 					{
-						if (!enemyNear)
+						if (!enemyNear && !isPowerUp)
 						{
 							currentAnimation = &attackJumpAnim2;
 							App->audio->PlayFx(App->audio->shuriken);
-							if (right) App->particles->shuriken.speed = iPoint(5, 0);
-							else App->particles->shuriken.speed = iPoint(-5, 0);
-							App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+							if (right)
+							{
+								App->particles->shuriken.speed = iPoint(5, 0);
+								App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+							}
+							else
+							{
+								App->particles->shuriken.speed = iPoint(-5, 0);
+								App->particles->AddParticle(App->particles->shuriken, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
+							}
+						}
+						else if (!enemyNear && isPowerUp)
+						{
+							currentAnimation = &attackJumpAnim2;
+							App->audio->PlayFx(App->audio->shuriken);
+							if (right)
+							{
+								App->particles->powgun.fliph = false;
+								App->particles->powgun.speed = iPoint(5, 0);
+								App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+							}
+							else
+							{
+								App->particles->powgun.fliph = true;
+								App->particles->powgun.speed = iPoint(-5, 0);
+								App->particles->AddParticle(App->particles->powgun, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
+							}
 						}
 						else
 						{
@@ -356,11 +380,13 @@ Update_Status ModulePlayer::Update()
 				App->audio->PlayFx(App->audio->shuriken);
 				if (right)
 				{
+					App->particles->powgun.fliph = false;
 					App->particles->powgun.speed = iPoint(5, 0);
 					App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
 				}
 				else
 				{
+					App->particles->powgun.fliph = true;
 					App->particles->powgun.speed = iPoint(-5, 0);
 					App->particles->AddParticle(App->particles->powgun, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
 				}
@@ -510,7 +536,7 @@ Update_Status ModulePlayer::Update()
 			collider->SetPos(position.x+5, position.y - 58);
 		}
 		//crouch animation
-		if (App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT)
+		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
 		{
 			isCrouching = true;
 			
@@ -559,11 +585,13 @@ Update_Status ModulePlayer::Update()
 					App->audio->PlayFx(App->audio->shuriken);
 					if (right)
 					{
+						App->particles->powgun.fliph = false;
 						App->particles->powgun.speed = iPoint(5, 0);
 						App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
 					}
 					else
 					{
+						App->particles->powgun.fliph = true;
 						App->particles->powgun.speed = iPoint(-5, 0);
 						App->particles->AddParticle(App->particles->powgun, position.x, position.y - 30, Collider::Type::PLAYER_SHOT);
 					}
@@ -688,9 +716,9 @@ Update_Status ModulePlayer::Update()
 
 		//not crouching
 		if (isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT
-			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_S] == KEY_IDLE
 			|| isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT
-			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_IDLE)
+			&& App->input->keys[SDL_SCANCODE_S] == KEY_IDLE)
 		{
 			isCrouching = false;
 			if (!isPowerUp) currentAnimation = &idleAnim;
@@ -698,20 +726,20 @@ Update_Status ModulePlayer::Update()
 		}
 		//not walking
 		if (isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT
+			&& App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT
 			|| isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT)
+			&& App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
 		{
 			isWalking = false;
 		}
 		if (isCrouching && App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT)
+			&& App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
 		{
 			isShooting = false;
 		}
 		//not kicking
 		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_LCTRL] == KEY_REPEAT)
+			&& App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
 		{
 			//kick++;
 			//if (kick >= 180)
