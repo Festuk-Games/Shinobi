@@ -26,6 +26,11 @@ const Collider* Enemy::GetCollider() const
 	return collider;
 }
 
+const Collider* Enemy::GetAttackCollider() const
+{
+	return attack;
+}
+
 void Enemy::Update()
 {
 	if (currentAnim != nullptr)

@@ -19,7 +19,7 @@ public:
 
 	// Returns the enemy's collider
 	const Collider* GetCollider() const;
-
+	const Collider* GetAttackCollider() const;
 	// Called from inhering enemies' Udpate
 	// Updates animation and collider position
 	virtual void Update();
@@ -48,6 +48,8 @@ public:
 	bool collision = true;
 	bool isCollidingRight = false;
 	bool isCollidingLeft = false;
+	bool attackCol = false;
+	Collider* attack = nullptr;
 
 protected:
 	// A ptr to the current animation
@@ -57,7 +59,6 @@ protected:
 
 	// The enemy's collider
 	Collider* collider = nullptr;
-	Collider* attack = nullptr;
 	Collider* feet = nullptr;
 
 	// Original spawn position. Stored for movement calculations

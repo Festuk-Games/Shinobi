@@ -257,5 +257,15 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 
 			}
 		}
+		if (enemies[i] != nullptr && enemies[i]->GetAttackCollider() == c1)
+		{
+			if (c2->type == Collider::Type::PLAYER) {
+
+				enemies[i]->attackCol = true;
+				enemies[i]->attack->rect.w = 0;
+				enemies[i]->attack->rect.h = 0;
+				enemies[i]->attack->SetPos(0, 0);
+			}
+		}
 	}
 }
