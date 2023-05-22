@@ -58,13 +58,13 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	jumpUpFloorAnim.PushBack({ 617, 402, 76, 66 });
 	jumpUpFloorAnim.PushBack({ 692, 402, 76, 66 });
 	jumpUpFloorAnim.loop = false;
-	jumpUpFloorAnim.speed = 0.001f;
+	jumpUpFloorAnim.speed = 0.06f;
 
 	//jump down animation
 	jumpDownFloorAnim.PushBack({ 798, 402, 76, 66 });
 	jumpDownFloorAnim.PushBack({ 873, 402, 76, 66 });
 	jumpDownFloorAnim.loop = false;
-	jumpDownFloorAnim.speed = 0.03f;
+	jumpDownFloorAnim.speed = 0.06f;
 
 	//crouch animation
 	crouchIdleAnim.PushBack({30, 116, 76, 66 });
@@ -139,6 +139,12 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	katanaAnim.loop = false;
 	katanaAnim.speed = 0.3f;
 
+	jumpUpPowAnim.PushBack({ 798, 209, 76, 66 });
+	jumpDownPowAnim.PushBack({ 1023, 209, 76, 66 });
+	jumpUpPowAnim.loop = false;
+	jumpUpPowAnim.speed = 0.1f;
+	jumpDownPowAnim.loop = false;
+	jumpDownPowAnim.speed = 0.1f;
 
 	attackJumpAnim1.PushBack({ 286, 209, 76, 66 });
 	attackJumpAnim1.loop = false;
@@ -151,7 +157,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	katanaJumpAnim.loop = false;
 	katanaJumpAnim.speed = 0.1f;
 
-	crouchPowAttackAnim.PushBack({ 286, 401, 76, 66 });
+	crouchPowAttackAnim.PushBack({ 30, 593, 76, 66 });
 	crouchPowAttackAnim.loop = false;
 	crouchPowAttackAnim.speed = 0.1f;
 
@@ -164,6 +170,13 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	crouchGunAnim.PushBack({ 286, 401, 76, 66 });
 	crouchGunAnim.loop = true;
 	crouchGunAnim.speed = 0.1f;
+
+	attackJumpPowAnim1.PushBack({ 873, 209, 76, 66 });
+	attackJumpPowAnim1.loop = false;
+	attackJumpPowAnim1.speed = 0.1f;
+	attackJumpPowAnim2.PushBack({ 948, 209, 76, 66 });
+	attackJumpPowAnim2.loop = false;
+	attackJumpPowAnim2.speed = 0.1f;
 
 	ultiAnim.PushBack({ 992, 30, 76, 66 });
 	ultiAnim.loop = false;
@@ -224,7 +237,8 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= jumpPosition.y-73)
 				{
-					if (jumpAttackDelay <= 0) currentAnimation = &jumpUpAnim;
+					if (jumpAttackDelay <= 0 && !isPowerUp) currentAnimation = &jumpUpAnim;
+					else if (jumpAttackDelay <= 0 && isPowerUp) currentAnimation = &jumpUpPowAnim;
 					else jumpAttackDelay--;
 					position.y -= 8;
 					collider->SetPos(position.x, position.y - 58); 
@@ -245,19 +259,43 @@ Update_Status ModulePlayer::Update()
 					}
 					if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN)
 					{
-						if (!enemyNear)
+						if (!enemyNear && !isPowerUp)
 						{
 							currentAnimation = &attackJumpAnim1;
 							App->audio->PlayFx(App->audio->shuriken);
-							if (right) App->particles->shuriken.speed = iPoint(5, 0);
-							else App->particles->shuriken.speed = iPoint(-5, 0);
-							App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+							if (right)
+							{
+								App->particles->shuriken.speed = iPoint(5, 0);
+								App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+							}
+							else
+							{
+								App->particles->shuriken.speed = iPoint(-5, 0);
+								App->particles->AddParticle(App->particles->shuriken, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
+							}
+						}
+						else if (!enemyNear && isPowerUp)
+						{
+							currentAnimation = &attackJumpPowAnim1;
+							App->audio->PlayFx(App->audio->shuriken);
+							if (right)
+							{
+								App->particles->powgun.fliph = false;
+								App->particles->powgun.speed = iPoint(5, 0);
+								App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+							}
+							else
+							{
+								App->particles->powgun.fliph = true;
+								App->particles->powgun.speed = iPoint(-5, 0);
+								App->particles->AddParticle(App->particles->powgun, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
+							}
 						}
 						else
 						{
 							currentAnimation = &katanaJumpAnim;
 						}
-						jumpAttackDelay+=5;
+						jumpAttackDelay+=10;
 					}
 
 				}
@@ -270,10 +308,8 @@ Update_Status ModulePlayer::Update()
 			{
 				if (/*position.y >= jumpPosition.y - 72 && position.y <= 208 ||*/ !ground )
 				{
-					if (jumpAttackDelay <= 0)
-					{
-						currentAnimation = &jumpDownAnim;
-					}
+					if (jumpAttackDelay <= 0 && !isPowerUp) currentAnimation = &jumpDownAnim;
+					else if (jumpAttackDelay <= 0 && isPowerUp) currentAnimation = &jumpDownPowAnim;
 					else jumpAttackDelay--;
 					position.y += 4;
 					collider->SetPos(position.x, position.y - 58);
@@ -311,7 +347,7 @@ Update_Status ModulePlayer::Update()
 						}
 						else if (!enemyNear && isPowerUp)
 						{
-							currentAnimation = &attackJumpAnim2;
+							currentAnimation = &attackJumpPowAnim2;
 							App->audio->PlayFx(App->audio->shuriken);
 							if (right)
 							{
@@ -330,7 +366,7 @@ Update_Status ModulePlayer::Update()
 						{
 							currentAnimation = &katanaJumpAnim;
 						}
-						jumpAttackDelay+=5;
+						jumpAttackDelay+=10;
 					}
 				}
 			}
@@ -356,7 +392,7 @@ Update_Status ModulePlayer::Update()
 		}
 
 		// Spawn shuriken particles when pressing LALT
-		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !isCrouching)
+		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !isCrouching && !isJumpingUp1)
 		{
 			isShooting = true;
 			if (!enemyNear && !isPowerUp)
@@ -441,8 +477,6 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= 68)
 				{
-
-					currentAnimation = &jumpUpFloorAnim;
 					currentAnimation->Update();
 					position.y -= 10;
 					collider->SetPos(position.x, position.y - 58);
@@ -581,7 +615,7 @@ Update_Status ModulePlayer::Update()
 				else if (!enemyNear && isPowerUp)
 				{
 					isShooting = true;
-					currentAnimation = &crouchAttackAnim;
+					currentAnimation = &crouchPowAttackAnim;
 					App->audio->PlayFx(App->audio->shuriken);
 					if (right)
 					{
@@ -597,16 +631,6 @@ Update_Status ModulePlayer::Update()
 					}
 				}
 			}
-			//crouch attack
-			/*else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && !enemyNear && isPowerUp)
-			{
-				isShooting = true;
-				currentAnimation = &crouchPowAttackAnim;
-				App->audio->PlayFx(App->audio->shuriken);
-				if (right) App->particles->shuriken.speed = iPoint(5, 0);
-				else App->particles->shuriken.speed = iPoint(-5, 0);
-				App->particles->AddParticle(App->particles->shuriken, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
-			}*/
 			//crouch kick / crouch katana
 			else if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN && !isWalking && enemyNear)
 			{

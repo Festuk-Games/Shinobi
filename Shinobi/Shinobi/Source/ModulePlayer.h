@@ -73,6 +73,8 @@ public:
 	Animation walkGunAnim;
 	Animation idlePowAnim;
 	Animation powAttackAnim;
+	Animation attackJumpPowAnim1, attackJumpPowAnim2;
+	Animation jumpUpPowAnim, jumpDownPowAnim;
 	Animation crouchPowAttackAnim;
 	Animation crouchGunIdleAnim;
 	Animation ultiAnim;
