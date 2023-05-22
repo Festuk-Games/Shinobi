@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "Hostage_Hostage.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
 
 #define SPAWN_MARGIN 10000
 
@@ -167,11 +168,13 @@ void ModuleHostage::OnCollision(Collider* c1, Collider* c2)
 			{
 				if (collision)
 				{
-					hostages[i]->OnCollision(c2); //Notify the hostage of a collision
-					c1->pendingToDelete = true;
-					break;
+					if (hostages[i]->position.y <= 100 && App->player->L2 || hostages[i]->position.y >= 100 && !App->player->L2)
+					{
+						hostages[i]->OnCollision(c2); //Notify the hostage of a collision
+						c1->pendingToDelete = true;
+						break;
+					}
 				}
-				
 			}
 		}
 	}

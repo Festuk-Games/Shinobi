@@ -254,7 +254,7 @@ Update_Status ModulePlayer::Update()
 						right = false;
 						position.x -= speed;
 					}
-					if (position.y <= 97 && App->scene->IsEnabled())
+					if (position.y <= 97 && App->scene->IsEnabled() && L2)
 					{
 						App->render->camera.y+=8;
 						App->render->jumpcam+=2;
@@ -327,7 +327,7 @@ Update_Status ModulePlayer::Update()
 						right = false;
 						position.x -= speed;
 					}
-					if (position.y <= 97 && App->render->jumpcam >= 1 && App->scene->IsEnabled())
+					if (position.y <= 97 && App->render->jumpcam >= 1 && App->scene->IsEnabled() && L2)
 					{
 						App->render->camera.y-=4;
 						App->render->jumpcam--;
