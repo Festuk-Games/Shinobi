@@ -246,10 +246,12 @@ Update_Status ModulePlayer::Update()
 					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isCollidingRight)
 					{
+						right = true;
 						position.x += speed;
 					}
 					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20 && !isCollidingLeft)
 					{
+						right = false;
 						position.x -= speed;
 					}
 					if (position.y <= 97 && App->scene->IsEnabled())
@@ -315,12 +317,14 @@ Update_Status ModulePlayer::Update()
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x+5, position.y-1);
 					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
-					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010)
+					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isCollidingRight)
 					{
+						right = true;
 						position.x += speed;
 					}
-					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20)
+					if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && position.x > 20 && !isCollidingLeft)
 					{
+						right = false;
 						position.x -= speed;
 					}
 					if (position.y <= 97 && App->render->jumpcam >= 1 && App->scene->IsEnabled())
@@ -900,14 +904,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		{
 			isCollidingRight = true;
 			isCollidingLeft = false;
-			cout << "collision" << endl;
+			cout << "collision right" << endl;
 		}
 		else
 		{
 			
 			isCollidingLeft = true;
 			isCollidingRight = false;
-			cout << "collision" << endl;
+			cout << "collision left" << endl;
 		}
 		
 	}

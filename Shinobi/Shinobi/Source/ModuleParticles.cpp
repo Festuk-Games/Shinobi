@@ -31,6 +31,7 @@ bool ModuleParticles::Start()
 	shuriken.speed = iPoint(5, 0);
 	shuriken.anim.loop = true;
 	shuriken.anim.speed = 0.2f;
+	shuriken.lifetime = 80;
 
 	powgun.anim.PushBack({ 362, 19, 13, 6 });
 	powgun.anim.PushBack({ 345, 19, 13, 6 });
@@ -39,6 +40,7 @@ bool ModuleParticles::Start()
 	powgun.speed = iPoint(5, 0);
 	powgun.anim.loop = true;
 	powgun.anim.speed = 0.2f;
+	powgun.lifetime = 80;
 
 	patada.anim.PushBack ({0, 0, 0, 0}) ;
 
