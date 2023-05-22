@@ -67,4 +67,8 @@ void Enemy::OnCollision(Collider* collider)
 		die = true;
 		App->ui->scoreCounter+= 200;
 	}
+	if (collider->type==Collider::Type::WALL)
+	{
+		collision = true;
+	}
 }

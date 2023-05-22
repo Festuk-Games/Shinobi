@@ -52,7 +52,7 @@ void Enemy_Soldier::Update()
 	if (!die)
 	{
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110)
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110 && !isCollidingRight)
 		{
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
@@ -94,7 +94,7 @@ void Enemy_Soldier::Update()
 
 		}
 		//walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110)
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110 && !isCollidingLeft)
 		{
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{

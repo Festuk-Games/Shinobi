@@ -44,6 +44,10 @@ public:
 	int destroyedFx = 0;
 
 	bool ground = false;
+	bool flip = true;
+	bool collision = true;
+	bool isCollidingRight = false;
+	bool isCollidingLeft = false;
 
 protected:
 	// A ptr to the current animation
@@ -59,7 +63,7 @@ protected:
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
 
-	bool flip = true;
+	
 	bool die = false;
 };
 

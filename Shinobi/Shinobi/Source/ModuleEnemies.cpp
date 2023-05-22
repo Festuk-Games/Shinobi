@@ -13,11 +13,12 @@
 #include "Enemy_Purple.h"
 #include "Enemy_green.h"
 #include "Enemy_Boss.h"
-
+using namespace std;
 
 #include "ModuleScene.h"
 
 #include "ModuleCollisions.h"
+#include <iostream>
 
 #define SPAWN_MARGIN 10000
 
@@ -211,9 +212,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
-	for(uint i = 0; i < MAX_ENEMIES; ++i)
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
 			if (c2->type == Collider::Type::PLAYER_SHOT)
 			{
@@ -231,6 +232,29 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				enemies[i]->ground = true;
 				enemies[i]->position.y--;
+			}
+			if (c2->type == Collider::Type::WALL)
+			{
+				
+				if (!enemies[i]->collision)
+				{
+					cout << "No hay colision" << endl;
+					enemies[i]->isCollidingLeft = false;
+					enemies[i]->isCollidingRight = false;
+				}
+				else if (enemies[i]->flip && enemies[i]->collision)
+				{
+					cout << "colision derecha" << endl;
+					enemies[i]->isCollidingRight = true;
+					enemies[i]->isCollidingLeft = false;
+				}
+				else
+				{
+					cout << "colision izq" << endl;
+					enemies[i]->isCollidingLeft = true;
+					enemies[i]->isCollidingRight = false;
+				}
+
 			}
 		}
 	}
