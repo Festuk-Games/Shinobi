@@ -171,6 +171,8 @@ bool ModuleUI::Start()
 Update_Status ModuleUI::Update()
 {
 
+	if (timemin <= 0 && timesec1 <= 0 && timesec2 <= 0)  lose = true;
+
 	//Timer one number every second
 	timef2++;
 	if (timef2 == 60)
@@ -178,7 +180,9 @@ Update_Status ModuleUI::Update()
 		timesec2--;
 		timef2 = 0;
 	}
-	if (timesec2 < 0) timesec2 = 9;
+	if (timemin <= 0 && timesec1 <= 0 && timesec2 <= 0)  timesec2 = 0;
+	else if (timesec2 < 0) timesec2 = 9;
+	
 
 	timef1++;
 	if (timef1 == 600)
@@ -186,7 +190,9 @@ Update_Status ModuleUI::Update()
 		timesec1--;
 		timef1 = 0;
 	}
-	if (timesec1 < 0) timesec1 = 5;
+	if (timemin <= 0 && timesec1 <= 0)  timesec1 = 0;
+	else if (timesec1 < 0) timesec1 = 5;
+
 
 	timef3++;
 	if (timef3 == 600*6)
@@ -194,6 +200,7 @@ Update_Status ModuleUI::Update()
 		timemin--;
 		timef3 = 0;
 	}
+	if (timemin < 0) timemin = 0;
 
 	time1p++;
 	if (time1p == 40)
