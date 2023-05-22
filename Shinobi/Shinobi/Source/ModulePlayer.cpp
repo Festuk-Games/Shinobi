@@ -183,7 +183,7 @@ bool ModulePlayer::Start()
 	
 	//initial position
 	position.x = 30;
-	position.y = 208;
+	position.y = 209;
 	App->ui->lifenum = 2;
 	alive = true;
 	currentAnimation = &idleAnim;
@@ -192,7 +192,7 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/main.png"); 
 	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
 	collider = App->collisions->AddCollider({ position.x+5, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
-	feet = App->collisions->AddCollider({ position.x, position.y, 35, 1 }, Collider::Type::FEET, this);
+	feet = App->collisions->AddCollider({ position.x+5, position.y, 35, 1 }, Collider::Type::FEET, this);
 	enemyNearCollider = App->collisions->AddCollider({ position.x-50, position.y, 135, 58 }, Collider::Type::ENEMY_NEAR, this);
 
 	ultiTimer = 0;
@@ -222,13 +222,13 @@ Update_Status ModulePlayer::Update()
 		{
 			if (!jumpState)
 			{
-				if (position.y >= jumpPosition.y-72)
+				if (position.y >= jumpPosition.y-73)
 				{
 					if (jumpAttackDelay <= 0) currentAnimation = &jumpUpAnim;
 					else jumpAttackDelay--;
 					position.y -= 8;
 					collider->SetPos(position.x, position.y - 58); 
-					feet->SetPos(position.x, position.y-1);
+					feet->SetPos(position.x+5, position.y-1);
 					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isCollidingRight)
 					{
@@ -261,23 +261,23 @@ Update_Status ModulePlayer::Update()
 					}
 
 				}
-				if (position.y == jumpPosition.y - 72)
+				if (position.y <= jumpPosition.y - 73)
 				{
 					jumpState = true;
 				}
 			}
 			else
 			{
-				if (position.y >= jumpPosition.y - 72 && position.y <= 208)
+				if (/*position.y >= jumpPosition.y - 72 && position.y <= 208 ||*/ !ground )
 				{
 					if (jumpAttackDelay <= 0)
 					{
 						currentAnimation = &jumpDownAnim;
 					}
 					else jumpAttackDelay--;
-					position.y += 4.2;
+					position.y += 4;
 					collider->SetPos(position.x, position.y - 58);
-					feet->SetPos(position.x, position.y-1);
+					feet->SetPos(position.x+5, position.y-1);
 					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010)
 					{
@@ -446,9 +446,9 @@ Update_Status ModulePlayer::Update()
 					currentAnimation->Update();
 					position.y -= 10;
 					collider->SetPos(position.x, position.y - 58);
-					feet->SetPos(position.x, position.y - 1);
+					feet->SetPos(position.x+5, position.y - 1);
 				}
-				if (position.y == 68)
+				if (position.y <= 68)
 				{
 					jumpState = true;
 				}
@@ -456,13 +456,13 @@ Update_Status ModulePlayer::Update()
 			else
 			{
 				L2 = true;
-				if (position.y >= 68 && position.y <= 95)
+				if (position.y >= 59 && position.y <= 95)
 				{
 					currentAnimation = &jumpUpFloorAnim;
 					currentAnimation->Update();
 					position.y += speed;
 					collider->SetPos(position.x, position.y - 58);
-					feet->SetPos(position.x, position.y - 1);
+					feet->SetPos(position.x+5, position.y - 1);
 				}
 				if (position.y == 95)
 				{
@@ -487,15 +487,15 @@ Update_Status ModulePlayer::Update()
 		{
 			if (!jumpState)
 			{
-				if (position.y >= 67)
+				if (position.y >= 65)
 				{
 					currentAnimation = &jumpDownFloorAnim;
 					currentAnimation->Update();
-					position.y -= 10;
+					position.y -= 8;
 					collider->SetPos(position.x, position.y - 58);
-					feet->SetPos(position.x, position.y - 1);
+					feet->SetPos(position.x+5, position.y - 1);
 				}
-				if (position.y == 67)
+				if (position.y == 65)
 				{
 					jumpState = true;
 				}
@@ -503,16 +503,16 @@ Update_Status ModulePlayer::Update()
 			else
 			{
 				L2 = false;
-				if (position.y >= 67 && position.y <= 208)
+				if (position.y >= 65 && position.y <= 208)
 				{
 					currentAnimation = &jumpDownFloorAnim;
 					currentAnimation->Update();
-					position.y += speed;
+					position.y += 4;
 					collider->SetPos(position.x, position.y - 58);
-					feet->SetPos(position.x, position.y - 1);
+					feet->SetPos(position.x+5, position.y - 1);
 					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
 				}
-				if (position.y == 208)
+				if (position.y == 209)
 				{
 					isJumpingDown1 = false;
 					isJumpingDown2 = false;
@@ -832,7 +832,7 @@ Update_Status ModulePlayer::Update()
 
 	//update colliders position
 	//collider->SetPos(position.x, position.y-58);
-	feet->SetPos(position.x, position.y-1);
+	feet->SetPos(position.x+5, position.y-1);
 	enemyNearCollider->SetPos(position.x-50, position.y-58);
 	currentAnimation->Update();
 

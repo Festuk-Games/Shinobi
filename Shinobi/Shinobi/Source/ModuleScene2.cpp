@@ -62,31 +62,31 @@ bool ModuleScene2::Start()
 	stageTexture2 = App->textures->Load("Assets/Scenes/layer_a1.png");
 	skyTexture2 = App->textures->Load("Assets/Scenes/layer_b1.png");
 
-	App->collisions->AddCollider({ 288, 175, 32, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 576, 175, 64, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 896, 175, 64, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 960, 143, 352, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1024, 111, 224, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1120, 79, 32, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1312, 175, 96, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1568, 175, 32, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1600, 143, 96, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1600, 111, 32, 1 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1696, 175, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 288, 176, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 576, 176, 64, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 896, 176, 64, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 960, 144, 352, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1024, 112, 224, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1120, 80, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1312, 176, 96, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1568, 176, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1600, 144, 96, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1600, 112, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1696, 176, 32, 1 }, Collider::Type::GROUND);
 
-	App->collisions->AddCollider({ 288, 176, 32, 32 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 576, 176, 64, 32 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 896, 176, 64, 32 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 960, 144, 352, 64 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1024, 112, 224, 32 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1120, 80, 32, 32 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1312, 176, 96, 32 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1568, 176, 32, 32 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1600, 144, 96, 64 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1600, 112, 32, 32 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1696, 176, 32, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 288, 177, 32, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 576, 177, 64, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 896, 177, 64, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 960, 145, 352, 63 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1024, 113, 224, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1120, 81, 32, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1312, 177, 96, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1568, 177, 32, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1600, 145, 96, 63 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1600, 113, 32, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1696, 177, 32, 31 }, Collider::Type::BOX);
 
-	App->collisions->AddCollider({ 0, 207, 2048, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
 	
 	//rehenes
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 295, 208 - 29- 32);
