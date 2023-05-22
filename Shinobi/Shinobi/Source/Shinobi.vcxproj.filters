@@ -133,7 +133,7 @@
     <ClInclude Include="BossScene.h">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy_green.h">
+    <ClInclude Include="Enemy_Green.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemy_Boss.h">
@@ -258,7 +258,7 @@
     <ClCompile Include="BossScene.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy_green.cpp">
+    <ClCompile Include="Enemy_Green.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Enemy_Boss.cpp">
