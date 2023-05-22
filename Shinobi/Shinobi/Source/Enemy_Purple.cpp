@@ -169,8 +169,9 @@ void Enemy_Purple::Update()
 		if (shooting)
 		{
 			cout << position.y<<endl;
-			position.y=139;
-			collider->rect.h = 70;
+			position.y=135;
+			collider->rect.h = 65;
+			collider->SetPos(position.x+5, position.y+7);
 			time++;
 			if (time >= 50)
 			{
@@ -188,9 +189,9 @@ void Enemy_Purple::Update()
 		}
 		else
 		{
-			
+			position.y = 135;
 			collider->rect.h = 50;
-			collider->SetPos(position.x, position.y);
+			collider->SetPos(position.x+6, position.y+22);
 		}
 
 
@@ -209,7 +210,7 @@ void Enemy_Purple::Update()
 	}
 	else if (die) {
 		currentAnim = &dieAnim;
-		collider->SetPos(position.x - 10, position.y + 30);
+		collider->SetPos(position.x , position.y);
 		collider->rect.w = 37;
 		collider->rect.h = 20;
 		attack->rect.w = 0;
