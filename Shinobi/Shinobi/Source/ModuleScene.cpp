@@ -121,7 +121,7 @@ bool ModuleScene::Start()
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 705, 97 - 29);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1020, 97 - 29);
 	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
+	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
 
 	return ret;
 }
