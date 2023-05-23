@@ -51,6 +51,17 @@ bool ModuleParticles::Start()
 	hit.anim.loop = false;
 	hit.anim.speed = 0.3f;
 
+	hitPow.anim.PushBack({ 1, 43, 51, 48 });
+	hitPow.anim.PushBack({ 54, 43, 51, 48 });
+	hitPow.anim.PushBack({ 104, 43, 51, 48 });
+	hitPow.anim.PushBack({ 154, 43, 51, 48 });
+	hitPow.anim.PushBack({ 204, 43, 51, 48 });
+	hitPow.anim.PushBack({ 254, 43, 51, 48 });
+	hitPow.anim.PushBack({ 304, 43, 51, 48 });
+	hitPow.anim.PushBack({ 354, 43, 51, 48 });
+	hitPow.anim.loop = false;
+	hitPow.anim.speed = 0.5f;
+
 	enemyshot.anim.PushBack({ 162, 15, 16, 11 });
 	enemyshot.anim.PushBack({ 177, 15, 16, 11 });
 	enemyshot.anim.loop = true;
@@ -302,7 +313,15 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (particles[i] != nullptr && particles[i]->collider == c1 && c2->type != Collider::Type::ULTIMATE)
 		{
-			AddParticle(hit, particles[i]->position.x, particles[i]->position.y);
+			if (c1->type == Collider::Type::PLAYER_SHOT)
+			{
+				AddParticle(hit, particles[i]->position.x, particles[i]->position.y);
+			}
+			/*else if (c1->type == Collider::Type::PLAYER_SHOT)
+			{
+				AddParticle(hitPow, particles[i]->position.x, particles[i]->position.y-14);
+			}
+			else AddParticle(hit, particles[i]->position.x, particles[i]->position.y);*/
 			delete particles[i];
 			particles[i] = nullptr;
 			break;

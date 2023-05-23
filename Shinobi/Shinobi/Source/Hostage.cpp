@@ -53,13 +53,13 @@ void Hostage::Draw()
 		}
 		if (time == 18 && App->hostage->powerup != 1)
 		{
-			App->particles->AddParticle(App->particles->bonus500, position.x - 20, position.y - 20, Collider::Type::NONE);
+			App->particles->AddParticle(App->particles->bonus500, position.x - 20, position.y - 10, Collider::Type::NONE);
 			time++;
 			App->hostage->powerup++;
 		}
 		if (time == 18 && App->hostage->powerup == 1)
 		{
-			App->particles->AddParticle(App->particles->pow, position.x - 20, position.y - 20, Collider::Type::NONE);
+			App->particles->AddParticle(App->particles->pow, position.x - 20, position.y - 10, Collider::Type::NONE);
 			time++;
 			App->hostage->powerup++;
 			App->player->isPowerUp = true;

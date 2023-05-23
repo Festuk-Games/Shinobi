@@ -64,6 +64,7 @@ public:
 	Particle hit;
 	Particle bonus500;
 	Particle pow;
+	Particle hitPow;
 	Particle powgun;
 	Particle ultimate, ultimate2;
 	Particle ultimateEffect, ultimateEffect2;

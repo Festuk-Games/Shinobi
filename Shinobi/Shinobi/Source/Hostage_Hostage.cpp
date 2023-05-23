@@ -22,12 +22,12 @@ Hostage_Hostage::Hostage_Hostage(int x, int y) : Hostage(x, y)
 	idleAnim.speed = 0.08f;
 
 	// exit animation
-	exitAnim.PushBack({ 7, 64, 26, 48 });
-	exitAnim.PushBack({ 36, 64, 26, 48 });
-	exitAnim.PushBack({ 66, 64, 26, 48 });
-	exitAnim.PushBack({ 96, 64, 26, 48 });
+	exitAnim.PushBack({ 7, 64, 24, 48 });
+	exitAnim.PushBack({ 36, 64, 24, 48 });
+	exitAnim.PushBack({ 66, 64, 24, 48 });
+	exitAnim.PushBack({ 96, 64, 24, 48 });
 	exitAnim.loop = false;
-	exitAnim.speed = 0.2f;
+	exitAnim.speed = 0.1f;
 
 	currentAnimation = &idleAnim;
 
@@ -43,6 +43,7 @@ void Hostage_Hostage::Update()
 	{
 		currentAnimation = &idleAnim;
 	}
+	else if (col && time < 1) position.y -= 20;
 	else if (col && time <= 18)
 	{
 		position.y -= 2;
