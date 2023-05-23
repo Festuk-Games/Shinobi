@@ -135,6 +135,11 @@ bool ModuleUI::Start()
 	text2 = App->textures->Load("Assets/UI/text2.png");
 	go = App->textures->Load("Assets/UI/go.png");
 
+
+	timesec2 = 9;
+	timesec1 = 5;
+	timemin = 2;
+
 	fstream file;
 	file.open("score.txt", ios::in);
 	file >> highScore;
