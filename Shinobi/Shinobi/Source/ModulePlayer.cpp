@@ -377,7 +377,8 @@ Update_Status ModulePlayer::Update()
 			currentAnimation->Update();
 			return Update_Status::UPDATE_CONTINUE;
 		}
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && !isCollidingRight && position.x < 2010)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && !isCrouching && !isCollidingRight && !isJumpingUp2 && !isJumpingDown2 && position.x < 2010 
+			&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
 		{
 			ulti = false;
 			right = true;
@@ -386,7 +387,8 @@ Update_Status ModulePlayer::Update()
 			else currentAnimation = &walkGunAnim;
 			position.x += speed;
 		}
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && !isCollidingLeft && position.x > 20 )
+		else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && !isCrouching && !isCollidingLeft && !isJumpingUp2 && !isJumpingDown2 && position.x > 20 
+			&& App->input->keys[SDL_SCANCODE_D] == KEY_IDLE)
 		{
 			right = false;
 			isWalking = true;
@@ -850,7 +852,7 @@ Update_Status ModulePlayer::Update()
 		{
 			alive = true;
 			position.x = 30;
-			position.y = 208;
+			position.y = 209;
 			App->render->camera.x = 0;
 			dietime=0;
 			diePos = false;

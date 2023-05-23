@@ -58,6 +58,7 @@ bool ModuleScene2::Start()
 	App->collisions->Enable();
 	App->particles->Enable();
 
+	App->render->camera.x = 0;
 
 	stageTexture2 = App->textures->Load("Assets/Scenes/layer_a1.png");
 	skyTexture2 = App->textures->Load("Assets/Scenes/layer_b1.png");
@@ -141,8 +142,8 @@ Update_Status ModuleScene2::Update()
 	if (App->player->position.x >= 2000)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
-		App->player->position.x = 30;
-		App->render->camera.x = 0;
+		//App->player->position.x = 30;
+		//App->render->camera.x = 0;
 	}
 
 	if (App->ui->lose)

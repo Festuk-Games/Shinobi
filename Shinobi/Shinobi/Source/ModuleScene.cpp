@@ -53,6 +53,8 @@ bool ModuleScene::Start()
 	nextStage = false;
 	clear = false;
 
+	App->render->camera.x = 0;
+
 	//enable modules
 	App->player->Enable();
 	App->hostage->Enable();
@@ -65,12 +67,7 @@ bool ModuleScene::Start()
 	if (stage1)
 	{
 		stageTexture = App->textures->Load("Assets/Scenes/layer_a.png");
-		//stageTextureL2 = App->textures->Load("Assets/Scenes/layer_aa.png");
 		skyTexture = App->textures->Load("Assets/Scenes/layer_b.png");
-		/*stageTexture2 = App->textures->Load("Assets/Scenes/layer_a1.png");
-		skyTexture2 = App->textures->Load("Assets/Scenes/layer_b1.png");
-		stageTexture3 = App->textures->Load("Assets/Scenes/layer_a2.png");
-		skyTexture3 = App->textures->Load("Assets/Scenes/layer_b2.png");*/
 
 		App->collisions->AddCollider({ 416, 176, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 704, 176, 32, 1 }, Collider::Type::GROUND);
@@ -142,8 +139,8 @@ Update_Status ModuleScene::Update()
 			if (clearcount >= 60)
 			{
 				App->fade->FadeToBlack(this, (Module*)App->mission2, false, false, 60);
-				App->player->position.x = 30;
-				App->render->camera.x = 0;
+				//App->player->position.x = 30;
+				//App->render->camera.x = 0;
 			}
 			/*stage1 = false;
 			stage2 = true;

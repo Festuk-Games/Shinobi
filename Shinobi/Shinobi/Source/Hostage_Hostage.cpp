@@ -11,6 +11,13 @@ Hostage_Hostage::Hostage_Hostage(int x, int y) : Hostage(x, y)
 	// idle animation
 	idleAnim.PushBack({ 7, 12, 24, 29 });
 	idleAnim.PushBack({ 36, 12, 24, 29 });
+	idleAnim.PushBack({ 7, 12, 24, 29 });
+	idleAnim.PushBack({ 36, 12, 24, 29 });
+	idleAnim.PushBack({ 65, 12, 24, 29 });
+	idleAnim.PushBack({ 94, 12, 24, 29 });
+	idleAnim.PushBack({ 65, 12, 24, 29 });
+	idleAnim.PushBack({ 94, 12, 24, 29 });
+	idleAnim.PushBack({ 36, 12, 24, 29 });
 	idleAnim.loop = true;
 	idleAnim.speed = 0.08f;
 
