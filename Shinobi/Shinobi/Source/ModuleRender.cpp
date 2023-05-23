@@ -100,7 +100,7 @@ Update_Status ModuleRender::Update()
 
 	//Handle horizontal movement of the camera
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{	
 		if (camera.x >= -4980)
 		{
@@ -111,7 +111,7 @@ Update_Status ModuleRender::Update()
 		}
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE)
+	else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{
 		if (camera.x <= -1)
 		{
