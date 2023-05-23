@@ -317,6 +317,10 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			{
 				AddParticle(hit, particles[i]->position.x, particles[i]->position.y);
 			}
+			if (c1->type== Collider::Type::ENEMY_SHOT)
+			{
+				AddParticle(hit, particles[i]->position.x, particles[i]->position.y);
+			}
 			/*else if (c1->type == Collider::Type::PLAYER_SHOT)
 			{
 				AddParticle(hitPow, particles[i]->position.x, particles[i]->position.y-14);
