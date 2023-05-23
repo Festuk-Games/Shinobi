@@ -14,6 +14,8 @@ using namespace std;
 
 #include "SceneIntro.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
+#include "BossScene.h"
 #include "ModuleUI.h"
 #include "ModuleCollisions.h"
 
@@ -100,7 +102,8 @@ Update_Status ModuleRender::Update()
 
 	//Handle horizontal movement of the camera
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
+	if ((App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled())
+		&& App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{	
 		if (camera.x >= -4980)
 		{
@@ -111,7 +114,8 @@ Update_Status ModuleRender::Update()
 		}
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
+	else if ((App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled())
+		&& App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{
 		if (camera.x <= -1)
 		{
