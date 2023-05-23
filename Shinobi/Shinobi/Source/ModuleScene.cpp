@@ -111,7 +111,7 @@ bool ModuleScene::Start()
 
 
 	//Enemigos suelo arriba
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 610, 97-78);
+	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 610, 97-78);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 958, 97 - 78);
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 982, 0);
 

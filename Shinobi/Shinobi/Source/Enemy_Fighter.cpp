@@ -61,9 +61,9 @@ void Enemy_Fighter::Update()
 	//std::cout << position.x << std::endl;
 	if (!die)
 	{
-		
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y>=110 && App->player->alive && !isCollidingRight)
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight
+			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
 		{
 			isCollidingLeft = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
@@ -111,8 +111,9 @@ void Enemy_Fighter::Update()
 			}
 		}
 
-		//walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110 && App->player->alive && !isCollidingLeft)
+		////walk left
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
+			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
 		{
 			isCollidingRight = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
@@ -161,28 +162,7 @@ void Enemy_Fighter::Update()
 				}
 			}
 		}
-		if (isCollidingLeft && !isCollidingRight)
-		{
-			if (jump && currentAnim != &jumpAnim)
-			{
-				currentAnim = &jumpAnim;
-				currentAnim->Reset();
-			}
-			else if (jump) currentAnim = &jumpAnim;
-			else currentAnim = &walkAnim;
-			position.x++;
-		}
-		if (isCollidingRight && !isCollidingLeft)
-		{
-			if (jump && currentAnim != &jumpAnim)
-			{
-				currentAnim = &jumpAnim;
-				currentAnim->Reset();
-			}
-			else if (jump) currentAnim = &jumpAnim;
-			else currentAnim = &walkAnim;
-			position.x--;
-		}
+
 		//walk path
 		else if (!pl && !reloading && !shooting)
 		{
@@ -193,19 +173,29 @@ void Enemy_Fighter::Update()
 			}
 			else if (jump) currentAnim = &jumpAnim;
 			else currentAnim = &walkAnim;
-			if (position.x >= spawnPos.x + 100 && !isCollidingRight)
+			if (position.x >= spawnPos.x + 100 || isCollidingLeft)
 			{
+				isCollidingLeft = false;
 				changedirection = true;
 				flip = true;
 			}
-			else if (position.x <= spawnPos.x - 50 && !isCollidingLeft)
+			else if (position.x <= spawnPos.x - 50 || isCollidingRight)
 			{
+				isCollidingRight = false;
 				changedirection = false;
 				flip = false;
 			}
 
-			if (changedirection) position.x--;
-			else position.x++;
+			if (changedirection)
+			{
+				flip = true;
+				position.x--;
+			}
+			else
+			{
+				flip = false;
+				position.x++;
+			}
 
 			shooting = false;
 			reloading = false;
@@ -254,6 +244,9 @@ void Enemy_Fighter::Update()
 		attack->SetPos(0, 0);
 	}
 	jump = false;
+
+	if (isCollidingLeft) std::cout << "colision izquierda" << std::endl;
+	if (isCollidingRight) std::cout << "colision derecha" << std::endl;
 	//feet->SetPos(position.x, position.y + 69);
 
 	// Call to the base class. It must be called at the end

@@ -237,13 +237,13 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (c2->type == Collider::Type::WALL)
 			{
 				
-				if (!enemies[i]->collision)
-				{
-					cout << "No hay colision" << endl;
-					enemies[i]->isCollidingLeft = false;
-					enemies[i]->isCollidingRight = false;
-				}
-				else if (enemies[i]->flip && enemies[i]->collision)
+				//if (!enemies[i]->collision)
+				//{
+				//	cout << "No hay colision" << endl;
+				//	enemies[i]->isCollidingLeft = false;
+				//	enemies[i]->isCollidingRight = false;
+				//}
+				if (enemies[i]->flip && enemies[i]->collision)
 				{
 					cout << "colision derecha" << endl;
 					enemies[i]->isCollidingRight = true;

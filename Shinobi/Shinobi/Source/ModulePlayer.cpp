@@ -215,6 +215,7 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	if (position.y >= 100) L2 = false;
 	flipPos.x = position.x - 25;
 	//Player movement
 	if (alive)
