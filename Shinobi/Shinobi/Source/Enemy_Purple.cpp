@@ -35,7 +35,6 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	hitAnim.speed = 0.14f;
 	hitAnim.loop = false;
 
-	dieAnim.PushBack({ 116,165,54,72 });
 	dieAnim.PushBack({ 171,165,54,72 });
 	dieAnim.PushBack({ 6,238,54,72 });
 	dieAnim.PushBack({ 6,238,54,72 });

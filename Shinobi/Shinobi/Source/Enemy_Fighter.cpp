@@ -33,10 +33,17 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 	hitAnim.speed = 0.14f;
 	hitAnim.loop = false;
 
+	jumpAnim.PushBack({ 326,29,68,66 });
+	jumpAnim.PushBack({ 259,29,68,66 });
+	jumpAnim.speed = 0.04f;
+	jumpAnim.loop = false;
+
+	dieAnim.PushBack({ 29,217,68,66 });
+	dieAnim.PushBack({ 96,217,68,66 });
 	dieAnim.PushBack({ 164,217,68,66 });
 	dieAnim.PushBack({ 164,217,68,66 });
 	dieAnim.PushBack({ 0,0,0,0 });
-	dieAnim.speed = 0.08f;
+	dieAnim.speed = 0.1f;
 	dieAnim.loop = false;
 
 
@@ -65,7 +72,13 @@ void Enemy_Fighter::Update()
 				shot++;
 				if (position.x - App->player->position.x >= pdistance - 175)
 				{
-					currentAnim = &walkAnim;
+					if (jump && currentAnim != &jumpAnim)
+					{
+						currentAnim = &jumpAnim;
+						currentAnim->Reset();
+					}
+					else if (jump) currentAnim = &jumpAnim;
+					else currentAnim = &walkAnim;
 					position.x--;
 				}
 				else if (shot >= 100)
@@ -110,7 +123,13 @@ void Enemy_Fighter::Update()
 
 				if (position.x - App->player->position.x <= -(pdistance - 140))
 				{
-					currentAnim = &walkAnim;
+					if (jump && currentAnim != &jumpAnim)
+					{
+						currentAnim = &jumpAnim;
+						currentAnim->Reset();
+					}
+					else if (jump) currentAnim = &jumpAnim;
+					else currentAnim = &walkAnim;
 					position.x++;
 				}
 				else if (shot >= 100)
@@ -142,20 +161,38 @@ void Enemy_Fighter::Update()
 				}
 			}
 		}
-		if (isCollidingLeft&& !isCollidingRight)
+		if (isCollidingLeft && !isCollidingRight)
 		{
-			currentAnim = &walkAnim;
+			if (jump && currentAnim != &jumpAnim)
+			{
+				currentAnim = &jumpAnim;
+				currentAnim->Reset();
+			}
+			else if (jump) currentAnim = &jumpAnim;
+			else currentAnim = &walkAnim;
 			position.x++;
 		}
-		if (isCollidingRight&& !isCollidingLeft)
+		if (isCollidingRight && !isCollidingLeft)
 		{
-			currentAnim = &walkAnim;
+			if (jump && currentAnim != &jumpAnim)
+			{
+				currentAnim = &jumpAnim;
+				currentAnim->Reset();
+			}
+			else if (jump) currentAnim = &jumpAnim;
+			else currentAnim = &walkAnim;
 			position.x--;
 		}
 		//walk path
 		else if (!pl && !reloading && !shooting)
 		{
-			currentAnim = &walkAnim;
+			if (jump && currentAnim != &jumpAnim)
+			{
+				currentAnim = &jumpAnim;
+				currentAnim->Reset();
+			}
+			else if (jump) currentAnim = &jumpAnim;
+			else currentAnim = &walkAnim;
 			if (position.x >= spawnPos.x + 100 && !isCollidingRight)
 			{
 				changedirection = true;
@@ -204,6 +241,7 @@ void Enemy_Fighter::Update()
 			}
 		}
 		collider->SetPos(position.x + 25, position.y+4);
+		
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}
 	else if (die) {
@@ -215,7 +253,7 @@ void Enemy_Fighter::Update()
 		attack->rect.h = 0;
 		attack->SetPos(0, 0);
 	}
-
+	jump = false;
 	//feet->SetPos(position.x, position.y + 69);
 
 	// Call to the base class. It must be called at the end

@@ -231,6 +231,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			if (c2->type == Collider::Type::BOX)
 			{
 				enemies[i]->ground = true;
+				enemies[i]->jump = true;
 				enemies[i]->position.y--;
 			}
 			if (c2->type == Collider::Type::WALL)

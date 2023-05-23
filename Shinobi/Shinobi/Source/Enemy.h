@@ -44,6 +44,7 @@ public:
 	int destroyedFx = 0;
 
 	bool ground = false;
+	bool jump = false;
 	bool flip = true;
 	bool collision = true;
 	bool isCollidingRight = false;
