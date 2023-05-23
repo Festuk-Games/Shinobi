@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
 
 #include "Enemy.h"
 #include "Enemy_Gunner.h"
@@ -265,7 +266,9 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				enemies[i]->attackCol = true;
 				enemies[i]->attack->rect.w = 0;
 				enemies[i]->attack->rect.h = 0;
+				App->particles->AddParticle(App->particles->hit, enemies[i]->attack->rect.x, enemies[i]->attack->rect.y);
 				enemies[i]->attack->SetPos(0, 0);
+				
 			}
 		}
 	}
