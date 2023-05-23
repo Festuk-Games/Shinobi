@@ -440,14 +440,14 @@ Update_Status ModulePlayer::Update()
 				currentAnimation->Reset();
 				if (right)
 				{
-					katana->rect.w = 20;
-					katana->rect.h = 20;
+					katana->rect.w = 25;
+					katana->rect.h = 25;
 					katana->SetPos(position.x+55, position.y - 50);
 				}
 				else
 				{
-					katana->rect.w = 20;
-					katana->rect.h = 20;
+					katana->rect.w = 25;
+					katana->rect.h = 25;
 					katana->SetPos(position.x-20, position.y - 50);
 				}
 				katana->rect.w = 0;
@@ -656,14 +656,14 @@ Update_Status ModulePlayer::Update()
 					currentAnimation->Reset();
 					if (right)
 					{
-						katana->rect.w = 20;
-						katana->rect.h = 20;
+						katana->rect.w = 25;
+						katana->rect.h = 25;
 						katana->SetPos(position.x + 55, position.y - 50);
 					}
 					else
 					{
-						katana->rect.w = 20;
-						katana->rect.h = 20;
+						katana->rect.w = 25;
+						katana->rect.h = 25;
 						katana->SetPos(position.x - 20, position.y - 50);
 					}
 					katana->rect.w = 0;
@@ -675,14 +675,14 @@ Update_Status ModulePlayer::Update()
 					currentAnimation->Reset();
 					if (right)
 					{
-						katana->rect.w = 20;
-						katana->rect.h = 20;
+						katana->rect.w = 25;
+						katana->rect.h = 25;
 						katana->SetPos(position.x + 55, position.y - 50);
 					}
 					else
 					{
-						katana->rect.w = 20;
-						katana->rect.h = 20;
+						katana->rect.w = 25;
+						katana->rect.h = 25;
 						katana->SetPos(position.x - 20, position.y - 50);
 					}
 					katana->rect.w = 0;
@@ -960,6 +960,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		katana->rect.w = 0;
 		katana->rect.h = 0;
+		App->particles->AddParticle(App->particles->hit,katana->rect.x, katana->rect.y);
 		katana->SetPos(0, 0);
 		
 	}
