@@ -38,7 +38,7 @@ bool LogoScene::Start()
 Update_Status LogoScene::Update()
 {
 	delay++;
-	if (delay >= 40) App->fade->FadeToBlack(this, (Module*)App->initial, false, false, 60);
+	if (delay >= 40) App->fade->FadeToBlack(this, (Module*)App->scene, false, false, 60);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

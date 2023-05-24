@@ -21,7 +21,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	walkAnim.PushBack({ 61,19,54,72 });
 	walkAnim.PushBack({ 116,19,54,72 });
 	walkAnim.PushBack({ 171,19,54,72 });
-	walkAnim.speed = 0.05f;
+	walkAnim.speed = 0.08f;
 
 	currentAnim = &walkAnim;
 
@@ -61,16 +61,17 @@ void Enemy_Purple::Update()
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight
 			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
 		{
+			isCollidingLeft = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
 				flip = true;
 				shot++;
-				if (position.x - App->player->position.x >= 40)
+				if (position.x - App->player->position.x >= 50)
 				{
 					currentAnim = &walkAnim;
 					position.x--;
 				}
-				else if (shot >= 100)
+				else if (shot >= 100 && position.x - App->player->position.x <= 35)
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
@@ -104,6 +105,7 @@ void Enemy_Purple::Update()
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
 			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
 		{
+			isCollidingRight = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
 
@@ -111,12 +113,12 @@ void Enemy_Purple::Update()
 
 				flip = false;
 
-				if (position.x - App->player->position.x <= -40)
+				if (position.x - App->player->position.x <= -50)
 				{
 					currentAnim = &walkAnim;
 					position.x++;
 				}
-				else if (shot >= 100)
+				else if (shot >= 100 && position.x - App->player->position.x >= -35)
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
@@ -147,7 +149,7 @@ void Enemy_Purple::Update()
 
 		}
 		//walk path
-		else if (!pl && !reloading && !shooting)
+		else if (!pl && !reloading && !shooting || isCollidingLeft)
 		{
 			currentAnim = &walkAnim;
 			if (position.x >= spawnPos.x)
@@ -155,14 +157,22 @@ void Enemy_Purple::Update()
 				changedirection = true;
 				flip = true;
 			}
-			else if (position.x <= spawnPos.x)
+			else if (position.x <= spawnPos.x || isCollidingRight)
 			{
 				changedirection = false;
 				flip = false;
 			}
 
-			if (changedirection && position.x != spawnPos.x) position.x--;
-			else if (position.x != spawnPos.x) position.x++;
+			if (changedirection && position.x != spawnPos.x)
+			{
+				flip = true;
+				position.x--;
+			}
+			else if (position.x != spawnPos.x)
+			{
+				flip = false;
+				position.x++;
+			}
 			else currentAnim = &idleAnim;
 
 			shooting = false;
@@ -182,13 +192,6 @@ void Enemy_Purple::Update()
 				shooting = false;
 				time = 0;
 
-				////reload
-				//if (bullets <= 0)
-				//{
-				//	currentAnim = &reloadAnim;
-				//	reloading = true;
-				//	bullets = 3;
-				//}
 			}
 		}
 		else
