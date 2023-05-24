@@ -58,13 +58,14 @@ void Enemy_Purple::Update()
 	if (!die)
 	{
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110 && App->player->alive)
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight
+			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
 		{
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
 				flip = true;
 				shot++;
-				if (position.x - App->player->position.x >= pdistance - 175)
+				if (position.x - App->player->position.x >= 40)
 				{
 					currentAnim = &walkAnim;
 					position.x--;
@@ -100,7 +101,8 @@ void Enemy_Purple::Update()
 
 		}
 		//walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110 && App->player->alive)
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
+			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
 		{
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
@@ -109,7 +111,7 @@ void Enemy_Purple::Update()
 
 				flip = false;
 
-				if (position.x - App->player->position.x <= -(pdistance - 140))
+				if (position.x - App->player->position.x <= -40)
 				{
 					currentAnim = &walkAnim;
 					position.x++;
@@ -148,19 +150,20 @@ void Enemy_Purple::Update()
 		else if (!pl && !reloading && !shooting)
 		{
 			currentAnim = &walkAnim;
-			if (position.x >= spawnPos.x + 100)
+			if (position.x >= spawnPos.x)
 			{
 				changedirection = true;
 				flip = true;
 			}
-			else if (position.x <= spawnPos.x - 50)
+			else if (position.x <= spawnPos.x)
 			{
 				changedirection = false;
 				flip = false;
 			}
 
-			if (changedirection) position.x--;
-			else position.x++;
+			if (changedirection && position.x != spawnPos.x) position.x--;
+			else if (position.x != spawnPos.x) position.x++;
+			else currentAnim = &idleAnim;
 
 			shooting = false;
 			reloading = false;
