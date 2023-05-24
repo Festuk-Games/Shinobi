@@ -50,7 +50,7 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 	//colliders
 	collider = App->collisions->AddCollider({ position.x + 25, position.y+4, 35, 62}, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
-	
+
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
 }
@@ -65,6 +65,7 @@ void Enemy_Fighter::Update()
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight
 			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
 		{
+			spawnPos.x = position.x - 100;
 			isCollidingLeft = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
@@ -115,6 +116,7 @@ void Enemy_Fighter::Update()
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
 			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
 		{
+			spawnPos.x = position.x + 50;
 			isCollidingRight = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
