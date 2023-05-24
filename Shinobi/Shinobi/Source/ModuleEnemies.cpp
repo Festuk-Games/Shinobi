@@ -233,7 +233,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				enemies[i]->ground = true;
 				enemies[i]->jump = true;
-				enemies[i]->position.y--;
+				enemies[i]->position.y-=3;
 			}
 			if (c2->type == Collider::Type::WALL)
 			{

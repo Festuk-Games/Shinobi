@@ -35,7 +35,7 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 
 	jumpAnim.PushBack({ 326,29,68,66 });
 	jumpAnim.PushBack({ 259,29,68,66 });
-	jumpAnim.speed = 0.04f;
+	jumpAnim.speed = 0.1f;
 	jumpAnim.loop = false;
 
 	dieAnim.PushBack({ 29,217,68,66 });
@@ -48,7 +48,7 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x + 25, position.y+4, 35, 62}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 25, position.y+3, 35, 64}, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
@@ -58,7 +58,7 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 void Enemy_Fighter::Update()
 {
 	flipPos.x = position.x + 20;
-	//std::cout << position.x << std::endl;
+	std::cout << position.y << std::endl;
 	if (!die)
 	{
 		//walk right
@@ -78,7 +78,7 @@ void Enemy_Fighter::Update()
 						currentAnim = &jumpAnim;
 						currentAnim->Reset();
 					}
-					else if (jump) currentAnim = &jumpAnim;
+					else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
 					else currentAnim = &walkAnim;
 					position.x--;
 				}
@@ -131,7 +131,7 @@ void Enemy_Fighter::Update()
 						currentAnim = &jumpAnim;
 						currentAnim->Reset();
 					}
-					else if (jump) currentAnim = &jumpAnim;
+					else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
 					else currentAnim = &walkAnim;
 					position.x++;
 				}
@@ -168,12 +168,12 @@ void Enemy_Fighter::Update()
 		//walk path
 		else if (!pl && !reloading && !shooting)
 		{
-			if (jump && currentAnim != &jumpAnim)
+			if (jump || !jump && !ground) && currentAnim != &jumpAnim)
 			{
 				currentAnim = &jumpAnim;
 				currentAnim->Reset();
 			}
-			else if (jump) currentAnim = &jumpAnim;
+			else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
 			else currentAnim = &walkAnim;
 			if (position.x >= spawnPos.x + 100 || isCollidingLeft)
 			{
@@ -211,14 +211,6 @@ void Enemy_Fighter::Update()
 			{
 				shooting = false;
 				time = 0;
-
-				////reload
-				//if (bullets <= 0)
-				//{
-				//	currentAnim = &reloadAnim;
-				//	reloading = true;
-				//	bullets = 3;
-				//}
 			}
 		}
 
@@ -232,7 +224,7 @@ void Enemy_Fighter::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x + 25, position.y+4);
+		collider->SetPos(position.x + 25, position.y+3);
 		
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}

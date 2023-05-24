@@ -92,11 +92,11 @@ bool ModuleParticles::Start()
 	{
 		for (int j = 0; j < 18; j++)
 		{
-			ultimateEffect2.anim.PushBack({ 7 + 46 * j,569 + 239 * i,40,209 });
+			ultimateEffect2.anim.PushBack({ 7 + 39 * j,569 + 239 * i,40,209 });
 		}
 	}
-	ultimateEffect2.anim.loop = true;
-	ultimateEffect2.anim.speed = 0.01f;
+	ultimateEffect2.anim.loop = false;
+	ultimateEffect2.anim.speed = 0.2f;
 
 	ultimate.anim.PushBack({ 4, 122, 46, 66 });
 	ultimate.anim.PushBack({ 0, 0, 0, 0 });

@@ -10,6 +10,7 @@ using namespace std;
 
 #include "ModuleAudio.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
 #include "ModuleUi.h"
 
 #include "ModuleCollisions.h"
@@ -705,51 +706,62 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &ultiAnim;
 			currentAnimation->Reset();
 			App->particles->AddParticle(App->particles->ultimateEffect, position.x - 10, position.y - 80, Collider::Type::NONE);
-			/*App->particles->AddParticle(App->particles->ultimateEffect2, position.x - 10, position.y - 200, Collider::Type::NONE);*/
 		}
 			
 		if (ulti && ultiTimer <= 120) ultiTimer++;
-		if (ulti && ultiTimer == 100)
+
+		if (App->scene->IsEnabled())
 		{
-			App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 42, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 18, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 34, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate, position.x + 26, position.y - 62, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 100)
+			{
+				App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 42, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 18, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 34, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 26, position.y - 62, Collider::Type::PLAYER_SHOT);
 
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 50, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 10, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 42, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 18, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 34, position.y - 62, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultimate2, position.x - 26, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 50, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 10, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 42, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 18, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 34, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 26, position.y - 62, Collider::Type::PLAYER_SHOT);
+			}
+			if (ulti && ultiTimer == 120)
+			{
+				ulti = false;
+				ultiTimer = 0;
+
+				App->particles->AddParticle(App->particles->ultiCenterUp, position.x - 10, position.y - 90, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiCenterUp, position.x + 10, position.y - 90, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiUpRight2, position.x + 20, position.y - 90, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiUpRight, position.x + 30, position.y - 80, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiRight, position.x + 40, position.y - 80, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiRight, position.x + 40, position.y - 70, Collider::Type::PLAYER_SHOT);
+
+				App->particles->AddParticle(App->particles->ultiCenterDown, position.x - 10, position.y - 70, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiCenterDown, position.x + 10, position.y - 70, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiUpLeft2, position.x - 20, position.y - 90, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiUpLeft, position.x - 30, position.y - 80, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 80, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 70, Collider::Type::PLAYER_SHOT);
+
+				App->particles->AddParticle(App->particles->ultiDownRight2, position.x + 20, position.y - 60, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiDownRight, position.x + 30, position.y - 70, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiDownLeft2, position.x - 20, position.y - 60, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiDownLeft, position.x - 30, position.y - 70, Collider::Type::PLAYER_SHOT);
+			}
 		}
-		if (ulti && ultiTimer == 120)
+		else if (App->scene2->IsEnabled())
 		{
-			ulti = false;
-			ultiTimer = 0;
-
-			App->particles->AddParticle(App->particles->ultiCenterUp, position.x - 10, position.y - 90, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiCenterUp, position.x + 10, position.y - 90, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiUpRight2, position.x + 20, position.y - 90, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiUpRight, position.x + 30, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiRight, position.x + 40, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiRight, position.x + 40, position.y - 70, Collider::Type::PLAYER_SHOT);
-
-			App->particles->AddParticle(App->particles->ultiCenterDown, position.x - 10, position.y - 70, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiCenterDown, position.x + 10, position.y - 70, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiUpLeft2, position.x - 20, position.y - 90, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiUpLeft, position.x - 30, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 80, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 70, Collider::Type::PLAYER_SHOT);
-
-			App->particles->AddParticle(App->particles->ultiDownRight2, position.x + 20, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiDownRight, position.x + 30, position.y - 70, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiDownLeft2, position.x - 20, position.y - 60, Collider::Type::PLAYER_SHOT);
-			App->particles->AddParticle(App->particles->ultiDownLeft, position.x - 30, position.y - 70, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 100)
+			{
+				ulti = false;
+				ultiTimer = 0;
+				App->particles->AddParticle(App->particles->ultimateEffect2, position.x - 10, position.y - 200, Collider::Type::PLAYER_SHOT);
+			}
 		}
-			
 
 		//key conditions
 
