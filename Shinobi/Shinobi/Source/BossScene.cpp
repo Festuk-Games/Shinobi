@@ -62,7 +62,7 @@ bool BossScene::Start()
 	skyTexture = App->textures->Load("Assets/Scenes/layer_b2.png");
 
 	App->enemies->AddEnemy(ENEMY_TYPE::BOSS, 300, 100);
-	App->collisions->AddCollider({ 0, 207, 2048, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
 
 	return ret;
 }

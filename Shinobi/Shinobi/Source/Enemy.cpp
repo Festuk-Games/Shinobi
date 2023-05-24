@@ -53,6 +53,19 @@ void Enemy::Draw()
 {
 	if (currentAnim != nullptr)
 	{
+		if (isBoss)
+		{
+			if (flip)
+			{
+				App->render->Blit(texture, position.x + 26, position.y+6, SDL_FLIP_NONE, &(currentHeadAnim->GetCurrentFrame()));
+				App->render->Blit(texture, position.x + 23, position.y + 40, SDL_FLIP_NONE, &(currentLegsAnim->GetCurrentFrame()));
+			}
+			else
+			{
+				App->render->Blit(texture, flipPos.x + 26, position.y+6, SDL_FLIP_HORIZONTAL, &(currentHeadAnim->GetCurrentFrame()));
+				App->render->Blit(texture, flipPos.x + 23, position.y + 40, SDL_FLIP_HORIZONTAL, &(currentLegsAnim->GetCurrentFrame()));
+			}
+		}
 		if (flip)
 		{
 			App->render->Blit(texture, position.x, position.y, SDL_FLIP_NONE, &(currentAnim->GetCurrentFrame()));

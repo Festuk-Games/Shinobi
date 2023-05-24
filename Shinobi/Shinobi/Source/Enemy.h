@@ -46,6 +46,7 @@ public:
 	bool ground = false;
 	bool jump = false;
 	bool flip = true;
+	bool isBoss = false;
 	bool collision = true;
 	bool isCollidingRight = false;
 	bool isCollidingLeft = false;
