@@ -155,7 +155,7 @@ bool ModuleUI::Start()
 		App->scene->clear = false;
 		if (lifenum >=2)
 		{
-			hostages = 3;
+			hostages = 4;
 		}
 		skill1 = App->textures->Load("Assets/UI/skill2.png");
 	}
