@@ -206,7 +206,7 @@ bool ModulePlayer::Start()
 	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
 	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 	feet = App->collisions->AddCollider({ position.x+5, position.y, 35, 1 }, Collider::Type::FEET, this);
-	enemyNearCollider = App->collisions->AddCollider({ position.x-50, position.y, 135, 58 }, Collider::Type::ENEMY_NEAR, this);
+	enemyNearCollider = App->collisions->AddCollider({ position.x-40, position.y, 115, 58 }, Collider::Type::ENEMY_NEAR, this);
 
 	ultiTimer = 0;
 
@@ -244,7 +244,7 @@ Update_Status ModulePlayer::Update()
 					position.y -= 8;
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x+5, position.y-1);
-					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
+					enemyNearCollider->SetPos(position.x - 40, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isCollidingRight)
 					{
 						right = true;
@@ -317,7 +317,7 @@ Update_Status ModulePlayer::Update()
 					position.y += 4;
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x+5, position.y-1);
-					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
+					enemyNearCollider->SetPos(position.x - 40, position.y - 58);
 					if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && position.x < 2010 && !isCollidingRight)
 					{
 						right = true;
@@ -551,7 +551,7 @@ Update_Status ModulePlayer::Update()
 					position.y += 4;
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x+5, position.y - 1);
-					enemyNearCollider->SetPos(position.x - 50, position.y - 58);
+					enemyNearCollider->SetPos(position.x - 40, position.y - 58);
 				}
 				if (position.y == 209)
 				{
@@ -875,7 +875,7 @@ Update_Status ModulePlayer::Update()
 	//update colliders position
 	//collider->SetPos(position.x, position.y-58);
 	feet->SetPos(position.x+5, position.y-1);
-	enemyNearCollider->SetPos(position.x-50, position.y-58);
+	enemyNearCollider->SetPos(position.x-40, position.y-58);
 	currentAnimation->Update();
 
 	return Update_Status::UPDATE_CONTINUE;
