@@ -31,6 +31,8 @@ bool MissionBossScene::Start()
 
 	bool ret = true;
 
+	App->render->camera.x = 0;
+
 	mission1_2 = App->textures->Load("Assets/Scenes/mission1_2.png");
 	mission1_3 = App->textures->Load("Assets/Scenes/mission1_3.png");
 
