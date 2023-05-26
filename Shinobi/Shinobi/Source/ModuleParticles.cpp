@@ -9,9 +9,6 @@
 
 #include "SDL/include/SDL_timer.h"
 
-#include <iostream>
-using namespace std;
-
 ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
@@ -212,6 +209,15 @@ bool ModuleParticles::Start()
 	ultiUpLeft2.speed = iPoint(-3, -4);
 	ultiUpLeft2.anim.speed = 0.01f;
 
+	ultiWind.anim.PushBack({ 15, 1042, 34, 12 });
+	ultiWind.anim.PushBack({ 48, 1042, 34, 12 });
+	ultiWind.anim.PushBack({ 81, 1042, 34, 12 });
+	ultiWind.anim.PushBack({ 114, 1042, 34, 12 });
+	ultiWind.fliph = false;
+	ultiWind.anim.loop = true;
+	ultiWind.speed = iPoint(3, 0);
+	ultiWind.anim.speed = 0.1f;
+
 	return true;
 }
 
@@ -305,8 +311,6 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);
 
 			}
-			cout << p->collider->rect.w << endl;
-
 
 			particles[i] = p;
 			break;
