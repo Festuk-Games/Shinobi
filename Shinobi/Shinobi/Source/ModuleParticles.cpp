@@ -5,8 +5,12 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleCollisions.h"
+#include "ModulePlayer.h"
 
 #include "SDL/include/SDL_timer.h"
+
+#include <iostream>
+using namespace std;
 
 ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 {
@@ -297,9 +301,13 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 				p->collider = App->collisions->AddCollider({ 0,0,5,5 }, colliderType, this);
 			}
 			else if (colliderType != Collider::Type::NONE)
+			{
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);
 
-			
+			}
+			cout << p->collider->rect.w << endl;
+
+
 			particles[i] = p;
 			break;
 		}
@@ -313,19 +321,19 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (particles[i] != nullptr && particles[i]->collider == c1 && c2->type != Collider::Type::ULTIMATE)
 		{
-			if (c1->type == Collider::Type::PLAYER_SHOT)
+			if (c1->type == Collider::Type::PLAYER_SHOT && !App->player->isPowerUp)
 			{
 				AddParticle(hit, particles[i]->position.x, particles[i]->position.y);
 			}
+			else if (c1->type == Collider::Type::PLAYER_SHOT && App->player->isPowerUp)
+			{
+				AddParticle(hitPow, particles[i]->position.x-5, particles[i]->position.y - 14);
+			}
+			else AddParticle(hit, particles[i]->position.x, particles[i]->position.y);
 			if (c1->type== Collider::Type::ENEMY_SHOT)
 			{
 				AddParticle(hit, particles[i]->position.x, particles[i]->position.y);
 			}
-			/*else if (c1->type == Collider::Type::PLAYER_SHOT)
-			{
-				AddParticle(hitPow, particles[i]->position.x, particles[i]->position.y-14);
-			}
-			else AddParticle(hit, particles[i]->position.x, particles[i]->position.y);*/
 			delete particles[i];
 			particles[i] = nullptr;
 			break;
