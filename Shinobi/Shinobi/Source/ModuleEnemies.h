@@ -15,6 +15,7 @@ enum class ENEMY_TYPE
 	SOLDIER,
 	PURPLE,
 	GREEN,
+	SPIDERMAN,
 	BOSS,
 };
 
@@ -82,6 +83,7 @@ private:
 	SDL_Texture* soldier = nullptr;
 	SDL_Texture* purple = nullptr;
 	SDL_Texture* green = nullptr;
+	SDL_Texture* spiderman = nullptr;
 	SDL_Texture* boss = nullptr;
 
 	SDL_Texture* stageTextureL2 = nullptr;

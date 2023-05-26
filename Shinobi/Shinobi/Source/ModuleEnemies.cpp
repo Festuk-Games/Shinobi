@@ -13,6 +13,7 @@
 #include "Enemy_Soldier.h"
 #include "Enemy_Purple.h"
 #include "Enemy_green.h"
+#include "Enemy_Spiderman.h"
 #include "Enemy_Boss.h"
 using namespace std;
 
@@ -50,6 +51,7 @@ bool ModuleEnemies::Start()
 	purple = App->textures->Load("Assets/purple.png");
 	green = App->textures->Load("Assets/green.png");
 	boss = App->textures->Load("Assets/boss.png");
+	spiderman = App->textures->Load("Assets/Spiderman.png");
 
 	stageTextureL2 = App->textures->Load("Assets/Scenes/layer_aa.png");
 
@@ -105,6 +107,7 @@ bool ModuleEnemies::CleanUp()
 	App->textures->Unload(soldier);
 	App->textures->Unload(purple);
 	App->textures->Unload(green);
+	App->textures->Unload(spiderman);
 
 	return true;
 }
@@ -198,6 +201,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case ENEMY_TYPE::GREEN:
 					enemies[i] = new Enemy_green(info.x, info.y);
 					enemies[i]->texture = green;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
+				case ENEMY_TYPE::SPIDERMAN:
+					enemies[i] = new Enemy_Spiderman(info.x, info.y);
+					enemies[i]->texture = spiderman;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					break;
 				case ENEMY_TYPE::BOSS:

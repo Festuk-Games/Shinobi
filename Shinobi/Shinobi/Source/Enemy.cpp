@@ -9,6 +9,7 @@
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
 #include "Enemy_Purple.h"
+#include "Enemy_Spiderman.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {
