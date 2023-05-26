@@ -59,7 +59,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	jumpUpFloorAnim.PushBack({ 617, 402, 76, 66 });
 	jumpUpFloorAnim.PushBack({ 692, 402, 76, 66 });
 	jumpUpFloorAnim.loop = false;
-	jumpUpFloorAnim.speed = 0.06f;
+	jumpUpFloorAnim.speed = 0.46f;
 
 	//jump down animation
 	jumpDownFloorAnim.PushBack({ 798, 402, 76, 66 });
@@ -485,6 +485,11 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= 68)
 				{
+					if (currentAnimation != &jumpUpFloorAnim)
+					{
+						currentAnimation = &jumpUpFloorAnim;
+						currentAnimation->Reset();
+					}
 					currentAnimation->Update();
 					position.y -= 10;
 					collider->SetPos(position.x, position.y - 58);
@@ -531,6 +536,11 @@ Update_Status ModulePlayer::Update()
 			{
 				if (position.y >= 65)
 				{
+					if (currentAnimation != &jumpDownFloorAnim)
+					{
+						currentAnimation = &jumpDownFloorAnim;
+						currentAnimation->Reset();
+					}
 					currentAnimation = &jumpDownFloorAnim;
 					currentAnimation->Update();
 					position.y -= 8;

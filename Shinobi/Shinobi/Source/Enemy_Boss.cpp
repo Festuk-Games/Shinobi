@@ -28,7 +28,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	dieAnim.PushBack({ 222,95,107,93 });
 	dieAnim.PushBack({ 328,95,107,93 });
 	dieAnim.loop = false;
-	dieAnim.speed = 0.03;
+	dieAnim.speed = 0.08;
 
 	idleAnim.PushBack({76,225,66,47});
 	idleAnim.loop = false;

@@ -168,7 +168,7 @@ void Enemy_Fighter::Update()
 		//walk path
 		else if (!pl && !reloading && !shooting)
 		{
-			if (jump || !jump && !ground) && currentAnim != &jumpAnim)
+			if ((jump || !jump && !ground) && currentAnim != &jumpAnim)
 			{
 				currentAnim = &jumpAnim;
 				currentAnim->Reset();
