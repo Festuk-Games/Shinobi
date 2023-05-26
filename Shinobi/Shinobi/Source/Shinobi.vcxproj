@@ -85,6 +85,7 @@
     <ClInclude Include="Enemy_Gunner.h" />
     <ClInclude Include="Enemy_Purple.h" />
     <ClInclude Include="Enemy_Soldier.h" />
+    <ClInclude Include="Enemy_Spiderman.h" />
     <ClInclude Include="Hostage.h" />
     <ClInclude Include="Hostage_Hostage.h" />
     <ClInclude Include="InitialScene.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Enemy_Gunner.cpp" />
     <ClCompile Include="Enemy_Purple.cpp" />
     <ClCompile Include="Enemy_Soldier.cpp" />
+    <ClCompile Include="Enemy_Spiderman.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Hostage.cpp" />
     <ClCompile Include="Hostage_Hostage.cpp" />
