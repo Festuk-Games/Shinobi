@@ -114,8 +114,9 @@ Update_Status SceneIntro::Update()
 		{
 			logos[i].time += 4;
 			logos[i].radius -= logos[i].angularVelocity * 4;
-			logos[i].logopos.x = logos[i].centerX + logos[i].radius * sin(logos[i].angularStep * logos[i].time);
-			logos[i].logopos.y = logos[i].centerY + logos[i].radius * cos(logos[i].angularStep * logos[i].time);
+			logos[i].logopos.x = static_cast<int>(logos[i].centerX + logos[i].radius * sin(logos[i].angularStep * logos[i].time));
+
+			logos[i].logopos.y = static_cast<int>(logos[i].centerY + logos[i].radius * cos(logos[i].angularStep * logos[i].time));
 
 		}
 	}

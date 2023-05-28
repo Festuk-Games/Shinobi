@@ -111,7 +111,7 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 	{
 		currentStep = Fade_Step::TO_BLACK;
 		frameCount = 0;
-		maxFadeFrames = frames;
+		maxFadeFrames = static_cast<Uint32>(frames);
 
 		if (fadeOut) fOut = true;
 		else fOut = false;

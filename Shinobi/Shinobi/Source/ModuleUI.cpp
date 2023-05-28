@@ -294,7 +294,7 @@ Update_Status ModuleUI::PostUpdate()
 	string sc = to_string(scoreCounter);
 	xpos = 97 - (sc.size() * 8);
 
-	for (int i = 0; i < sc.size(); i++)
+	for (unsigned int i = 0; i < sc.size(); i++)
 	{
 		digit = sc[i] - '0';
 
@@ -305,7 +305,7 @@ Update_Status ModuleUI::PostUpdate()
 	string hscore = to_string(highScore);
 	xpos = 190 - (hscore.size() * 8);
 
-	for (int i = 0; i < hscore.size(); i++)
+	for (unsigned int i = 0; i < hscore.size(); i++)
 	{
 		digit = hscore[i] - '0';
 
