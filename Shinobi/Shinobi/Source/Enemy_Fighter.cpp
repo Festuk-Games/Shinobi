@@ -63,7 +63,8 @@ void Enemy_Fighter::Update()
 	{
 		//walk right
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight
-			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
+			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) 
+			&& (App->player->currentAnimation != &App->player->jumpDownFloorAnim || App->player->currentAnimation != &App->player->jumpUpFloorAnim))
 		{
 			spawnPos.x = position.x - 100;
 			isCollidingLeft = false;
@@ -114,7 +115,8 @@ void Enemy_Fighter::Update()
 
 		////walk left
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
-			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
+			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2)
+			&& (App->player->currentAnimation != &App->player->jumpDownFloorAnim || App->player->currentAnimation != &App->player->jumpUpFloorAnim))
 		{
 			spawnPos.x = position.x + 50;
 			isCollidingRight = false;
