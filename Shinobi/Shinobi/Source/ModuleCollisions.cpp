@@ -100,6 +100,17 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::GROUND][Collider::Type::FEET] = true;
 	matrix[Collider::Type::GROUND][Collider::Type::ENEMY_NEAR] = false;
 
+	matrix[Collider::Type::GROUND2][Collider::Type::WALL] = false;
+	matrix[Collider::Type::GROUND2][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::GROUND2][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::GROUND2][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::GROUND2][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::GROUND2][Collider::Type::HOSTAGE] = true;
+	matrix[Collider::Type::GROUND2][Collider::Type::BOX] = true;
+	matrix[Collider::Type::GROUND2][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::GROUND2][Collider::Type::FEET] = true;
+	matrix[Collider::Type::GROUND2][Collider::Type::ENEMY_NEAR] = false;
+
 	matrix[Collider::Type::FEET][Collider::Type::GROUND] = true;
 	matrix[Collider::Type::FEET][Collider::Type::WALL] = false;
 	matrix[Collider::Type::FEET][Collider::Type::PLAYER] = false;
@@ -229,6 +240,9 @@ void ModuleCollisions::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha, -1.0f);
 			break;
 			case Collider::Type::GROUND: // magenta
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, -1.0f);
+			break;
+			case Collider::Type::GROUND2: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, -1.0f);
 			break;
 			case Collider::Type::FEET: // magenta

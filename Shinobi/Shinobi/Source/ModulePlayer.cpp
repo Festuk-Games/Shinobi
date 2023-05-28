@@ -108,6 +108,11 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	crouchKatanaAnim.loop = false;
 	crouchKatanaAnim.speed = 0.2f;
 
+	//punch
+	punchAnim.PushBack({ 979, 116, 76, 66 });
+	punchAnim.loop = false;
+	punchAnim.speed = 0.1f;
+
 	//shoot animation
 	shootAnim.PushBack({ 392, 116, 76, 66 });
 	shootAnim.loop = false;
@@ -200,6 +205,7 @@ bool ModulePlayer::Start()
 	position.y = 209;
 	App->ui->lifenum = 2;
 	alive = true;
+	isPowerUp = false;
 	currentAnimation = &idleAnim;
 	currentAnimation->Reset();
 
@@ -286,13 +292,13 @@ Update_Status ModulePlayer::Update()
 							{
 								App->particles->powgun.fliph = false;
 								App->particles->powgun.speed = iPoint(5, 0);
-								App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+								App->particles->AddParticle(App->particles->powgun, position.x + 30, position.y - 47, Collider::Type::PLAYER_SHOT);
 							}
 							else
 							{
 								App->particles->powgun.fliph = true;
 								App->particles->powgun.speed = iPoint(-5, 0);
-								App->particles->AddParticle(App->particles->powgun, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
+								App->particles->AddParticle(App->particles->powgun, position.x+5, position.y - 47, Collider::Type::PLAYER_SHOT);
 							}
 						}
 						else
@@ -359,13 +365,13 @@ Update_Status ModulePlayer::Update()
 							{
 								App->particles->powgun.fliph = false;
 								App->particles->powgun.speed = iPoint(5, 0);
-								App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+								App->particles->AddParticle(App->particles->powgun, position.x + 30, position.y - 47, Collider::Type::PLAYER_SHOT);
 							}
 							else
 							{
 								App->particles->powgun.fliph = true;
 								App->particles->powgun.speed = iPoint(-5, 0);
-								App->particles->AddParticle(App->particles->powgun, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
+								App->particles->AddParticle(App->particles->powgun, position.x+5, position.y - 47, Collider::Type::PLAYER_SHOT);
 							}
 						}
 						else
@@ -426,37 +432,36 @@ Update_Status ModulePlayer::Update()
 				{
 					App->particles->powgun.fliph = false;
 					App->particles->powgun.speed = iPoint(5, 0);
-					App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 50, Collider::Type::PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->powgun, position.x + 30, position.y - 47, Collider::Type::PLAYER_SHOT);
 				}
 				else
 				{
 					App->particles->powgun.fliph = true;
 					App->particles->powgun.speed = iPoint(-5, 0);
-					App->particles->AddParticle(App->particles->powgun, position.x, position.y - 50, Collider::Type::PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->powgun, position.x+5, position.y - 47, Collider::Type::PLAYER_SHOT);
 				}
 			}
 			else if(enemyNear)
 			{
-				currentAnimation = &katanaAnim;
-				currentAnimation->Reset();
-				if (right)
+				if (isPowerUp)
 				{
-					katana->rect.w = 25;
-					katana->rect.h = 25;
-					katana->SetPos(position.x+55, position.y - 50);
+					currentAnimation = &katanaAnim;
+					currentAnimation->Reset();
 				}
 				else
 				{
-					katana->rect.w = 25;
-					katana->rect.h = 25;
-					katana->SetPos(position.x-20, position.y - 50);
+					currentAnimation = &punchAnim;
+					currentAnimation->Reset();
 				}
+				katana->rect.w = 25;
+				katana->rect.h = 25;
+				if (right) katana->SetPos(position.x + 55, position.y - 50);
+				else katana->SetPos(position.x - 20, position.y - 50);
 				katana->rect.w = 0;
 				katana->rect.h = 0;
 				//katana->SetPos(0, 0);
 			}
 			
-		
 		}
 		//jumping to second floor input
 		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && !isWalking && !isCrouching && !L2 && canjump)
@@ -647,13 +652,13 @@ Update_Status ModulePlayer::Update()
 					{
 						App->particles->powgun.fliph = false;
 						App->particles->powgun.speed = iPoint(5, 0);
-						App->particles->AddParticle(App->particles->powgun, position.x + 35, position.y - 30, Collider::Type::PLAYER_SHOT);
+						App->particles->AddParticle(App->particles->powgun, position.x + 30, position.y - 25, Collider::Type::PLAYER_SHOT);
 					}
 					else
 					{
 						App->particles->powgun.fliph = true;
 						App->particles->powgun.speed = iPoint(-5, 0);
-						App->particles->AddParticle(App->particles->powgun, position.x, position.y - 30, Collider::Type::PLAYER_SHOT);
+						App->particles->AddParticle(App->particles->powgun, position.x+5, position.y - 25, Collider::Type::PLAYER_SHOT);
 					}
 				}
 			}
@@ -847,6 +852,7 @@ Update_Status ModulePlayer::Update()
 	}
 	else
 	{	//die
+		isPowerUp = false;
 		if (!diePos)
 		{
 			diePosition = position;
@@ -873,7 +879,7 @@ Update_Status ModulePlayer::Update()
 				currentAnimation->Reset();
 			}
 		}
-		if (App->ui->lifenum >=1 && dietime >= 60)
+		if (App->ui->lifenum >=0 && dietime >= 60)
 		{
 			alive = true;
 			position.x = 30;
@@ -882,7 +888,7 @@ Update_Status ModulePlayer::Update()
 			dietime=0;
 			diePos = false;
 		}
-		else if (App->ui->lifenum <= 0 && dietime >= 20)
+		else if (App->ui->lifenum < 0 && dietime >= 20)
 		{
 			App->ui->lose = true;
 			dietime = 0;
@@ -891,7 +897,16 @@ Update_Status ModulePlayer::Update()
 	}
 	
 	//ground
-	if (!ground && !isJumping) position.y+=2;
+	if (!ground && !isJumping)
+	{
+		currentAnimation = &jumpDownAnim;
+		position.y += 2;
+		if (position.y <= 97 && App->render->jumpcam >= 1 && App->scene->IsEnabled() && L2)
+		{
+			App->render->camera.y -= 4;
+			App->render->jumpcam--;
+		}
+	}
 
 	if (isCollidingRight) cout << "collision right" << endl;
 	if (isCollidingLeft) cout << "collision left" << endl;
@@ -978,15 +993,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1->type == Collider::Type::ENEMY_NEAR && c2->type == Collider::Type::ENEMY)
 	{
 		enemyNear = true;
-		cout << "near" << endl;
+		//cout << "near" << endl;
 	}
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)
 	{
 		katana->rect.w = 0;
 		katana->rect.h = 0;
-		App->particles->AddParticle(App->particles->hit,katana->rect.x, katana->rect.y);
-		katana->SetPos(0, 0);
-		
+		//App->particles->AddParticle(App->particles->hit,katana->rect.x, katana->rect.y);
+		katana->SetPos(0, 0);	
 	}
 }
 

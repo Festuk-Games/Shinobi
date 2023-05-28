@@ -233,7 +233,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				//enemies[i] = nullptr;
 				break;
 			}
-			if (/*c1->type == Collider::Type::FEET && */c2->type == Collider::Type::GROUND)
+			if (c2->type == Collider::Type::GROUND || c2->type == Collider::Type::GROUND2)
 			{
 				enemies[i]->ground = true;
 			}

@@ -90,8 +90,8 @@ bool ModuleScene::Start()
 		//App->collisions->AddCollider({ 544, 64, 32, 32 }, Collider::Type::WALL);
 
 		App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
-		App->collisions->AddCollider({ 96, 95, 992, 2 }, Collider::Type::GROUND);
-		App->collisions->AddCollider({ 1296, 95, 656, 7 }, Collider::Type::GROUND);
+		App->collisions->AddCollider({ 96, 96, 992, 2 }, Collider::Type::GROUND2);
+		App->collisions->AddCollider({ 1296, 96, 656, 2 }, Collider::Type::GROUND2);
 
 		App->collisions->AddCollider({ 80, -90, 16, 186 }, Collider::Type::WALL);
 		App->collisions->AddCollider({ 1086, -90, 16, 186 }, Collider::Type::WALL);
@@ -100,9 +100,9 @@ bool ModuleScene::Start()
 	}
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 272, 150);
 
-	/*App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 220, 142);*/
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 220, 142);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 341, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 580, 130);
+	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 580, 130);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 707, 130-32);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 726, 130-32);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 740, 130);
@@ -112,7 +112,7 @@ bool ModuleScene::Start()
 
 	//Enemigos suelo arriba
 	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 610, 97-78);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 958, 97 - 78);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 958, 97 - 78);
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 982, 0);
 
 	
@@ -153,6 +153,19 @@ Update_Status ModuleScene::Update()
 	{
 		if (losecounter <= 120) losecounter++;
 		else App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
+	}
+
+	if (App->player->L2 && !ground2)
+	{
+		groundCol = App->collisions->AddCollider({ 96, 96, 992, 2 }, Collider::Type::GROUND);
+		groundCol2 = App->collisions->AddCollider({ 1296, 96, 656, 2 }, Collider::Type::GROUND);
+		ground2 = true;
+	}
+	else if (!App->player->L2 && ground2)
+	{
+		groundCol->pendingToDelete = true;
+		groundCol2->pendingToDelete = true;
+		ground2 = false;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

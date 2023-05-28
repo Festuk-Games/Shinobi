@@ -21,6 +21,7 @@ struct Collider
 		FEET,
 		ENEMY_NEAR,
 		ULTIMATE,
+		GROUND2,
 
 		MAX
 	};
