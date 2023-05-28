@@ -34,8 +34,6 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* logo = nullptr;
 
-	SDL_Rect logorect;
-
 	int delay = 0;
 };
 

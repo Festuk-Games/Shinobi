@@ -114,12 +114,12 @@ Update_Status InitialScene::Update()
 	if (delay == 320)
 	{
 		writefx = 0;
-		aux == 10;
+		aux = 10;
 	}
 	if (delay == 580)
 	{
 		writefx = 0;
-		aux == 10;
+		aux = 10;
 	}
 
 	if (delay <= 320) currentAnimation = &descriptionAnim;

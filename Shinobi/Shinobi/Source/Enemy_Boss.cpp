@@ -17,7 +17,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	headAnim.PushBack({ 51,194,29,27 });
 	headAnim.PushBack({ 135,194,29,27 });
 	headAnim.loop = true;
-	headAnim.speed = 0.06;
+	headAnim.speed = 0.06f;
 
 	dieAnim.PushBack({ 10,3,107,93 });
 	dieAnim.PushBack({ 116,3,107,93 });
@@ -28,15 +28,15 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	dieAnim.PushBack({ 222,95,107,93 });
 	dieAnim.PushBack({ 328,95,107,93 });
 	dieAnim.loop = false;
-	dieAnim.speed = 0.08;
+	dieAnim.speed = 0.08f;
 
 	idleAnim.PushBack({76,225,66,47});
 	idleAnim.loop = false;
-	idleAnim.speed = 0.03;
+	idleAnim.speed = 0.03f;
 
 	legsAnim.PushBack({273,224,53,61});
 	legsAnim.loop = false;
-	legsAnim.speed = 0.03;
+	legsAnim.speed = 0.03f;
 
 	//colliders
 	collider = App->collisions->AddCollider({ position.x+70, position.y, 29, 200 }, Collider::Type::ENEMY, (Module*)App->enemies);

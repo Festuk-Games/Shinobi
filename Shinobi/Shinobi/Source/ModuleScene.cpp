@@ -18,21 +18,19 @@
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
 	//stage1 rects
-	if (stage1)
-	{
-		// ground
-		ground.x = 0;
-		ground.y = 0;
-		ground.w = 2048;
-		ground.h = 512;
 
-		//sky
-		sky.x = 0;
-		sky.y = 0;
-		sky.w = 1312;
-		sky.h = 512;
+	// ground
+	ground.x = 0;
+	ground.y = 0;
+	ground.w = 2048;
+	ground.h = 512;
 
-	}
+	//sky
+	sky.x = 0;
+	sky.y = 0;
+	sky.w = 1312;
+	sky.h = 512;
+
 
 
 }
