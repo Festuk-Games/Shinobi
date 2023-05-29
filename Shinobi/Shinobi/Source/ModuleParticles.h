@@ -81,6 +81,8 @@ public:
 			ultiDownLeft2,
 			ultiDownRight2;
 	Particle ultiWind;
+
+
 };
 
 #endif // !__MODULEPARTICLES_H__

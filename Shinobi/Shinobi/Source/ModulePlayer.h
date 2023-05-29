@@ -119,6 +119,8 @@ public:
 	int jumpAttackDelay = 0;
 
 	bool canjump = true;
+
+	int delay = 0;
 };
 
 #endif //!__MODULE_PLAYER_H__

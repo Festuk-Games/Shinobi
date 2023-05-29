@@ -97,7 +97,7 @@ bool ModuleParticles::Start()
 		}
 	}
 	ultimateEffect2.anim.loop = false;
-	ultimateEffect2.anim.speed = 0.2f;
+	ultimateEffect2.anim.speed = 0.3f;
 
 	ultimate.anim.PushBack({ 4, 122, 46, 66 });
 	ultimate.anim.PushBack({ 0, 0, 0, 0 });
@@ -215,8 +215,10 @@ bool ModuleParticles::Start()
 	ultiWind.anim.PushBack({ 114, 1042, 34, 12 });
 	ultiWind.fliph = false;
 	ultiWind.anim.loop = true;
-	ultiWind.speed = iPoint(3, 0);
+	ultiWind.speed = iPoint(6, 0);
+	ultiWind.lifetime = 80;
 	ultiWind.anim.speed = 0.1f;
+
 
 	return true;
 }

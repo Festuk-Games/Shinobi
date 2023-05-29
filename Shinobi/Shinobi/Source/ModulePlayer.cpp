@@ -723,7 +723,7 @@ Update_Status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->ultimateEffect, position.x - 10, position.y - 80, Collider::Type::NONE);
 		}
 			
-		if (ulti && ultiTimer <= 140) ultiTimer++;
+		if (ulti && ultiTimer <= 170) ultiTimer++;
 
 		if (App->scene->IsEnabled())
 		{
@@ -774,9 +774,17 @@ Update_Status ModulePlayer::Update()
 			{
 				App->particles->AddParticle(App->particles->ultimateEffect2, position.x - 10, position.y - 200, Collider::Type::PLAYER_SHOT);
 			}
-			if (ulti && ultiTimer == 120)
+			if (ulti && ultiTimer == 110) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 20, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 120) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 40, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 130) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 60, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 140) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 80, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 150) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 100, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 160) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 120, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 170) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 140, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer > 170)
 			{
-				App->particles->AddParticle(App->particles->ultiWind, position.x - 40, position.y - 80, Collider::Type::PLAYER_SHOT);
+				ulti = false;
+				ultiTimer = 0;
 			}
 		}
 
