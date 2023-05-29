@@ -44,7 +44,7 @@ void Enemy::Update()
 	{
 		position.y++;
 	}
-
+	
 	if (!die) ground = false;
 	else ground = true;
 	
@@ -78,6 +78,7 @@ void Enemy::Draw()
 	}
 
 }
+
 
 void Enemy::OnCollision(Collider* collider)
 {

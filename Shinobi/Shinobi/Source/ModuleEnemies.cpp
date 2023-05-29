@@ -219,6 +219,17 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 	}
 }
 
+void ModuleEnemies::GetParticle(int particle)
+{
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] != nullptr)
+		{
+			enemies[i]->currentParticle = particle;
+		}
+	}
+}
+
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)

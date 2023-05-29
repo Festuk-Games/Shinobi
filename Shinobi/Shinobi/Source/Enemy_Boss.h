@@ -45,6 +45,10 @@ private:
 	int shot = 0;
 	bool shooting = false, reloading = false, walking = true;
 	int time = 0;
+
+	int particle1;
+	int particle2;
+	int count = 0;
 };
 
 #endif // __ENEMY_BOSS_H__

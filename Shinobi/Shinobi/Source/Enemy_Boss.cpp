@@ -53,7 +53,20 @@ void Enemy_Boss::Update()
 	currentAnim->Update();
 	currentHeadAnim->Update();
 	currentLegsAnim->Update();
-
+	if (count < 1)
+	{
+		App->particles->AddParticle(App->particles->enemyshot, position.x, position.y, Collider::Type::ENEMY_SHOT);
+		particle1 = currentParticle;
+		count++;
+	}
+	if (count == 1)
+	{
+		App->particles->AddParticle(App->particles->enemyshot, position.x-20, position.y, Collider::Type::ENEMY_SHOT);
+		particle2 = currentParticle;
+		count++;
+	}
+	App->particles->particles[particle1]->position.x--;
+	App->particles->particles[particle2]->position.y--;
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();

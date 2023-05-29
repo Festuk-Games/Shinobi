@@ -53,6 +53,8 @@ public:
 	bool attackCol = false;
 	Collider* attack = nullptr;
 
+	int currentParticle;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
