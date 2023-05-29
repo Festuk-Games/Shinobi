@@ -106,7 +106,7 @@ bool ModuleScene2::Start()
 
 	//Spiderman
 
-	App->enemies->AddEnemy(ENEMY_TYPE::SPIDERMAN, 800, 100);
+	App->enemies->AddEnemy(ENEMY_TYPE::SPIDERMAN, 800, 80);
 
 	//enemigos gunner
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 471, 130);

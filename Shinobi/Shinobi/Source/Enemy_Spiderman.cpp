@@ -45,6 +45,7 @@ Enemy_Spiderman::Enemy_Spiderman(int x, int y) : Enemy(x, y)
 	//colliders
 	collider = App->collisions->AddCollider({ position.x + 25, position.y + 3, 35, 64 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	isSpiderman = true;
 
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
@@ -57,15 +58,19 @@ void Enemy_Spiderman::Update()
 	if (!die)
 	{
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight
-			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
+		if (position.x - App->player->position.x <= 50 && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight)
 		{
 			spawnPos.x = position.x - 100;
 			isCollidingLeft = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
+
 				flip = true;
 				shot++;
+				if (position.x-App->player->position.x>=0 && position.x-App->player->position.x<=10)
+				{
+					isSpiderman = false;
+				}
 				if (position.x - App->player->position.x >= pdistance - 175)
 				{
 					if (jump && currentAnim != &jumpAnim)
@@ -108,14 +113,12 @@ void Enemy_Spiderman::Update()
 		}
 
 		////walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
-			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
+		else if (position.x - App->player->position.x >= -50 && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft)
 		{
 			spawnPos.x = position.x + 50;
 			isCollidingRight = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
-
 				shot++;
 				flip = false;
 
@@ -233,9 +236,6 @@ void Enemy_Spiderman::Update()
 		attack->SetPos(0, 0);
 	}
 	jump = false;
-
-	if (isCollidingLeft) std::cout << "colision izquierda" << std::endl;
-	if (isCollidingRight) std::cout << "colision derecha" << std::endl;
 	//feet->SetPos(position.x, position.y + 69);
 
 	// Call to the base class. It must be called at the end
