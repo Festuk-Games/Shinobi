@@ -42,7 +42,7 @@ public:
 
 	// Sound fx when destroyed
 	int destroyedFx = 0;
-
+	bool isSpiderman = false;
 	bool ground = false;
 	bool jump = false;
 	bool flip = true;

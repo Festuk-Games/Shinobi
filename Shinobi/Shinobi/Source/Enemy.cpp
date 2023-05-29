@@ -40,7 +40,7 @@ void Enemy::Update()
 	//if (collider != nullptr)
 	//	collider->SetPos(position.x, position.y);
 
-	if (!ground)
+	if (!ground && !isSpiderman)
 	{
 		position.y++;
 	}
