@@ -220,6 +220,15 @@ bool ModuleParticles::Start()
 	ultiWind.lifetime = 80;
 	ultiWind.anim.speed = 0.1f;
 
+	for (int i = 0; i <= 7; i++)
+	{
+		fireBoss[i].anim.PushBack({ 455 - i*31, 141, 32, 27 });
+		fireBoss[i].fliph = false;
+		fireBoss[i].anim.loop = true;
+	/*	fireBoss[i].lifetime = 80;*/
+		fireBoss[i].anim.speed = 0.1f;
+	}
+
 
 	return true;
 }

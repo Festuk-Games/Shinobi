@@ -81,6 +81,7 @@ public:
 			ultiDownLeft2,
 			ultiDownRight2;
 	Particle ultiWind;
+	Particle fireBoss[8];
 
 
 };

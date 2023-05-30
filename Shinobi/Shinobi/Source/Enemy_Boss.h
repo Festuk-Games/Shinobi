@@ -46,7 +46,7 @@ private:
 	bool shooting = false, reloading = false, walking = true;
 	int time = 0;
 
-	int particle1;
+	int particle1[8];
 	int particle2;
 	int count = 0;
 };
