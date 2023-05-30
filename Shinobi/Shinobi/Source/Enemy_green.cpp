@@ -24,8 +24,9 @@ Enemy_green::Enemy_green(int x, int y) : Enemy(x, y)
 	currentAnim = &walkAnim;
 
 	//shoot animation
+	shootAnim.PushBack({ 486,74,96,72 });
+
 	hitAnim.PushBack({ 389,74,96,72 });
-	hitAnim.PushBack({ 486,74,96,72 });
 	hitAnim.PushBack({ 389,1,96,72 });
 	hitAnim.PushBack({ 292,1,96,72 });
 	hitAnim.PushBack({ 195,1,96,72 });
@@ -51,40 +52,37 @@ Enemy_green::Enemy_green(int x, int y) : Enemy(x, y)
 
 void Enemy_green::Update()
 {
-	flipPos.x = position.x + 20;
+		flipPos.x = position.x;
 	//std::cout << position.x << std::endl;
 	if (!die)
 	{
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110 && App->player->alive)
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110)
 		{
-			if (position.x != App->player->position.x && !shooting && !reloading)
+			
+			shot++;
+			if (shot >= 100 && !reloading && bullets >= 1)
+			{
+				currentAnim = &shootAnim;
+				currentAnim->Reset();
+				App->audio->PlayFx(App->audio->shuriken);
+				App->particles->espada.speed = iPoint(-5, 0);
+				App->particles->AddParticle(App->particles->espada, position.x, position.y + 25, Collider::Type::ENEMY_SHOT);
+				shot = 0;
+				shooting = true;
+				bullets--;
+			}
+			else if (position.x != App->player->position.x && !shooting && !reloading)
 			{
 				flip = true;
-				shot++;
-				if (position.x - App->player->position.x >= pdistance - 175)
+
+				if (position.x - App->player->position.x >= pdistance - 40)
 				{
 					currentAnim = &walkAnim;
 					position.x--;
 				}
-				else if (shot >= 100)
-				{
-					currentAnim = &hitAnim;
-					currentAnim->Reset();
-					//App->particles->AddParticle(App->particles->patada, position.x, position.y + 30, Collider::Type::ENEMY_SHOT);
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x, position.y + 30);
-					App->audio->PlayFx(App->audio->shuriken);
-					shot = 0;
-					shooting = true;
-				}
-				else {
-					currentAnim = &idleAnim;
-					attack->rect.w = 0;
-					attack->rect.h = 0;
-					attack->SetPos(0, 0);
-				}
+				else currentAnim = &idleAnim;
+
 				pl = true;
 
 				if (position.x <= pos2)
@@ -98,39 +96,31 @@ void Enemy_green::Update()
 
 		}
 		//walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110 && App->player->alive)
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110)
 		{
-			if (position.x != App->player->position.x && !shooting && !reloading)
+			shot++;
+			if (shot >= 100 && !reloading && bullets >= 1)
 			{
-
-				shot++;
-
+				currentAnim = &shootAnim;
+				currentAnim->Reset();
+				App->audio->PlayFx(App->audio->shuriken);
+				App->particles->espada.speed = iPoint(5, 0);
+				App->particles->AddParticle(App->particles->espada, position.x +69, position.y + 25, Collider::Type::ENEMY_SHOT);
+				shot = 0;
+				shooting = true;
+				bullets--;
+			}
+			else if (position.x != App->player->position.x && !shooting && !reloading)
+			{
 				flip = false;
 
-				if (position.x - App->player->position.x <= -(pdistance - 140))
+				if (position.x - App->player->position.x <= -(pdistance - 40))
 				{
 					currentAnim = &walkAnim;
 					position.x++;
 				}
-				else if (shot >= 100)
-				{
-					currentAnim = &hitAnim;
-					currentAnim->Reset();
-					//App->particles->AddParticle(App->particles->patada, position.x+80, position.y + 30, Collider::Type::ENEMY_SHOT);
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x + 80, position.y + 30);
-					App->audio->PlayFx(App->audio->shuriken);
-					shot = 0;
-					shooting = true;
-				}
-				else {
-					attack->rect.w = 0;
-					attack->rect.h = 0;
-					attack->SetPos(0, 0);
-					currentAnim = &idleAnim;
+				else currentAnim = &idleAnim;
 
-				}
 				pl = true;
 
 				if (position.x >= pos2) changedirection = true;
@@ -172,14 +162,6 @@ void Enemy_green::Update()
 			{
 				shooting = false;
 				time = 0;
-
-				////reload
-				//if (bullets <= 0)
-				//{
-				//	currentAnim = &reloadAnim;
-				//	reloading = true;
-				//	bullets = 3;
-				//}
 			}
 		}
 
@@ -193,18 +175,9 @@ void Enemy_green::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x + 25, position.y + 4);
-		//attack->SetPos(position.x + 25, position.y + 4);
+		collider->SetPos(position.x+20, position.y + 8);
 	}
-	else if (die) {
-		currentAnim = &dieAnim;
-		collider->SetPos(position.x - 10, position.y + 30);
-		collider->rect.w = 37;
-		collider->rect.h = 20;
-		attack->rect.w = 0;
-		attack->rect.h = 0;
-		attack->SetPos(0, 0);
-	}
+	else if (die) currentAnim = &dieAnim;
 
 	//feet->SetPos(position.x, position.y + 69);
 

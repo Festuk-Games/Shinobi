@@ -35,6 +35,7 @@ private:
 	Animation walkAnim;
 	Animation hitAnim;
 	Animation dieAnim;
+	Animation shootAnim;
 
 	bool changedirection = true;
 
@@ -45,6 +46,7 @@ private:
 	int shot = 0;
 	bool shooting = false, reloading = false, walking = true;
 	int time = 0;
+	int bullets = 1;
 };
 
 #endif // __ENEMY_GREEN_H__
