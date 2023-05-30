@@ -117,6 +117,7 @@ bool ModuleScene2::Start()
 
 	//Enemigos Tochos (purple...)
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 831, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREEN, 250, 130);
 
 
 	return ret;

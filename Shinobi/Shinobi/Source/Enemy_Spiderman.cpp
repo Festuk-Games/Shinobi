@@ -43,7 +43,7 @@ Enemy_Spiderman::Enemy_Spiderman(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x + 25, position.y + 3, 35, 64 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 25, position.y + 3, 35, 50 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	isSpiderman = true;
 
@@ -109,7 +109,18 @@ void Enemy_Spiderman::Update()
 				}
 				else changedirection = false;
 
+				if (!isSpiderman && ground)
+				{
+					if (position.x-App->player->position.x <=600 && position.x - App->player->position.x >=0 )
+					{
+						currentAnim = &hitAnim;
+						currentAnim->Reset();
+						position.x = App->player->position.x;
+						
+					}
+				}
 			}
+
 		}
 
 		////walk left
@@ -122,7 +133,12 @@ void Enemy_Spiderman::Update()
 				shot++;
 				flip = false;
 
-				if (position.x - App->player->position.x <= -(pdistance - 140))
+				if (position.x - App->player->position.x >= 0 && position.x - App->player->position.x >= -10)
+				{
+					isSpiderman = false;
+				}
+
+				if (position.x - App->player->position.x <= -(pdistance - 140) && isSpiderman)
 				{
 					if (jump && currentAnim != &jumpAnim)
 					{
@@ -159,6 +175,15 @@ void Enemy_Spiderman::Update()
 				{
 					changedirection = false;
 					flip = false;
+				}
+				if (!isSpiderman && ground)
+				{
+					if (App->player->position.x - position.x  >= -600 && position.x - App->player->position.x <= 0)
+					{
+						currentAnim = &hitAnim;
+						currentAnim->Reset();
+						position.x = App->player->position.x;
+					}
 				}
 			}
 		}
