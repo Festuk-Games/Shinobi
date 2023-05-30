@@ -46,7 +46,21 @@ private:
 	bool shooting = false, reloading = false, walking = true;
 	int time = 0;
 
-	int particle1[8];
+	struct particle1
+	{
+		int particle;
+		int centerX = 0;
+		int centerY = 100;
+		float radius = 40.0f;
+		float angularVelocity = 0.16f;
+		float angularStep = 0.012f;
+		float time = 0.0f;
+		bool left = true;
+	}particle1[8];
+
+
+	int delay = 0;
+
 	int particle2;
 	int count = 0;
 };
