@@ -229,7 +229,6 @@ bool ModuleParticles::Start()
 		fireBoss[i].anim.PushBack({ 455 - i*31, 141, 32, 27 });
 		fireBoss[i].fliph = false;
 		fireBoss[i].anim.loop = true;
-		fireBoss[i].lifetime = 180;
 		fireBoss[i].anim.speed = 0.1f;
 	}
 

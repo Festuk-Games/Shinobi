@@ -48,6 +48,7 @@ private:
 
 	struct particle1
 	{
+		bool alive = false;
 		int particle;
 		int centerX = 0;
 		int centerY = 100;
@@ -58,11 +59,24 @@ private:
 		bool left = true;
 	}particle1[8];
 
+	struct particle2
+	{
+		bool alive = false;
+		int particle;
+		int centerX = 0;
+		int centerY = 140;
+		float radius = 40.0f;
+		float angularVelocity = 0.16f;
+		float angularStep = 0.012f;
+		float time = 0.0f;
+		bool left = true;
+	}particle2[8];
+
+	bool isShooting = false;
 
 	int delay = 0;
 
-	int particle2;
-	int count = 0;
+	int count = 1;
 };
 
 #endif // __ENEMY_BOSS_H__

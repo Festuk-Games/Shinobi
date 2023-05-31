@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "ModuleScene.h"
 
 ModuleAuxScene::ModuleAuxScene(bool startEnabled) : Module(startEnabled)
 {
@@ -54,7 +55,7 @@ Update_Status ModuleAuxScene::PostUpdate()
 	// Draw everything --------------------------------------
 	if (stage1)
 	{
-		if (App->player->L2) App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 1.0f); // groundL2
+		if (App->scene->IsEnabled()) App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 1.0f); // groundL2
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
