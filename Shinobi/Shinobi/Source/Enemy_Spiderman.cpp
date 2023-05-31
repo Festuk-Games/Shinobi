@@ -82,24 +82,6 @@ void Enemy_Spiderman::Update()
 					else currentAnim = &walkAnim;
 					position.x--;
 				}
-				//else if (shot >= 100)
-				//{
-				//	currentAnim = &hitAnim;
-				//	currentAnim->Reset();
-				//	//App->particles->AddParticle(App->particles->patada, position.x, position.y + 30, Collider::Type::ENEMY_SHOT);
-				//	attack->rect.w = 10;
-				//	attack->rect.h = 10;
-				//	attack->SetPos(position.x, position.y + 30);
-				//	App->audio->PlayFx(App->audio->shuriken);
-				//	shot = 0;
-				//	shooting = true;
-				//}
-				//else {
-				//	currentAnim = &idleAnim;
-				//	attack->rect.w = 0;
-				//	attack->rect.h = 0;
-				//	attack->SetPos(0, 0);
-				//}
 				pl = true;
 
 				if (position.x <= pos2)
@@ -111,12 +93,21 @@ void Enemy_Spiderman::Update()
 
 				if (!isSpiderman && ground)
 				{
-					if (position.x-App->player->position.x <=600 && position.x - App->player->position.x >=0 )
+					if (position.x-App->player->position.x <=1000 && position.x - App->player->position.x >=0 )
 					{
 						currentAnim = &hitAnim;
 						currentAnim->Reset();
+						
 						int posicion = App->player->position.x;
-						position.x = posicion;
+						for (int i = position.x; i <posicion ; i++)
+						{
+							position.x = i;
+							for (int h = position.y; h < 60; h++)
+							{
+								position.y = h;
+							}
+						}
+						//position.x = posicion;
 						reloading = true;
 					}
 				}
@@ -150,25 +141,6 @@ void Enemy_Spiderman::Update()
 					else currentAnim = &walkAnim;
 					position.x++;
 				}
-				else if (shot >= 100)
-				{
-					currentAnim = &hitAnim;
-					currentAnim->Reset();
-					//App->particles->AddParticle(App->particles->patada, position.x+80, position.y + 30, Collider::Type::ENEMY_SHOT);
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x + 80, position.y + 30);
-					App->audio->PlayFx(App->audio->shuriken);
-					shot = 0;
-					shooting = true;
-				}
-				else {
-					attack->rect.w = 0;
-					attack->rect.h = 0;
-					attack->SetPos(0, 0);
-					currentAnim = &idleAnim;
-
-				}
 				pl = true;
 
 				if (position.x >= pos2) changedirection = true;
@@ -179,7 +151,7 @@ void Enemy_Spiderman::Update()
 				}
 				if (!isSpiderman && ground)
 				{
-					if (App->player->position.x - position.x  >= -600 && position.x - App->player->position.x <= 0)
+					if (App->player->position.x - position.x  >= -1000 && position.x - App->player->position.x <= 0)
 					{
 						currentAnim = &hitAnim;
 						currentAnim->Reset();
