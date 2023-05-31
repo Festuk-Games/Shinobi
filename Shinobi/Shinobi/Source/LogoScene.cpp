@@ -49,7 +49,7 @@ Update_Status LogoScene::Update()
 {
 	currentAnim->Update();
 	delay++;
-	if (delay >= 200) App->fade->FadeToBlack(this, (Module*)App->scene2, false, false, 60);//tiempo que tarda en cambiar la escena
+	if (delay >= 200) App->fade->FadeToBlack(this, (Module*)App->initial, false, false, 60);//tiempo que tarda en cambiar la escena
 
 	return Update_Status::UPDATE_CONTINUE;
 }

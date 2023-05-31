@@ -14,7 +14,7 @@ InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			membersAnim.PushBack({ 384*j + 5*j, 224*i + 5*i, 384, 224 });
+			membersAnim.PushBack({ 320*j + 1*j, 224*i + 1*i, 320, 224 });
 		}
 	}
 
@@ -59,7 +59,7 @@ bool InitialScene::Start()
 
 	bool ret = true;
 
-	members = App->textures->Load("Assets/names_intro.png");
+	members = App->textures->Load("Assets/Scenes/intro/names_intro.png");
 	info = App->textures->Load("Assets/intro_upc.png");
 	description = App->textures->Load("Assets/intro_explicacion.png");
 	
