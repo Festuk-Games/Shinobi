@@ -14,47 +14,57 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 {
 	
 
-	headAnim.PushBack({ 23,194,29,27 });
-	headAnim.PushBack({ 80,194,29,27 });
-	headAnim.PushBack({ 51,194,29,27 });
-	headAnim.PushBack({ 135,194,29,27 });
+	headAnim.PushBack({ 22,228,30,29 });
+	headAnim.PushBack({ 51,228,30,29 });
+	headAnim.PushBack({ 80,228,30,29 });
+	headAnim.PushBack({ 109,228,30,29 });
 	headAnim.loop = true;
 	headAnim.speed = 0.06f;
 
-	dieAnim.PushBack({ 10,3,107,93 });
-	dieAnim.PushBack({ 116,3,107,93 });
-	dieAnim.PushBack({ 222,3,107,93 });
-	dieAnim.PushBack({ 328,3,107,93 });
-	dieAnim.PushBack({ 10,95,107,93 });
-	dieAnim.PushBack({ 116,95,107,93 });
-	dieAnim.PushBack({ 222,95,107,93 });
-	dieAnim.PushBack({ 328,95,107,93 });
+	dieAnim.PushBack({ 22,8,109,92 });
+	dieAnim.PushBack({ 130,8,109,92 });
+	dieAnim.PushBack({ 238,8,109,92 });
+	dieAnim.PushBack({ 346,8,109,92 });
+	dieAnim.PushBack({ 22,109,109,92 });
+	dieAnim.PushBack({ 130,109,109,92 });
+	dieAnim.PushBack({ 238,109,109,92 });
+	dieAnim.PushBack({ 346,109,109,92 });
 	dieAnim.loop = false;
 	dieAnim.speed = 0.08f;
 
-	idleAnim.PushBack({76,225,66,47});
+	idleAnim.PushBack({93,410,70,60});
 	idleAnim.loop = false;
 	idleAnim.speed = 0.03f;
 
-	legsAnim.PushBack({273,224,53,61});
+	attackAnim1.PushBack({ 93,473,70,60 });
+	attackAnim1.PushBack({ 93,410,70,60 });
+	attackAnim1.PushBack({ 24,282,70,60 });
+	attackAnim1.PushBack({ 93,282,70,60 });
+	attackAnim1.PushBack({ 93,282,70,60 });
+	attackAnim1.PushBack({ 93,282,70,60 });
+	attackAnim1.PushBack({ 93,282,70,60 });
+	attackAnim1.PushBack({ 24,282,70,60 });
+	attackAnim1.PushBack({ 93,410,70,60 });
+	attackAnim1.loop = false;
+	attackAnim1.speed = 0.04f;
+
+	legsAnim.PushBack({79,617,55,60});
 	legsAnim.loop = false;
 	legsAnim.speed = 0.03f;
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x+30, position.y+79, 29, 20 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x+30, position.y+79, 29, 26 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);*/
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 	isBoss = true;
+	currentAnim = &idleAnim;
 }
 
 void Enemy_Boss::Update()
 {
-	currentAnim = &idleAnim;
 	currentHeadAnim = &headAnim;
 	currentLegsAnim = &legsAnim;
-	currentAnim->Update();
-	currentHeadAnim->Update();
-	currentLegsAnim->Update();
+
 
 	
 
@@ -63,10 +73,10 @@ void Enemy_Boss::Update()
 		count = 0;
 		for (int i = 7; i >= 0; i--)
 		{
-			if (count < 1)
+			if (count == 0)
 			{
-				App->particles->AddParticle(App->particles->fireBoss[i], position.x-50+(i*2), position.y, Collider::Type::ENEMY_SHOT);
-				particle1[i].particle = currentParticle;
+				currentAnim = &attackAnim1;
+				currentAnim->Reset();
 				particle1[i].alive = true;
 				particle1[i].centerY = 100;
 				particle1[i].radius = 40.0f;
@@ -74,9 +84,11 @@ void Enemy_Boss::Update()
 				particle1[i].angularStep = 0.012f;
 				particle1[i].time = 0.0f;
 				particle1[i].left = true;
+				App->particles->AddParticle(App->particles->fireBoss[i], position.x-50+(i*2), static_cast<int>(particle1[i].centerY + particle1[i].radius * cos(particle1[i].angularStep * particle1[i].time)), Collider::Type::ENEMY_SHOT);
+				particle1[i].particle = currentParticle;
 			 	App->particles->particles[particle1[i].particle]->lifetime = 200;
 			}
-			if (count < 1)
+			if (count == 1)
 			{
 				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 50 + (i * 2), position.y, Collider::Type::ENEMY_SHOT);
 				particle2[i].particle = currentParticle;
@@ -89,14 +101,14 @@ void Enemy_Boss::Update()
 				particle2[i].left = true;
 				App->particles->particles[particle2[i].particle]->lifetime = 120;
 			}
-			if (count < 1)
+			if (count == 2)
 			{
 				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 50 + (i * 2), position.y+70, Collider::Type::ENEMY_SHOT);
 				particle3[i].particle = currentParticle;
 				particle3[i].alive = true;
 				App->particles->particles[particle3[i].particle]->lifetime = 120;
 			}
-			if (i == 0) count++;
+			if (i == 0) count=-1;
 		}
 		isShooting = true;
 		delay = 0;
@@ -170,10 +182,19 @@ void Enemy_Boss::Update()
 		{
 			particle3[i].alive = false;
 		}
+
+		if (App->particles->particles[particle1[i].particle] == nullptr 
+			&& App->particles->particles[particle2[i].particle] == nullptr 
+			&& App->particles->particles[particle3[i].particle] == nullptr)
+		{
+			currentAnim = &idleAnim;
+		}
 	}
 	collider->SetPos(position.x + 30, position.y+79);
 
-	
+	currentAnim->Update();
+	currentHeadAnim->Update();
+	currentLegsAnim->Update();
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

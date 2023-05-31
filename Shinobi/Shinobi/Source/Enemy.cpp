@@ -58,13 +58,13 @@ void Enemy::Draw()
 		{
 			if (flip)
 			{
-				App->render->Blit(texture, position.x + 26, position.y+6, SDL_FLIP_NONE, &(currentHeadAnim->GetCurrentFrame()));
-				App->render->Blit(texture, position.x + 23, position.y + 40, SDL_FLIP_NONE, &(currentLegsAnim->GetCurrentFrame()));
+				App->render->Blit(texture, position.x + 19, position.y+11, SDL_FLIP_NONE, &(currentHeadAnim->GetCurrentFrame()));
+				App->render->Blit(texture, position.x + 20, position.y + 44, SDL_FLIP_NONE, &(currentLegsAnim->GetCurrentFrame()));
 			}
 			else
 			{
-				App->render->Blit(texture, flipPos.x + 26, position.y+6, SDL_FLIP_HORIZONTAL, &(currentHeadAnim->GetCurrentFrame()));
-				App->render->Blit(texture, flipPos.x + 23, position.y + 40, SDL_FLIP_HORIZONTAL, &(currentLegsAnim->GetCurrentFrame()));
+				App->render->Blit(texture, flipPos.x + 19, position.y+11, SDL_FLIP_HORIZONTAL, &(currentHeadAnim->GetCurrentFrame()));
+				App->render->Blit(texture, flipPos.x + 20, position.y + 44, SDL_FLIP_HORIZONTAL, &(currentLegsAnim->GetCurrentFrame()));
 			}
 		}
 		if (flip)
