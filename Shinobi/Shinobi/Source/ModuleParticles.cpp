@@ -79,11 +79,12 @@ bool ModuleParticles::Start()
 	pow.anim.loop = false;
 	pow.anim.speed = 0.04f;
 
-	espada.anim.PushBack({ 7,7,40,27 });
-	espada.anim.PushBack({ 50,7,48,24 });
-	espada.anim.PushBack({ 104,7,44,24 });
+	espada.anim.PushBack({ 0,6,51,28 });
+	espada.anim.PushBack({ 50,6,51,28 });
+	espada.anim.PushBack({ 100,6,51,28 });
 	espada.anim.loop = true;
-	espada.anim.speed = 0.02f;
+	espada.anim.speed = 0.3f;
+
 	for (int i = 0; i < 6; i++)
 	{
 		for (int j = 0; j < 15; j++)

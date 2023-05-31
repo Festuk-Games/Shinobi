@@ -24,20 +24,20 @@ Enemy_green::Enemy_green(int x, int y) : Enemy(x, y)
 	currentAnim = &walkAnim;
 
 	//shoot animation
-	shootAnim.PushBack({ 486,74,96,72 });
+	shootAnim.PushBack({ 389,1,96,72 });
+	shootAnim.PushBack({ 292,1,96,72 });
+	shootAnim.PushBack({ 195,1,96,72 });
+	shootAnim.PushBack({ 98,1,96,72 });
+	shootAnim.PushBack({ 1,1,96,72 });
+	shootAnim.speed = 0.14f;
+	shootAnim.loop = false;
 
-	hitAnim.PushBack({ 389,74,96,72 });
-	hitAnim.PushBack({ 389,1,96,72 });
-	hitAnim.PushBack({ 292,1,96,72 });
-	hitAnim.PushBack({ 195,1,96,72 });
-	hitAnim.PushBack({ 98,1,96,72 });
-	hitAnim.PushBack({ 1,1,96,72 });
-	hitAnim.speed = 0.14f;
-	hitAnim.loop = false;
 
-	dieAnim.PushBack({ 1,147,96,72 });
-	dieAnim.PushBack({ 98,147,96,72 });
 	dieAnim.PushBack({ 195,147,96,72 });
+	dieAnim.PushBack({ 98,147,96,72 });
+	dieAnim.PushBack({ 1,147,96,72 });
+	dieAnim.PushBack({ 1,147,96,72 });
+	dieAnim.PushBack({ 0,0,0,0 });
 	dieAnim.speed = 0.08f;
 	dieAnim.loop = false;
 
@@ -63,14 +63,20 @@ void Enemy_green::Update()
 			shot++;
 			if (shot >= 100 && !reloading && bullets >= 1)
 			{
-				currentAnim = &shootAnim;
-				currentAnim->Reset();
+				if (currentAnim != &shootAnim)
+				{
+					currentAnim = &shootAnim;
+					currentAnim->Reset();
+				}
+				currentAnim->Update();
 				App->audio->PlayFx(App->audio->shuriken);
 				App->particles->espada.speed = iPoint(-5, 0);
-				App->particles->AddParticle(App->particles->espada, position.x, position.y + 25, Collider::Type::ENEMY_SHOT);
-				shot = 0;
-				shooting = true;
-				bullets--;
+				if (shot >= 112)
+				{
+					App->particles->AddParticle(App->particles->espada, position.x, position.y + 12, Collider::Type::ENEMY_SHOT);
+					shot = 0;
+					shooting = true;
+				}
 			}
 			else if (position.x != App->player->position.x && !shooting && !reloading)
 			{
@@ -101,14 +107,20 @@ void Enemy_green::Update()
 			shot++;
 			if (shot >= 100 && !reloading && bullets >= 1)
 			{
-				currentAnim = &shootAnim;
-				currentAnim->Reset();
+				if (currentAnim != &shootAnim)
+				{
+					currentAnim = &shootAnim;
+					currentAnim->Reset();
+				}
+				currentAnim->Update();
 				App->audio->PlayFx(App->audio->shuriken);
 				App->particles->espada.speed = iPoint(5, 0);
-				App->particles->AddParticle(App->particles->espada, position.x +69, position.y + 25, Collider::Type::ENEMY_SHOT);
-				shot = 0;
-				shooting = true;
-				bullets--;
+				if (shot >= 112)
+				{
+					App->particles->AddParticle(App->particles->espada, position.x+69, position.y + 12, Collider::Type::ENEMY_SHOT);
+					shot = 0;
+					shooting = true;
+				}
 			}
 			else if (position.x != App->player->position.x && !shooting && !reloading)
 			{
@@ -162,19 +174,10 @@ void Enemy_green::Update()
 			{
 				shooting = false;
 				time = 0;
+
 			}
 		}
 
-		//reload delay
-		if (reloading)
-		{
-			time++;
-			if (time >= 100)
-			{
-				reloading = false;
-				time = 0;
-			}
-		}
 		collider->SetPos(position.x+20, position.y + 8);
 	}
 	else if (die) currentAnim = &dieAnim;
