@@ -67,7 +67,7 @@ void Enemy_Spiderman::Update()
 
 				flip = true;
 				shot++;
-				if (position.x-App->player->position.x>=-10 && position.x-App->player->position.x<=10)
+				if (position.x - App->player->position.x >= -10 && position.x - App->player->position.x <= 10)
 				{
 					isSpiderman = false;
 				}
@@ -93,21 +93,12 @@ void Enemy_Spiderman::Update()
 
 				if (!isSpiderman && ground)
 				{
-					if (position.x-App->player->position.x <=1000 && position.x - App->player->position.x >=0 )
+					if (position.x - App->player->position.x <= 1000 && position.x - App->player->position.x >= 0)
 					{
 						currentAnim = &hitAnim;
 						currentAnim->Reset();
-						
 						int posicion = App->player->position.x;
-						for (int i = position.x; i <posicion ; i++)
-						{
-							position.x = i;
-							for (int h = position.y; h < 60; h++)
-							{
-								position.y = h;
-							}
-						}
-						//position.x = posicion;
+						position.x = posicion;
 						reloading = true;
 					}
 				}
@@ -115,7 +106,7 @@ void Enemy_Spiderman::Update()
 
 		}
 
-		////walk left
+		//walk left
 		else if (position.x - App->player->position.x >= -50 && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft)
 		{
 			spawnPos.x = position.x + 50;
@@ -151,11 +142,12 @@ void Enemy_Spiderman::Update()
 				}
 				if (!isSpiderman && ground)
 				{
-					if (App->player->position.x - position.x  >= -1000 && position.x - App->player->position.x <= 0)
+					if (App->player->position.x - position.x >= -1000 && position.x - App->player->position.x <= 0)
 					{
 						currentAnim = &hitAnim;
 						currentAnim->Reset();
 						int posicion = App->player->position.x;
+
 						position.x = posicion;
 						reloading = true;
 					}
@@ -164,15 +156,9 @@ void Enemy_Spiderman::Update()
 		}
 
 		//walk path
-		else if (!pl && !reloading && !shooting)
+		if (!pl && !reloading && !shooting)
 		{
-			if ((jump || !jump && !ground) && currentAnim != &jumpAnim)
-			{
-				currentAnim = &jumpAnim;
-				currentAnim->Reset();
-			}
-			else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
-			else currentAnim = &walkAnim;
+			if (!jump) currentAnim = &walkAnim;
 			if (position.x >= spawnPos.x + 100 || isCollidingLeft)
 			{
 				isCollidingLeft = false;
@@ -242,4 +228,3 @@ void Enemy_Spiderman::Update()
 	// It will update the collider depending on the position
 	Enemy::Update();
 }
-
