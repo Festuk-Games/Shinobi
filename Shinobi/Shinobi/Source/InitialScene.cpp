@@ -37,7 +37,7 @@ InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			descriptionAnim.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
+			descriptionAnim.PushBack({ 32 + 320 * j + 5 * j + 64 * j, 224 * i + 5 * i, 320, 224 });
 		}
 	}
 
@@ -128,7 +128,7 @@ Update_Status InitialScene::Update()
 
 	currentAnimation->Update();
 	delay++;
-	if (delay >= 820) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 20);
+	if (delay >= 750) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 20);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
