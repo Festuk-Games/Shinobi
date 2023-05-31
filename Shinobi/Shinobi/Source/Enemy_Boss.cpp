@@ -68,6 +68,12 @@ void Enemy_Boss::Update()
 				App->particles->AddParticle(App->particles->fireBoss[i], position.x-50+(i*2), position.y, Collider::Type::ENEMY_SHOT);
 				particle1[i].particle = currentParticle;
 				particle1[i].alive = true;
+				particle1[i].centerY = 100;
+				particle1[i].radius = 40.0f;
+				particle1[i].angularVelocity = 0.16f;
+				particle1[i].angularStep = 0.012f;
+				particle1[i].time = 0.0f;
+				particle1[i].left = true;
 			 	App->particles->particles[particle1[i].particle]->lifetime = 200;
 			}
 			if (count < 1)
@@ -75,7 +81,20 @@ void Enemy_Boss::Update()
 				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 50 + (i * 2), position.y, Collider::Type::ENEMY_SHOT);
 				particle2[i].particle = currentParticle;
 				particle2[i].alive = true;
+				particle2[i].centerY = 140;
+				particle2[i].radius = 40.0f;
+				particle2[i].angularVelocity = 0.16f;
+				particle2[i].angularStep = 0.012f;
+				particle2[i].time = 0.0f;
+				particle2[i].left = true;
 				App->particles->particles[particle2[i].particle]->lifetime = 120;
+			}
+			if (count < 1)
+			{
+				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 50 + (i * 2), position.y+70, Collider::Type::ENEMY_SHOT);
+				particle3[i].particle = currentParticle;
+				particle3[i].alive = true;
+				App->particles->particles[particle3[i].particle]->lifetime = 120;
 			}
 			if (i == 0) count++;
 		}
@@ -136,6 +155,20 @@ void Enemy_Boss::Update()
 		else if (App->particles->particles[particle2[i].particle] == nullptr)
 		{
 			particle2[i].alive = false;
+		}
+
+		//particle3
+		if (App->particles->particles[particle3[i].particle] != nullptr && particle3[i].alive && delay >= i * 2)
+		{
+
+			if (particle3[i].left)
+			{
+				App->particles->particles[particle3[i].particle]->position.x -= 2;
+			}
+		}
+		else if (App->particles->particles[particle3[i].particle] == nullptr)
+		{
+			particle3[i].alive = false;
 		}
 	}
 	collider->SetPos(position.x + 30, position.y+79);

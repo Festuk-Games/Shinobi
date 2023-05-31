@@ -72,6 +72,13 @@ private:
 		bool left = true;
 	}particle2[8];
 
+	struct particle3
+	{
+		bool alive = false;
+		int particle;
+		bool left = true;
+	}particle3[8];
+
 	bool isShooting = false;
 
 	int delay = 0;
