@@ -41,6 +41,7 @@ public:
 	unsigned int platform;
 	unsigned int attack;
 	unsigned int punch;
+	unsigned int swoosh_logo;
 
 private:
 

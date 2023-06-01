@@ -49,6 +49,7 @@ bool ModuleAudio::Init()
 	platform = LoadFx("Audio/FX/plataforma.wav");
 	attack = LoadFx("Audio/FX/attack.wav");
 	punch = LoadFx("Audio/FX/punch.wav");
+	swoosh_logo = LoadFx("Audio/FX/swoosh_logo.wav");
 	return ret;
 }
 
