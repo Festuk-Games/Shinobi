@@ -37,6 +37,10 @@ public:
 	unsigned int write;
 	unsigned int coin;
 	unsigned int jump;
+	unsigned int hostage;
+	unsigned int platform;
+	unsigned int attack;
+	unsigned int punch;
 
 private:
 

@@ -304,6 +304,8 @@ Update_Status ModulePlayer::Update()
 						else
 						{
 							currentAnimation = &katanaJumpAnim;
+							App->audio->PlayFx(App->audio->attack);
+
 						}
 						jumpAttackDelay+=10;
 					}
@@ -377,6 +379,7 @@ Update_Status ModulePlayer::Update()
 						else
 						{
 							currentAnimation = &katanaJumpAnim;
+							App->audio->PlayFx(App->audio->attack);
 						}
 						jumpAttackDelay+=10;
 					}
@@ -447,11 +450,14 @@ Update_Status ModulePlayer::Update()
 				{
 					currentAnimation = &katanaAnim;
 					currentAnimation->Reset();
+					App->audio->PlayFx(App->audio->attack);
 				}
 				else
 				{
 					currentAnimation = &punchAnim;
 					currentAnimation->Reset();
+					App->audio->PlayFx(App->audio->attack);
+					App->audio->PlayFx(App->audio->punch);
 				}
 				katana->rect.w = 25;
 				katana->rect.h = 25;
@@ -482,6 +488,8 @@ Update_Status ModulePlayer::Update()
 		{
 			isJumpingUp2 = true;
 			jumpPosition.y = position.y;
+			App->audio->PlayFx(App->audio->platform);
+			App->audio->PlayFx(App->audio->jump);
 		}
 		//jump to second floor animation
 		if (isJumpingUp2)
@@ -533,6 +541,8 @@ Update_Status ModulePlayer::Update()
 		{
 			isJumpingDown2 = true;
 			jumpPosition.y = position.y;
+			App->audio->PlayFx(App->audio->platform);
+			App->audio->PlayFx(App->audio->jump);
 		}
 		//jump to first floor animation
 		if (isJumpingDown2)
@@ -669,6 +679,7 @@ Update_Status ModulePlayer::Update()
 				if (!isPowerUp)
 				{
 					currentAnimation = &crouchKickAnim;
+					App->audio->PlayFx(App->audio->attack);
 					currentAnimation->Reset();
 					if (right)
 					{
@@ -688,6 +699,7 @@ Update_Status ModulePlayer::Update()
 				}
 				else {
 					currentAnimation = &crouchKatanaAnim;
+					App->audio->PlayFx(App->audio->attack);
 					currentAnimation->Reset();
 					if (right)
 					{

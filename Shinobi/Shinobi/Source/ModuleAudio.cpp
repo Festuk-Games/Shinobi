@@ -45,6 +45,10 @@ bool ModuleAudio::Init()
 	write = LoadFx("Audio/FX/write.wav");
 	coin = LoadFx("Audio/FX/coin.wav");
 	jump = LoadFx("Audio/FX/jump.wav");
+	hostage = LoadFx("Audio/FX/freeKids.wav");
+	platform = LoadFx("Audio/FX/plataforma.wav");
+	attack = LoadFx("Audio/FX/attack.wav");
+	punch = LoadFx("Audio/FX/punch.wav");
 	return ret;
 }
 
