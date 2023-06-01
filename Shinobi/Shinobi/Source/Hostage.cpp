@@ -74,4 +74,6 @@ void Hostage::OnCollision(Collider* collider)
 	App->ui->scoreCounter += 500;
 	App->ui->hostages--;
 	col = true;
+	App->audio->PlayFx(App->audio->hostage);
 }
+
