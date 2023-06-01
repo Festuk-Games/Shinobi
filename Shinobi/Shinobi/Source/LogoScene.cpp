@@ -51,7 +51,7 @@ Update_Status LogoScene::Update()
 	delay++;
 	if (delay >= 200) App->fade->FadeToBlack(this, (Module*)App->initial, false, false, 60);//tiempo que tarda en cambiar la escena
 
-	if(delay >= 60 && delay <= 150)App->audio->PlayFx(App->audio->swoosh_logo);
+	if(delay == 55)App->audio->PlayFx(App->audio->swoosh_logo);
 	
 	return Update_Status::UPDATE_CONTINUE;
 }
