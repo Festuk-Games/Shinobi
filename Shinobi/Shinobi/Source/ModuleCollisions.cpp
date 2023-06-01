@@ -254,7 +254,7 @@ void ModuleCollisions::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha, -1.0f);
 			break;
 			case Collider::Type::ULTIMATE: // green
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha, 0.0f);
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha, -1.0f);
 			break;
 		}
 	}

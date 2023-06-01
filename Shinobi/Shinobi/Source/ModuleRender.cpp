@@ -110,6 +110,7 @@ Update_Status ModuleRender::Update()
 			if (App->player->position.x >= 180 && !App->player->isCollidingRight)
 			{
 				camera.x -= cameraSpeed;
+				colPos += 3;
 			}
 		}
 	}
@@ -122,9 +123,15 @@ Update_Status ModuleRender::Update()
 			if (App->player->position.x <= 1840 && !App->player->isCollidingLeft)
 			{
 				camera.x += cameraSpeed;
+				colPos -= 3;
 			}
 		}
 	}
+
+	cameracol->SetPos(colPos, 0);
+	cameracol2->SetPos(319 + colPos, 0);
+	cameracol3->SetPos(colPos, 223);
+	cameracol4->SetPos(colPos, 0);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

@@ -59,6 +59,7 @@ public:
 
 	// The speed at which the camera will be moving
 	int cameraSpeed = 9;
+	int colPos = 0;
 	bool posiciones = false;
 
 	int jumpcam = 0;
