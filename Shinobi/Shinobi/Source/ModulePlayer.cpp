@@ -718,6 +718,7 @@ Update_Status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_G] == KEY_DOWN)
 		{
 			ulti = true;
+			ultiTimer = 0;
 			currentAnimation = &ultiAnim;
 			currentAnimation->Reset();
 			App->particles->AddParticle(App->particles->ultimateEffect, position.x - 10, position.y - 80, Collider::Type::NONE);
