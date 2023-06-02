@@ -50,9 +50,11 @@ bool ModuleScene::Start()
 	App->ui->lose = false;
 	nextStage = false;
 	clear = false;
+	App->ui->scoreCounter = 0;
+	App->ui->lifenum = 2;
 
 	App->render->camera.x = 0;
-
+	App->render->colPos = 0;
 	//enable modules
 	App->player->Enable();
 	App->hostage->Enable();

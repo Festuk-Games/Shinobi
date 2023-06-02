@@ -153,7 +153,7 @@ bool ModuleUI::Start()
 	{
 		App->scene->nextStage = false;
 		App->scene->clear = false;
-		if (lifenum >=2)
+		if (lifenum >=0)
 		{
 			hostages = 4;
 		}
@@ -163,7 +163,7 @@ bool ModuleUI::Start()
 	{
 		App->scene->nextStage = false;
 		App->scene->clear = false;
-		if (lifenum >= 2)
+		if (lifenum >= 0)
 		{
 			hostages = 3;
 		}

@@ -128,7 +128,7 @@ Update_Status InitialScene::Update()
 
 	currentAnimation->Update();
 	delay++;
-	if (delay >= 750) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 20);
+	if (delay >= 820) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 20);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

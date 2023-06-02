@@ -14,17 +14,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
-}
-
-ModuleParticles::~ModuleParticles()
-{
-
-}
-
-bool ModuleParticles::Start()
-{
-	LOG("Loading particles");
-	texture = App->textures->Load("Assets/bullets2.png");
 
 	// shuriken particle
 	shuriken.anim.PushBack({ 287, 15, 16, 13 });
@@ -44,7 +33,7 @@ bool ModuleParticles::Start()
 	powgun.anim.speed = 0.2f;
 	powgun.lifetime = 80;
 
-	patada.anim.PushBack ({0, 0, 0, 0}) ;
+	patada.anim.PushBack({ 0, 0, 0, 0 });
 
 
 	hit.anim.PushBack({ 202, 12, 24, 18 });
@@ -89,7 +78,7 @@ bool ModuleParticles::Start()
 	{
 		for (int j = 0; j < 15; j++)
 		{
-			ultimateEffect.anim.PushBack({62*j,199 + 60*i,63,61});
+			ultimateEffect.anim.PushBack({ 62 * j,199 + 60 * i,63,61 });
 		}
 	}
 	ultimateEffect.anim.loop = false;
@@ -227,11 +216,24 @@ bool ModuleParticles::Start()
 
 	for (int i = 0; i <= 7; i++)
 	{
-		fireBoss[i].anim.PushBack({ 455 - i*31, 141, 32, 27 });
+		fireBoss[i].anim.PushBack({ 455 - i * 31, 141, 32, 27 });
 		fireBoss[i].fliph = false;
 		fireBoss[i].anim.loop = true;
 		fireBoss[i].anim.speed = 0.1f;
 	}
+}
+
+ModuleParticles::~ModuleParticles()
+{
+
+}
+
+bool ModuleParticles::Start()
+{
+	LOG("Loading particles");
+	texture = App->textures->Load("Assets/bullets2.png");
+
+	
 
 
 	return true;

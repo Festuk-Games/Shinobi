@@ -203,7 +203,7 @@ bool ModulePlayer::Start()
 	//initial position
 	position.x = 30;
 	position.y = 209;
-	App->ui->lifenum = 2;
+	//App->ui->lifenum = 2;
 	alive = true;
 	isPowerUp = false;
 	currentAnimation = &idleAnim;
@@ -879,7 +879,7 @@ Update_Status ModulePlayer::Update()
 			diePosition = position;
 			diePos = true;
 		}
-		if (position.x >= diePosition.x - 25 )
+		if (right && position.x >= diePosition.x - 25 )
 		{
 			if (currentAnimation != &dieAnim1)
 			{
@@ -887,12 +887,27 @@ Update_Status ModulePlayer::Update()
 				currentAnimation->Reset();
 			}
 			position.x -= speed;
-			if (position.x >= 100)
+
+			if (position.x >= 200)
 			{
 				App->render->camera.x += speed;
 			}
 		}
-		else if (position.x <= diePosition.x - 25)
+		else if (!right && position.x <= diePosition.x + 25)
+		{
+			if (currentAnimation != &dieAnim1)
+			{
+				currentAnimation = &dieAnim1;
+				currentAnimation->Reset();
+			}
+			position.x += speed;
+
+			if (position.x >= 200)
+			{
+				App->render->camera.x -= speed;
+			}
+		}
+		else if (position.x <= diePosition.x - 25 || position.x >= diePosition.x + 25)
 		{
 			if (currentAnimation != &dieAnim2)
 			{
