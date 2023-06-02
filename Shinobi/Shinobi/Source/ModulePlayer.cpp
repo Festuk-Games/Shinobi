@@ -750,8 +750,9 @@ Update_Status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_G] == KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_G] == KEY_DOWN && App->ui->sk1)
 		{
+			App->ui->sk1 = false;
 			ulti = true;
 			ultiTimer = 0;
 			currentAnimation = &ultiAnim;

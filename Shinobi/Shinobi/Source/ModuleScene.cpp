@@ -47,6 +47,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	App->ui->sk1 = true;
 	App->ui->lose = false;
 	nextStage = false;
 	clear = false;
