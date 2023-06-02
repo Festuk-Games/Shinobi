@@ -155,18 +155,18 @@ Update_Status ModuleScene::Update()
 		else App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
 	}
 
-	if (App->player->L2 && !ground2)
-	{
-		groundCol = App->collisions->AddCollider({ 96, 96, 992, 2 }, Collider::Type::GROUND);
-		groundCol2 = App->collisions->AddCollider({ 1296, 96, 656, 2 }, Collider::Type::GROUND);
-		ground2 = true;
-	}
-	else if (!App->player->L2 && ground2)
-	{
-		groundCol->pendingToDelete = true;
-		groundCol2->pendingToDelete = true;
-		ground2 = false;
-	}
+	//if (App->player->L2 && !ground2)
+	//{
+	//	groundCol = App->collisions->AddCollider({ 96, 96, 992, 2 }, Collider::Type::GROUND);
+	//	groundCol2 = App->collisions->AddCollider({ 1296, 96, 656, 2 }, Collider::Type::GROUND);
+	//	ground2 = true;
+	//}
+	//else if (!App->player->L2 && ground2)
+	//{
+	//	groundCol->pendingToDelete = true;
+	//	groundCol2->pendingToDelete = true;
+	//	ground2 = false;
+	//}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

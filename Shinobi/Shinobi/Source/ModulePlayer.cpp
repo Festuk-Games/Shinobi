@@ -1003,6 +1003,15 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			jumpState = false;
 		}
 	}
+	if (c1->type == Collider::Type::FEET && c2->type == Collider::Type::GROUND2 && L2)
+	{
+		ground = true;
+		isJumping = false;
+		if (!isJumpingDown2)
+		{
+			jumpState = false;
+		}
+	}
 
 	//box collider
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::BOX || c2->type == Collider::Type::WALL)
