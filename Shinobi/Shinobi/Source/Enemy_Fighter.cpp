@@ -59,7 +59,7 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 void Enemy_Fighter::Update()
 {
 	flipPos.x = position.x + 20;
-	//std::cout << position.y << std::endl;
+	std::cout << position.y << std::endl;
 	if (!die)
 	{
 		//walk right
@@ -82,7 +82,7 @@ void Enemy_Fighter::Update()
 					}
 					else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
 					else currentAnim = &walkAnim;
-					position.x--;
+					if(ground) position.x--;
 				}
 				else if (shot >= 100)
 				{
@@ -136,7 +136,7 @@ void Enemy_Fighter::Update()
 					}
 					else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
 					else currentAnim = &walkAnim;
-					position.x++;
+					if(ground) position.x++;
 				}
 				else if (shot >= 100)
 				{
@@ -169,7 +169,7 @@ void Enemy_Fighter::Update()
 		}
 
 		//walk path
-		else if (!pl && !reloading && !shooting)
+		else if (!pl && !reloading && !shooting )
 		{
 			if ((jump || !jump && !ground) && currentAnim != &jumpAnim)
 			{
@@ -194,12 +194,12 @@ void Enemy_Fighter::Update()
 			if (changedirection)
 			{
 				flip = true;
-				position.x--;
+				if(ground) position.x--;
 			}
 			else
 			{
 				flip = false;
-				position.x++;
+				if(ground) position.x++;
 			}
 
 			shooting = false;

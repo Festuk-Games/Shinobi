@@ -48,13 +48,13 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({position.x+20, position.y+8, 45, 61}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({position.x+20, position.y+8, 45, 62}, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 }
 void Enemy_Gunner::Update()
 {
 	flipPos.x = position.x;
-	//std::cout << position.x << std::endl;
+	std::cout << position.y << std::endl;
 	if (!die)
 	{
 		//walk right
@@ -147,8 +147,16 @@ void Enemy_Gunner::Update()
 				flip = false;
 			}
 
-			if (changedirection) position.x--;
-			else position.x++;
+			if (changedirection)
+			{
+				flip = true;
+				position.x--;
+			}
+			else
+			{
+				flip = false;
+				position.x++;
+			}
 
 			shooting = false;
 			reloading = false;

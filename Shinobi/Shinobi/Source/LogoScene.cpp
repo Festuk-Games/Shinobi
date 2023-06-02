@@ -49,7 +49,7 @@ Update_Status LogoScene::Update()
 {
 	currentAnim->Update();
 	delay++;
-	if (delay >= 200) App->fade->FadeToBlack(this, (Module*)App->scene, false, false, 60);//tiempo que tarda en cambiar la escena
+	if (delay >= 200) App->fade->FadeToBlack(this, (Module*)App->scene2, false, false, 60);//tiempo que tarda en cambiar la escena
 
 	if(delay == 55)App->audio->PlayFx(App->audio->swoosh_logo);
 	

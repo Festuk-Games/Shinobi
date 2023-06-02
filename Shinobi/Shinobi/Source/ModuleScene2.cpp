@@ -75,17 +75,17 @@ bool ModuleScene2::Start()
 	App->collisions->AddCollider({ 1600, 112, 32, 1 }, Collider::Type::GROUND);
 	App->collisions->AddCollider({ 1696, 176, 32, 1 }, Collider::Type::GROUND);
 
-	App->collisions->AddCollider({ 288, 177, 32, 31 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 576, 177, 64, 31 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 896, 177, 64, 31 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 960, 145, 352, 63 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1024, 113, 224, 31 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1120, 81, 32, 31 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1312, 177, 96, 31 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1568, 177, 32, 31 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1600, 145, 96, 63 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1600, 113, 32, 31 }, Collider::Type::BOX);
-	App->collisions->AddCollider({ 1696, 177, 32, 31 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 288, 178, 32, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 576, 178, 64, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 896, 178, 64, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 960, 146, 352, 62 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1024, 114, 224, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1120, 82, 32, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1312, 178, 96, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1568, 178, 32, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1600, 146, 96, 62 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1600, 114, 32, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1696, 178, 32, 30 }, Collider::Type::BOX);
 
 	App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
 	
@@ -109,11 +109,11 @@ bool ModuleScene2::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::SPIDERMAN, 800, 80);
 
 	//enemigos gunner
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 471, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 576, 130-32);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 896, 130 - 32);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1233, 130 - 32);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1624, 130 - 32-64);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 471, 139);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 576, 139-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 896, 139 - 32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1233, 139 - 32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1624, 139 - 32-64);
 
 	App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 350,130);
 

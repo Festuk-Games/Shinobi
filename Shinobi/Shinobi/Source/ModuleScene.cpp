@@ -78,14 +78,14 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1472, 176, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 544, 64, 32, 1 }, Collider::Type::GROUND);
 
-		App->collisions->AddCollider({ 416, 177, 32, 31 }, Collider::Type::BOX);
-		App->collisions->AddCollider({ 704, 177, 32, 31 }, Collider::Type::BOX);
-		App->collisions->AddCollider({ 864, 177, 32, 31 }, Collider::Type::BOX);
-		App->collisions->AddCollider({ 1408, 145, 32, 31 }, Collider::Type::BOX);
-		App->collisions->AddCollider({ 1408, 177, 32, 31 }, Collider::Type::BOX);
-		App->collisions->AddCollider({ 1440, 177, 32, 31 }, Collider::Type::BOX);
-		App->collisions->AddCollider({ 1472, 177, 32, 31 }, Collider::Type::BOX);
-		App->collisions->AddCollider({ 544, 65, 32, 31 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 416, 178, 32, 30 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 704, 178, 32, 30 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 864, 178, 32, 30 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 1408, 146, 32, 30 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 1408, 178, 32, 30 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 1440, 178, 32, 30 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 1472, 178, 32, 30 }, Collider::Type::BOX);
+		App->collisions->AddCollider({ 544, 66, 32, 30 }, Collider::Type::BOX);
 
 		//App->collisions->AddCollider({ 544, 64, 32, 32 }, Collider::Type::WALL);
 
@@ -102,7 +102,7 @@ bool ModuleScene::Start()
 
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 220, 142);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 341, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 580, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 220, 139);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 707, 130-32);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 726, 130-32);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 740, 130);
