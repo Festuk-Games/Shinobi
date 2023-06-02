@@ -38,13 +38,14 @@ Enemy_Spiderman::Enemy_Spiderman(int x, int y) : Enemy(x, y)
 	dieAnim.PushBack({ 7,198,45,54 });
 	dieAnim.PushBack({ 53,198,45,54 });
 	dieAnim.PushBack({ 99,198,45,54 });
+	dieAnim.PushBack({0,0,0,0});
 	dieAnim.speed = 0.1f;
 	dieAnim.loop = false;
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x + 25, position.y + 3, 35, 50 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x, position.y + 3, 40, 50 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	attack = App->collisions->AddCollider({0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	isSpiderman = true;
 
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
@@ -53,7 +54,7 @@ Enemy_Spiderman::Enemy_Spiderman(int x, int y) : Enemy(x, y)
 
 void Enemy_Spiderman::Update()
 {
-	flipPos.x = position.x + 20;
+	flipPos.x = position.x;
 	std::cout << position.y << std::endl;
 	if (!die)
 	{
@@ -99,6 +100,9 @@ void Enemy_Spiderman::Update()
 						currentAnim->Reset();
 						int posicion = App->player->position.x;
 						position.x = posicion;
+						attack->rect.w = 10;
+						attack->rect.h = 10;
+						attack->SetPos(position.x, position.y);
 						reloading = true;
 					}
 				}
@@ -149,6 +153,9 @@ void Enemy_Spiderman::Update()
 						int posicion = App->player->position.x;
 
 						position.x = posicion;
+						attack->rect.w = 10;
+						attack->rect.h = 10;
+						attack->SetPos(position.x, position.y);
 						reloading = true;
 					}
 				}
@@ -208,20 +215,11 @@ void Enemy_Spiderman::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x + 25, position.y + 3);
+		collider->SetPos(position.x, position.y + 3);
 
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}
-	else if (die) {
-		currentAnim = &dieAnim;
-		collider->SetPos(position.x - 10, position.y + 30);
-		collider->rect.w = 37;
-		collider->rect.h = 20;
-		attack->rect.w = 0;
-		attack->rect.h = 0;
-		attack->SetPos(0, 0);
-	}
-	jump = false;
+	else if (die) currentAnim = &dieAnim;
 	//feet->SetPos(position.x, position.y + 69);
 
 	// Call to the base class. It must be called at the end
