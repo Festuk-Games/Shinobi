@@ -301,10 +301,27 @@ Update_Status ModulePlayer::Update()
 								App->particles->AddParticle(App->particles->powgun, position.x+5, position.y - 47, Collider::Type::PLAYER_SHOT);
 							}
 						}
+						else if (enemyNear && !isPowerUp)
+						{
+							currentAnimation = &attackJumpAnim1;
+							App->audio->PlayFx(App->audio->attack);
+							katana->rect.w = 30;
+							katana->rect.h = 30;
+							if (right) katana->SetPos(position.x + 50, position.y - 50);
+							else katana->SetPos(position.x - 15, position.y - 50);
+							katana->rect.w = 0;
+							katana->rect.h = 0;
+						}
 						else
 						{
 							currentAnimation = &katanaJumpAnim;
 							App->audio->PlayFx(App->audio->attack);
+							katana->rect.w = 30;
+							katana->rect.h = 30;
+							if (right) katana->SetPos(position.x + 50, position.y - 50);
+							else katana->SetPos(position.x - 15, position.y - 50);
+							katana->rect.w = 0;
+							katana->rect.h = 0;
 
 						}
 						jumpAttackDelay+=10;
@@ -380,6 +397,12 @@ Update_Status ModulePlayer::Update()
 						{
 							currentAnimation = &katanaJumpAnim;
 							App->audio->PlayFx(App->audio->attack);
+							katana->rect.w = 30;
+							katana->rect.h = 30;
+							if (right) katana->SetPos(position.x + 50, position.y - 50);
+							else katana->SetPos(position.x - 15, position.y - 50);
+							katana->rect.w = 0;
+							katana->rect.h = 0;
 						}
 						jumpAttackDelay+=10;
 					}
@@ -459,10 +482,10 @@ Update_Status ModulePlayer::Update()
 					App->audio->PlayFx(App->audio->attack);
 					App->audio->PlayFx(App->audio->punch);
 				}
-				katana->rect.w = 25;
-				katana->rect.h = 25;
-				if (right) katana->SetPos(position.x + 55, position.y - 50);
-				else katana->SetPos(position.x - 20, position.y - 50);
+				katana->rect.w = 30;
+				katana->rect.h = 30;
+				if (right) katana->SetPos(position.x + 50, position.y - 50);
+				else katana->SetPos(position.x - 15, position.y - 50);
 				katana->rect.w = 0;
 				katana->rect.h = 0;
 				//katana->SetPos(0, 0);

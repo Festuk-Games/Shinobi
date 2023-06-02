@@ -38,13 +38,13 @@ Enemy_Spiderman::Enemy_Spiderman(int x, int y) : Enemy(x, y)
 	dieAnim.PushBack({ 7,198,45,54 });
 	dieAnim.PushBack({ 53,198,45,54 });
 	dieAnim.PushBack({ 99,198,45,54 });
-	dieAnim.PushBack({ 0,0,0,0 });
+	dieAnim.PushBack({0,0,0,0});
 	dieAnim.speed = 0.1f;
 	dieAnim.loop = false;
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x, position.y + 20, 45, 54 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x, position.y + 3, 40, 50 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	isSpiderman = true;
 
@@ -215,7 +215,7 @@ void Enemy_Spiderman::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x, position.y + 20);
+		collider->SetPos(position.x, position.y + 3);
 
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}
