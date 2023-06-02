@@ -103,7 +103,8 @@ void Enemy_Purple::Update()
 		}
 		//walk left
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
-			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2))
+			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) && 
+			(App->player->currentAnimation != &App->player->jumpDownFloorAnim || App->player->currentAnimation != &App->player->jumpUpFloorAnim))
 		{
 			isCollidingRight = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
@@ -149,16 +150,18 @@ void Enemy_Purple::Update()
 
 		}
 		//walk path
-		else if (!pl && !reloading && !shooting || isCollidingLeft)
+		else if (!pl && !reloading && !shooting)
 		{
 			currentAnim = &walkAnim;
-			if (position.x >= spawnPos.x)
+			if (position.x >= spawnPos.x || isCollidingLeft)
 			{
+				isCollidingLeft = false;
 				changedirection = true;
 				flip = true;
 			}
 			else if (position.x <= spawnPos.x || isCollidingRight)
 			{
+				isCollidingRight = false;
 				changedirection = false;
 				flip = false;
 			}
@@ -185,7 +188,7 @@ void Enemy_Purple::Update()
 			cout << position.y<<endl;
 			position.y=135;
 			collider->rect.h = 65;
-			collider->SetPos(position.x+5, position.y+7);
+			collider->SetPos(position.x+5, position.y+8);
 			time++;
 			if (time >= 50)
 			{
@@ -198,7 +201,7 @@ void Enemy_Purple::Update()
 		{
 			position.y = 135;
 			collider->rect.h = 50;
-			collider->SetPos(position.x+6, position.y+22);
+			collider->SetPos(position.x+6, position.y+23);
 		}
 
 
@@ -212,7 +215,7 @@ void Enemy_Purple::Update()
 				time = 0;
 			}
 		}
-		//collider->SetPos(position.x, position.y);
+		//collider->SetPos(position.x, position.y+2);
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}
 	else if (die) {

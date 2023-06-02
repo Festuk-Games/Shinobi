@@ -43,7 +43,7 @@ Enemy_green::Enemy_green(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x + 25, position.y + 4, 35, 62 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 28, position.y + 12, 38, 68 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
@@ -73,7 +73,7 @@ void Enemy_green::Update()
 				App->particles->espada.speed = iPoint(-5, 0);
 				if (shot >= 112)
 				{
-					App->particles->AddParticle(App->particles->espada, position.x, position.y + 12, Collider::Type::ENEMY_SHOT);
+					App->particles->AddParticle(App->particles->espada, position.x+20, position.y + 15, Collider::Type::ENEMY_SHOT);
 					shot = 0;
 					shooting = true;
 				}
@@ -117,7 +117,7 @@ void Enemy_green::Update()
 				App->particles->espada.speed = iPoint(5, 0);
 				if (shot >= 112)
 				{
-					App->particles->AddParticle(App->particles->espada, position.x+69, position.y + 12, Collider::Type::ENEMY_SHOT);
+					App->particles->AddParticle(App->particles->espada, position.x+69, position.y + 15, Collider::Type::ENEMY_SHOT);
 					shot = 0;
 					shooting = true;
 				}
@@ -178,7 +178,7 @@ void Enemy_green::Update()
 			}
 		}
 
-		collider->SetPos(position.x+20, position.y + 8);
+		collider->SetPos(position.x+28, position.y + 6);
 	}
 	else if (die) currentAnim = &dieAnim;
 

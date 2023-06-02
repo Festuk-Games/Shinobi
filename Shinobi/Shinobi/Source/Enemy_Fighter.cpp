@@ -53,9 +53,7 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
-
 }
-
 void Enemy_Fighter::Update()
 {
 	flipPos.x = position.x + 20;
