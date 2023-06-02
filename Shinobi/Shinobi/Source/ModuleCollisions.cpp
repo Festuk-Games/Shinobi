@@ -245,7 +245,7 @@ void ModuleCollisions::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, -1.0f);
 			break;
 			case Collider::Type::GROUND2: // magenta
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, -1.0f);
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha, -1.0f);
 			break;
 			case Collider::Type::FEET: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, -1.0f);

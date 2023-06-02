@@ -7,7 +7,7 @@
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
-
+#include "BossScene.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
@@ -323,7 +323,11 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 			
 			if (colliderType == Collider::Type::ENEMY_SHOT) {
 				p->collider = App->collisions->AddCollider({ 0,0,5,5 }, colliderType, this);
-				App->enemies->GetParticle(i);
+				if (App->sceneboss->IsEnabled())
+				{
+					App->enemies->GetParticle(i);
+				}
+				
 			}
 			else if (colliderType != Collider::Type::NONE)
 			{
