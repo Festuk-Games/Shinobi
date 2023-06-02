@@ -115,6 +115,8 @@ bool ModuleScene2::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1233, 130 - 32);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1624, 130 - 32-64);
 
+	App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 350,130);
+
 	//Enemigos Tochos (purple...)
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 831, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::GREEN, 250, 130);

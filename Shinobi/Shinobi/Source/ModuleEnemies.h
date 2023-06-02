@@ -17,6 +17,7 @@ enum class ENEMY_TYPE
 	GREEN,
 	SPIDERMAN,
 	BOSS,
+	SITTGUNNER,
 };
 
 struct EnemySpawnpoint
@@ -87,6 +88,7 @@ private:
 	SDL_Texture* green = nullptr;
 	SDL_Texture* spiderman = nullptr;
 	SDL_Texture* boss = nullptr;
+	SDL_Texture* sittingGunner = nullptr;
 
 	SDL_Texture* stageTextureL2 = nullptr;
 

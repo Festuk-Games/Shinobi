@@ -1,16 +1,16 @@
-#ifndef __ENEMY_GREEN_H__
-#define __ENEMY_GREEN_H__
+#ifndef __ENEMY_SITTINGGUNNER_H__
+#define __ENEMY_SITTINGGUNNER_H__
 
 #include "Enemy.h"
 #include "Path.h"
 
-class Enemy_green : public Enemy
+class Enemy_SittingGunner : public Enemy
 {
 public:
 
 	// Constructor (x y coordinates in the world)
 	// Creates animation data and the collider
-	Enemy_green(int x, int y);
+	Enemy_SittingGunner(int x, int y);
 
 	// The enemy is going to perform a sinusoidal movement
 	void Update() override;
@@ -33,20 +33,20 @@ private:
 	// The enemy animation
 	Animation idleAnim;
 	Animation walkAnim;
-	Animation hitAnim;
+	Animation preshootAnim, shootAnim, reloadAnim;
 	Animation dieAnim;
-	Animation shootAnim;
 
 	bool changedirection = true;
 
 	bool pl = false;
-	bool moving = false;
+
 	int pos1 = 500, pos2 = 650;
 	int pdistance = 200;
 	int shot = 0;
-	bool shooting = false, reloading = false, walking = true; 
+	bool shooting = false, reloading = false, walking = true;
 	int time = 0;
-	int bullets = 1;
+
+	int bullets = 3;
 };
 
-#endif // __ENEMY_GREEN_H__
+#endif // __ENEMY_SITTINGGUNNER_H__

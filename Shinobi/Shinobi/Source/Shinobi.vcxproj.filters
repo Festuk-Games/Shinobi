@@ -169,6 +169,9 @@
     <ClInclude Include="Enemy_Spiderman.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy_SittingGunner.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -295,6 +298,9 @@
       <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
     </ClCompile>
     <ClCompile Include="Enemy_Spiderman.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_SittingGunner.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
