@@ -22,7 +22,7 @@ bool ModuleInput::Init()
 	bool ret = true;
 	SDL_Init(0);
 
-	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
+	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
@@ -61,21 +61,21 @@ Update_Status ModuleInput::PreUpdate()
 	{
 		switch (event.type)
 		{
-			case(SDL_CONTROLLERDEVICEADDED):
-			{
-				HandleDeviceConnection(event.cdevice.which);
-				break;
-			}
-			case(SDL_CONTROLLERDEVICEREMOVED):
-			{
-				HandleDeviceRemoval(event.cdevice.which);
-				break;
-			}
-			case(SDL_QUIT):
-			{
-				return Update_Status::UPDATE_STOP;
-				break;
-			}
+		case(SDL_CONTROLLERDEVICEADDED):
+		{
+			HandleDeviceConnection(event.cdevice.which);
+			break;
+		}
+		case(SDL_CONTROLLERDEVICEREMOVED):
+		{
+			HandleDeviceRemoval(event.cdevice.which);
+			break;
+		}
+		case(SDL_QUIT):
+		{
+			return Update_Status::UPDATE_STOP;
+			break;
+		}
 		}
 	}
 
@@ -155,6 +155,23 @@ void ModuleInput::UpdateGamepadsInput()
 
 		if (pad.enabled == true)
 		{
+			pad._a_down = pad.a;
+			pad._b_down = pad.b;
+			pad._x_down = pad.x;
+			pad._y_down = pad.y;
+			pad._l1_down = pad.l1;
+			pad._r1_down = pad.r1;
+			pad._l3_down = pad.l3;
+			pad._r3_down = pad.r3;
+			pad._up_down = pad.up;
+			pad._down_down = pad.down;
+			pad._left_down = pad.left;
+			pad._right_down = pad.right;
+			pad._start_down = pad.start;
+			pad._back_down = pad.back;
+			pad._guide_down = pad.guide;
+
+
 			pad.a = SDL_GameControllerGetButton(pad.controller, SDL_CONTROLLER_BUTTON_A) == 1;
 			pad.b = SDL_GameControllerGetButton(pad.controller, SDL_CONTROLLER_BUTTON_B) == 1;
 			pad.x = SDL_GameControllerGetButton(pad.controller, SDL_CONTROLLER_BUTTON_X) == 1;
@@ -185,6 +202,25 @@ void ModuleInput::UpdateGamepadsInput()
 			pad.l_y = (fabsf(pad.l_y) > pad.l_dz) ? pad.l_y : 0.0f;
 			pad.r_x = (fabsf(pad.r_x) > pad.r_dz) ? pad.r_x : 0.0f;
 			pad.r_y = (fabsf(pad.r_y) > pad.r_dz) ? pad.r_y : 0.0f;
+
+
+			pad.a_down = (!pad._a_down && pad.a);
+			pad.b_down = (!pad._b_down && pad.b);
+			pad.x_down = (!pad._x_down && pad.x);
+			pad.y_down = (!pad._y_down && pad.y);
+			pad.l1_down = (!pad._l1_down && pad.l1);
+			pad.r1_down = (!pad._r1_down && pad.r1);
+			pad.l3_down = (!pad._l3_down && pad.l3);
+			pad.r3_down = (!pad._r3_down && pad.r3);
+			pad.up_down = (!pad._up_down && pad.up);
+			pad.down_down = (!pad._down_down && pad.down);
+			pad.left_down = (!pad._left_down && pad.left);
+			pad.right_down = (!pad._right_down && pad.right);
+			pad.start_down = (!pad._start_down && pad.start);
+			pad.back_down = (!pad._back_down && pad.back);
+			pad.guide_down = (!pad._guide_down && pad.guide);
+
+
 
 			if (pad.rumble_countdown > 0)
 				pad.rumble_countdown--;

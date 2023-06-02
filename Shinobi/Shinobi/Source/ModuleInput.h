@@ -3,27 +3,34 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include "SDL/include/SDL_scancode.h"
 
 #define MAX_KEYS 256
 #define MAX_PADS 4
 
-
 struct _SDL_GameController;
 struct _SDL_Haptic;
 
-enum KEY_STATE
+enum Key_State
 {
 	KEY_IDLE,
 	KEY_DOWN,
 	KEY_REPEAT,
 	KEY_UP
 };
+
 struct GamePad
 {
 	//Input data
 	bool start, back, guide;
+	bool start_down, back_down, guide_down;
+	bool _start_down, _back_down, _guide_down;
 	bool x, y, a, b, l1, r1, l3, r3;
+	bool _x_down, _y_down, _a_down, _b_down, _l1_down, _r1_down, _l3_down, _r3_down;
+	bool x_down, y_down, a_down, b_down, l1_down, r1_down, l3_down, r3_down;
 	bool up, down, left, right;
+	bool _up_down, _down_down, _left_down, _right_down;
+	bool up_down, down_down, left_down, right_down;
 	float l2, r2;
 	float l_x, l_y, r_x, r_y, l_dz, r_dz;
 
@@ -36,6 +43,11 @@ struct GamePad
 	//Rumble controller
 	int rumble_countdown;
 	float rumble_strength;
+
+
+
+
+
 };
 
 class ModuleInput : public Module
@@ -74,10 +86,10 @@ public:
 
 public:
 	// An array to fill in the state of all the keyboard keys
-	KEY_STATE keys[MAX_KEYS] = { KEY_IDLE };
+	Key_State keys[MAX_KEYS] = { KEY_IDLE };
 
 	// An array to fill in all detected gamepads
 	GamePad pads[MAX_PADS];
 };
 
-#endif // __ModuleInput_H__
+#endif
