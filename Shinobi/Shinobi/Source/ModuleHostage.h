@@ -14,7 +14,7 @@ enum class HOSTAGE_TYPE
 struct HostageSpawnpoint
 {
 	HOSTAGE_TYPE type = HOSTAGE_TYPE::NO_TYPE;
-	int x, y;
+	int x, y, id;
 };
 
 class Hostage;
@@ -50,7 +50,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Add an hostage into the queue to be spawned later
-	bool AddHostage(HOSTAGE_TYPE type, int x, int y);
+	bool AddHostage(HOSTAGE_TYPE type, int x, int y, int id);
 
 	// Iterates the queue and checks for camera position
 	void HandleHostageSpawn();
@@ -60,6 +60,8 @@ public:
 
 	int powerup = 0;
 
+	// All spawned enemies in the scene
+	Hostage* hostages[MAX_HOSTAGES] = { nullptr };
 
 private:
 	// Spawns a new hostage using the data from the queue
@@ -69,9 +71,6 @@ private:
 	bool collision = true;
 	// A queue with all spawn points information
 	HostageSpawnpoint spawnQueue[MAX_HOSTAGES];
-
-	// All spawned enemies in the scene
-	Hostage* hostages[MAX_HOSTAGES] = { nullptr };
 
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;

@@ -77,7 +77,7 @@ bool ModuleHostage::CleanUp()
 	return true;
 }
 
-bool ModuleHostage::AddHostage(HOSTAGE_TYPE type, int x, int y)
+bool ModuleHostage::AddHostage(HOSTAGE_TYPE type, int x, int y, int id)
 {
 	bool ret = false;
 
@@ -88,6 +88,7 @@ bool ModuleHostage::AddHostage(HOSTAGE_TYPE type, int x, int y)
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
 			spawnQueue[i].y = y;
+			spawnQueue[i].id = id;
 			ret = true;
 			break;
 		}
@@ -144,7 +145,7 @@ void ModuleHostage::SpawnHostage(const HostageSpawnpoint& info)
 			switch (info.type)
 			{
 			case HOSTAGE_TYPE::HOSTAGE:
-				hostages[i] = new Hostage_Hostage(info.x, info.y);
+				hostages[i] = new Hostage_Hostage(info.x, info.y, info.id);
 				break;
 			}
 			hostages[i]->texture = texture;

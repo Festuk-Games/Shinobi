@@ -10,7 +10,7 @@ public:
 
 	// Constructor (x y coordinates in the world)
 	// Creates animation data and the collider
-	Hostage_Hostage(int x, int y);
+	Hostage_Hostage(int x, int y, int id);
 
 	// The enemy is going to perform a sinusoidal movement
 	void Update() override;
@@ -31,6 +31,8 @@ private:
 	Path path;
 
 	bool changedirection = true;
+
+	int hostageId = -1;
 
 	//Animation* currentAnimation = nullptr;
 	//Animation idleAnim, exitAnim;

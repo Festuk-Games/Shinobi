@@ -92,9 +92,9 @@ bool ModuleScene2::Start()
 	App->hostage->Enable();
 
 	//rehenes
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 295, 208 - 29- 32);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 870, 208 - 29);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1640, 208 - 29-64);
+	if (hostages[0] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 295, 208 - 29- 32, 0);
+	if (hostages[1] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 870, 208 - 29, 1);
+	if (hostages[2] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1640, 208 - 29-64, 2);
 	//enemigos luchadores grises
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 325, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 335, 130);
@@ -145,13 +145,6 @@ Update_Status ModuleScene2::Update()
 				App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
 			}
 		}
-	}
-	
-	if (App->player->position.x >= 2000)
-	{
-		App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
-		//App->player->position.x = 30;
-		//App->render->camera.x = 0;
 	}
 
 	if (App->ui->lose)

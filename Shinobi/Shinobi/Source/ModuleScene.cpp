@@ -52,7 +52,6 @@ bool ModuleScene::Start()
 	nextStage = false;
 	clear = false;
 	App->ui->scoreCounter = 0;
-	App->ui->lifenum = 2;
 	clearcount = 0;
 
 	App->render->camera.x = 0;
@@ -116,12 +115,12 @@ bool ModuleScene::Start()
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 982, 0);
 
 	
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29);
+	if (hostages[0] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29, 0);
 	
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 705, 97 - 29);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1020, 97 - 29);
+	if (hostages[1] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 705, 97 - 29, 1);
+	if (hostages[2] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1020, 97 - 29, 2);
 	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
-	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
+	if (hostages[3] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68, 3);
 
 	stageTexture = App->textures->Load("Assets/Scenes/layer_a.png");
 	skyTexture = App->textures->Load("Assets/Scenes/layer_b.png");

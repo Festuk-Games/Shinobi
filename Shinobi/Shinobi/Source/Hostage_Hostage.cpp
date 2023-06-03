@@ -5,8 +5,10 @@
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include "ModuleScene.h"
+#include "ModuleScene2.h"
 
-Hostage_Hostage::Hostage_Hostage(int x, int y) : Hostage(x, y)
+Hostage_Hostage::Hostage_Hostage(int x, int y, int id) : Hostage(x, y)
 {
 	// idle animation
 	idleAnim.PushBack({ 7, 12, 24, 29 });
@@ -32,7 +34,7 @@ Hostage_Hostage::Hostage_Hostage(int x, int y) : Hostage(x, y)
 	currentAnimation = &idleAnim;
 
 	collider = App->collisions->AddCollider({ 0, 0, 24, 28 }, Collider::Type::HOSTAGE, (Module*)App->hostage);
-
+	hostageId = id;
 }
 
 void Hostage_Hostage::Update()
@@ -48,6 +50,8 @@ void Hostage_Hostage::Update()
 	{
 		position.y -= 2;
 		currentAnimation = &exitAnim;
+		if(App->scene->IsEnabled()) App->scene->hostages[hostageId] = true;
+		if (App->scene2->IsEnabled()) App->scene2->hostages[hostageId] = true;
 	}
 	currentAnimation->Update();
 

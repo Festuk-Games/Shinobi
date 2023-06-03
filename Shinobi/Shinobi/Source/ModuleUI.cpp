@@ -9,6 +9,7 @@ using namespace std;
 #include "ModuleRender.h"
 #include "ModuleScene.h"
 #include "ModuleScene2.h"
+#include "BossScene.h"
 
 #include <fstream>
 
@@ -171,26 +172,43 @@ bool ModuleUI::Start()
 	nextframe = 0;
 	if (App->scene->IsEnabled())
 	{
-		App->scene->nextStage = false;
-		App->scene->clear = false;
-		if (lifenum >=0)
+		if (lifenum >=0 && restart1)
 		{
+			restart1 = false;
+			App->scene->nextStage = false;
+			App->scene->clear = false;
 			hostages = 4;
+
 		}
 		skill1 = App->textures->Load("Assets/UI/skill2.png");
 	}
 	else if (App->scene2->IsEnabled())
 	{
-		App->scene->nextStage = false;
-		App->scene->clear = false;
-		if (lifenum >= 0)
+		restart1 = true;
+		
+		if (lifenum >= 0 && restart2)
 		{
+			restart2 = false;
+			App->scene->nextStage = false;
+			App->scene->clear = false;
 			hostages = 3;
+			
 		}
 		skill1 = App->textures->Load("Assets/UI/skill3.png");
 	}
+	
+	else if (App->sceneboss->IsEnabled())
+	{
+		restart2 = true;
+		App->scene2->nextStage = false;
+		App->scene2->clear = false;
+		skill1 = App->textures->Load("Assets/UI/skill2.png");
+	}
+
 	App->scene->nextStage = false;
 	App->scene2->nextStage = false;
+	App->sceneboss->nextStage = false;
+	
 	return ret;
 }
 
@@ -354,8 +372,8 @@ Update_Status ModuleUI::PostUpdate()
 		}
 		App->render->Blit(go, goposx, 140, SDL_FLIP_NONE, NULL, 1.0f);
 	}
-
-	if (App->scene->clear || App->scene2->clear)
+	 
+	if (App->scene->clear || App->scene2->clear || App->sceneboss->clear)
 	{
 		App->render->Blit(nums, 125, 110, SDL_FLIP_NONE, &clear, 0.0f);
 		if (sk1)

@@ -12,6 +12,8 @@ using namespace std;
 #include "ModuleScene.h"
 #include "ModuleScene2.h"
 #include "ModuleUi.h"
+#include "ModuleFadeToBlack.h"
+#include "BossScene.h"
 
 #include "ModuleCollisions.h"
 
@@ -206,6 +208,9 @@ bool ModulePlayer::Start()
 	//App->ui->lifenum = 2;
 	alive = true;
 	isPowerUp = false;
+	App->render->camera.x = 0;
+	dietime = 0;
+	diePos = false;
 	currentAnimation = &idleAnim;
 	currentAnimation->Reset();
 
@@ -941,12 +946,15 @@ Update_Status ModulePlayer::Update()
 		}
 		if (App->ui->lifenum >=0 && dietime >= 60)
 		{
-			alive = true;
-			position.x = 30;
-			position.y = 209;
-			App->render->camera.x = 0;
-			dietime=0;
-			diePos = false;
+			//alive = true;
+			//position.x = 30;
+			//position.y = 209;
+			//App->render->camera.x = 0;
+			//dietime=0;
+			//diePos = false;
+			if (App->scene->IsEnabled()) App->fade->FadeToBlack((Module*)App->scene, (Module*)App->mission, false, false, 60);
+			else if (App->scene2->IsEnabled()) App->fade->FadeToBlack((Module*)App->scene2, (Module*)App->mission2, false, false, 60);
+			else if (App->sceneboss->IsEnabled()) App->fade->FadeToBlack((Module*)App->sceneboss, (Module*)App->missionBoss, false, false, 60);
 		}
 		else if (App->ui->lifenum < 0 && dietime >= 20)
 		{

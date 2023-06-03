@@ -32,7 +32,8 @@ bool SceneMission::Start()
 
 	mission1_0 = App->textures->Load("Assets/Scenes/mission1_0.png");
 	mission1_1 = App->textures->Load("Assets/Scenes/mission1_1.png");
-
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	timer = 0;
 	changescene = 0;
 	imageX = -80; 

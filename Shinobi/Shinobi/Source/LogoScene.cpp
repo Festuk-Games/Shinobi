@@ -7,6 +7,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "Animation.h"
+#include "ModuleUI.h"
 
 LogoScene::LogoScene(bool startEnabled) : Module(startEnabled)
 {
@@ -41,6 +42,7 @@ bool LogoScene::Start()
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+	App->ui->lifenum = 2;
 	currentAnim = &logoAnim;
 	return ret;
 }

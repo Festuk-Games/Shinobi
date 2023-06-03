@@ -32,8 +32,8 @@ bool MissionCompleteScene::Start()
 	bool ret = true;
 
 	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 
-	mission1_3 = App->textures->Load("Assets/Scenes/mission1_3.png");
 	mission1_boss = App->textures->Load("Assets/Scenes/mission1_boss.png");
 
 	timer = 0;
@@ -75,15 +75,14 @@ Update_Status MissionCompleteScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
 
-	if (s1) App->render->Blit(mission1_3, imageX, imageY, SDL_FLIP_NONE, &ground, 1.0f);
-	else App->render->Blit(mission1_boss, imageX, imageY, SDL_FLIP_NONE, &ground, 1.0f);
+	App->render->Blit(mission1_boss, imageX, imageY, SDL_FLIP_NONE, &ground, 1.0f);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 bool MissionCompleteScene::CleanUp()
 {
-	App->textures->Unload(mission1_3);
+
 	App->textures->Unload(mission1_boss);
 	return true;
 }

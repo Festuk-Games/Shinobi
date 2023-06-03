@@ -93,6 +93,8 @@ public:
 
 	int losecounter = 0;
 	bool lose = false;
+	bool restart1 = true;
+	bool restart2 = true;
 
 	int nextCounter = 0, nextframe = 0;
 	int goposx = 1900;
