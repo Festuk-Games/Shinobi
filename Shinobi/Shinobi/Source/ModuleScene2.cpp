@@ -92,6 +92,10 @@ bool ModuleScene2::Start()
 	if (hostages[1] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 870, 208 - 29, 1);
 	if (hostages[2] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1640, 208 - 29-64, 2);
 	//enemigos luchadores grises
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 831, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREEN, 250, 130);
+
+
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 325, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 335, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 340, 130);
@@ -114,8 +118,7 @@ bool ModuleScene2::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 350,130);
 
 	//Enemigos Tochos (purple...)
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 831, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::GREEN, 250, 130);
+	
 
 	App->player->Enable();
 	App->auxscene->Enable();
