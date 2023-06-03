@@ -65,15 +65,15 @@ void Enemy_Boss::Update()
 	currentHeadAnim = &headAnim;
 	currentLegsAnim = &legsAnim;
 
+	cout << (App->player->position.x - position.x) << endl;
 
-	
+	timer++;
 
-	if (App->input->keys[SDL_SCANCODE_H] == KEY_DOWN)
+	if(timer >= 200)
 	{
-		count = 0;
 		for (int i = 7; i >= 0; i--)
 		{
-			if (count == 0)
+			if ((App->player->position.x - position.x ) > -200 && (App->player->position.x - position.x) < -120)
 			{
 				currentAnim = &attackAnim1;
 				currentAnim->Reset();
@@ -84,13 +84,13 @@ void Enemy_Boss::Update()
 				particle1[i].angularStep = 0.012f;
 				particle1[i].time = 0.0f;
 				particle1[i].left = true;
-				App->particles->AddParticle(App->particles->fireBoss[i], position.x-50+(i*2), static_cast<int>(particle1[i].centerY + particle1[i].radius * cos(particle1[i].angularStep * particle1[i].time)), Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->fireBoss[i], position.x-25+(i*2), static_cast<int>(particle1[i].centerY + particle1[i].radius * cos(particle1[i].angularStep * particle1[i].time)), Collider::Type::ENEMY_SHOT);
 				particle1[i].particle = currentParticle;
 			 	App->particles->particles[particle1[i].particle]->lifetime = 200;
 			}
-			if (count == 1)
+			else if ((App->player->position.x - position.x )> -120)
 			{
-				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 50 + (i * 2), position.y, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), position.y, Collider::Type::ENEMY_SHOT);
 				particle2[i].particle = currentParticle;
 				particle2[i].alive = true;
 				particle2[i].centerY = 140;
@@ -101,14 +101,14 @@ void Enemy_Boss::Update()
 				particle2[i].left = true;
 				App->particles->particles[particle2[i].particle]->lifetime = 120;
 			}
-			if (count == 2)
+			else if ((App->player->position.x - position.x )< -200)
 			{
-				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 50 + (i * 2), position.y+70, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), position.y+70, Collider::Type::ENEMY_SHOT);
 				particle3[i].particle = currentParticle;
 				particle3[i].alive = true;
 				App->particles->particles[particle3[i].particle]->lifetime = 120;
 			}
-			if (i == 0) count=-1;
+			if (i == 0) timer = 0;
 		}
 		isShooting = true;
 		delay = 0;

@@ -6,6 +6,9 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleScene.h"
+#include "ModuleScene2.h"
+#include "ModuleUI.h"
 #include "Animation.h"
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
@@ -75,6 +78,21 @@ bool SceneIntro::Start()
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+
+
+	App->scene->hostages[0] = { false };
+	App->scene->hostages[1] = { false };
+	App->scene->hostages[2] = { false };
+	App->scene->hostages[3] = { false };
+
+	App->scene2->hostages[0] = { false };
+	App->scene2->hostages[1] = { false };
+	App->scene2->hostages[2] = { false };
+
+	App->ui->restart1 = true;
+	App->ui->restart2 = true;
+
+	App->ui->lifenum = 2;
 
 	currentAnimation = &lightAnim;
 	currentAnimation->Reset();

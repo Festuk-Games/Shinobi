@@ -79,6 +79,8 @@ private:
 		bool left = true;
 	}particle3[8];
 
+	int timer = 0;
+
 	bool isShooting = false;
 
 	int delay = 0;

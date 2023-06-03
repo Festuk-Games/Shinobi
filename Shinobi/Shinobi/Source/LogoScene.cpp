@@ -42,7 +42,7 @@ bool LogoScene::Start()
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
-	App->ui->lifenum = 2;
+
 	currentAnim = &logoAnim;
 	return ret;
 }
