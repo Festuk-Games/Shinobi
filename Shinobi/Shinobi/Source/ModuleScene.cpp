@@ -60,16 +60,11 @@ bool ModuleScene::Start()
 	//enable modules
 	App->collisions->Enable();
 	App->particles->Enable();
-	App->player->Enable();
-	App->hostage->Enable();
-	App->auxscene->Enable();
-	App->enemies->Enable();
-	App->ui->Enable();
+	
 
 	if (stage1)
 	{
-		stageTexture = App->textures->Load("Assets/Scenes/layer_a.png");
-		skyTexture = App->textures->Load("Assets/Scenes/layer_b.png");
+		
 
 		App->collisions->AddCollider({ 416, 176, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 704, 176, 32, 1 }, Collider::Type::GROUND);
@@ -100,6 +95,9 @@ bool ModuleScene::Start()
 		App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
 		App->collisions->AddCollider({ 1950, -90, 16, 186 }, Collider::Type::WALL);
 	}
+
+	App->enemies->Enable();
+	App->hostage->Enable();
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 272, 150);
 
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 220, 142);
@@ -125,6 +123,12 @@ bool ModuleScene::Start()
 	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
 
+	stageTexture = App->textures->Load("Assets/Scenes/layer_a.png");
+	skyTexture = App->textures->Load("Assets/Scenes/layer_b.png");
+
+	App->player->Enable();
+	App->auxscene->Enable();
+	App->ui->Enable();
 	return ret;
 }
 

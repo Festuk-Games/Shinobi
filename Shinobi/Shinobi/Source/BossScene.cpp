@@ -50,20 +50,20 @@ bool BossScene::Start()
 	clear = false;
 
 	//enable modules
-	App->player->Enable();
-	App->hostage->Enable();
-	App->auxscene->Enable();
-	App->enemies->Enable();
-	App->ui->Enable();
 	App->collisions->Enable();
 	App->particles->Enable();
-
+	
 
 	stageTexture = App->textures->Load("Assets/Scenes/layer_a2.png");
 	skyTexture = App->textures->Load("Assets/Scenes/layer_b2.png");
-
-	App->enemies->AddEnemy(ENEMY_TYPE::BOSS, 360, 50);
+	
 	App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
+	App->enemies->Enable();
+	App->enemies->AddEnemy(ENEMY_TYPE::BOSS, 360, 50);
+	
+
+	App->player->Enable();
+	App->ui->Enable();
 
 	return ret;
 }
