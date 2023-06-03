@@ -89,6 +89,21 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	clear.h = 10;
 	clear.w = 88;
 
+	whitePts.x = 1;
+	whitePts.y = 114;
+	whitePts.h = 8;
+	whitePts.w = 23;
+
+	redPts.x = 1;
+	redPts.y = 124;
+	redPts.h = 8;
+	redPts.w = 23;
+
+	specialBonus.x = 1;
+	specialBonus.y = 135;
+	specialBonus.h = 8;
+	specialBonus.w = 97;
+
 	for	(int i = 0; i < 10; i++)
 	{
 		timer[i] = { 1 + 8* i, 1, 7, 14 };
@@ -104,6 +119,11 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	for (int i = 0; i < 10; i++)
 	{
 		wscore[i] = { 1 + 8 * i, 60, 7, 8 };
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		rscore[i] = { 1 + 8 * i, 71, 7, 8 };
 	}
 
 	for (int i = 0; i < 10; i++)
@@ -336,7 +356,29 @@ Update_Status ModuleUI::PostUpdate()
 
 	if (App->scene->clear)
 	{
-		App->render->Blit(nums, 140, 60, SDL_FLIP_NONE, &clear, 0.0f);
+		App->render->Blit(nums, 125, 110, SDL_FLIP_NONE, &clear, 0.0f);
+		if (sk1)
+		{
+			App->render->Blit(skill1, 125, 129, SDL_FLIP_NONE, &skill, 0.0f);
+			App->render->Blit(nums, 150, 129, SDL_FLIP_NONE, &timer[5], 0.0f);
+			App->render->Blit(nums, 158, 129, SDL_FLIP_NONE, &timer[0], 0.0f);
+			App->render->Blit(nums, 166, 129, SDL_FLIP_NONE, &timer[0], 0.0f);
+			App->render->Blit(nums, 174, 129, SDL_FLIP_NONE, &timer[0], 0.0f);
+			App->render->Blit(nums, 183, 135, SDL_FLIP_NONE, &whitePts, 0.0f);
+
+			App->render->Blit(nums, 85, 152, SDL_FLIP_NONE, &specialBonus, 0.0f);
+
+			string bn = to_string(5000);
+			int bnPos = 222 - (bn.size() * 8);
+
+			for (unsigned int i = 0; i < bn.size(); i++)
+			{
+				bnDigit = bn[i] - '0';
+				App->render->Blit(nums, bnPos + (i * 8), 152, SDL_FLIP_NONE, &rscore[bnDigit], 0.0f);
+			}
+
+			App->render->Blit(nums, 225, 152, SDL_FLIP_NONE, &redPts, 0.0f);
+		}
 	}
 	return Update_Status::UPDATE_CONTINUE;
 }

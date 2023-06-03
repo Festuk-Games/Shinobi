@@ -70,15 +70,20 @@ public:
 			white1p, 
 			bscore[10], 
 			wscore[10], 
+			rscore[10],
 			h_score[10], 
 			playerReady, 
 			hi,
 			gameoverRed,
 			gameoverWhite,
 			nextstage,
-			clear;
+			clear,
+			whitePts,
+			redPts,
+			specialBonus;
 
 	int digit = 0;
+	int bnDigit = 0;
 	int xpos = 0;
 	int scoreCounter = 0;
 

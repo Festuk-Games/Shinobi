@@ -135,9 +135,9 @@ Update_Status ModuleScene::Update()
 	{
 		if (App->player->position.x >= 2000)
 		{
-			//clear = true;
+			clear = true;
 			clearcount++;
-			if (clearcount >= 60)
+			if (clearcount >= 80)
 			{
 				App->fade->FadeToBlack(this, (Module*)App->mission2, false, false, 60);
 				//App->player->position.x = 30;
