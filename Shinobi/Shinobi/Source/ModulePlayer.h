@@ -64,7 +64,7 @@ public:
 	Animation jumpUpFloorAnim, jumpDownFloorAnim;
 	Animation shootAnim;
 	Animation gunAnim;
-	Animation dieAnim1, dieAnim2, dieAnim3;
+	Animation dieAnim1, dieAnim2, dieAnim;
 	Animation backAnim;
 	Animation crouchAttackAnim , crouchKickAnim, crouchKatanaAnim;
 	Animation katanaAnim;

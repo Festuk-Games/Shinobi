@@ -121,14 +121,22 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	shootAnim.speed = 0.1f;
 
 	//die animation
-	dieAnim1.PushBack({ 798,593,76,66 });
+	/*dieAnim1.PushBack({ 798,593,76,66 });
 	dieAnim2.PushBack({ 873,593,76,66 });
 	dieAnim2.PushBack({ 948,593,76,66 });
 	dieAnim2.PushBack({ 1023,593,76,66 });
 	dieAnim1.loop = false;
 	dieAnim1.speed = 0.05f;
 	dieAnim2.loop = false;
-	dieAnim2.speed = 0.08f;
+	dieAnim2.speed = 0.08f;*/
+
+	dieAnim.PushBack({ 798,593,76,66 });
+	dieAnim.PushBack({ 873,593,76,66 });
+	dieAnim.PushBack({ 948,593,76,66 });
+	dieAnim.PushBack({ 1023,593,76,66 });
+	dieAnim.loop = false;
+	dieAnim.speed = 0.16f;
+
 
 	//back animation
 	backAnim.PushBack({ 542, 402, 76, 66 });
@@ -211,6 +219,7 @@ bool ModulePlayer::Start()
 	App->render->camera.x = 0;
 	dietime = 0;
 	diePos = false;
+	App->render->jumpcam = 0;
 	currentAnimation = &idleAnim;
 	currentAnimation->Reset();
 
@@ -235,6 +244,18 @@ Update_Status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN)
 		{
 			collision = !collision;
+		}
+		if (App->input->keys[SDL_SCANCODE_F9] == KEY_DOWN)
+		{
+			position.x = 30;
+			position.y = 209;
+			App->render->camera.x = 0;
+			App->render->camera.y = 0;
+			App->render->jumpcam = 0;
+			isJumping = false;
+			ground = true;
+			currentAnimation = &idleAnim;
+			currentAnimation->Reset();
 		}
 		//Jumping input
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && !isJumping && !isJumpingUp1 && !isJumpingDown1)
@@ -903,7 +924,7 @@ Update_Status ModulePlayer::Update()
 	else
 	{	//die
 		isPowerUp = false;
-		if (!diePos)
+		/*if (!diePos)
 		{
 			diePosition = position;
 			diePos = true;
@@ -943,6 +964,11 @@ Update_Status ModulePlayer::Update()
 				currentAnimation = &dieAnim2;
 				currentAnimation->Reset();
 			}
+		}*/
+		if (currentAnimation != &dieAnim)
+		{
+			currentAnimation = &dieAnim;
+			currentAnimation->Reset();
 		}
 		if (App->ui->lifenum >=0 && dietime >= 60)
 		{
