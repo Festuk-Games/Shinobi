@@ -55,7 +55,7 @@ Enemy_Spiderman::Enemy_Spiderman(int x, int y) : Enemy(x, y)
 void Enemy_Spiderman::Update()
 {
 	flipPos.x = position.x;
-	std::cout << position.y << std::endl;
+	/*std::cout << position.y << std::endl;*/
 	if (!die)
 	{
 		//walk right
