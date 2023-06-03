@@ -1043,7 +1043,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			isCollidingLeft = false;
 			isCollidingRight = false;
 		}
-		else {
+		else if(alive) {
 			App->ui->lifenum--;
 			alive = false;
 		}

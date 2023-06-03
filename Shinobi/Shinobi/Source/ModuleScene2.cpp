@@ -49,6 +49,7 @@ bool ModuleScene2::Start()
 	App->ui->lose = false;
 	nextStage = false;
 	clear = false;
+	clearcount = 0;
 
 	//enable modules
 	App->player->Enable();
@@ -137,13 +138,10 @@ Update_Status ModuleScene2::Update()
 		{
 			clear = true;
 			clearcount++;
-			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
-			//stage1 = false;
-			//stage2 = true;
-			//App->player->position.x = 30;
-			//App->render->camera.x = 0;
-			//nextStage = false;
-			//App->audio->PlayMusic("Audio/music/mission_2.ogg", 0.5f);
+			if (clearcount >= 80)
+			{
+				App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
+			}
 		}
 	}
 	

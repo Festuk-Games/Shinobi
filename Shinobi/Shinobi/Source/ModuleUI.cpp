@@ -190,6 +190,7 @@ bool ModuleUI::Start()
 		skill1 = App->textures->Load("Assets/UI/skill3.png");
 	}
 	App->scene->nextStage = false;
+	App->scene2->nextStage = false;
 	return ret;
 }
 
@@ -237,8 +238,8 @@ Update_Status ModuleUI::Update()
 
 	if (hostages == 0)
 	{
-		App->scene->nextStage = true;
-
+		if (App->scene->IsEnabled()) App->scene->nextStage = true;
+		if (App->scene2->IsEnabled()) App->scene2->nextStage = true;
 	}
 
 	if (scoreCounter > highScore)
@@ -256,11 +257,11 @@ Update_Status ModuleUI::Update()
 	if (lose && losecounter <= 8) losecounter++;
 	else losecounter = 0;
 
-	if (App->scene->nextStage && nextCounter <= 80) nextCounter++;
-	if (App->scene->nextStage && nextframe <= 10) nextframe++;
+	if ((App->scene->nextStage || App->scene->nextStage) && nextCounter <= 80) nextCounter++;
+	if ((App->scene->nextStage || App->scene->nextStage) && nextframe <= 10) nextframe++;
 	else nextframe = 0;
 
-	if (App->scene->nextStage)
+	if (App->scene->nextStage || App->scene2->nextStage)
 	{
 		if (goposx <= 1980) goposx++;
 		else goposx = 1900;
@@ -345,7 +346,7 @@ Update_Status ModuleUI::PostUpdate()
 		else App->render->Blit(text2, 110, 110, SDL_FLIP_NONE, &gameoverWhite, 0.0f);
 	}
 
-	if (App->scene->nextStage)
+	if (App->scene->nextStage || App->scene2->nextStage)
 	{
 		if (nextCounter <= 80)
 		{
@@ -354,7 +355,7 @@ Update_Status ModuleUI::PostUpdate()
 		App->render->Blit(go, goposx, 140, SDL_FLIP_NONE, NULL, 1.0f);
 	}
 
-	if (App->scene->clear)
+	if (App->scene->clear || App->scene2->clear)
 	{
 		App->render->Blit(nums, 125, 110, SDL_FLIP_NONE, &clear, 0.0f);
 		if (sk1)

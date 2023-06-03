@@ -58,7 +58,7 @@ void Enemy_Gunner::Update()
 	if (!die)
 	{
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110)
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110 && App->player->alive)
 		{
 			flip = true;
 			shot++;
@@ -96,7 +96,7 @@ void Enemy_Gunner::Update()
 
 		}
 		//walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110)
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110 && App->player->alive)
 		{
 			flip = false;
 			shot++;

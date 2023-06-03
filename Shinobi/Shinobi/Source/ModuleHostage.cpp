@@ -43,10 +43,6 @@ Update_Status ModuleHostage::Update()
 		if (hostages[i] != nullptr)
 			hostages[i]->Update();
 	}
-	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN)
-	{
-		collision = !collision;
-	}
 
 	HandleHostageDespawn();
 
@@ -166,15 +162,14 @@ void ModuleHostage::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (c2->type == Collider::Type::PLAYER)
 			{
-				if (collision)
+
+				if (hostages[i]->position.y <= 100 && App->player->L2 || hostages[i]->position.y >= 100 && !App->player->L2)
 				{
-					if (hostages[i]->position.y <= 100 && App->player->L2 || hostages[i]->position.y >= 100 && !App->player->L2)
-					{
-						hostages[i]->OnCollision(c2); //Notify the hostage of a collision
-						c1->pendingToDelete = true;
-						break;
-					}
+					hostages[i]->OnCollision(c2); //Notify the hostage of a collision
+					c1->pendingToDelete = true;
+					break;
 				}
+
 			}
 		}
 	}

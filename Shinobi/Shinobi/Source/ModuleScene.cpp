@@ -53,17 +53,18 @@ bool ModuleScene::Start()
 	clear = false;
 	App->ui->scoreCounter = 0;
 	App->ui->lifenum = 2;
+	clearcount = 0;
 
 	App->render->camera.x = 0;
 	App->render->colPos = 0;
 	//enable modules
+	App->collisions->Enable();
+	App->particles->Enable();
 	App->player->Enable();
 	App->hostage->Enable();
 	App->auxscene->Enable();
 	App->enemies->Enable();
 	App->ui->Enable();
-	App->collisions->Enable();
-	App->particles->Enable();
 
 	if (stage1)
 	{
@@ -208,8 +209,7 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(App->ui->hostage);
 	App->textures->Unload(App->ui->lifes);
 	App->textures->Unload(App->ui->skill1);
-	App->textures->Unload(App->ui->skill2);
-	App->textures->Unload(App->ui->skill3);
+	App->textures->Unload(App->ui->go);
 	App->textures->Unload(App->ui->nums);
 	App->textures->Unload(App->ui->text2);
 
