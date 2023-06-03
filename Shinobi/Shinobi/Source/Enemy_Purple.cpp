@@ -215,7 +215,7 @@ void Enemy_Purple::Update()
 				time = 0;
 			}
 		}
-		//collider->SetPos(position.x, position.y+2);
+		collider->SetPos(position.x, position.y+2);
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}
 	else if (die) {

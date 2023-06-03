@@ -12,7 +12,7 @@
 #include "Enemy_Fighter.h"
 #include "Enemy_Soldier.h"
 #include "Enemy_Purple.h"
-#include "Enemy_green.h"
+#include "Enemy_Green.h"
 #include "Enemy_Spiderman.h"
 #include "Enemy_Boss.h"
 #include "Enemy_SittingGunner.h"

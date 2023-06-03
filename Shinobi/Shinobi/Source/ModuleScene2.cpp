@@ -29,8 +29,6 @@ ModuleScene2::ModuleScene2(bool startEnabled) : Module(startEnabled)
 	sky.y = 0;
 	sky.w = 1312;
 	sky.h = 512;
-
-
 }
 
 ModuleScene2::~ModuleScene2()
@@ -54,8 +52,6 @@ bool ModuleScene2::Start()
 	//enable modules
 	App->collisions->Enable();
 	App->particles->Enable();
-	
-	
 
 	App->render->camera.x = 0;
 
@@ -107,7 +103,6 @@ bool ModuleScene2::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1468, 130);
 
 	//Spiderman
-
 	App->enemies->AddEnemy(ENEMY_TYPE::SPIDERMAN, 800, 80);
 
 	//enemigos gunner
@@ -116,7 +111,6 @@ bool ModuleScene2::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 896, 139 - 32);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1233, 139 - 32);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1624, 139 - 32-64);
-
 	App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 350,130);
 
 	//Enemigos Tochos (purple...)

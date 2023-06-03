@@ -33,7 +33,7 @@ Enemy_SittingGunner::Enemy_SittingGunner(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x, position.y + 50, 84, 19 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x, position.y + 47, 84, 22 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 }
 void Enemy_SittingGunner::Update()
@@ -122,9 +122,6 @@ void Enemy_SittingGunner::Update()
 				flip = false;
 			}
 
-			if (changedirection) position.x--;
-			else position.x++;
-
 			shooting = false;
 		}
 		else pl = false;
@@ -140,7 +137,7 @@ void Enemy_SittingGunner::Update()
 			}
 		}
 
-		collider->SetPos(position.x, position.y + 50);
+		collider->SetPos(position.x, position.y + 47);
 	}
 	else if (die) currentAnim = &dieAnim;
 
