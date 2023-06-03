@@ -259,7 +259,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation->Reset();
 		}
 		//Jumping input
-		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || pad.a )&& !isJumping && !isJumpingUp1 && !isJumpingDown1)
+		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || pad.a )&& !isJumping && !isJumpingUp1 && !isJumpingDown1 && ground)
 		{
 			App->audio->PlayFx(App->audio->jump);
 			isJumping = true;
@@ -362,7 +362,7 @@ Update_Status ModulePlayer::Update()
 			}
 			else
 			{
-				if (/*position.y >= jumpPosition.y - 72 && position.y <= 208 ||*/ !ground )
+				if (position.y <209/*position.y >= jumpPosition.y - 72 && position.y <= 208 ||*/ && !ground )
 				{
 					if (jumpAttackDelay <= 0 && !isPowerUp) currentAnimation = &jumpDownAnim;
 					else if (jumpAttackDelay <= 0 && isPowerUp) currentAnimation = &jumpDownPowAnim;
@@ -534,7 +534,7 @@ Update_Status ModulePlayer::Update()
 
 		}
 		//jumping input -> second floor
-		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || pad.a) && !isJumping && isJumpingUp1 && App->scene->stage1)
+		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || pad.a) && !isJumping && isJumpingUp1 && App->scene->stage1 && ground)
 		{
 			isJumpingUp2 = true;
 			jumpPosition.y = position.y;
@@ -587,7 +587,7 @@ Update_Status ModulePlayer::Update()
 			return Update_Status::UPDATE_CONTINUE;
 		}
 		//jumping input -> first floor 
-		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || pad.a) == KEY_DOWN && !isJumping && isJumpingDown1)
+		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || pad.a) == KEY_DOWN && !isJumping && isJumpingDown1 && ground)
 		{
 			isJumpingDown2 = true;
 			jumpPosition.y = position.y;
@@ -889,12 +889,27 @@ Update_Status ModulePlayer::Update()
 			//}
 		}
 		//idle
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
+		if (pad.enabled && (App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
 			&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE
 			&& App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE
 			&& App->input->keys[SDL_SCANCODE_W] == KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_S] == KEY_IDLE
-			&&pad.l_x==0&& pad.l_y==0&& pad.x_idle&& pad.a_idle)
+			&& App->input->keys[SDL_SCANCODE_S] == KEY_IDLE)
+			&& (pad.l_x==0 && pad.l_y==0 && pad.x_idle && pad.a_idle))
+		{
+			isJumpingUp1 = false;
+			isJumpingDown1 = false;
+			isWalking = false;
+			isShooting = false;
+			isCrouching = false;
+			isKicking = false;
+			if (!isPowerUp && !ulti) currentAnimation = &idleAnim;
+			else if (!ulti) currentAnimation = &idlePowAnim;
+		}
+		else if (!pad.enabled && (App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_W] == KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_S] == KEY_IDLE))
 		{
 			isJumpingUp1 = false;
 			isJumpingDown1 = false;
@@ -992,7 +1007,7 @@ Update_Status ModulePlayer::Update()
 	}
 	
 	//ground
-	if (!ground && !isJumping)
+	if (!ground /*&& !isJumping*/)
 	{
 		currentAnimation = &jumpDownAnim;
 		position.y += 2;
@@ -1001,6 +1016,17 @@ Update_Status ModulePlayer::Update()
 			App->render->camera.y -= 4;
 			App->render->jumpcam--;
 		}
+	}
+
+	if (position.y > 209)
+	{
+		ground = true;
+		position.y--;
+	}
+	else if (L2 && position.y > 97)
+	{
+		ground = true;
+		position.y--;
 	}
 
 	if (isCollidingRight) cout << "collision right" << endl;
