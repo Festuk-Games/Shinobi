@@ -210,10 +210,10 @@ bool ModulePlayer::Start()
 	currentAnimation->Reset();
 
 	texture = App->textures->Load("Assets/main.png"); 
-	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
 	collider = App->collisions->AddCollider({ position.x, position.y-58, 35, 58 }, Collider::Type::PLAYER, this);
 	feet = App->collisions->AddCollider({ position.x+5, position.y, 35, 1 }, Collider::Type::FEET, this);
 	enemyNearCollider = App->collisions->AddCollider({ position.x-40, position.y, 115, 58 }, Collider::Type::ENEMY_NEAR, this);
+	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
 
 	ultiTimer = 0;
 

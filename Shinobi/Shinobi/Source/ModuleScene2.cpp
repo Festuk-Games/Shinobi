@@ -51,13 +51,10 @@ bool ModuleScene2::Start()
 	clear = false;
 
 	//enable modules
-	App->player->Enable();
-	App->hostage->Enable();
-	App->auxscene->Enable();
-	App->enemies->Enable();
-	App->ui->Enable();
 	App->collisions->Enable();
 	App->particles->Enable();
+	
+	
 
 	App->render->camera.x = 0;
 
@@ -89,7 +86,10 @@ bool ModuleScene2::Start()
 	App->collisions->AddCollider({ 1696, 178, 32, 30 }, Collider::Type::BOX);
 
 	App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
-	
+
+	App->enemies->Enable();
+	App->hostage->Enable();
+
 	//rehenes
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 295, 208 - 29- 32);
 	App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 870, 208 - 29);
@@ -122,7 +122,9 @@ bool ModuleScene2::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 831, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::GREEN, 250, 130);
 
-
+	App->player->Enable();
+	App->auxscene->Enable();
+	App->ui->Enable();
 	return ret;
 	
 }
