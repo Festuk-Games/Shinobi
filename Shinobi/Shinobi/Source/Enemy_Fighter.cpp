@@ -87,18 +87,17 @@ void Enemy_Fighter::Update()
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
 					//App->particles->AddParticle(App->particles->patada, position.x, position.y + 30, Collider::Type::ENEMY_SHOT);
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x, position.y + 30);
+					attack = App->collisions->AddCollider({ position.x, position.y+30, 10, 10 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+					//attack->SetPos(position.x, position.y + 30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
 				}
 				else {
 					currentAnim = &idleAnim;
-					attack->rect.w = 0;
-					attack->rect.h = 0;
-					attack->SetPos(0, 0);
+					/*attack->rect.w = 0;
+					attack->rect.h = 0;*/
+					attack->pendingToDelete = true;
 				}
 				pl = true;
 
@@ -141,9 +140,8 @@ void Enemy_Fighter::Update()
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
 					//App->particles->AddParticle(App->particles->patada, position.x+80, position.y + 30, Collider::Type::ENEMY_SHOT);
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x+80, position.y+30);
+					attack = App->collisions->AddCollider({ position.x+80, position.y+30, 10, 10 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+					//attack->SetPos(position.x+80, position.y+30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
@@ -151,7 +149,7 @@ void Enemy_Fighter::Update()
 				else {
 					attack->rect.w = 0;
 					attack->rect.h = 0;
-					attack->SetPos(0, 0);
+					attack->pendingToDelete=true;
 					currentAnim = &idleAnim;
 					
 				}
