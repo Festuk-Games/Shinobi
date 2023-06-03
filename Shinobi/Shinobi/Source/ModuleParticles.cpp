@@ -57,6 +57,7 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 	enemyshot.anim.PushBack({ 177, 15, 16, 11 });
 	enemyshot.anim.loop = true;
 	enemyshot.anim.speed = 0.3f;
+	enemyshot.lifetime = 80;
 
 	bonus500.anim.PushBack({ 110, 98, 39, 18 });
 	bonus500.anim.PushBack({ 0, 0, 0, 0 });

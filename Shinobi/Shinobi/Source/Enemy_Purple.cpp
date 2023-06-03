@@ -54,7 +54,10 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 void Enemy_Purple::Update()
 {
 	flipPos.x = position.x;
-	//std::cout << position.x << std::endl;
+	std::cout << "x:" << collider->rect.x << std::endl;
+	std::cout << "y:" << collider->rect.y << std::endl;
+	std::cout << "h:" << collider->rect.h << std::endl;
+	std::cout << "w:" << collider->rect.w << std::endl;
 	if (!die)
 	{
 		//walk right
