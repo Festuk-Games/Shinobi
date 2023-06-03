@@ -73,6 +73,7 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
+	GamePad& pad = App->input->pads[0];
 	////Handle positive vertical movement
 	//if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 	//	camera.y += cameraSpeed;
@@ -103,7 +104,7 @@ Update_Status ModuleRender::Update()
 	//Handle horizontal movement of the camera
 
 	if ((App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled())
-		&& App->player->alive && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
+		&& App->player->alive && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT||pad.l_x>0.2f) && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{	
 		if (camera.x >= -4980)
 		{
@@ -116,7 +117,7 @@ Update_Status ModuleRender::Update()
 	}
 
 	else if ((App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled())
-		&& App->player->alive && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
+		&& App->player->alive && (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT || pad.l_x <-0.2f) && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{
 		if (camera.x <= -1)
 		{

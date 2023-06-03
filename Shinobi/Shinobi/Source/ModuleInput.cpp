@@ -220,6 +220,10 @@ void ModuleInput::UpdateGamepadsInput()
 			pad.back_down = (!pad._back_down && pad.back);
 			pad.guide_down = (!pad._guide_down && pad.guide);
 
+			pad.a_idle = (!pad.a_down && !pad.a);
+			pad.b_idle = (!pad.b_down && !pad.b);
+			pad.x_idle = (!pad.x_down && !pad.x);
+			pad.y_idle = (!pad.y_down && !pad.y);
 
 
 			if (pad.rumble_countdown > 0)

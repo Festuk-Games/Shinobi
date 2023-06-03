@@ -33,7 +33,7 @@ struct GamePad
 	bool up_down, down_down, left_down, right_down;
 	float l2, r2;
 	float l_x, l_y, r_x, r_y, l_dz, r_dz;
-
+	bool x_idle, y_idle, a_idle, b_idle, l1_idle, r1_idle, l3_idle, r3_idle;
 	//Controller data
 	bool enabled;
 	int index;
