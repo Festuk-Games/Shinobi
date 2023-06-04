@@ -45,6 +45,7 @@ bool ModuleScene2::Start()
 
 	App->ui->sk1 = true;
 	App->ui->lose = false;
+	App->render->win = false;
 	nextStage = false;
 	clear = false;
 	clearcount = 0;
@@ -115,7 +116,7 @@ bool ModuleScene2::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 896, 139 - 32);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1233, 139 - 32);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1624, 139 - 32-64);
-	App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 350,130);
+	//App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 350,130);
 
 	//Enemigos Tochos (purple...)
 	
@@ -133,7 +134,7 @@ Update_Status ModuleScene2::Update()
 	//next stage condition
 	if (nextStage)
 	{
-		if (App->player->position.x >= 2000)
+		if (App->player->position.x >= 2000 || App->render->win)
 		{
 			clear = true;
 			if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
