@@ -79,6 +79,8 @@ bool SceneIntro::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	App->audio->isPlaying = false;
+	Mix_HaltMusic();
 
 	App->scene->hostages[0] = { false };
 	App->scene->hostages[1] = { false };

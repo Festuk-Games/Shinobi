@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleScene.h"
+#include "ModuleAudio.h"
 
 #include "ModuleFadeToBlack.h"
 
@@ -38,6 +39,9 @@ bool SceneMission::Start()
 	changescene = 0;
 	imageX = -80; 
 	imageY = 224;
+
+	App->audio->isPlaying = false;
+	Mix_HaltMusic();
 
 	return ret;
 }

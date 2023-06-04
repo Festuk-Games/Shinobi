@@ -309,7 +309,7 @@ Update_Status ModuleUI::PostUpdate()
 	if (sk1) App->render->Blit(skill1, 246, 210, SDL_FLIP_NONE, &skill, 0.0f);
 	
 
-	if (!App->scene->nextStage)
+	if (!App->scene->nextStage && !App->scene2->nextStage && !App->sceneboss->IsEnabled())
 	{
 		App->render->Blit(nums, 24, 205, SDL_FLIP_NONE, &savet, 0.0f);
 	}

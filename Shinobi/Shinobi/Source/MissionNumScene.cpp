@@ -73,6 +73,9 @@ bool MissionNumScene::Start()
 	writefx = 0;
 	aux = 10;
 
+	App->audio->isPlaying = false;
+	Mix_HaltMusic();
+
 	currentAnim = &missionAnim;
 	currentAnim->Reset();
 	return ret;

@@ -90,7 +90,7 @@ Update_Status InitialScene::Update()
 		}
 		aux++;
 	}
-	else if (writefx <= 16 && delay <= 580 && delay >= 320)
+	else if (writefx <= 23 && delay <= 580 && delay >= 320)
 	{
 		if (aux == 10)
 		{
@@ -100,7 +100,7 @@ Update_Status InitialScene::Update()
 		}
 		aux++;
 	}
-	else if (writefx <= 23)
+	else if (writefx <= 16 && delay >= 580)
 	{
 		if (aux == 10)
 		{

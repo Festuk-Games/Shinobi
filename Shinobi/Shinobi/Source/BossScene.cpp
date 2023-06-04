@@ -77,6 +77,7 @@ Update_Status BossScene::Update()
 		if (App->player->position.x >= 2000)
 		{
 			clear = true;
+			if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
 			clearcount++;
 			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->missionComplete, false, false, 60);
 			//stage1 = false;
@@ -105,6 +106,12 @@ Update_Status BossScene::PostUpdate()
 
 	App->render->Blit(skyTexture, 0, 0, SDL_FLIP_NONE, &sky, 1.0f); // sky
 	App->render->Blit(stageTexture, 0, 0, SDL_FLIP_NONE, &ground, 1.0f); // ground
+
+	if (!App->audio->isPlaying)
+	{
+		App->audio->isPlaying = true;
+		App->audio->PlayMusic("Audio/music/mission_5.ogg", 2.0f);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

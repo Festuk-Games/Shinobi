@@ -41,6 +41,9 @@ bool Mission2Scene::Start()
 	imageX = -80;
 	imageY = 224;
 
+	App->audio->isPlaying = false;
+	Mix_HaltMusic();
+
 	return ret;
 }
 

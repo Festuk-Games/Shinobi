@@ -140,6 +140,7 @@ Update_Status ModuleScene::Update()
 		if (App->player->position.x >= 2000)
 		{
 			clear = true;
+			if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
 			clearcount++;
 			if (clearcount >= 80)
 			{
