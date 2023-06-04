@@ -667,7 +667,7 @@ Update_Status ModulePlayer::Update()
 			
 			
 			//coruch right
-			if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f )&& position.x < 2010 && !isCollidingRight)
+			if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f )&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && position.x < 2010 && !isCollidingRight)
 			{
 				right = true;
 				isWalking = true;
@@ -676,7 +676,7 @@ Update_Status ModulePlayer::Update()
 				position.x += speed;
 			}
 			//crouch left
-			else if ((App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT || pad.l_x < -0.2f) && position.x > 20 && !isCollidingLeft)
+			else if ((App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT || pad.l_x < -0.2f) && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE && position.x > 20 && !isCollidingLeft)
 			{
 				right = false;
 				isWalking = true;
@@ -770,8 +770,9 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//crouch idle
-			else if(!isShooting && !isWalking && !isKicking)
+			if(!isShooting && !isWalking && !isKicking)
 			{
+			cout << ("BUG") << endl;
 				if (!isPowerUp) currentAnimation = &crouchIdleAnim;
 				else currentAnimation = &crouchGunIdleAnim;
 			}
@@ -868,8 +869,7 @@ Update_Status ModulePlayer::Update()
 		//not walking
 		if (isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
 			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y < -0.2f)
-			|| isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE
-			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y < -0.2f))
+			&& isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
 		{
 			isWalking = false;
 		}
