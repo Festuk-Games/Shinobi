@@ -113,7 +113,7 @@ Update_Status ModuleRender::Update()
 	{
 		openMenu2 = false;
 	}
-	else if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled()) && !openMenu2)
+	else if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled()|| App->sceneboss->IsEnabled()) && !openMenu2)
 	{
 		openMenu2 = true;
 	}
