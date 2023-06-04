@@ -80,7 +80,12 @@ public:
 			clear,
 			whitePts,
 			redPts,
-			specialBonus;
+			specialBonus,
+			bossPow,
+			bossIcon;
+
+
+	int bossLives = 8;
 
 	int digit = 0;
 	int bnDigit = 0;

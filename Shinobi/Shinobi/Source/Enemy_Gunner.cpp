@@ -66,7 +66,7 @@ void Enemy_Gunner::Update()
 			{
 				currentAnim = &shootAnim;
 				currentAnim->Reset();
-				App->audio->PlayFx(App->audio->shoot);
+				App->audio->PlayFx(App->audio->shuriken);
 				App->particles->enemyshot.speed = iPoint(-5, 0);
 				App->particles->AddParticle(App->particles->enemyshot, position.x, position.y + 25, Collider::Type::ENEMY_SHOT);
 				shot = 0;

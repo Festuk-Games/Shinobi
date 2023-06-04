@@ -41,7 +41,7 @@ private:
 	bool pl = false;
 	int hitTimer = 0;
 	int pos1 = 500, pos2 = 650;
-	int pdistance = 100;
+	int pdistance = 120;
 	int shot = 0;
 	bool shooting = false, reloading = false, walking = true;
 	int time = 0;

@@ -34,6 +34,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::BOX] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::FEET] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_NEAR] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::ULTI_SHOT] = false;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = false;
@@ -45,8 +46,9 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::FEET] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_NEAR] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::ULTI_SHOT] = true;
 
-	/*matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;*/
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = true;
@@ -58,6 +60,21 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::GROUND2] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::FEET] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_NEAR] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ULTI_SHOT] = false;
+
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::WALL] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::WALL] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::ULTI_SHOT] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::HOSTAGE] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::BOX] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::GROUND2] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::FEET] = false;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::ENEMY_NEAR] = false;
 	
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = true;
@@ -136,8 +153,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY_NEAR][Collider::Type::BOX] = false;
 	matrix[Collider::Type::ENEMY_NEAR][Collider::Type::FEET] = false;
 
-	matrix[Collider::Type::ULTIMATE][Collider::Type::PLAYER_SHOT] = true;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ULTIMATE] = true;
+	matrix[Collider::Type::ULTIMATE][Collider::Type::ULTI_SHOT] = true;
+	matrix[Collider::Type::ULTI_SHOT][Collider::Type::ULTIMATE] = true;
 
 }
 
@@ -149,7 +166,7 @@ ModuleCollisions::~ModuleCollisions()
 
 Update_Status ModuleCollisions::PreUpdate()
 {
-	int a = 0;
+	/*int a = 0;*/
 	// Remove all colliders scheduled for deletion
 	for(uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -158,10 +175,10 @@ Update_Status ModuleCollisions::PreUpdate()
 			delete colliders[i];
 			colliders[i] = nullptr;
 		}
-		if (colliders[i] != nullptr) a++;
+		/*if (colliders[i] != nullptr) a++;*/
 	}
-	cout << "total: " << a << endl;
-	a = 0;
+	//cout << "total: " << a << endl;
+	//a = 0;
 
 	Collider* c1;
 	Collider* c2;

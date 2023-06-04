@@ -291,7 +291,7 @@ Update_Status ModulePlayer::Update()
 					}
 					if (position.y <= 97 && App->scene->IsEnabled() && L2)
 					{
-						App->render->camera.y+=8;
+						App->render->camera.y+=12;
 						App->render->jumpcam+=2;
 					}
 					if ((App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN || pad.x_down))
@@ -383,7 +383,7 @@ Update_Status ModulePlayer::Update()
 					}
 					if (position.y <= 97 && App->render->jumpcam >= 1 && App->scene->IsEnabled() && L2)
 					{
-						App->render->camera.y-=4;
+						App->render->camera.y-=6;
 						App->render->jumpcam--;
 					}
 					if ((App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN || pad.x_down))
@@ -667,7 +667,7 @@ Update_Status ModulePlayer::Update()
 			
 			
 			//coruch right
-			if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f )&& position.x < 2010 && !isCollidingRight)
+			if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f )&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && position.x < 2010 && !isCollidingRight)
 			{
 				right = true;
 				isWalking = true;
@@ -676,7 +676,7 @@ Update_Status ModulePlayer::Update()
 				position.x += speed;
 			}
 			//crouch left
-			else if ((App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT || pad.l_x < -0.2f) && position.x > 20 && !isCollidingLeft)
+			else if ((App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT || pad.l_x < -0.2f) && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE && position.x > 20 && !isCollidingLeft)
 			{
 				right = false;
 				isWalking = true;
@@ -770,14 +770,14 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//crouch idle
-			else if(!isShooting && !isWalking && !isKicking)
+			if(!isShooting && !isWalking && !isKicking)
 			{
 				if (!isPowerUp) currentAnimation = &crouchIdleAnim;
 				else currentAnimation = &crouchGunIdleAnim;
 			}
 		}
 
-		if ((App->input->keys[SDL_SCANCODE_G] == KEY_DOWN||pad.y_down) && App->ui->sk1)
+		if ((App->input->keys[SDL_SCANCODE_G] == KEY_DOWN||pad.y_down) && App->ui->sk1 && position.y == 209)
 		{
 			App->ui->sk1 = false;
 			ulti = true;
@@ -790,62 +790,62 @@ Update_Status ModulePlayer::Update()
 			
 		if (ulti && ultiTimer <= 170) ultiTimer++;
 
-		if (App->scene->IsEnabled())
+		if (App->scene->IsEnabled() || App->sceneboss->IsEnabled())
 		{
 			if (ulti && ultiTimer == 100)
 			{
-				App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate, position.x + 42, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate, position.x + 18, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate, position.x + 34, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate, position.x + 26, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 50, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 10, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 42, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 18, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 34, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate, position.x + 26, position.y - 62, Collider::Type::ULTI_SHOT);
 
-				App->particles->AddParticle(App->particles->ultimate2, position.x - 50, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate2, position.x - 10, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate2, position.x - 42, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate2, position.x - 18, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate2, position.x - 34, position.y - 62, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultimate2, position.x - 26, position.y - 62, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 50, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 10, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 42, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 18, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 34, position.y - 62, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultimate2, position.x - 26, position.y - 62, Collider::Type::ULTI_SHOT);
 			}
 			if (ulti && ultiTimer == 120)
 			{
 				ulti = false;
 				ultiTimer = 0;
 
-				App->particles->AddParticle(App->particles->ultiCenterUp, position.x - 10, position.y - 90, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiCenterUp, position.x + 10, position.y - 90, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiUpRight2, position.x + 20, position.y - 90, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiUpRight, position.x + 30, position.y - 80, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiRight, position.x + 40, position.y - 80, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiRight, position.x + 40, position.y - 70, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiCenterUp, position.x - 10, position.y - 90, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiCenterUp, position.x + 10, position.y - 90, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiUpRight2, position.x + 20, position.y - 90, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiUpRight, position.x + 30, position.y - 80, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiRight, position.x + 40, position.y - 80, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiRight, position.x + 40, position.y - 70, Collider::Type::ULTI_SHOT);
 
-				App->particles->AddParticle(App->particles->ultiCenterDown, position.x - 10, position.y - 70, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiCenterDown, position.x + 10, position.y - 70, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiUpLeft2, position.x - 20, position.y - 90, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiUpLeft, position.x - 30, position.y - 80, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 80, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 70, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiCenterDown, position.x - 10, position.y - 70, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiCenterDown, position.x + 10, position.y - 70, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiUpLeft2, position.x - 20, position.y - 90, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiUpLeft, position.x - 30, position.y - 80, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 80, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiLeft, position.x - 40, position.y - 70, Collider::Type::ULTI_SHOT);
 
-				App->particles->AddParticle(App->particles->ultiDownRight2, position.x + 20, position.y - 60, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiDownRight, position.x + 30, position.y - 70, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiDownLeft2, position.x - 20, position.y - 60, Collider::Type::PLAYER_SHOT);
-				App->particles->AddParticle(App->particles->ultiDownLeft, position.x - 30, position.y - 70, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultiDownRight2, position.x + 20, position.y - 60, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiDownRight, position.x + 30, position.y - 70, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiDownLeft2, position.x - 20, position.y - 60, Collider::Type::ULTI_SHOT);
+				App->particles->AddParticle(App->particles->ultiDownLeft, position.x - 30, position.y - 70, Collider::Type::ULTI_SHOT);
 			}
 		}
 		else if (App->scene2->IsEnabled())
 		{
 			if (ulti && ultiTimer == 100)
 			{
-				App->particles->AddParticle(App->particles->ultimateEffect2, position.x - 10, position.y - 200, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->ultimateEffect2, position.x - 10, position.y - 200, Collider::Type::ULTI_SHOT);
 			}
-			if (ulti && ultiTimer == 110) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 20, Collider::Type::PLAYER_SHOT);
-			if (ulti && ultiTimer == 120) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 40, Collider::Type::PLAYER_SHOT);
-			if (ulti && ultiTimer == 130) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 60, Collider::Type::PLAYER_SHOT);
-			if (ulti && ultiTimer == 140) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 80, Collider::Type::PLAYER_SHOT);
-			if (ulti && ultiTimer == 150) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 100, Collider::Type::PLAYER_SHOT);
-			if (ulti && ultiTimer == 160) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 120, Collider::Type::PLAYER_SHOT);
-			if (ulti && ultiTimer == 170) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 140, Collider::Type::PLAYER_SHOT);
+			if (ulti && ultiTimer == 110) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 20, Collider::Type::ULTI_SHOT);
+			if (ulti && ultiTimer == 120) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 40, Collider::Type::ULTI_SHOT);
+			if (ulti && ultiTimer == 130) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 60, Collider::Type::ULTI_SHOT);
+			if (ulti && ultiTimer == 140) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 80, Collider::Type::ULTI_SHOT);
+			if (ulti && ultiTimer == 150) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 100, Collider::Type::ULTI_SHOT);
+			if (ulti && ultiTimer == 160) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 120, Collider::Type::ULTI_SHOT);
+			if (ulti && ultiTimer == 170) App->particles->AddParticle(App->particles->ultiWind, position.x - 70, position.y - 140, Collider::Type::ULTI_SHOT);
 			if (ulti && ultiTimer > 170)
 			{
 				ulti = false;
@@ -856,31 +856,41 @@ Update_Status ModulePlayer::Update()
 		//key conditions
 
 		//not crouching
-		if (isCrouching && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f)
+		if ((pad.enabled && isCrouching && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f)
 			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE && pad.l_y<0.2f)
 			|| isCrouching && (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT || pad.l_x < -0.2f)
-			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE && pad.l_y < 0.2f))
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE && pad.l_y < 0.2f) )
+			|| !pad.enabled && isCrouching && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE)
+			|| isCrouching && (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE ))
 		{
 			isCrouching = false;
 			if (!isPowerUp) currentAnimation = &idleAnim;
 			else currentAnimation = &idlePowAnim;
 		}
 		//not walking
-		if (isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
+		if ((pad.enabled && isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
 			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y < -0.2f)
-			|| isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE
-			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y < -0.2f))
+			&& isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE) 
+			|| !pad.enabled && isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
+			&& isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
 		{
 			isWalking = false;
 		}
-		if (isCrouching && App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE
-			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y >0.2f))
+		if ((pad.enabled && isCrouching && (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE && pad.x_idle)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT || pad.l_y >0.2f)) 
+			|| !pad.enabled && isCrouching && (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE )
+				&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT ))
 		{
 			isShooting = false;
 		}
 		//not kicking
-		if ((App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE&& pad.x_idle)
-			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y >0.2f))
+		if ((pad.enabled && (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE && pad.x_idle)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y >0.2f)) || !pad.enabled 
+			&& (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT ))
 		{
 			//kick++;
 			//if (kick >= 180)
@@ -984,9 +994,10 @@ Update_Status ModulePlayer::Update()
 		}*/
 		if (currentAnimation != &dieAnim)
 		{
+			App->audio->PlayFx(App->audio->dieplayer);
+			Mix_HaltMusic();
 			currentAnimation = &dieAnim;
 			currentAnimation->Reset();
-			App->audio->PlayFx(App->audio->dieplayer);
 		}
 		if (App->ui->lifenum >=0 && dietime >= 60)
 		{
@@ -1015,7 +1026,7 @@ Update_Status ModulePlayer::Update()
 		position.y += 2;
 		if (position.y <= 97 && App->render->jumpcam >= 1 && App->scene->IsEnabled() && L2)
 		{
-			App->render->camera.y -= 4;
+			App->render->camera.y -= 6;
 			App->render->jumpcam--;
 		}
 	}
@@ -1031,8 +1042,8 @@ Update_Status ModulePlayer::Update()
 		position.y--;
 	}
 
-	if (isCollidingRight) cout << "collision right" << endl;
-	if (isCollidingLeft) cout << "collision left" << endl;
+	/*if (isCollidingRight) cout << "collision right" << endl;
+	if (isCollidingLeft) cout << "collision left" << endl;*/
 
 	//update colliders position
 	//collider->SetPos(position.x, position.y-58);
@@ -1101,15 +1112,19 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	//enemy shot collider
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT)
 	{
-		if (!collision)
+		if (ultiTimer == 0)
 		{
-			isCollidingLeft = false;
-			isCollidingRight = false;
+			if (!collision)
+			{
+				isCollidingLeft = false;
+				isCollidingRight = false;
+			}
+			else if (alive) {
+				App->ui->lifenum--;
+				alive = false;
+			}
 		}
-		else if(alive) {
-			App->ui->lifenum--;
-			alive = false;
-		}
+		
 	}
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::HOSTAGE)
 	{
@@ -1119,7 +1134,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			isCollidingRight = false;
 			
 		}
-		cout << "collision" << endl;
+		/*cout << "collision" << endl;*/
 		
 	}
 	if (c1->type == Collider::Type::ENEMY_NEAR && c2->type == Collider::Type::ENEMY)

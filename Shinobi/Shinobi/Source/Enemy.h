@@ -43,6 +43,8 @@ public:
 	// Sound fx when destroyed
 	int destroyedFx = 0;
 	bool isSpiderman = false;
+	bool purple = false;
+	int hits = 5;
 	bool ground = false;
 	bool jump = false;
 	bool flip = true;
@@ -53,7 +55,7 @@ public:
 	bool attackCol = false;
 	Collider* attack = nullptr;
 
-	int currentParticle;
+	int currentParticle = -1;
 
 protected:
 	// A ptr to the current animation
@@ -63,6 +65,7 @@ protected:
 
 	// The enemy's collider
 	Collider* collider = nullptr;
+	Collider* head = nullptr;
 	Collider* feet = nullptr;
 
 	// Original spawn position. Stored for movement calculations

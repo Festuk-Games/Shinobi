@@ -22,6 +22,7 @@ struct Collider
 		ENEMY_NEAR,
 		ULTIMATE,
 		GROUND2,
+		ULTI_SHOT,
 
 		MAX
 	};

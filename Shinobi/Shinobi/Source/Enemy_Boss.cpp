@@ -53,7 +53,8 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	legsAnim.speed = 0.03f;
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x+30, position.y+79, 29, 26 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x+30, position.y+103, 29, 2 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	head = App->collisions->AddCollider({ position.x + 28, position.y + 10, 20, 26 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);*/
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 	isBoss = true;
@@ -90,8 +91,6 @@ void Enemy_Boss::Update()
 			}
 			else if ((App->player->position.x - position.x )> -120)
 			{
-				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), position.y, Collider::Type::ENEMY_SHOT);
-				particle2[i].particle = currentParticle;
 				particle2[i].alive = true;
 				particle2[i].centerY = 140;
 				particle2[i].radius = 40.0f;
@@ -99,6 +98,8 @@ void Enemy_Boss::Update()
 				particle2[i].angularStep = 0.012f;
 				particle2[i].time = 0.0f;
 				particle2[i].left = true;
+				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), static_cast<int>(particle2[i].centerY + particle2[i].radius * sin(particle2[i].angularStep * particle2[i].time)), Collider::Type::ENEMY_SHOT);
+				particle2[i].particle = currentParticle;
 				App->particles->particles[particle2[i].particle]->lifetime = 120;
 			}
 			else if ((App->player->position.x - position.x )< -200)
@@ -190,7 +191,8 @@ void Enemy_Boss::Update()
 			currentAnim = &idleAnim;
 		}
 	}
-	collider->SetPos(position.x + 30, position.y+79);
+	collider->SetPos(position.x + 30, position.y+103);
+	head->SetPos(position.x + 28, position.y + 10);
 
 	currentAnim->Update();
 	currentHeadAnim->Update();

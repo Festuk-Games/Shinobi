@@ -82,11 +82,16 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-	if (collider->type == Collider::Type::PLAYER_SHOT)
+	if (collider->type == Collider::Type::PLAYER_SHOT || collider->type == Collider::Type::ULTI_SHOT)
 	{
-		die = true;
-		App->audio->PlayFx(App->audio->deathenemy);
-		App->ui->scoreCounter+= 200;
+		if (purple && hits > 0) hits--;
+		else if ((purple && hits == 0) || !purple)
+		{
+			die = true;
+			App->audio->PlayFx(App->audio->deathenemy);
+			App->ui->scoreCounter += 200;
+		}
+		
 	}
 	if (collider->type==Collider::Type::WALL)
 	{

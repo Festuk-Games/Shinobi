@@ -57,6 +57,14 @@ bool BossScene::Start()
 	stageTexture = App->textures->Load("Assets/Scenes/layer_a2.png");
 	skyTexture = App->textures->Load("Assets/Scenes/layer_b2.png");
 	
+	App->render->cameracol = App->collisions->AddCollider({ 0, 0, 320,  1 }, Collider::Type::ULTIMATE);
+	App->render->cameracol2 = App->collisions->AddCollider({ 319, 0, 1,  224 }, Collider::Type::ULTIMATE);
+	App->render->cameracol3 = App->collisions->AddCollider({ 0, 223, 320,  1 }, Collider::Type::ULTIMATE);
+	App->render->cameracol4 = App->collisions->AddCollider({ 0, 0, 1,  224 }, Collider::Type::ULTIMATE);
+
+	App->render->colPos = 0;
+
+
 	App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
 	App->enemies->Enable();
 	App->enemies->AddEnemy(ENEMY_TYPE::BOSS, 360, 50);

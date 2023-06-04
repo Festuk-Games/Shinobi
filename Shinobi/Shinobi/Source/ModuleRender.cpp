@@ -50,10 +50,7 @@ bool ModuleRender::Init()
 
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH*3, SCREEN_HEIGHT*3);
 
-	cameracol = App->collisions->AddCollider({ 0, 0, 320,  1}, Collider::Type::ULTIMATE);
-	cameracol2 = App->collisions->AddCollider({ 319, 0, 1,  224 }, Collider::Type::ULTIMATE);
-	cameracol3 = App->collisions->AddCollider({ 0, 223, 320,  1 }, Collider::Type::ULTIMATE);
-	cameracol4 = App->collisions->AddCollider({ 0, 0, 1,  224 }, Collider::Type::ULTIMATE);
+	menu = App->textures->Load("Assets/menu_intro_shinobi.png");
 
 	return ret;
 }
@@ -106,9 +103,10 @@ Update_Status ModuleRender::Update()
 	if ((App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled())
 		&& App->player->alive && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT||pad.l_x>0.2f) && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{	
-		if (camera.x >= -4980)
+		if (((App->scene->IsEnabled() || App->scene2->IsEnabled())  && camera.x >= -5182)
+			|| (App->sceneboss->IsEnabled() && camera.x >= -570))
 		{
-			if (App->player->position.x >= 180 && !App->player->isCollidingRight)
+			if (App->player->position.x >= 100 && !App->player->isCollidingRight)
 			{
 				camera.x -= cameraSpeed;
 				colPos += 3;
@@ -129,10 +127,13 @@ Update_Status ModuleRender::Update()
 		}
 	}
 
-	cameracol->SetPos(colPos, 0);
-	cameracol2->SetPos(319 + colPos, 0);
-	cameracol3->SetPos(colPos, 223);
-	cameracol4->SetPos(colPos, 0);
+	if (App->scene->IsEnabled() || App->sceneboss->IsEnabled())
+	{
+		cameracol->SetPos(colPos, 0);
+		cameracol2->SetPos(319 + colPos, 0);
+		cameracol3->SetPos(colPos, 223);
+		cameracol4->SetPos(colPos, 0);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -143,6 +144,10 @@ Update_Status ModuleRender::PostUpdate()
 	{
 		printPos();
 	}
+
+
+	if(App->intro->IsEnabled()) Blit(menu, 5, 5, SDL_FLIP_NONE, NULL);
+
 	//Update the screen
 	SDL_RenderPresent(renderer);
 

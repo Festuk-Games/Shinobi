@@ -233,17 +233,18 @@ void Enemy_Fighter::Update()
 	}
 	else if (die) {
 		currentAnim = &dieAnim;
-		collider->SetPos(position.x-10, position.y + 30);
+		/*collider->SetPos(position.x-10, position.y + 30);
 		collider->rect.w = 37;
-		collider->rect.h = 20;
+		collider->rect.h = 20;*/
 		attack->rect.w = 0;
 		attack->rect.h = 0;
 		attack->SetPos(0, 0);
+		attack->pendingToDelete = true;
 	}
 	jump = false;
 
-	if (isCollidingLeft) std::cout << "colision izquierda" << std::endl;
-	if (isCollidingRight) std::cout << "colision derecha" << std::endl;
+	/*if (isCollidingLeft) std::cout << "colision izquierda" << std::endl;
+	if (isCollidingRight) std::cout << "colision derecha" << std::endl;*/
 	//feet->SetPos(position.x, position.y + 69);
 
 	// Call to the base class. It must be called at the end
