@@ -32,6 +32,11 @@ const Collider* Enemy::GetAttackCollider() const
 	return attack;
 }
 
+const Collider* Enemy::GetHeadCollider() const
+{
+	return head;
+}
+
 void Enemy::Update()
 {
 	if (currentAnim != nullptr)
@@ -84,12 +89,25 @@ void Enemy::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::PLAYER_SHOT || collider->type == Collider::Type::ULTI_SHOT)
 	{
-		if (purple && hits > 0) hits--;
-		else if ((purple && hits == 0) || !purple)
+		if (isBoss)
 		{
-			die = true;
-			App->audio->PlayFx(App->audio->deathenemy);
-			App->ui->scoreCounter += 200;
+			if (App->ui->bossLives > 1) App->ui->bossLives--;
+			else if (App->ui->bossLives == 1)
+			{
+				die = true;
+				App->audio->PlayFx(App->audio->deathenemy);
+				App->ui->scoreCounter += 200;
+			}
+		}
+		else
+		{
+			if (purple && hits > 0) hits--;
+			else if ((purple && hits == 0) || !purple)
+			{
+				die = true;
+				App->audio->PlayFx(App->audio->deathenemy);
+				App->ui->scoreCounter += 200;
+			}
 		}
 		
 	}

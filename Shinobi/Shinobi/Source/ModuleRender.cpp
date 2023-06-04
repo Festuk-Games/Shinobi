@@ -93,21 +93,18 @@ Update_Status ModuleRender::Update()
 	}
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN && App->intro->IsEnabled()&& openMenu) {
 
-		//App->fade->FadeToBlack(this, (Module*)App->intro, true, false, 50);
-		App->intro->Disable();
-		App->scene->Enable();
+		App->fade->FadeToBlack((Module*)App->intro, (Module*)App->mission, true, false, 50);
+
 		//posiciones = !posiciones;
 	}
 	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN && App->intro->IsEnabled() && openMenu)
 	{
-		App->intro->Disable();
-		App->scene2->Enable();
+		App->fade->FadeToBlack((Module*)App->intro, (Module*)App->mission2, true, false, 50);
 	}
 
 	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN && App->intro->IsEnabled() && openMenu)
 	{
-		App->intro->Disable();
-		App->sceneboss->Enable();
+		App->fade->FadeToBlack((Module*)App->intro, (Module*)App->missionBoss, true, false, 50);
 	}
 
 	//menu player

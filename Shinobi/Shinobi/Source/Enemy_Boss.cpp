@@ -68,132 +68,139 @@ void Enemy_Boss::Update()
 
 	/*cout << (App->player->position.x - position.x) << endl;*/
 
-	timer++;
-
-	if(timer >= 300)
-	{
-		for (int i = 7; i >= 0; i--)
-		{
-			if ((App->player->position.x - position.x ) > -200 && (App->player->position.x - position.x) < -120)
-			{
-				currentAnim = &attackAnim1;
-				currentAnim->Reset();
-				particle1[i].alive = true;
-				particle1[i].centerY = 100;
-				particle1[i].radius = 40.0f;
-				particle1[i].angularVelocity = 0.16f;
-				particle1[i].angularStep = 0.012f;
-				particle1[i].time = 0.0f;
-				particle1[i].left = true;
-				App->particles->AddParticle(App->particles->fireBoss[i], position.x-25+(i*2), static_cast<int>(particle1[i].centerY + particle1[i].radius * cos(particle1[i].angularStep * particle1[i].time)), Collider::Type::ENEMY_SHOT);
-				particle1[i].particle = currentParticle;
-			 	App->particles->particles[particle1[i].particle]->lifetime = 200;
-			}
-			if ((App->player->position.x - position.x )> -120)
-			{
-				particle2[i].alive = true;
-				particle2[i].centerY = 140;
-				particle2[i].radius = 40.0f;
-				particle2[i].angularVelocity = 0.16f;
-				particle2[i].angularStep = 0.012f;
-				particle2[i].time = 0.0f;
-				particle2[i].left = true;
-				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), static_cast<int>(particle2[i].centerY + particle2[i].radius * sin(particle2[i].angularStep * particle2[i].time)), Collider::Type::ENEMY_SHOT);
-				particle2[i].particle = currentParticle;
-				App->particles->particles[particle2[i].particle]->lifetime = 120;
-			}
-			else if ((App->player->position.x - position.x )< -200)
-			{
-				App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), position.y+70, Collider::Type::ENEMY_SHOT);
-				particle3[i].particle = currentParticle;
-				particle3[i].alive = true;
-				App->particles->particles[particle3[i].particle]->lifetime = 120;
-			}
-			if (i == 0) timer = 0;
-		}
-		isShooting = true;
-		delay = 0;
-	}
-	
-
-	if (isShooting) delay++;
-	for (int i = 0; i <= 7; i++)
+	if (!die)
 	{
 
-		//particle1
-		if (App->particles->particles[particle1[i].particle] != nullptr && particle1[i].alive && particle1[i].radius >= 0 && delay >= i * 2)
-		{
+		timer++;
 
-			particle1[i].time += 3;
-			App->particles->particles[particle1[i].particle]->position.y = static_cast<int>(particle1[i].centerY + particle1[i].radius * cos(particle1[i].angularStep * particle1[i].time));
-			if (particle1[i].left)
+		if (timer >= 300)
+		{
+			for (int i = 7; i >= 0; i--)
 			{
-				App->particles->particles[particle1[i].particle]->position.x -= 2;
+				if ((App->player->position.x - position.x) > -200 && (App->player->position.x - position.x) < -120)
+				{
+					currentAnim = &attackAnim1;
+					currentAnim->Reset();
+					particle1[i].alive = true;
+					particle1[i].centerY = 100;
+					particle1[i].radius = 40.0f;
+					particle1[i].angularVelocity = 0.16f;
+					particle1[i].angularStep = 0.012f;
+					particle1[i].time = 0.0f;
+					particle1[i].left = true;
+					App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), static_cast<int>(particle1[i].centerY + particle1[i].radius * cos(particle1[i].angularStep * particle1[i].time)), Collider::Type::ENEMY_SHOT);
+					particle1[i].particle = currentParticle;
+					App->particles->particles[particle1[i].particle]->lifetime = 200;
+				}
+				if ((App->player->position.x - position.x) > -120)
+				{
+					particle2[i].alive = true;
+					particle2[i].centerY = 140;
+					particle2[i].radius = 40.0f;
+					particle2[i].angularVelocity = 0.16f;
+					particle2[i].angularStep = 0.012f;
+					particle2[i].time = 0.0f;
+					particle2[i].left = true;
+					App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), static_cast<int>(particle2[i].centerY + particle2[i].radius * sin(particle2[i].angularStep * particle2[i].time)), Collider::Type::ENEMY_SHOT);
+					particle2[i].particle = currentParticle;
+					App->particles->particles[particle2[i].particle]->lifetime = 120;
+				}
+				else if ((App->player->position.x - position.x) < -200)
+				{
+					App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), position.y + 70, Collider::Type::ENEMY_SHOT);
+					particle3[i].particle = currentParticle;
+					particle3[i].alive = true;
+					App->particles->particles[particle3[i].particle]->lifetime = 120;
+				}
+				if (i == 0) timer = 0;
 			}
-			if (App->particles->particles[particle1[i].particle]->position.x <= 60 && particle1[i].left)
+			isShooting = true;
+			delay = 0;
+		}
+
+
+		if (isShooting) delay++;
+		for (int i = 0; i <= 7; i++)
+		{
+
+			//particle1
+			if (App->particles->particles[particle1[i].particle] != nullptr && particle1[i].alive && particle1[i].radius >= 0 && delay >= i * 2)
 			{
-				particle1[i].left = false;
-				particle1[i].centerY = 106;
-				App->particles->particles[particle1[i].particle]->fliph = true;
+
+				particle1[i].time += 3;
+				App->particles->particles[particle1[i].particle]->position.y = static_cast<int>(particle1[i].centerY + particle1[i].radius * cos(particle1[i].angularStep * particle1[i].time));
+				if (particle1[i].left)
+				{
+					App->particles->particles[particle1[i].particle]->position.x -= 2;
+				}
+				if (App->particles->particles[particle1[i].particle]->position.x <= 60 && particle1[i].left)
+				{
+					particle1[i].left = false;
+					particle1[i].centerY = 106;
+					App->particles->particles[particle1[i].particle]->fliph = true;
+				}
+				if (!particle1[i].left && App->particles->particles[particle1[i].particle]->position.x <= 70)
+				{
+					particle1[i].radius += particle1[i].angularVelocity * 8;
+					App->particles->particles[particle1[i].particle]->position.x += 2;
+				}
+				if (!particle1[i].left && App->particles->particles[particle1[i].particle]->position.x >= 70)
+				{
+					particle1[i].radius += particle1[i].angularVelocity * 4;
+					App->particles->particles[particle1[i].particle]->position.x += 2;
+				}
+
 			}
-			if (!particle1[i].left && App->particles->particles[particle1[i].particle]->position.x <= 70)
+			else if (App->particles->particles[particle1[i].particle] == nullptr)
 			{
-				particle1[i].radius += particle1[i].angularVelocity * 8;
-				App->particles->particles[particle1[i].particle]->position.x += 2;
+				particle1[i].alive = false;
 			}
-			if (!particle1[i].left && App->particles->particles[particle1[i].particle]->position.x >= 70)
+
+			//particle2
+			if (App->particles->particles[particle2[i].particle] != nullptr && particle2[i].alive && particle2[i].radius >= 0 && delay >= i * 2)
 			{
-				particle1[i].radius += particle1[i].angularVelocity * 4;
-				App->particles->particles[particle1[i].particle]->position.x += 2;
+
+				particle2[i].time += 3;
+
+				App->particles->particles[particle2[i].particle]->position.y = static_cast<int>(particle2[i].centerY + particle2[i].radius * sin(particle2[i].angularStep * particle2[i].time));
+
+				App->particles->particles[particle2[i].particle]->position.x -= 2;
+				cout << "-2" << endl;
+
 			}
-			
-		}
-		else if (App->particles->particles[particle1[i].particle] == nullptr)
-		{
-			particle1[i].alive = false;
-		}
-
-		//particle2
-		if (App->particles->particles[particle2[i].particle] != nullptr && particle2[i].alive && particle2[i].radius >= 0 && delay >= i * 2)
-		{
-
-			particle2[i].time += 3;
-		
-			App->particles->particles[particle2[i].particle]->position.y = static_cast<int>(particle2[i].centerY + particle2[i].radius * sin(particle2[i].angularStep * particle2[i].time));
-
-			App->particles->particles[particle2[i].particle]->position.x -= 2;
-			cout << "-2" << endl;
-
-		}
-		else if (App->particles->particles[particle2[i].particle] == nullptr)
-		{
-			particle2[i].alive = false;
-		}
-
-		//particle3
-		if (App->particles->particles[particle3[i].particle] != nullptr && particle3[i].alive && delay >= i * 2)
-		{
-
-			if (particle3[i].left)
+			else if (App->particles->particles[particle2[i].particle] == nullptr)
 			{
-				App->particles->particles[particle3[i].particle]->position.x -= 2;
+				particle2[i].alive = false;
 			}
-		}
-		else if (App->particles->particles[particle3[i].particle] == nullptr)
-		{
-			particle3[i].alive = false;
-		}
 
-		if (App->particles->particles[particle1[i].particle] == nullptr 
-			&& App->particles->particles[particle2[i].particle] == nullptr 
-			&& App->particles->particles[particle3[i].particle] == nullptr)
-		{
-			currentAnim = &idleAnim;
+			//particle3
+			if (App->particles->particles[particle3[i].particle] != nullptr && particle3[i].alive && delay >= i * 2)
+			{
+
+				if (particle3[i].left)
+				{
+					App->particles->particles[particle3[i].particle]->position.x -= 2;
+				}
+			}
+			else if (App->particles->particles[particle3[i].particle] == nullptr)
+			{
+				particle3[i].alive = false;
+			}
+
+			if (App->particles->particles[particle1[i].particle] == nullptr
+				&& App->particles->particles[particle2[i].particle] == nullptr
+				&& App->particles->particles[particle3[i].particle] == nullptr)
+			{
+				currentAnim = &idleAnim;
+			}
 		}
 	}
 	collider->SetPos(position.x + 30, position.y+103);
 	head->SetPos(position.x + 28, position.y + 10);
-
+	if (die)
+	{
+		currentAnim = &dieAnim;
+	}
 	currentAnim->Update();
 	currentHeadAnim->Update();
 	currentLegsAnim->Update();

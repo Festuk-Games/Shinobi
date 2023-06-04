@@ -16,6 +16,8 @@
 #include "Enemy_Spiderman.h"
 #include "Enemy_Boss.h"
 #include "Enemy_SittingGunner.h"
+#include "ModuleUI.h"
+
 using namespace std;
 
 #include "ModuleScene.h"
@@ -246,8 +248,8 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (c2->type == Collider::Type::PLAYER_SHOT || c2->type == Collider::Type::ULTI_SHOT)
 			{
-				if ((enemies[i]->purple && enemies[i]->hits == 0 ) || !enemies[i]->purple) {
-					 //Notify the enemy of a collision
+				if ((enemies[i]->purple && enemies[i]->hits == 0) || !enemies[i]->purple) {
+					//Notify the enemy of a collision
 					c1->pendingToDelete = true;
 				}
 				enemies[i]->OnCollision(c2);
@@ -264,11 +266,11 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				enemies[i]->ground = true;
 				enemies[i]->jump = true;
-				enemies[i]->position.y-=4;
+				enemies[i]->position.y -= 4;
 			}
 			if (c2->type == Collider::Type::WALL)
 			{
-				
+
 				//if (!enemies[i]->collision)
 				//{
 				//	cout << "No hay colision" << endl;
@@ -299,7 +301,22 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				enemies[i]->attack->rect.h = 0;
 				App->particles->AddParticle(App->particles->hit, enemies[i]->attack->rect.x, enemies[i]->attack->rect.y);
 				enemies[i]->attack->SetPos(0, 0);
-				
+
+			}
+		}
+		if (enemies[i] != nullptr && enemies[i]->GetHeadCollider() == c1)
+		{
+			if (c2->type == Collider::Type::PLAYER_SHOT || c2->type == Collider::Type::ULTI_SHOT)
+			{
+				if (App->ui->bossLives == 1) {
+					//Notify the enemy of a collision
+					c1->pendingToDelete = true;
+				}
+				enemies[i]->OnCollision(c2);
+
+				//delete enemies[i];
+				//enemies[i] = nullptr;
+				break;
 			}
 		}
 	}

@@ -65,7 +65,7 @@ public:
 	int cameraSpeed = 9;
 	int colPos = 0;
 	bool posiciones = false;
-	bool openMenu = true;
+	bool openMenu = false;
 	bool openMenu2 = false;
 	bool openMenu3 = false;
 	bool control = false;
