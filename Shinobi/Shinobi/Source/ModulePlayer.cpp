@@ -785,6 +785,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &ultiAnim;
 			currentAnimation->Reset();
 			App->particles->AddParticle(App->particles->ultimateEffect, position.x - 10, position.y - 80, Collider::Type::NONE);
+			App->audio->PlayFx(App->audio->ultimate);
 		}
 			
 		if (ulti && ultiTimer <= 170) ultiTimer++;
@@ -985,6 +986,7 @@ Update_Status ModulePlayer::Update()
 		{
 			currentAnimation = &dieAnim;
 			currentAnimation->Reset();
+			App->audio->PlayFx(App->audio->dieplayer);
 		}
 		if (App->ui->lifenum >=0 && dietime >= 60)
 		{

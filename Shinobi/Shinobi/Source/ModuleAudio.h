@@ -44,6 +44,10 @@ public:
 	unsigned int swoosh_logo;
 	unsigned int mission;
 	unsigned int mission1;
+	unsigned int ultimate;
+	unsigned int dieplayer;
+	unsigned int deathenemy;
+	 
 
 private:
 

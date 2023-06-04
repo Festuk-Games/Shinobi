@@ -90,7 +90,7 @@ Update_Status MissionNumScene::Update()
 	{
 		App->audio->PlayFx(App->audio->mission);
 	}
-	if (changescene==45)
+	if (changescene==50)
 	{
 		App->audio->PlayFx(App->audio->mission1);
 	}

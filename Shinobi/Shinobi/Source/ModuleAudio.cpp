@@ -52,6 +52,9 @@ bool ModuleAudio::Init()
 	swoosh_logo = LoadFx("Audio/FX/swoosh_logo.wav");
 	mission = LoadFx("Audio/FX/mission.wav");
 	mission1= LoadFx("Audio/FX/mission1.wav");
+	ultimate = LoadFx("Audio/FX/ultimate.wav");
+	dieplayer = LoadFx("Audio/FX/die.wav");
+	deathenemy = LoadFx("Audio/FX/death.wav");
 	return ret;
 }
 
