@@ -55,6 +55,7 @@ bool ModuleAudio::Init()
 	ultimate = LoadFx("Audio/FX/ultimate.wav");
 	dieplayer = LoadFx("Audio/FX/die.wav");
 	deathenemy = LoadFx("Audio/FX/death.wav");
+	shoot = LoadFx("Audio/FX/shoot.wav");
 	return ret;
 }
 
