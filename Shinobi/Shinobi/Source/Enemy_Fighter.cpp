@@ -79,7 +79,8 @@ void Enemy_Fighter::Update()
 						currentAnim = &jumpAnim;
 						currentAnim->Reset();
 					}
-					else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
+					else if (jump) currentAnim = &jumpAnim;
+					else if ((!jump && !ground)) currentAnim = &idleAnim;
 					else currentAnim = &walkAnim;
 					if(ground) position.x--;
 				}
@@ -132,7 +133,8 @@ void Enemy_Fighter::Update()
 						currentAnim = &jumpAnim;
 						currentAnim->Reset();
 					}
-					else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
+					else if (jump) currentAnim = &jumpAnim;
+					else if ((!jump && !ground)) currentAnim = &idleAnim;
 					else currentAnim = &walkAnim;
 					if(ground) position.x++;
 				}
@@ -168,13 +170,14 @@ void Enemy_Fighter::Update()
 		//walk path
 		else if (!pl && !reloading && !shooting )
 		{
-			if ((jump || !jump && !ground) && currentAnim != &jumpAnim)
-			{
-				currentAnim = &jumpAnim;
-				currentAnim->Reset();
-			}
-			else if (jump || (!jump && !ground)) currentAnim = &jumpAnim;
-			else currentAnim = &walkAnim;
+		if (jump && currentAnim != &jumpAnim)
+		{
+			currentAnim = &jumpAnim;
+			currentAnim->Reset();
+		}
+		else if (jump) currentAnim = &jumpAnim;
+		else if ((!jump && !ground)) currentAnim = &idleAnim;
+		else currentAnim = &walkAnim;
 			if (position.x >= spawnPos.x + 100 || isCollidingLeft)
 			{
 				isCollidingLeft = false;
