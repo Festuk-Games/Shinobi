@@ -211,7 +211,8 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	
 	//initial position
-	position.x = 30;
+	if (App->sceneboss->IsEnabled()) position.x = 45;
+	else position.x = 30;
 	position.y = 209;
 	//App->ui->lifenum = 2;
 	alive = true;
@@ -238,6 +239,8 @@ Update_Status ModulePlayer::Update()
 {
 	GamePad& pad = App->input->pads[0];
 	if (position.y >= 100) L2 = false;
+	if (App->scene->IsEnabled() || App->scene2->IsEnabled()) maxpos = 2010;
+	else if (App->sceneboss->IsEnabled()) maxpos = 420;
 	flipPos.x = position.x - 25;
 	//Player movement
 	if (alive)
@@ -279,7 +282,7 @@ Update_Status ModulePlayer::Update()
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x+5, position.y-1);
 					enemyNearCollider->SetPos(position.x - 40, position.y - 58);
-					if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f) && position.x < 2010 && !isCollidingRight)
+					if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f) && position.x < maxpos && !isCollidingRight)
 					{
 						right = true;
 						position.x += speed;
@@ -371,7 +374,7 @@ Update_Status ModulePlayer::Update()
 					collider->SetPos(position.x, position.y - 58);
 					feet->SetPos(position.x+5, position.y-1);
 					enemyNearCollider->SetPos(position.x - 40, position.y - 58);
-					if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f) && position.x < 2010 && !isCollidingRight)
+					if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f) && position.x < maxpos && !isCollidingRight)
 					{
 						right = true;
 						position.x += speed;
@@ -438,7 +441,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation->Update();
 			return Update_Status::UPDATE_CONTINUE;
 		}
-		if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f) && !isCrouching && !isCollidingRight && !isJumpingUp2 && !isJumpingDown2 && position.x < 2010
+		if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f) && !isCrouching && !isCollidingRight && !isJumpingUp2 && !isJumpingDown2 && position.x < maxpos
 			&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
 		{
 			ulti = false;
@@ -667,7 +670,7 @@ Update_Status ModulePlayer::Update()
 			
 			
 			//coruch right
-			if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f )&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && position.x < 2010 && !isCollidingRight)
+			if ((App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f )&& App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && position.x < maxpos && !isCollidingRight)
 			{
 				right = true;
 				isWalking = true;

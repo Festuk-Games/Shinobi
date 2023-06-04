@@ -105,6 +105,16 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	specialBonus.h = 8;
 	specialBonus.w = 97;
 
+	bossPow.x = 0;
+	bossPow.y = 178;
+	bossPow.h = 8;
+	bossPow.w = 64;
+
+	bossIcon.x = 67;
+	bossIcon.y = 178;
+	bossIcon.h = 8;
+	bossIcon.w = 8;
+
 	for	(int i = 0; i < 10; i++)
 	{
 		timer[i] = { 1 + 8* i, 1, 7, 14 };
@@ -403,5 +413,15 @@ Update_Status ModuleUI::PostUpdate()
 			}
 		}
 	}
+
+	if (App->sceneboss->IsEnabled() && bossLives > 0)
+	{
+		App->render->Blit(nums, 90, 28, SDL_FLIP_NONE, &bossPow, 0.0f);
+		for (int i = 0; i < bossLives; i++)
+		{
+			App->render->Blit(nums, 160 + (i*8), 28, SDL_FLIP_NONE, &bossIcon, 0.0f);
+		}
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }

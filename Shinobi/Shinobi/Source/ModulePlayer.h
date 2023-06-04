@@ -107,6 +107,8 @@ public:
 	bool ulti = false;
 	int ultiTimer = 0;
 
+	int maxpos = 0;
+
 	bool right = true;
 	//bool left = false;
 

@@ -66,11 +66,11 @@ void Enemy_Boss::Update()
 	currentHeadAnim = &headAnim;
 	currentLegsAnim = &legsAnim;
 
-	cout << (App->player->position.x - position.x) << endl;
+	/*cout << (App->player->position.x - position.x) << endl;*/
 
 	timer++;
 
-	if(timer >= 200)
+	if(timer >= 300)
 	{
 		for (int i = 7; i >= 0; i--)
 		{
@@ -89,7 +89,7 @@ void Enemy_Boss::Update()
 				particle1[i].particle = currentParticle;
 			 	App->particles->particles[particle1[i].particle]->lifetime = 200;
 			}
-			else if ((App->player->position.x - position.x )> -120)
+			if ((App->player->position.x - position.x )> -120)
 			{
 				particle2[i].alive = true;
 				particle2[i].centerY = 140;
@@ -160,10 +160,10 @@ void Enemy_Boss::Update()
 			particle2[i].time += 3;
 		
 			App->particles->particles[particle2[i].particle]->position.y = static_cast<int>(particle2[i].centerY + particle2[i].radius * sin(particle2[i].angularStep * particle2[i].time));
-			if (particle2[i].left)
-			{
-				App->particles->particles[particle2[i].particle]->position.x -= 2;
-			}
+
+			App->particles->particles[particle2[i].particle]->position.x -= 2;
+			cout << "-2" << endl;
+
 		}
 		else if (App->particles->particles[particle2[i].particle] == nullptr)
 		{
