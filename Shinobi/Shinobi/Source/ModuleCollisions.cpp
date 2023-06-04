@@ -5,6 +5,8 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL_Scancode.h"
+#include <iostream>
+using namespace std;
 
 ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 {
@@ -147,6 +149,7 @@ ModuleCollisions::~ModuleCollisions()
 
 Update_Status ModuleCollisions::PreUpdate()
 {
+	int a = 0;
 	// Remove all colliders scheduled for deletion
 	for(uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -155,7 +158,10 @@ Update_Status ModuleCollisions::PreUpdate()
 			delete colliders[i];
 			colliders[i] = nullptr;
 		}
+		if (colliders[i] != nullptr) a++;
 	}
+	cout << "total: " << a << endl;
+	a = 0;
 
 	Collider* c1;
 	Collider* c2;

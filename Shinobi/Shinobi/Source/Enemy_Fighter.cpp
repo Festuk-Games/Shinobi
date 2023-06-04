@@ -5,6 +5,7 @@
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include "ModuleScene.h"
 #include <iostream>
 
 Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
@@ -62,7 +63,7 @@ void Enemy_Fighter::Update()
 	{
 		//walk right
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight
-			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) && App->player->alive
+			&& ((position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) && App->scene->IsEnabled()) && App->player->alive
 			&& (App->player->currentAnimation != &App->player->jumpDownFloorAnim || App->player->currentAnimation != &App->player->jumpUpFloorAnim))
 		{
 			spawnPos.x = position.x - 100;
@@ -113,7 +114,7 @@ void Enemy_Fighter::Update()
 
 		////walk left
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
-			&& (position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) && App->player->alive
+			&& ((position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) && App->scene->IsEnabled()) && App->player->alive
 			&& (App->player->currentAnimation != &App->player->jumpDownFloorAnim || App->player->currentAnimation != &App->player->jumpUpFloorAnim))
 		{
 			spawnPos.x = position.x + 50;

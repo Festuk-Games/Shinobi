@@ -5,7 +5,7 @@
 
 #include "ModuleRender.h"
 
-#define MAX_ENEMIES 50
+#define MAX_ENEMIES 30
 
 enum class ENEMY_TYPE
 {

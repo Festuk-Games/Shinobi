@@ -3,7 +3,7 @@
 
 #include "Module.h"
 
-#define MAX_HOSTAGES 20
+#define MAX_HOSTAGES 10
 
 enum class HOSTAGE_TYPE
 {
