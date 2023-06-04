@@ -42,6 +42,8 @@ public:
 	unsigned int attack;
 	unsigned int punch;
 	unsigned int swoosh_logo;
+	unsigned int mission;
+	unsigned int mission1;
 
 private:
 

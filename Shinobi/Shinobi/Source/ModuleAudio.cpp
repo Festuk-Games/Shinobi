@@ -50,6 +50,8 @@ bool ModuleAudio::Init()
 	attack = LoadFx("Audio/FX/attack.wav");
 	punch = LoadFx("Audio/FX/punch.wav");
 	swoosh_logo = LoadFx("Audio/FX/swoosh_logo.wav");
+	mission = LoadFx("Audio/FX/mission.wav");
+	mission1= LoadFx("Audio/FX/mission1.wav");
 	return ret;
 }
 

@@ -86,6 +86,14 @@ Update_Status MissionNumScene::Update()
 	currentAnim->Update();
 
 	changescene++;
+	if (changescene==25)
+	{
+		App->audio->PlayFx(App->audio->mission);
+	}
+	if (changescene==45)
+	{
+		App->audio->PlayFx(App->audio->mission1);
+	}
 	if (changescene >= 180)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->mission, true, false, 50);
