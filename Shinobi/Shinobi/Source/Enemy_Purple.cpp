@@ -55,7 +55,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 void Enemy_Purple::Update()
 {
 	flipPos.x = position.x;
-	std::cout << position.y << std::endl;
+	/*std::cout << position.y << std::endl;*/
 
 	if (!die)
 	{

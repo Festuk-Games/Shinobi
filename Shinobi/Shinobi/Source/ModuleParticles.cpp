@@ -367,7 +367,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			particles[i] = nullptr;
 			break;
 		}
-		else if (particles[i] != nullptr && particles[i]->collider == c1 && c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ULTIMATE)
+		else if (particles[i] != nullptr && particles[i]->collider == c1 && c1->type == Collider::Type::ULTI_SHOT && c2->type == Collider::Type::ULTIMATE)
 		{
 
 			if (particles[i]->speed == iPoint(4, -4))

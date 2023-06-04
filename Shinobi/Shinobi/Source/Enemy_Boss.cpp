@@ -53,7 +53,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	legsAnim.speed = 0.03f;
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x+30, position.y+79, 29, 26 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x+30, position.y+103, 29, 2 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	head = App->collisions->AddCollider({ position.x + 28, position.y + 10, 20, 26 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	/*attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);*/
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
@@ -191,7 +191,7 @@ void Enemy_Boss::Update()
 			currentAnim = &idleAnim;
 		}
 	}
-	collider->SetPos(position.x + 30, position.y+79);
+	collider->SetPos(position.x + 30, position.y+103);
 	head->SetPos(position.x + 28, position.y + 10);
 
 	currentAnim->Update();

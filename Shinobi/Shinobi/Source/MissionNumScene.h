@@ -36,7 +36,7 @@ public:
 	SDL_Texture* name = nullptr;
 	SDL_Texture* mission = nullptr;
 
-	SDL_Rect missionrect, namerect, missionrect2;
+	SDL_Rect missionrect, missionrect2;
 	int counter = 0;
 	int changescene = 0;
 

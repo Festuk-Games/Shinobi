@@ -55,7 +55,7 @@ public:
 	bool attackCol = false;
 	Collider* attack = nullptr;
 
-	int currentParticle;
+	int currentParticle = -1;
 
 protected:
 	// A ptr to the current animation

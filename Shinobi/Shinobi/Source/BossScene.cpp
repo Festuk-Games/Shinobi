@@ -53,6 +53,7 @@ bool BossScene::Start()
 	App->collisions->Enable();
 	App->particles->Enable();
 	
+	App->render->colPos = 0;
 
 	stageTexture = App->textures->Load("Assets/Scenes/layer_a2.png");
 	skyTexture = App->textures->Load("Assets/Scenes/layer_b2.png");

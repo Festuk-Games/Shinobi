@@ -244,7 +244,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			if (c2->type == Collider::Type::PLAYER_SHOT)
+			if (c2->type == Collider::Type::PLAYER_SHOT || c2->type == Collider::Type::ULTI_SHOT)
 			{
 				if ((enemies[i]->purple && enemies[i]->hits == 0 ) || !enemies[i]->purple) {
 					 //Notify the enemy of a collision
@@ -277,13 +277,13 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				//}
 				if (enemies[i]->flip && enemies[i]->collision)
 				{
-					cout << "colision derecha" << endl;
+					/*cout << "colision derecha" << endl;*/
 					enemies[i]->isCollidingRight = true;
 					enemies[i]->isCollidingLeft = false;
 				}
 				else
 				{
-					cout << "colision izq" << endl;
+					/*cout << "colision izq" << endl;*/
 					enemies[i]->isCollidingLeft = true;
 					enemies[i]->isCollidingRight = false;
 				}
