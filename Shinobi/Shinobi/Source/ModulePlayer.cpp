@@ -231,7 +231,7 @@ bool ModulePlayer::Start()
 	katana = App->collisions->AddCollider({ 0,0,0,0 }, Collider::Type::PLAYER_SHOT, this);
 
 	ultiTimer = 0;
-
+	
 	return ret;
 } 
 
@@ -245,10 +245,11 @@ Update_Status ModulePlayer::Update()
 	//Player movement
 	if (alive)
 	{
-		if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && App->render->openMenu2)
 		{
 			collision = !collision;
 		}
+
 		if (App->input->keys[SDL_SCANCODE_F9] == KEY_DOWN)
 		{
 			position.x = 30;

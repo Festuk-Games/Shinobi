@@ -53,6 +53,8 @@ public:
 	SDL_Renderer* renderer = nullptr;
 
 	SDL_Texture* menu = nullptr;
+	SDL_Texture* menuPlayer = nullptr;
+	SDL_Texture* menuEnemies = nullptr;
 
 	// A rectangle that represents the camera section
 	// Sprites will be rendered to the screen depending on the camera position
@@ -63,6 +65,13 @@ public:
 	int cameraSpeed = 9;
 	int colPos = 0;
 	bool posiciones = false;
+	bool openMenu = true;
+	bool openMenu2 = false;
+	bool openMenu3 = false;
+	bool control = false;
+	bool showColliders = false;
+	bool colissions = true;
+	bool win = false;
 
 	int jumpcam = 0;
 

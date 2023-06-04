@@ -49,6 +49,7 @@ bool ModuleScene::Start()
 
 	App->ui->sk1 = true;
 	App->ui->lose = false;
+	App->render->win = false;
 	nextStage = false;
 	clear = false;
 	App->ui->scoreCounter = 0;
@@ -144,7 +145,7 @@ Update_Status ModuleScene::Update()
 	//next stage condition
 	if (nextStage && stage1)
 	{
-		if (App->player->position.x >= 2000)
+		if (App->player->position.x >= 2000 || App->render->win)
 		{
 			clear = true;
 			if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
