@@ -100,15 +100,13 @@ bool ModuleScene::Start()
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 272, 150);
 
 
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 220, 142);
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 400, 142);
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 600, 142);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 970, 23);
 
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 220, 142);
 	////App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 341, 130);
 	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 220, 139);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 707, 130-32);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 726, 130-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 707, 130-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 726, 130-32);
 	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 740, 130);
 	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 783, 130);
 

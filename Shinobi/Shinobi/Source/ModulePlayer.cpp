@@ -772,7 +772,6 @@ Update_Status ModulePlayer::Update()
 			//crouch idle
 			if(!isShooting && !isWalking && !isKicking)
 			{
-			cout << ("BUG") << endl;
 				if (!isPowerUp) currentAnimation = &crouchIdleAnim;
 				else currentAnimation = &crouchGunIdleAnim;
 			}
@@ -857,30 +856,41 @@ Update_Status ModulePlayer::Update()
 		//key conditions
 
 		//not crouching
-		if (isCrouching && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f)
+		if ((pad.enabled && isCrouching && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT || pad.l_x > 0.2f)
 			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE && pad.l_y<0.2f)
 			|| isCrouching && (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT || pad.l_x < -0.2f)
-			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE && pad.l_y < 0.2f))
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE && pad.l_y < 0.2f) )
+			|| !pad.enabled && isCrouching && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE)
+			|| isCrouching && (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_IDLE ))
 		{
 			isCrouching = false;
 			if (!isPowerUp) currentAnimation = &idleAnim;
 			else currentAnimation = &idlePowAnim;
 		}
 		//not walking
-		if (isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
+		if ((pad.enabled && isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
 			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y < -0.2f)
+			&& isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE) 
+			|| !pad.enabled && isCrouching && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
 			&& isCrouching && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
 		{
 			isWalking = false;
 		}
-		if (isCrouching && App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE
-			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y >0.2f))
+		if ((pad.enabled && isCrouching && (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE && pad.x_idle)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT || pad.l_y >0.2f)) 
+			|| !pad.enabled && isCrouching && (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE )
+				&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT ))
 		{
 			isShooting = false;
 		}
 		//not kicking
-		if ((App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE&& pad.x_idle)
-			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y >0.2f))
+		if ((pad.enabled && (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE && pad.x_idle)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && pad.l_y >0.2f)) || !pad.enabled 
+			&& (App->input->keys[SDL_SCANCODE_LALT] == KEY_IDLE)
+			&& (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT ))
 		{
 			//kick++;
 			//if (kick >= 180)

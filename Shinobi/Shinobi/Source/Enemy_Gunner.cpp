@@ -43,7 +43,7 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 	dieAnim.PushBack({ 112,418,83,69 });
 	dieAnim.PushBack({ 112,418,83,69 });
 	dieAnim.PushBack({ 0,0,0,0 });
-	dieAnim.speed = 0.08f;
+	dieAnim.speed = 0.05f;
 	dieAnim.loop = false;
 
 
@@ -66,7 +66,7 @@ void Enemy_Gunner::Update()
 			{
 				currentAnim = &shootAnim;
 				currentAnim->Reset();
-				App->audio->PlayFx(App->audio->shoot);
+				App->audio->PlayFx(App->audio->shuriken);
 				App->particles->enemyshot.speed = iPoint(-5, 0);
 				App->particles->AddParticle(App->particles->enemyshot, position.x, position.y + 25, Collider::Type::ENEMY_SHOT);
 				shot = 0;
