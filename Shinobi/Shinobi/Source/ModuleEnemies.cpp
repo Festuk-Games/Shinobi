@@ -246,8 +246,12 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (c2->type == Collider::Type::PLAYER_SHOT)
 			{
-				enemies[i]->OnCollision(c2); //Notify the enemy of a collision
-				c1->pendingToDelete = true;
+				if ((enemies[i]->purple && enemies[i]->hits == 0 )|| !purple) {
+					 //Notify the enemy of a collision
+					c1->pendingToDelete = true;
+				}
+				enemies[i]->OnCollision(c2);
+
 				//delete enemies[i];
 				//enemies[i] = nullptr;
 				break;

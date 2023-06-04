@@ -42,6 +42,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	dieAnim.speed = 0.08f;
 	dieAnim.loop = false;
 
+	purple = true;
 
 	//colliders
 	collider = App->collisions->AddCollider({ position.x, position.y, 40, 50 }, Collider::Type::ENEMY, (Module*)App->enemies);
@@ -69,12 +70,12 @@ void Enemy_Purple::Update()
 			{
 				flip = true;
 				shot++;
-				if (position.x - App->player->position.x >= 50)
+				if (position.x - App->player->position.x >= 60)
 				{
 					currentAnim = &walkAnim;
 					position.x--;
 				}
-				else if (shot >= 100 && position.x - App->player->position.x <= 35)
+				else if (shot >= 100 && position.x - App->player->position.x <= 50)
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
@@ -117,12 +118,12 @@ void Enemy_Purple::Update()
 
 				flip = false;
 
-				if (position.x - App->player->position.x <= -50)
+				if (position.x - App->player->position.x <= -60)
 				{
 					currentAnim = &walkAnim;
 					position.x++;
 				}
-				else if (shot >= 100 && position.x - App->player->position.x >= -35)
+				else if (shot >= 100 && position.x - App->player->position.x >= -50)
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
@@ -188,8 +189,9 @@ void Enemy_Purple::Update()
 
 		if (shooting)
 		{
-			cout << position.y<<endl;
-			position.y=135;
+			/*cout << position.y<<endl;
+			position.y=135;*/
+			
 			collider->rect.h = 65;
 			collider->SetPos(position.x+5, position.y+8);
 			time++;
@@ -202,7 +204,7 @@ void Enemy_Purple::Update()
 		}
 		else
 		{
-			position.y = 135;
+			/*position.y = 135;*/
 			collider->rect.h = 50;
 			collider->SetPos(position.x+6, position.y+23);
 		}

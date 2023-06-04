@@ -199,6 +199,7 @@ bool ModuleUI::Start()
 	
 	else if (App->sceneboss->IsEnabled())
 	{
+		hostages = 0;
 		restart2 = true;
 		App->scene2->nextStage = false;
 		App->scene2->clear = false;
@@ -385,18 +386,21 @@ Update_Status ModuleUI::PostUpdate()
 			App->render->Blit(nums, 174, 129, SDL_FLIP_NONE, &timer[0], 0.0f);
 			App->render->Blit(nums, 183, 135, SDL_FLIP_NONE, &whitePts, 0.0f);
 
-			App->render->Blit(nums, 85, 152, SDL_FLIP_NONE, &specialBonus, 0.0f);
-
-			string bn = to_string(5000);
-			int bnPos = 222 - (bn.size() * 8);
-
-			for (unsigned int i = 0; i < bn.size(); i++)
+			if (App->scene->clear)
 			{
-				bnDigit = bn[i] - '0';
-				App->render->Blit(nums, bnPos + (i * 8), 152, SDL_FLIP_NONE, &rscore[bnDigit], 0.0f);
-			}
+				App->render->Blit(nums, 85, 152, SDL_FLIP_NONE, &specialBonus, 0.0f);
 
-			App->render->Blit(nums, 225, 152, SDL_FLIP_NONE, &redPts, 0.0f);
+				string bn = to_string(5000);
+				int bnPos = 222 - (bn.size() * 8);
+
+				for (unsigned int i = 0; i < bn.size(); i++)
+				{
+					bnDigit = bn[i] - '0';
+					App->render->Blit(nums, bnPos + (i * 8), 152, SDL_FLIP_NONE, &rscore[bnDigit], 0.0f);
+				}
+
+				App->render->Blit(nums, 225, 152, SDL_FLIP_NONE, &redPts, 0.0f);
+			}
 		}
 	}
 	return Update_Status::UPDATE_CONTINUE;

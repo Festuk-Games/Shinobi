@@ -43,7 +43,7 @@ Enemy_Gunner::Enemy_Gunner(int x, int y) : Enemy(x, y)
 	dieAnim.PushBack({ 112,418,83,69 });
 	dieAnim.PushBack({ 112,418,83,69 });
 	dieAnim.PushBack({ 0,0,0,0 });
-	dieAnim.speed = 0.05f;
+	dieAnim.speed = 0.08f;
 	dieAnim.loop = false;
 
 

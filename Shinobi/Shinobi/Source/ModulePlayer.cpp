@@ -291,7 +291,7 @@ Update_Status ModulePlayer::Update()
 					}
 					if (position.y <= 97 && App->scene->IsEnabled() && L2)
 					{
-						App->render->camera.y+=8;
+						App->render->camera.y+=12;
 						App->render->jumpcam+=2;
 					}
 					if ((App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN || pad.x_down))
@@ -383,7 +383,7 @@ Update_Status ModulePlayer::Update()
 					}
 					if (position.y <= 97 && App->render->jumpcam >= 1 && App->scene->IsEnabled() && L2)
 					{
-						App->render->camera.y-=4;
+						App->render->camera.y-=6;
 						App->render->jumpcam--;
 					}
 					if ((App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN || pad.x_down))
@@ -984,9 +984,10 @@ Update_Status ModulePlayer::Update()
 		}*/
 		if (currentAnimation != &dieAnim)
 		{
+			App->audio->PlayFx(App->audio->dieplayer);
+			Mix_HaltMusic();
 			currentAnimation = &dieAnim;
 			currentAnimation->Reset();
-			App->audio->PlayFx(App->audio->dieplayer);
 		}
 		if (App->ui->lifenum >=0 && dietime >= 60)
 		{
@@ -1015,7 +1016,7 @@ Update_Status ModulePlayer::Update()
 		position.y += 2;
 		if (position.y <= 97 && App->render->jumpcam >= 1 && App->scene->IsEnabled() && L2)
 		{
-			App->render->camera.y -= 4;
+			App->render->camera.y -= 6;
 			App->render->jumpcam--;
 		}
 	}

@@ -149,7 +149,7 @@ ModuleCollisions::~ModuleCollisions()
 
 Update_Status ModuleCollisions::PreUpdate()
 {
-	int a = 0;
+	/*int a = 0;*/
 	// Remove all colliders scheduled for deletion
 	for(uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -158,10 +158,10 @@ Update_Status ModuleCollisions::PreUpdate()
 			delete colliders[i];
 			colliders[i] = nullptr;
 		}
-		if (colliders[i] != nullptr) a++;
+		/*if (colliders[i] != nullptr) a++;*/
 	}
-	cout << "total: " << a << endl;
-	a = 0;
+	//cout << "total: " << a << endl;
+	//a = 0;
 
 	Collider* c1;
 	Collider* c2;
