@@ -52,6 +52,8 @@ public:
 	// Rendering context used for any rendering action
 	SDL_Renderer* renderer = nullptr;
 
+	SDL_Texture* menu = nullptr;
+
 	// A rectangle that represents the camera section
 	// Sprites will be rendered to the screen depending on the camera position
 	SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };

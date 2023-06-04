@@ -55,7 +55,7 @@ bool ModuleScene::Start()
 	clearcount = 0;
 
 	App->render->camera.x = 0;
-	App->render->colPos = 0;
+
 	//enable modules
 	App->collisions->Enable();
 	App->particles->Enable();
@@ -63,7 +63,11 @@ bool ModuleScene::Start()
 
 	if (stage1)
 	{
-		
+		App->render->cameracol = App->collisions->AddCollider({ 0, 0, 320,  1 }, Collider::Type::ULTIMATE);
+		App->render->cameracol2 = App->collisions->AddCollider({ 319, 0, 1,  224 }, Collider::Type::ULTIMATE);
+		App->render->cameracol3 = App->collisions->AddCollider({ 0, 223, 320,  1 }, Collider::Type::ULTIMATE);
+		App->render->cameracol4 = App->collisions->AddCollider({ 0, 0, 1,  224 }, Collider::Type::ULTIMATE);
+		App->render->colPos = 0;
 
 		App->collisions->AddCollider({ 416, 176, 32, 1 }, Collider::Type::GROUND);
 		App->collisions->AddCollider({ 704, 176, 32, 1 }, Collider::Type::GROUND);
