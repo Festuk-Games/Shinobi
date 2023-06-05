@@ -30,11 +30,16 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	dieAnim.PushBack({ 238,109,109,92 });
 	dieAnim.PushBack({ 346,109,109,92 });
 	dieAnim.loop = false;
-	dieAnim.speed = 0.08f;
+	dieAnim.speed = 0.06f;
+
+	hitAnim.PushBack({ 22,8,109,92 });
 
 	idleAnim.PushBack({93,410,70,60});
 	idleAnim.loop = false;
 	idleAnim.speed = 0.03f;
+
+	dieHeadAnim.PushBack({ 0,0,0,0 });
+	dieLegsAnim.PushBack({ 0,0,0,0 });
 
 	attackAnim1.PushBack({ 93,473,70,60 });
 	attackAnim1.PushBack({ 93,410,70,60 });
@@ -63,24 +68,44 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 
 void Enemy_Boss::Update()
 {
-	currentHeadAnim = &headAnim;
-	currentLegsAnim = &legsAnim;
 
 	/*cout << (App->player->position.x - position.x) << endl;*/
-
+	
 	if (!die)
 	{
-
-		timer++;
-
-		if (timer >= 300)
+		cout << position.y << endl;
+		if (hit && hitCount <= 10)
+		{
+			currentAnim = &hitAnim;
+			currentHeadAnim = &dieHeadAnim;
+			currentLegsAnim = &dieLegsAnim;
+			position.x = 326;
+			position.y = 117;
+			hitCount++;
+			timer = 0;
+		}
+		if (hit && hitCount == 10)
+		{
+			position.x = 360;
+			position.y = 104;
+			hit = false;
+		}
+		if(!hit)
+		{
+			hitCount = 0;
+			currentAnim = &idleAnim;
+			currentHeadAnim = &headAnim;
+			currentLegsAnim = &legsAnim;
+			timer++;
+		}
+		if (timer >= 300 && !hit)
 		{
 			for (int i = 7; i >= 0; i--)
 			{
 				if ((App->player->position.x - position.x) > -200 && (App->player->position.x - position.x) < -120)
 				{
-					currentAnim = &attackAnim1;
-					currentAnim->Reset();
+					/*currentAnim = &attackAnim1;
+					currentAnim->Reset();*/
 					particle1[i].alive = true;
 					particle1[i].centerY = 100;
 					particle1[i].radius = 40.0f;
@@ -189,7 +214,7 @@ void Enemy_Boss::Update()
 
 			if (App->particles->particles[particle1[i].particle] == nullptr
 				&& App->particles->particles[particle2[i].particle] == nullptr
-				&& App->particles->particles[particle3[i].particle] == nullptr)
+				&& App->particles->particles[particle3[i].particle] == nullptr && !hit)
 			{
 				currentAnim = &idleAnim;
 			}
@@ -200,10 +225,15 @@ void Enemy_Boss::Update()
 	if (die)
 	{
 		currentAnim = &dieAnim;
+		currentHeadAnim = &dieHeadAnim;
+		currentLegsAnim = &dieLegsAnim;
+		position.y = 117;
+		position.x = 330;
 	}
 	currentAnim->Update();
 	currentHeadAnim->Update();
 	currentLegsAnim->Update();
+	
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

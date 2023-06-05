@@ -91,8 +91,12 @@ void Enemy::OnCollision(Collider* collider)
 	{
 		if (isBoss)
 		{
-			if (App->ui->bossLives > 1) App->ui->bossLives--;
-			else if (App->ui->bossLives == 1)
+			if (App->ui->bossLives > 0)
+			{
+				App->ui->bossLives--;
+				hit = true;
+			}
+			if (App->ui->bossLives == 0)
 			{
 				die = true;
 				App->audio->PlayFx(App->audio->deathenemy);
