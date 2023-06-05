@@ -284,3 +284,5 @@ When you attack, if the enemy is too far, the character uses the shuriken and if
 And if it has the power up, use the pistol for the faraway enemies and the katana for the close ones.
 
 If you save 2 hostages, you get a powerup.
+
+<br><a href="https://github.com/gosu00](https://festuk-games.github.io/FestukGames/">Website</a></br>
