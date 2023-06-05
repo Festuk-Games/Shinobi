@@ -48,6 +48,7 @@ public:
 	unsigned int dieplayer;
 	unsigned int deathenemy;
 	unsigned int shoot;
+	unsigned int finished;
 	 
 
 private:
