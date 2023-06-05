@@ -393,7 +393,7 @@ Update_Status ModuleUI::PostUpdate()
 	{
 		if (nextCounter <= 80)
 		{
-			if (nextframe <= 5) App->render->Blit(nums, 140, 60, SDL_FLIP_NONE, &nextstage, 0.0f);
+			if (nextframe <= 5) App->render->Blit(nums, 120, 60, SDL_FLIP_NONE, &nextstage, 0.0f);
 		}
 		App->render->Blit(go, goposx, 140, SDL_FLIP_NONE, NULL, 1.0f);
 	}
