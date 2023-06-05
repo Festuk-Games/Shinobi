@@ -67,6 +67,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	isBoss = true;
 	currentAnim = &idleAnim;
 	count = 0;
+	attackTime = 50;
 }
 
 void Enemy_Boss::Update()
@@ -85,13 +86,18 @@ void Enemy_Boss::Update()
 			position.x = 326;
 			position.y = 117;
 			hitCount++;
-			timer = 0;
 		}
 		if (hit && hitCount == 10)
 		{
 			position.x = 360;
 			position.y = 104;
 			hit = false;
+			if (!resetTimer)
+			{
+				timer = 0;
+				attackTime = 150;
+				resetTimer = true;
+			}
 		}
 		if(!hit)
 		{
@@ -101,14 +107,14 @@ void Enemy_Boss::Update()
 			currentLegsAnim = &legsAnim;
 			timer++;
 		}
-		if (timer >= 300 && !hit)
+		if (timer >= attackTime)
 		{
 			for (int i = 7; i >= 0; i--)
 			{
 				if ((App->player->position.x - position.x) > -200 && (App->player->position.x - position.x) < -120)
 				{
-					/*currentAnim = &attackAnim1;
-					currentAnim->Reset();*/
+					currentAnim = &attackAnim1;
+					currentAnim->Reset();
 					particle1[i].alive = true;
 					particle1[i].centerY = 100;
 					particle1[i].radius = 40.0f;
@@ -119,9 +125,13 @@ void Enemy_Boss::Update()
 					App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), static_cast<int>(particle1[i].centerY + particle1[i].radius * cos(particle1[i].angularStep * particle1[i].time)), Collider::Type::ENEMY_SHOT);
 					particle1[i].particle = currentParticle;
 					App->particles->particles[particle1[i].particle]->lifetime = 200;
+					attackTime = 250;
+					resetTimer = false;
 				}
 				if ((App->player->position.x - position.x) > -120)
 				{
+					currentAnim = &attackAnim1;
+					currentAnim->Reset();
 					particle2[i].alive = true;
 					particle2[i].centerY = 140;
 					particle2[i].radius = 40.0f;
@@ -132,13 +142,19 @@ void Enemy_Boss::Update()
 					App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), static_cast<int>(particle2[i].centerY + particle2[i].radius * sin(particle2[i].angularStep * particle2[i].time)), Collider::Type::ENEMY_SHOT);
 					particle2[i].particle = currentParticle;
 					App->particles->particles[particle2[i].particle]->lifetime = 120;
+					attackTime = 200;
+					resetTimer = false;
 				}
 				else if ((App->player->position.x - position.x) < -200)
 				{
-					App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), position.y + 70, Collider::Type::ENEMY_SHOT);
+					currentAnim = &attackAnim1;
+					currentAnim->Reset();
+					App->particles->AddParticle(App->particles->fireBoss[i], position.x - 25 + (i * 2), position.y + 40, Collider::Type::ENEMY_SHOT);
 					particle3[i].particle = currentParticle;
 					particle3[i].alive = true;
 					App->particles->particles[particle3[i].particle]->lifetime = 120;
+					attackTime = 150;
+					resetTimer = false;
 				}
 				if (i == 0) {
 					timer = 0;
@@ -210,7 +226,7 @@ void Enemy_Boss::Update()
 
 				if (particle3[i].left)
 				{
-					App->particles->particles[particle3[i].particle]->position.x -= 2;
+					App->particles->particles[particle3[i].particle]->position.x -= 3;
 				}
 			}
 			else if (App->particles->particles[particle3[i].particle] == nullptr)
@@ -223,6 +239,7 @@ void Enemy_Boss::Update()
 				&& App->particles->particles[particle3[i].particle] == nullptr && !hit)
 			{
 				currentAnim = &idleAnim;
+				isShooting = false;
 			}
 		}
 	}
@@ -241,7 +258,6 @@ void Enemy_Boss::Update()
 			App->audio->PlayMusic("Audio/music/boss_clear.ogg", 0.0f);
 			App->sceneboss->nextStage = true;
 		}
-		cout << count << endl;
 		
 	}
 	currentAnim->Update();

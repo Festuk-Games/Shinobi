@@ -88,6 +88,8 @@ private:
 
 	int count = 1;
 
+	int attackTime = 100;
+	bool resetTimer = false;
 	int hitCount = 0;
 };
 
