@@ -63,6 +63,7 @@ void Enemy_Soldier::Update()
 				{
 					currentAnim = &walkAnim;
 					position.x--;
+					position.x--;
 				}
 				else if (shot >= 100)
 				{
@@ -70,7 +71,7 @@ void Enemy_Soldier::Update()
 					currentAnim->Reset();
 					attack->rect.w = 10;
 					attack->rect.h = 10;
-					attack->SetPos(position.x, position.y + 30);
+					attack->SetPos(position.x-3, position.y + 30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
