@@ -143,7 +143,7 @@ Update_Status ModuleScene2::Update()
 			{
 				App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
 			}
-			if (clearcount == 0)
+			if (clearcount == 20)
 			{
 				App->audio->PlayMusic("Audio/music/stage_clear.ogg", 0.0f);
 			}

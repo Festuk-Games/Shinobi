@@ -161,7 +161,7 @@ Update_Status ModuleScene::Update()
 				//App->player->position.x = 30;
 				//App->render->camera.x = 0;
 			}
-			if (clearcount == 0)
+			if (clearcount == 20)
 			{
 				App->audio->PlayMusic("Audio/music/stage_clear.ogg", 0.0f);
 			}
