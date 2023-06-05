@@ -39,7 +39,7 @@ Enemy_Soldier::Enemy_Soldier(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x-3, position.y, 30, 63}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x-3, position.y, 30, 65}, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
