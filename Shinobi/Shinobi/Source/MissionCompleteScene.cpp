@@ -69,6 +69,18 @@ Update_Status MissionCompleteScene::Update()
 		imageY -= 8;
 		imageX += 6;
 	}
+	if (changescene==25)
+	{
+		App->audio->PlayFx(App->audio->mission);
+	}
+	if (changescene==50)
+	{
+		App->audio->PlayFx(App->audio->mission1);
+	}
+	if (changescene==75)
+	{
+		App->audio->PlayFx(App->audio->finished);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
