@@ -45,6 +45,21 @@ bool ModuleAudio::Init()
 	write = LoadFx("Audio/FX/write.wav");
 	coin = LoadFx("Audio/FX/coin.wav");
 	jump = LoadFx("Audio/FX/jump.wav");
+	hostage = LoadFx("Audio/FX/freeKids.wav");
+	platform = LoadFx("Audio/FX/plataforma.wav");
+	attack = LoadFx("Audio/FX/attack.wav");
+	punch = LoadFx("Audio/FX/punch.wav");
+	swoosh_logo = LoadFx("Audio/FX/swoosh_logo.wav");
+	mission = LoadFx("Audio/FX/mission.wav");
+	mission1= LoadFx("Audio/FX/mission1.wav");
+	ultimate = LoadFx("Audio/FX/ultimate.wav");
+	dieplayer = LoadFx("Audio/FX/die.wav");
+	deathenemy = LoadFx("Audio/FX/death.wav");
+	shoot = LoadFx("Audio/FX/shoot.wav");
+	finished = LoadFx("Audio/FX/finished.wav");
+	boss_hit = LoadFx("Audio/FX/boss_hit.wav");
+	die_boss = LoadFx("Audio/FX/die_boss.wav");
+	boss_attack = LoadFx("Audio/FX/boss_attack.wav");
 	return ret;
 }
 

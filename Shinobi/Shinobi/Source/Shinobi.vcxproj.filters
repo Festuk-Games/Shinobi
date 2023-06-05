@@ -32,6 +32,9 @@
     <Filter Include="Source Files\Entities\Hostage">
       <UniqueIdentifier>{eb316a2d-de84-4f46-9501-9ccdadc82a36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Modules\Gameplay\Scenes\Scene info">
+      <UniqueIdentifier>{da639506-a03e-40a6-aa2a-9cfdf5f3e820}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -103,9 +106,6 @@
     <ClInclude Include="ModuleScene.h">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="SceneIntro.h">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleAuxScene.h">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
@@ -118,25 +118,60 @@
     <ClInclude Include="Hostage_Hostage.h">
       <Filter>Source Files\Entities\Hostage</Filter>
     </ClInclude>
-    <ClInclude Include="InitialScene.h">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMission.h">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy_Fighter.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemy_Soldier.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="LogoScene.h">
+    <ClInclude Include="ModuleScene2.h">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Purple.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BossScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Green.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Boss.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="InitialScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClInclude>
+    <ClInclude Include="LogoScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClInclude>
+    <ClInclude Include="Mission2Scene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionBossScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompleteScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
     </ClInclude>
     <ClInclude Include="MissionNumScene.h">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleScene2.h" />
+    <ClInclude Include="SceneIntro.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMission.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRanking.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Spiderman.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_SittingGunner.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -202,9 +237,6 @@
     <ClCompile Include="ModuleScene.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneIntro.cpp">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleAuxScene.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
@@ -217,26 +249,59 @@
     <ClCompile Include="Hostage_Hostage.cpp">
       <Filter>Source Files\Entities\Hostage</Filter>
     </ClCompile>
-    <ClCompile Include="InitialScene.cpp">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMission.cpp">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy_Fighter.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Enemy_Soldier.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="LogoScene.cpp">
+    <ClCompile Include="ModuleScene2.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Purple.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="BossScene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Green.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Boss.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="InitialScene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClCompile>
+    <ClCompile Include="LogoScene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClCompile>
+    <ClCompile Include="Mission2Scene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClCompile>
+    <ClCompile Include="MissionBossScene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClCompile>
+    <ClCompile Include="MissionCompleteScene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
     </ClCompile>
     <ClCompile Include="MissionNumScene.cpp">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleScene2.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SceneIntro.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMission.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRanking.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes\Scene info</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Spiderman.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_SittingGunner.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "Hostage_Hostage.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
 
 #define SPAWN_MARGIN 10000
 
@@ -41,10 +42,6 @@ Update_Status ModuleHostage::Update()
 	{
 		if (hostages[i] != nullptr)
 			hostages[i]->Update();
-	}
-	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN)
-	{
-		collision = !collision;
 	}
 
 	HandleHostageDespawn();
@@ -80,7 +77,7 @@ bool ModuleHostage::CleanUp()
 	return true;
 }
 
-bool ModuleHostage::AddHostage(HOSTAGE_TYPE type, int x, int y)
+bool ModuleHostage::AddHostage(HOSTAGE_TYPE type, int x, int y, int id)
 {
 	bool ret = false;
 
@@ -91,6 +88,7 @@ bool ModuleHostage::AddHostage(HOSTAGE_TYPE type, int x, int y)
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
 			spawnQueue[i].y = y;
+			spawnQueue[i].id = id;
 			ret = true;
 			break;
 		}
@@ -147,7 +145,7 @@ void ModuleHostage::SpawnHostage(const HostageSpawnpoint& info)
 			switch (info.type)
 			{
 			case HOSTAGE_TYPE::HOSTAGE:
-				hostages[i] = new Hostage_Hostage(info.x, info.y);
+				hostages[i] = new Hostage_Hostage(info.x, info.y, info.id);
 				break;
 			}
 			hostages[i]->texture = texture;
@@ -165,13 +163,14 @@ void ModuleHostage::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (c2->type == Collider::Type::PLAYER)
 			{
-				if (collision)
+
+				if (hostages[i]->position.y <= 100 && App->player->L2 || hostages[i]->position.y >= 100 && !App->player->L2)
 				{
 					hostages[i]->OnCollision(c2); //Notify the hostage of a collision
 					c1->pendingToDelete = true;
 					break;
 				}
-				
+
 			}
 		}
 	}

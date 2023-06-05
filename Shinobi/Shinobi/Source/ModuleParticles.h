@@ -6,7 +6,7 @@
 #include "Particle.h"
 #include "Collider.h"
 
-#define MAX_ACTIVE_PARTICLES 100
+#define MAX_ACTIVE_PARTICLES 150
 
 struct SDL_Texture;
 struct Collider;
@@ -46,12 +46,12 @@ public:
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
 	void AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
 
+	// An array to store and handle all the particles
+	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
+
 private:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture = nullptr;
-
-	// An array to store and handle all the particles
-	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
 
 	// An index to the last added particle
 	uint lastParticle = 0;
@@ -64,6 +64,27 @@ public:
 	Particle hit;
 	Particle bonus500;
 	Particle pow;
+	Particle hitPow;
+	Particle powgun;
+	Particle ultimate, ultimate2;
+	Particle ultimateEffect, ultimateEffect2;
+	Particle ultiCenterUp, 
+			ultiUpRight, 
+			ultiUpRight2, 
+			ultiRight, 
+			ultiDownRight, 
+			ultiCenterDown, 
+			ultiDownLeft, 
+			ultiLeft, 
+			ultiUpLeft, 
+			ultiUpLeft2,
+			ultiDownLeft2,
+			ultiDownRight2;
+	Particle ultiWind;
+	Particle fireBoss[8];
+	Particle espada;
+
+
 };
 
 #endif // !__MODULEPARTICLES_H__

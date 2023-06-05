@@ -5,6 +5,7 @@
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include "ModuleScene.h"
 #include <iostream>
 
 Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
@@ -33,56 +34,72 @@ Enemy_Fighter::Enemy_Fighter(int x, int y) : Enemy(x, y)
 	hitAnim.speed = 0.14f;
 	hitAnim.loop = false;
 
+	jumpAnim.PushBack({ 326,29,68,66 });
+	jumpAnim.PushBack({ 259,29,68,66 });
+	jumpAnim.speed = 0.1f;
+	jumpAnim.loop = false;
+
+	dieAnim.PushBack({ 29,217,68,66 });
+	dieAnim.PushBack({ 96,217,68,66 });
 	dieAnim.PushBack({ 164,217,68,66 });
 	dieAnim.PushBack({ 164,217,68,66 });
 	dieAnim.PushBack({ 0,0,0,0 });
-	dieAnim.speed = 0.08f;
+
+	dieAnim.speed = 0.1f;
 	dieAnim.loop = false;
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x + 25, position.y+4, 35, 62}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 25, position.y+3, 35, 64}, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
-	
+
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
-
 }
-
 void Enemy_Fighter::Update()
 {
 	flipPos.x = position.x + 20;
-	//std::cout << position.x << std::endl;
+	//std::cout << position.y << std::endl;
 	if (!die)
 	{
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y>=110 && App->player->alive)
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->alive && !isCollidingRight
+			&& ((position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) || !App->scene->IsEnabled()) && App->player->alive
+			&& (App->player->currentAnimation != &App->player->jumpDownFloorAnim || App->player->currentAnimation != &App->player->jumpUpFloorAnim))
 		{
+			spawnPos.x = position.x - 100;
+			isCollidingLeft = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
 				flip = true;
 				shot++;
 				if (position.x - App->player->position.x >= pdistance - 175)
 				{
-					currentAnim = &walkAnim;
-					position.x--;
+					if (jump && currentAnim != &jumpAnim)
+					{
+						currentAnim = &jumpAnim;
+						currentAnim->Reset();
+					}
+					else if (jump) currentAnim = &jumpAnim;
+					else if ((!jump && !ground)) currentAnim = &idleAnim;
+					else currentAnim = &walkAnim;
+					if(ground) position.x--;
 				}
 				else if (shot >= 100)
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
 					//App->particles->AddParticle(App->particles->patada, position.x, position.y + 30, Collider::Type::ENEMY_SHOT);
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x, position.y + 30);
+					attack = App->collisions->AddCollider({ position.x, position.y+30, 10, 10 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+					//attack->SetPos(position.x, position.y + 30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
 				}
 				else {
 					currentAnim = &idleAnim;
-					attack->rect.w = 0;
-					attack->rect.h = 0;
-					attack->SetPos(0, 0);
+					/*attack->rect.w = 0;
+					attack->rect.h = 0;*/
+					attack->pendingToDelete = true;
 				}
 				pl = true;
 
@@ -94,31 +111,40 @@ void Enemy_Fighter::Update()
 				else changedirection = false;
 
 			}
-
 		}
-		//walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110 && App->player->alive)
-		{
+
+		////walk left
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
+			&& ((position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) || !App->scene->IsEnabled()) && App->player->alive
+			&& (App->player->currentAnimation != &App->player->jumpDownFloorAnim || App->player->currentAnimation != &App->player->jumpUpFloorAnim))
+			{
+			spawnPos.x = position.x + 50;
+			isCollidingRight = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
 
 				shot++;
-
 				flip = false;
 
 				if (position.x - App->player->position.x <= -(pdistance - 140))
 				{
-					currentAnim = &walkAnim;
-					position.x++;
+					if (jump && currentAnim != &jumpAnim)
+					{
+						currentAnim = &jumpAnim;
+						currentAnim->Reset();
+					}
+					else if (jump) currentAnim = &jumpAnim;
+					else if ((!jump && !ground)) currentAnim = &idleAnim;
+					else currentAnim = &walkAnim;
+					if(ground) position.x++;
 				}
 				else if (shot >= 100)
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
 					//App->particles->AddParticle(App->particles->patada, position.x+80, position.y + 30, Collider::Type::ENEMY_SHOT);
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x+80, position.y+30);
+					attack = App->collisions->AddCollider({ position.x+80, position.y+30, 10, 10 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+					//attack->SetPos(position.x+80, position.y+30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
@@ -126,7 +152,7 @@ void Enemy_Fighter::Update()
 				else {
 					attack->rect.w = 0;
 					attack->rect.h = 0;
-					attack->SetPos(0, 0);
+					attack->pendingToDelete=true;
 					currentAnim = &idleAnim;
 					
 				}
@@ -139,25 +165,42 @@ void Enemy_Fighter::Update()
 					flip = false;
 				}
 			}
-
 		}
+
 		//walk path
-		else if (!pl && !reloading && !shooting)
+		else if (!pl && !reloading && !shooting )
 		{
-			currentAnim = &walkAnim;
-			if (position.x >= spawnPos.x + 100)
+		if (jump && currentAnim != &jumpAnim)
+		{
+			currentAnim = &jumpAnim;
+			currentAnim->Reset();
+		}
+		else if (jump) currentAnim = &jumpAnim;
+		else if ((!jump && !ground)) currentAnim = &idleAnim;
+		else currentAnim = &walkAnim;
+			if (position.x >= spawnPos.x + 100 || isCollidingLeft)
 			{
+				isCollidingLeft = false;
 				changedirection = true;
 				flip = true;
 			}
-			else if (position.x <= spawnPos.x - 50)
+			else if (position.x <= spawnPos.x - 50 || isCollidingRight)
 			{
+				isCollidingRight = false;
 				changedirection = false;
 				flip = false;
 			}
 
-			if (changedirection) position.x--;
-			else position.x++;
+			if (changedirection)
+			{
+				flip = true;
+				if(ground) position.x--;
+			}
+			else
+			{
+				flip = false;
+				if(ground) position.x++;
+			}
 
 			shooting = false;
 			reloading = false;
@@ -171,14 +214,6 @@ void Enemy_Fighter::Update()
 			{
 				shooting = false;
 				time = 0;
-
-				////reload
-				//if (bullets <= 0)
-				//{
-				//	currentAnim = &reloadAnim;
-				//	reloading = true;
-				//	bullets = 3;
-				//}
 			}
 		}
 
@@ -192,19 +227,24 @@ void Enemy_Fighter::Update()
 				time = 0;
 			}
 		}
-		collider->SetPos(position.x + 25, position.y+4);
+		collider->SetPos(position.x + 25, position.y+3);
+		
 		//attack->SetPos(position.x + 25, position.y + 4);
 	}
 	else if (die) {
 		currentAnim = &dieAnim;
-		collider->SetPos(position.x-10, position.y + 30);
+		/*collider->SetPos(position.x-10, position.y + 30);
 		collider->rect.w = 37;
-		collider->rect.h = 20;
+		collider->rect.h = 20;*/
 		attack->rect.w = 0;
 		attack->rect.h = 0;
 		attack->SetPos(0, 0);
+		attack->pendingToDelete = true;
 	}
+	jump = false;
 
+	/*if (isCollidingLeft) std::cout << "colision izquierda" << std::endl;
+	if (isCollidingRight) std::cout << "colision derecha" << std::endl;*/
 	//feet->SetPos(position.x, position.y + 69);
 
 	// Call to the base class. It must be called at the end

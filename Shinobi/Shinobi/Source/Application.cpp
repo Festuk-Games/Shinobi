@@ -21,6 +21,11 @@
 #include "LogoScene.h"
 #include "MissionNumScene.h"
 #include "ModuleScene2.h"
+#include "SceneRanking.h"
+#include "BossScene.h"
+#include "Mission2Scene.h"
+#include "MissionBossScene.h"
+#include "MissionCompleteScene.h"
 
 Application::Application()
 {
@@ -38,18 +43,23 @@ Application::Application()
 	modules[7] = mission = new SceneMission(false);
 
 	modules[8] = scene = new ModuleScene(false);
-	modules[9] = scene2 = new ModuleScene2(false);
-	modules[10] = player = new ModulePlayer(false);
-	modules[11] = hostage = new ModuleHostage(false);
-	modules[12] = enemies = new ModuleEnemies(false);
+	modules[9] = mission2 = new Mission2Scene(false);
+	modules[10] = scene2 = new ModuleScene2(false);
+	modules[11] = missionBoss = new MissionBossScene(false);
+	modules[12] = sceneboss = new BossScene(false);
+	modules[13] = missionComplete = new MissionCompleteScene(false);
+	modules[14] = ranking = new SceneRanking(false);
+	modules[15] = hostage = new ModuleHostage(false);
+	modules[16] = enemies = new ModuleEnemies(false);
+	modules[17] = player = new ModulePlayer(false);
+	modules[18] = particles = new ModuleParticles(false);
 
-	modules[13] = auxscene = new ModuleAuxScene(false);
-	modules[14] = ui = new ModuleUI(false);
-	modules[15] = particles = new ModuleParticles(false);
-	modules[16] = collisions = new ModuleCollisions(false);
-	modules[17] = fade = new ModuleFadeToBlack(true);
-	modules[18] = render = new ModuleRender(true);
-	modules[19] = audio = new ModuleAudio(true);
+	modules[19] = auxscene = new ModuleAuxScene(false);
+	modules[20] = ui = new ModuleUI(false);
+	modules[21] = collisions = new ModuleCollisions(false);
+	modules[22] = fade = new ModuleFadeToBlack(true);
+	modules[23] = render = new ModuleRender(true);
+	modules[24] = audio = new ModuleAudio(true);
 
 }
 

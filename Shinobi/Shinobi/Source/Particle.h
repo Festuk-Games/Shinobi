@@ -36,6 +36,9 @@ public:
 	// Particles will be set to not alive until "spawnTime" is reached
 	bool isAlive = false;
 
+	bool flipv = false;
+	bool fliph = false;
+
 	// Defines the time when the particle will be spawned
 	int frameCount = 0;
 

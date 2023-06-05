@@ -73,6 +73,9 @@ bool MissionNumScene::Start()
 	writefx = 0;
 	aux = 10;
 
+	App->audio->isPlaying = false;
+	Mix_HaltMusic();
+
 	currentAnim = &missionAnim;
 	currentAnim->Reset();
 	return ret;
@@ -82,7 +85,15 @@ Update_Status MissionNumScene::Update()
 {
 	currentAnim->Update();
 
-	/*changescene++;*/
+	changescene++;
+	if (changescene==25)
+	{
+		App->audio->PlayFx(App->audio->mission);
+	}
+	if (changescene==50)
+	{
+		App->audio->PlayFx(App->audio->mission1);
+	}
 	if (changescene >= 180)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->mission, true, false, 50);

@@ -39,7 +39,7 @@ Enemy_Soldier::Enemy_Soldier(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x, position.y, 30, 63}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x-3, position.y, 30, 65}, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 
@@ -52,7 +52,7 @@ void Enemy_Soldier::Update()
 	if (!die)
 	{
 		//walk right
-		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110)
+		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110 && !isCollidingRight)
 		{
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
@@ -63,23 +63,24 @@ void Enemy_Soldier::Update()
 				{
 					currentAnim = &walkAnim;
 					position.x--;
+					position.x--;
 				}
 				else if (shot >= 100)
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x, position.y + 30);
+					//App->particles->AddParticle(App->particles->patada, position.x, position.y + 30, Collider::Type::ENEMY_SHOT);
+					attack = App->collisions->AddCollider({ position.x-5, position.y + 30, 10, 10 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+					//attack->SetPos(position.x, position.y + 30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
 				}
 				else {
 					currentAnim = &idleAnim;
-					attack->rect.w = 0;
-					attack->rect.h = 0;
-					attack->SetPos(0, 0);
+					/*attack->rect.w = 0;
+					attack->rect.h = 0;*/
+					attack->pendingToDelete = true;
 				}
 				pl = true;
 
@@ -94,7 +95,7 @@ void Enemy_Soldier::Update()
 
 		}
 		//walk left
-		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110)
+		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110 && !isCollidingLeft)
 		{
 			if (position.x != App->player->position.x && !shooting && !reloading)
 			{
@@ -107,23 +108,24 @@ void Enemy_Soldier::Update()
 				{
 					currentAnim = &walkAnim;
 					position.x++;
+					position.x++;
 				}
 				else if (shot >= 100)
 				{
 					currentAnim = &hitAnim;
 					currentAnim->Reset();
-					attack->rect.w = 10;
-					attack->rect.h = 10;
-					attack->SetPos(position.x + 25, position.y + 30);
+					//App->particles->AddParticle(App->particles->patada, position.x+80, position.y + 30, Collider::Type::ENEMY_SHOT);
+					attack = App->collisions->AddCollider({ position.x + 25, position.y + 30, 10, 10 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+					//attack->SetPos(position.x+80, position.y+30);
 					App->audio->PlayFx(App->audio->shuriken);
 					shot = 0;
 					shooting = true;
 				}
 				else {
-					currentAnim = &idleAnim;
 					attack->rect.w = 0;
 					attack->rect.h = 0;
-					attack->SetPos(0, 0);
+					attack->pendingToDelete = true;
+					currentAnim = &idleAnim;
 				}
 				pl = true;
 
@@ -181,7 +183,16 @@ void Enemy_Soldier::Update()
 		}
 		collider->SetPos(position.x, position.y);
 	}
-	else if (die) currentAnim = &dieAnim;
+	else if (die) {
+	currentAnim = &dieAnim;
+	/*collider->SetPos(position.x-10, position.y + 30);
+	collider->rect.w = 37;
+	collider->rect.h = 20;*/
+	attack->rect.w = 0;
+	attack->rect.h = 0;
+	attack->SetPos(0, 0);
+	attack->pendingToDelete = true;
+	}
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

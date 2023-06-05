@@ -64,7 +64,7 @@ public:
 	Animation jumpUpFloorAnim, jumpDownFloorAnim;
 	Animation shootAnim;
 	Animation gunAnim;
-	Animation dieAnim1, dieAnim2, dieAnim3;
+	Animation dieAnim1, dieAnim2, dieAnim;
 	Animation backAnim;
 	Animation crouchAttackAnim , crouchKickAnim, crouchKatanaAnim;
 	Animation katanaAnim;
@@ -73,8 +73,12 @@ public:
 	Animation walkGunAnim;
 	Animation idlePowAnim;
 	Animation powAttackAnim;
+	Animation attackJumpPowAnim1, attackJumpPowAnim2;
+	Animation jumpUpPowAnim, jumpDownPowAnim;
 	Animation crouchPowAttackAnim;
 	Animation crouchGunIdleAnim;
+	Animation ultiAnim;
+	Animation punchAnim;
 
 	iPoint diePosition;
 	iPoint jumpPosition;
@@ -100,6 +104,11 @@ public:
 	bool L2 = false;
 	bool ground = false;
 
+	bool ulti = false;
+	int ultiTimer = 0;
+
+	int maxpos = 0;
+
 	bool right = true;
 	//bool left = false;
 
@@ -112,6 +121,8 @@ public:
 	int jumpAttackDelay = 0;
 
 	bool canjump = true;
+
+	int delay = 0;
 };
 
 #endif //!__MODULE_PLAYER_H__

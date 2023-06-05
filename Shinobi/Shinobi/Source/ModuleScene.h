@@ -59,6 +59,12 @@ public:
 
 	bool clear = false;
 	int clearcount = 0;
+
+	bool hostages[4] = { false };
+
+	bool ground2 = false;
+	Collider* groundCol = nullptr;
+	Collider* groundCol2 = nullptr;
 };
 
 #endif

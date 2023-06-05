@@ -6,6 +6,10 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleScene.h"
+#include "ModuleScene2.h"
+#include "BossScene.h"
+#include "ModuleUI.h"
 #include "Animation.h"
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
@@ -76,6 +80,31 @@ bool SceneIntro::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	App->render->win = false;
+	App->scene->nextStage = false;
+	App->scene2->nextStage = false;
+	App->sceneboss->nextStage = false;
+	App->scene->clear = false;
+	App->scene2->clear = false;
+	App->sceneboss->clear = false;
+
+	App->audio->isPlaying = false;
+	Mix_HaltMusic();
+
+	App->scene->hostages[0] = { false };
+	App->scene->hostages[1] = { false };
+	App->scene->hostages[2] = { false };
+	App->scene->hostages[3] = { false };
+
+	App->scene2->hostages[0] = { false };
+	App->scene2->hostages[1] = { false };
+	App->scene2->hostages[2] = { false };
+
+	App->ui->restart1 = true;
+	App->ui->restart2 = true;
+
+	App->ui->lifenum = 2;
+
 	currentAnimation = &lightAnim;
 	currentAnimation->Reset();
 
@@ -85,7 +114,7 @@ bool SceneIntro::Start()
 
 	for (int i = 0; i <= 5; i++)
 	{
-		logos[i].centerX = 141;
+		logos[i].centerX = 121;
 		logos[i].centerY = 14;
 		logos[i].time = 0.0f;
 		logos[i].radius = 150.0f;
@@ -100,7 +129,8 @@ bool SceneIntro::Start()
 
 Update_Status SceneIntro::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	GamePad& pad = App->input->pads[0];
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN|| pad.a_down)
 	{
 		App->audio->PlayFx(App->audio->coin);
 		App->fade->FadeToBlack(this, (Module*)App->missionNum, true, false, 50);
@@ -114,8 +144,9 @@ Update_Status SceneIntro::Update()
 		{
 			logos[i].time += 4;
 			logos[i].radius -= logos[i].angularVelocity * 4;
-			logos[i].logopos.x = logos[i].centerX + logos[i].radius * sin(logos[i].angularStep * logos[i].time);
-			logos[i].logopos.y = logos[i].centerY + logos[i].radius * cos(logos[i].angularStep * logos[i].time);
+			logos[i].logopos.x = static_cast<int>(logos[i].centerX + logos[i].radius * sin(logos[i].angularStep * logos[i].time));
+
+			logos[i].logopos.y = static_cast<int>(logos[i].centerY + logos[i].radius * cos(logos[i].angularStep * logos[i].time));
 
 		}
 	}
@@ -143,17 +174,17 @@ Update_Status SceneIntro::PostUpdate()
 		if (delay >= i*3) App->render->Blit(logos[i].logo, logos[i].logopos.x, logos[i].logopos.y, SDL_FLIP_NONE, NULL);
 	}
 	
-	App->render->Blit(sega, 150, 180, SDL_FLIP_NONE, NULL);
+	App->render->Blit(sega, 128, 180, SDL_FLIP_NONE, NULL);
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	App->render->Blit(light, 145, 114, SDL_FLIP_NONE, &rect);
+	App->render->Blit(light, 126, 114, SDL_FLIP_NONE, &rect);
 
-	App->render->Blit(text, 242, 208, SDL_FLIP_NONE, &segarect);
-	App->render->Blit(text, 290, 207, SDL_FLIP_NONE, &nums);
-	if (counter <= 30) App->render->Blit(text, 144, 144, SDL_FLIP_NONE, &coin);
+	App->render->Blit(text, 232, 208, SDL_FLIP_NONE, &segarect);
+	App->render->Blit(text, 280, 207, SDL_FLIP_NONE, &nums);
+	if (counter <= 30) App->render->Blit(text, 122, 144, SDL_FLIP_NONE, &coin);
 
-	if (scount <= 4) App->render->Blit(text2, 140, 64, SDL_FLIP_NONE, &shinobi);
-	else App->render->Blit(text2, 140, 64, SDL_FLIP_NONE, &shinobi2);
+	if (scount <= 4) App->render->Blit(text2, 120, 64, SDL_FLIP_NONE, &shinobi);
+	else App->render->Blit(text2, 120, 64, SDL_FLIP_NONE, &shinobi2);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

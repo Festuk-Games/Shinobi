@@ -3,18 +3,22 @@ using namespace std;
 #include "ModuleRender.h"
 
 #include "Application.h"
-
+#include "ModuleCollisions.h"
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModulePlayer.h"
-
+#include "ModuleEnemies.h"
+#include "ModuleFadeToBlack.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_scancode.h"
 
 #include "SceneIntro.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
+#include "BossScene.h"
 #include "ModuleUI.h"
+#include "ModuleCollisions.h"
 
 ModuleRender::ModuleRender(bool startEnabled) : Module(startEnabled)
 {
@@ -47,6 +51,10 @@ bool ModuleRender::Init()
 
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH*3, SCREEN_HEIGHT*3);
 
+	menu = App->textures->Load("Assets/menu_intro_shinobi.png");
+	menuPlayer = App->textures->Load("Assets/menu_game_shinobi.png");
+	menuEnemies = App->textures->Load("Assets/menu_enemy_shinobi.png");
+
 	return ret;
 }
 
@@ -65,6 +73,7 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
+	GamePad& pad = App->input->pads[0];
 	////Handle positive vertical movement
 	//if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 	//	camera.y += cameraSpeed;
@@ -73,57 +82,182 @@ Update_Status ModuleRender::Update()
 	//if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 	//	camera.y -= cameraSpeed;
 
-	if (App->input->keys[SDL_SCANCODE_F2]== KEY_DOWN)
-		posiciones = !posiciones;
-	
-
-	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN)
+	//menu intro
+	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN && App->intro->IsEnabled() && openMenu)
 	{
-		App->scene->clear = true;
+		openMenu = false;
+	}
+	else if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN && App->intro->IsEnabled() && !openMenu)
+	{
+		openMenu = true;
+	}
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN && App->intro->IsEnabled()&& openMenu) {
+
+		App->fade->FadeToBlack((Module*)App->intro, (Module*)App->mission, true, false, 50);
+
+		//posiciones = !posiciones;
+	}
+	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN && App->intro->IsEnabled() && openMenu)
+	{
+		App->fade->FadeToBlack((Module*)App->intro, (Module*)App->mission2, true, false, 50);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_F5] == KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN && App->intro->IsEnabled() && openMenu)
 	{
-		App->ui->lose = true;
+		App->fade->FadeToBlack((Module*)App->intro, (Module*)App->missionBoss, true, false, 50);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_F6] == KEY_DOWN)
+	//menu player
+
+	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu2)
+	{
+		openMenu2 = false;
+	}
+	else if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled()|| App->sceneboss->IsEnabled()) && !openMenu2)
+	{
+		openMenu2 = true;
+	}
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu2)
+	{
+		showColliders = !showColliders;
+	}
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu2)
 	{
 		App->player->isPowerUp = !App->player->isPowerUp;
 	}
 
+	if (App->input->keys[SDL_SCANCODE_F5] == KEY_DOWN && App->scene->IsEnabled() && openMenu2)
+	{
+		App->scene->nextStage = true;
+		win = true;
+	}
+	else if (App->input->keys[SDL_SCANCODE_F5] == KEY_DOWN && App->scene2->IsEnabled() && openMenu2)
+	{
+		App->scene2->nextStage = true;
+		win = true;
+	}
+	else if (App->input->keys[SDL_SCANCODE_F5] == KEY_DOWN && App->sceneboss->IsEnabled() && openMenu2)
+	{
+		App->sceneboss->nextStage = true;
+		win = true;
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F6] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu2)
+	{
+		App->ui->lose = true;
+	}
+	if (App->input->keys[SDL_SCANCODE_F7] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu2)
+	{
+		openMenu2 = false;
+		openMenu3 = true;
+	}
+
+	// Menu enemigos
+
+	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu3)
+	{
+		openMenu3 = false;
+		openMenu2 = true;
+		control = false;
+	}
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu3)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, App->player->position.x + 200, 120);
+	}
+	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu3)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, App->player->position.x + 200, 120);
+	}
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu3)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, App->player->position.x + 200, 120);
+	}
+	if (App->input->keys[SDL_SCANCODE_F5] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu3)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, App->player->position.x + 200, 120);
+	}
+	if (App->input->keys[SDL_SCANCODE_F6] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu3)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, App->player->position.x + 200, 120);
+	}
+	if (App->input->keys[SDL_SCANCODE_F7] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu3 && control)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::GREEN, App->player->position.x + 200, 120);
+	}
+	if (App->input->keys[SDL_SCANCODE_F8] == KEY_DOWN && (App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && openMenu3)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::SPIDERMAN, App->player->position.x + 200, 120);
+	}
+
+	
+
 	//Handle horizontal movement of the camera
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE)
+	if ((App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled())
+		&& App->player->alive && (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT||pad.l_x>0.2f) && App->input->keys[SDL_SCANCODE_A] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{	
-		if (camera.x >= -4980)
+		if (((App->scene->IsEnabled() || App->scene2->IsEnabled())  && camera.x >= -5182)
+			|| (App->sceneboss->IsEnabled() && camera.x >= -570))
 		{
-			if (App->player->position.x >= 180 && !App->player->isCollidingRight)
+			if (App->player->position.x >= 100 && !App->player->isCollidingRight)
 			{
 				camera.x -= cameraSpeed;
+				colPos += 3;
 			}
 		}
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE)
+	else if ((App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled())
+		&& App->player->alive && (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT || pad.l_x <-0.2f) && App->input->keys[SDL_SCANCODE_D] == KEY_IDLE && !App->player->isJumpingUp2 && !App->player->isJumpingDown2)
 	{
 		if (camera.x <= -1)
 		{
 			if (App->player->position.x <= 1840 && !App->player->isCollidingLeft)
 			{
 				camera.x += cameraSpeed;
+				colPos -= 3;
 			}
 		}
 	}
+
+	if (App->scene->IsEnabled() || App->sceneboss->IsEnabled())
+	{
+		cameracol->SetPos(colPos, 0);
+		cameracol2->SetPos(319 + colPos, 0);
+		cameracol3->SetPos(colPos, 223);
+		cameracol4->SetPos(colPos, 0);
+	}
+
+	
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModuleRender::PostUpdate()
 {
+	if (showColliders)
+	{
+		App->collisions->DebugDraw();
+	}
 	if (posiciones)
 	{
 		printPos();
+	}
+
+	if ((App->scene->IsEnabled() || App->scene2->IsEnabled()|| App->sceneboss->IsEnabled()) && openMenu2)
+	{
+		Blit(menuPlayer, 5, 5, SDL_FLIP_NONE, NULL,0.0f);
+		openMenu2 = true;
+	}
+	if ((App->scene->IsEnabled() || App->scene2->IsEnabled() || App->sceneboss->IsEnabled()) && !openMenu2 && openMenu3)
+	{
+		Blit(menuEnemies, 5, 5, SDL_FLIP_NONE, NULL, 0.0f);
+		openMenu3 = true;
+		control = true;
+	}
+	if (App->intro->IsEnabled() && openMenu) {
+		Blit(menu, 5, 5, SDL_FLIP_NONE, NULL);
+		openMenu = true;
 	}
 	//Update the screen
 	SDL_RenderPresent(renderer);
@@ -132,8 +266,8 @@ Update_Status ModuleRender::PostUpdate()
 }
 
 void ModuleRender::printPos() {
-	cout << "Player.x: " << App->player->position.x << endl;
-	//cout << "Player.y: " << App->player->position.y << endl;
+	//cout << "Player.x: " << App->player->position.x << endl;
+	cout << "Player.y: " << App->player->position.y << endl;
 	//cout << "Camera.x: " << camera.x << endl;
 
 }

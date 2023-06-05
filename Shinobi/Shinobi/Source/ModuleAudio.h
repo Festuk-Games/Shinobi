@@ -37,6 +37,22 @@ public:
 	unsigned int write;
 	unsigned int coin;
 	unsigned int jump;
+	unsigned int hostage;
+	unsigned int platform;
+	unsigned int attack;
+	unsigned int punch;
+	unsigned int swoosh_logo;
+	unsigned int mission;
+	unsigned int mission1;
+	unsigned int ultimate;
+	unsigned int dieplayer;
+	unsigned int deathenemy;
+	unsigned int shoot;
+	unsigned int finished;
+	unsigned int boss_hit;
+	unsigned int die_boss;
+	unsigned int boss_attack;
+	
 
 private:
 

@@ -35,6 +35,7 @@ private:
 	Animation walkAnim;
 	Animation hitAnim;
 	Animation dieAnim;
+	Animation jumpAnim;
 
 	bool changedirection = true;
 

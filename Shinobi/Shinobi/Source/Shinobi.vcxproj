@@ -76,15 +76,24 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="BossScene.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemy_Boss.h" />
     <ClInclude Include="Enemy_Fighter.h" />
+    <ClInclude Include="Enemy_Green.h" />
     <ClInclude Include="Enemy_Gunner.h" />
+    <ClInclude Include="Enemy_Purple.h" />
+    <ClInclude Include="Enemy_SittingGunner.h" />
     <ClInclude Include="Enemy_Soldier.h" />
+    <ClInclude Include="Enemy_Spiderman.h" />
     <ClInclude Include="Hostage.h" />
     <ClInclude Include="Hostage_Hostage.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="LogoScene.h" />
+    <ClInclude Include="Mission2Scene.h" />
+    <ClInclude Include="MissionBossScene.h" />
+    <ClInclude Include="MissionCompleteScene.h" />
     <ClInclude Include="MissionNumScene.h" />
     <ClInclude Include="ModuleScene2.h" />
     <ClInclude Include="SceneMission.h" />
@@ -109,19 +118,29 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="SceneIntro.h" />
+    <ClInclude Include="SceneRanking.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Enemy_Boss.cpp" />
     <ClCompile Include="Enemy_Fighter.cpp" />
+    <ClCompile Include="Enemy_Green.cpp" />
     <ClCompile Include="Enemy_Gunner.cpp" />
+    <ClCompile Include="Enemy_Purple.cpp" />
+    <ClCompile Include="Enemy_SittingGunner.cpp" />
     <ClCompile Include="Enemy_Soldier.cpp" />
+    <ClCompile Include="Enemy_Spiderman.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Hostage.cpp" />
     <ClCompile Include="Hostage_Hostage.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="LogoScene.cpp" />
+    <ClCompile Include="Mission2Scene.cpp" />
+    <ClCompile Include="MissionBossScene.cpp" />
+    <ClCompile Include="MissionCompleteScene.cpp" />
     <ClCompile Include="MissionNumScene.cpp" />
     <ClCompile Include="ModuleScene2.cpp" />
     <ClCompile Include="SceneMission.cpp" />
@@ -144,6 +163,7 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="SceneIntro.cpp" />
+    <ClCompile Include="SceneRanking.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

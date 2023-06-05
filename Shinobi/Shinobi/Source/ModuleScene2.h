@@ -55,6 +55,8 @@ public:
 	bool stage1 = true, stage1L2 = false, stage2 = false, stage3 = false;
 	bool nextStage = false;
 
+	bool hostages[3] = { false };
+
 	int losecounter = 0;
 
 	bool clear = false;

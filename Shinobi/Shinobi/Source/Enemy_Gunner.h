@@ -33,6 +33,7 @@ private:
 	// The enemy animation
 	Animation idleAnim;
 	Animation walkAnim;
+	Animation jumpAnim;
 	Animation preshootAnim, shootAnim, reloadAnim;
 	Animation dieAnim;
 

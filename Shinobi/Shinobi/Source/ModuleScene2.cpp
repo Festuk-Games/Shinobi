@@ -29,8 +29,6 @@ ModuleScene2::ModuleScene2(bool startEnabled) : Module(startEnabled)
 	sky.y = 0;
 	sky.w = 1312;
 	sky.h = 512;
-
-
 }
 
 ModuleScene2::~ModuleScene2()
@@ -45,67 +43,89 @@ bool ModuleScene2::Start()
 
 	bool ret = true;
 
+	App->ui->sk1 = true;
 	App->ui->lose = false;
+	App->render->win = false;
 	nextStage = false;
 	clear = false;
+	clearcount = 0;
 
 	//enable modules
-	App->player->Enable();
-	App->hostage->Enable();
-	App->auxscene->Enable();
-	App->enemies->Enable();
-	App->ui->Enable();
 	App->collisions->Enable();
 	App->particles->Enable();
 
+	App->render->camera.x = 0;
 
 	stageTexture2 = App->textures->Load("Assets/Scenes/layer_a1.png");
 	skyTexture2 = App->textures->Load("Assets/Scenes/layer_b1.png");
 
-	//App->collisions->AddCollider({ 419, 175, 28, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 704, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 864, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1408, 143, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1408, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1440, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1472, 175, 32, 1 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 544, 63, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 288, 176, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 576, 176, 64, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 896, 176, 64, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 960, 144, 352, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1024, 112, 224, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1120, 80, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1312, 176, 96, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1568, 176, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1600, 144, 96, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1600, 112, 32, 1 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1696, 176, 32, 1 }, Collider::Type::GROUND);
 
-	//App->collisions->AddCollider({ 416, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 704, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 864, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 1408, 144, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 1408, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 1440, 176, 32, 32 }, Collider::Type::BOX);
-	//App->collisions->AddCollider({ 1472, 176, 32, 32 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 288, 178, 32, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 576, 178, 64, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 896, 178, 64, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 960, 146, 352, 62 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1024, 114, 224, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1120, 82, 32, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1312, 178, 96, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1568, 178, 32, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1600, 146, 96, 62 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1600, 114, 32, 30 }, Collider::Type::BOX);
+	App->collisions->AddCollider({ 1696, 178, 32, 30 }, Collider::Type::BOX);
 
-	////App->collisions->AddCollider({ 544, 64, 32, 32 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
 
-	App->collisions->AddCollider({ 0, 207, 2048, 2 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 96, 95, 992, 7 }, Collider::Type::GROUND);
-	//App->collisions->AddCollider({ 1296, 95, 656, 7 }, Collider::Type::GROUND);
+	App->enemies->Enable();
+	App->hostage->Enable();
 
-	//App->collisions->AddCollider({ 80, -90, 16, 186 }, Collider::Type::WALL);
-	//App->collisions->AddCollider({ 1088, -90, 16, 186 }, Collider::Type::WALL);
-	//App->collisions->AddCollider({ 1280, -90, 16, 186 }, Collider::Type::WALL);
-	//App->collisions->AddCollider({ 1952, -90, 16, 186 }, Collider::Type::WALL);
-	//
+	//rehenes
+	if (hostages[0] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 295, 208 - 29- 32, 0);
+	if (hostages[1] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 870, 208 - 29, 1);
+	if (hostages[2] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1640, 208 - 29-64, 2);
+	//enemigos luchadores grises
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 831, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREEN, 250, 130);
 
-	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1000, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1600, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 350, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 500, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1800, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 1200, 130);
 
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 800, 208 - 29);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1200, 208 - 29);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
-	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 325, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 375, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 425, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 525, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 841, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1064, 130-64-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1122, 130 - 64 - 64);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1154, 130 - 64 - 64);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1468, 130);
 
+	//Spiderman
+	App->enemies->AddEnemy(ENEMY_TYPE::SPIDERMAN, 800, 80);
+
+	//enemigos gunner
+	App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 471, 139);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 590, 139-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 900, 139 - 32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1233, 139 - 32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1624, 139 - 32-64);
+	//App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 350,130);
+
+	//Enemigos Tochos (purple...)
+	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 139);
+
+	App->player->Enable();
+	App->auxscene->Enable();
+	App->ui->Enable();
 	return ret;
+	
 }
 
 Update_Status ModuleScene2::Update()
@@ -114,20 +134,21 @@ Update_Status ModuleScene2::Update()
 	//next stage condition
 	if (nextStage)
 	{
-		if (App->player->position.x >= 2000)
+		if (App->player->position.x >= 2000 || App->render->win)
 		{
 			clear = true;
+			if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
 			clearcount++;
-			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->intro, false, false, 60);
-			//stage1 = false;
-			//stage2 = true;
-			//App->player->position.x = 30;
-			//App->render->camera.x = 0;
-			//nextStage = false;
-			//App->audio->PlayMusic("Audio/music/mission_2.ogg", 0.5f);
+			if (clearcount >= 100)
+			{
+				App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
+			}
+			if (clearcount == 20)
+			{
+				App->audio->PlayMusic("Audio/music/stage_clear.ogg", 0.0f);
+			}
 		}
 	}
-	
 
 	if (App->ui->lose)
 	{
@@ -145,6 +166,12 @@ Update_Status ModuleScene2::PostUpdate()
 
 	App->render->Blit(skyTexture2, 0, -265, SDL_FLIP_NONE, &sky, 0.5f); // sky
 	App->render->Blit(stageTexture2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 1.0f); // ground
+
+	if (!App->audio->isPlaying)
+	{
+		App->audio->isPlaying = true;
+		App->audio->PlayMusic("Audio/music/mission_2.ogg", 2.0f);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

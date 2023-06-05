@@ -3,7 +3,9 @@
 
 #include "Module.h"
 
-#define MAX_ENEMIES 50
+#include "ModuleRender.h"
+
+#define MAX_ENEMIES 100
 
 enum class ENEMY_TYPE
 {
@@ -11,6 +13,11 @@ enum class ENEMY_TYPE
 	GUNNER,
 	FIGHTER,
 	SOLDIER,
+	PURPLE,
+	GREEN,
+	SPIDERMAN,
+	BOSS,
+	SITTGUNNER,
 };
 
 struct EnemySpawnpoint
@@ -60,6 +67,8 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
+	void GetParticle(int i);
+
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
@@ -75,7 +84,15 @@ private:
 	SDL_Texture* gunner = nullptr;
 	SDL_Texture* fighter = nullptr;
 	SDL_Texture* soldier = nullptr;
+	SDL_Texture* purple = nullptr;
+	SDL_Texture* green = nullptr;
+	SDL_Texture* spiderman = nullptr;
+	SDL_Texture* boss = nullptr;
+	SDL_Texture* sittingGunner = nullptr;
 
+	SDL_Texture* stageTextureL2 = nullptr;
+
+	SDL_Rect ground;
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
 };

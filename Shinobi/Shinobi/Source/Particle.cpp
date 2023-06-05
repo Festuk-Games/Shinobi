@@ -10,7 +10,7 @@ Particle::Particle()
 }
 
 Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), speed(p.speed),
-frameCount(p.frameCount), lifetime(p.lifetime)
+frameCount(p.frameCount), lifetime(p.lifetime), fliph(p.fliph), flipv(p.flipv)
 {
 
 }
@@ -37,7 +37,7 @@ bool Particle::Update()
 		// If the particle has a specific lifetime, check when it has to be destroyed
 		if (lifetime > 0)
 		{
-			if (frameCount >= lifetime)
+			if (static_cast<unsigned int>(frameCount) >= lifetime)
 				ret = false;
 		}
 		// Otherwise the particle is destroyed when the animation is finished

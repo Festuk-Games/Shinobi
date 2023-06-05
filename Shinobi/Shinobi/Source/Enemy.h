@@ -19,7 +19,8 @@ public:
 
 	// Returns the enemy's collider
 	const Collider* GetCollider() const;
-
+	const Collider* GetAttackCollider() const;
+	const Collider* GetHeadCollider() const;
 	// Called from inhering enemies' Udpate
 	// Updates animation and collider position
 	virtual void Update();
@@ -42,22 +43,37 @@ public:
 
 	// Sound fx when destroyed
 	int destroyedFx = 0;
-
+	bool isSpiderman = false;
+	bool purple = false;
+	int hits = 3;
 	bool ground = false;
+	bool jump = false;
+	bool flip = true;
+	bool isBoss = false;
+	bool collision = true;
+	bool isCollidingRight = false;
+	bool isCollidingLeft = false;
+	bool attackCol = false;
+	bool hit = false;
+	Collider* attack = nullptr;
+
+	int currentParticle = -1;
 
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+	Animation* currentHeadAnim = nullptr;
+	Animation* currentLegsAnim = nullptr;
 
 	// The enemy's collider
 	Collider* collider = nullptr;
-	Collider* attack = nullptr;
+	Collider* head = nullptr;
 	Collider* feet = nullptr;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
 
-	bool flip = true;
+	
 	bool die = false;
 };
 

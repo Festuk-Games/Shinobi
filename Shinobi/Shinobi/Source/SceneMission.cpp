@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleScene.h"
+#include "ModuleAudio.h"
 
 #include "ModuleFadeToBlack.h"
 
@@ -32,11 +33,15 @@ bool SceneMission::Start()
 
 	mission1_0 = App->textures->Load("Assets/Scenes/mission1_0.png");
 	mission1_1 = App->textures->Load("Assets/Scenes/mission1_1.png");
-
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	timer = 0;
 	changescene = 0;
-	imageX = -50; 
+	imageX = -80; 
 	imageY = 224;
+
+	App->audio->isPlaying = false;
+	Mix_HaltMusic();
 
 	return ret;
 }

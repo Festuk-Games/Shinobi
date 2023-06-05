@@ -14,7 +14,7 @@ InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			membersAnim.PushBack({ 384*j + 5*j, 224*i + 5*i, 384, 224 });
+			membersAnim.PushBack({ 320*j + 1*j, 224*i + 1*i, 320, 224 });
 		}
 	}
 
@@ -26,7 +26,7 @@ InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			infoAnim.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
+			infoAnim.PushBack({ 320 * j + 1 * j, 224 * i + 1 * i, 320, 224 });
 		}
 	}
 
@@ -37,7 +37,7 @@ InitialScene::InitialScene(bool startEnabled) : Module(startEnabled)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			descriptionAnim.PushBack({ 384 * j + 5 * j, 224 * i + 5 * i, 384, 224 });
+			descriptionAnim.PushBack({ 32 + 320 * j + 5 * j + 64 * j, 224 * i + 5 * i, 320, 224 });
 		}
 	}
 
@@ -59,8 +59,8 @@ bool InitialScene::Start()
 
 	bool ret = true;
 
-	members = App->textures->Load("Assets/names_intro.png");
-	info = App->textures->Load("Assets/intro_upc.png");
+	members = App->textures->Load("Assets/Scenes/intro/names_intro.png");
+	info = App->textures->Load("Assets//Scenes/intro/intro_upc.png");
 	description = App->textures->Load("Assets/intro_explicacion.png");
 	
 	/*App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);*/
@@ -100,7 +100,7 @@ Update_Status InitialScene::Update()
 		}
 		aux++;
 	}
-	else if (writefx <= 16)
+	else if (writefx <= 16 && delay >= 580)
 	{
 		if (aux == 10)
 		{
@@ -114,12 +114,12 @@ Update_Status InitialScene::Update()
 	if (delay == 320)
 	{
 		writefx = 0;
-		aux == 10;
+		aux = 10;
 	}
 	if (delay == 580)
 	{
 		writefx = 0;
-		aux == 10;
+		aux = 10;
 	}
 
 	if (delay <= 320) currentAnimation = &descriptionAnim;

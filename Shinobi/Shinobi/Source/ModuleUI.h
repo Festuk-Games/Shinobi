@@ -41,7 +41,7 @@ public:
 	SDL_Texture* go = nullptr;
 
 
-	bool sk1 = false, sk2 = true, sk3 = false;
+	bool sk1 = true;
 
 	int timesec2 = 9;
 	int timesec1 = 5;
@@ -70,15 +70,25 @@ public:
 			white1p, 
 			bscore[10], 
 			wscore[10], 
+			rscore[10],
 			h_score[10], 
 			playerReady, 
 			hi,
 			gameoverRed,
 			gameoverWhite,
 			nextstage,
-			clear;
+			clear,
+			whitePts,
+			redPts,
+			specialBonus,
+			bossPow,
+			bossIcon;
+
+
+	int bossLives = 8;
 
 	int digit = 0;
+	int bnDigit = 0;
 	int xpos = 0;
 	int scoreCounter = 0;
 
@@ -88,9 +98,13 @@ public:
 
 	int losecounter = 0;
 	bool lose = false;
+	bool restart1 = true;
+	bool restart2 = true;
 
 	int nextCounter = 0, nextframe = 0;
 	int goposx = 1900;
+
+	int saveCounter = 0;
 };
 
 #endif

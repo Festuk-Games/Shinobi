@@ -5,13 +5,25 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
 
 #include "Enemy.h"
 #include "Enemy_Gunner.h"
 #include "Enemy_Fighter.h"
 #include "Enemy_Soldier.h"
+#include "Enemy_Purple.h"
+#include "Enemy_Green.h"
+#include "Enemy_Spiderman.h"
+#include "Enemy_Boss.h"
+#include "Enemy_SittingGunner.h"
+#include "ModuleUI.h"
+
+using namespace std;
+
+#include "ModuleScene.h"
 
 #include "ModuleCollisions.h"
+#include <iostream>
 
 #define SPAWN_MARGIN 10000
 
@@ -21,6 +33,11 @@ ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 		enemies[i] = nullptr;
 	LOG("Loading enemies");
+
+	ground.x = 0;
+	ground.y = 0;
+	ground.w = 2048;
+	ground.h = 512;
 }
 
 ModuleEnemies::~ModuleEnemies()
@@ -34,6 +51,14 @@ bool ModuleEnemies::Start()
 	gunner = App->textures->Load("Assets/gun.png");
 	fighter = App->textures->Load("Assets/fighter.png");
 	soldier = App->textures->Load("Assets/soldier.png");
+	purple = App->textures->Load("Assets/purple.png");
+	green = App->textures->Load("Assets/green.png");
+	boss = App->textures->Load("Assets/boss.png");
+	spiderman = App->textures->Load("Assets/Spiderman.png");
+	sittingGunner = App->textures->Load("Assets/gun.png");
+
+	stageTextureL2 = App->textures->Load("Assets/Scenes/layer_aa.png");
+
 	return true;
 }
 
@@ -59,6 +84,10 @@ Update_Status ModuleEnemies::PostUpdate()
 		if (enemies[i] != nullptr)
 			enemies[i]->Draw();
 	}
+	if (App->scene->IsEnabled())
+	{
+		App->render->Blit(stageTextureL2, 0, -(512 - SCREEN_HEIGHT), SDL_FLIP_NONE, &ground, 1.0f);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -80,6 +109,10 @@ bool ModuleEnemies::CleanUp()
 	App->textures->Unload(gunner);
 	App->textures->Unload(fighter);
 	App->textures->Unload(soldier);
+	App->textures->Unload(purple);
+	App->textures->Unload(green);
+	App->textures->Unload(spiderman);
+	App->textures->Unload(sittingGunner);
 
 	return true;
 }
@@ -165,34 +198,125 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i]->texture = soldier;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					break;
+				case ENEMY_TYPE::PURPLE:
+					enemies[i] = new Enemy_Purple(info.x, info.y);
+					enemies[i]->texture = purple;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
+				case ENEMY_TYPE::GREEN:
+					enemies[i] = new Enemy_green(info.x, info.y);
+					enemies[i]->texture = green;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
+				case ENEMY_TYPE::SPIDERMAN:
+					enemies[i] = new Enemy_Spiderman(info.x, info.y);
+					enemies[i]->texture = spiderman;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
+				case ENEMY_TYPE::BOSS:
+					enemies[i] = new Enemy_Boss(info.x, info.y);
+					enemies[i]->texture = boss;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
+				case ENEMY_TYPE::SITTGUNNER:
+					enemies[i] = new Enemy_SittingGunner(info.x, info.y);
+					enemies[i]->texture = sittingGunner;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
 			}
 			break;
 		}
 	}
 }
 
+void ModuleEnemies::GetParticle(int particle)
+{
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] != nullptr)
+		{
+			enemies[i]->currentParticle = particle;
+		}
+	}
+}
+
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
-	for(uint i = 0; i < MAX_ENEMIES; ++i)
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			if (c2->type == Collider::Type::PLAYER_SHOT)
+			if (c2->type == Collider::Type::PLAYER_SHOT || c2->type == Collider::Type::ULTI_SHOT)
 			{
-				enemies[i]->OnCollision(c2); //Notify the enemy of a collision
-				c1->pendingToDelete = true;
+				if ((enemies[i]->purple && enemies[i]->hits == 0) || !enemies[i]->purple) {
+					//Notify the enemy of a collision
+					c1->pendingToDelete = true;
+				}
+				enemies[i]->OnCollision(c2);
+
 				//delete enemies[i];
 				//enemies[i] = nullptr;
 				break;
 			}
-			if (/*c1->type == Collider::Type::FEET && */c2->type == Collider::Type::GROUND)
+			if (c2->type == Collider::Type::GROUND || c2->type == Collider::Type::GROUND2)
 			{
 				enemies[i]->ground = true;
 			}
 			if (c2->type == Collider::Type::BOX)
 			{
 				enemies[i]->ground = true;
-				enemies[i]->position.y--;
+				enemies[i]->jump = true;
+				enemies[i]->position.y -= 4;
+			}
+			if (c2->type == Collider::Type::WALL)
+			{
+
+				//if (!enemies[i]->collision)
+				//{
+				//	cout << "No hay colision" << endl;
+				//	enemies[i]->isCollidingLeft = false;
+				//	enemies[i]->isCollidingRight = false;
+				//}
+				if (enemies[i]->flip && enemies[i]->collision)
+				{
+					/*cout << "colision derecha" << endl;*/
+					enemies[i]->isCollidingRight = true;
+					enemies[i]->isCollidingLeft = false;
+				}
+				else
+				{
+					/*cout << "colision izq" << endl;*/
+					enemies[i]->isCollidingLeft = true;
+					enemies[i]->isCollidingRight = false;
+				}
+
+			}
+		}
+		if (enemies[i] != nullptr && enemies[i]->GetAttackCollider() == c1)
+		{
+			if (c2->type == Collider::Type::PLAYER) {
+
+				enemies[i]->attackCol = true;
+				enemies[i]->attack->rect.w = 0;
+				enemies[i]->attack->rect.h = 0;
+				App->particles->AddParticle(App->particles->hit, enemies[i]->attack->rect.x, enemies[i]->attack->rect.y);
+				enemies[i]->attack->SetPos(0, 0);
+
+			}
+		}
+		if (enemies[i] != nullptr && enemies[i]->GetHeadCollider() == c1)
+		{
+			if (c2->type == Collider::Type::PLAYER_SHOT || c2->type == Collider::Type::ULTI_SHOT)
+			{
+				if (App->ui->bossLives == 1) {
+					//Notify the enemy of a collision
+					c1->pendingToDelete = true;
+				}
+				enemies[i]->OnCollision(c2);
+
+				//delete enemies[i];
+				//enemies[i] = nullptr;
+				break;
 			}
 		}
 	}
