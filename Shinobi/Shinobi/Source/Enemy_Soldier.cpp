@@ -108,6 +108,7 @@ void Enemy_Soldier::Update()
 				{
 					currentAnim = &walkAnim;
 					position.x++;
+					position.x++;
 				}
 				else if (shot >= 100)
 				{

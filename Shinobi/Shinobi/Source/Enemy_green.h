@@ -44,7 +44,7 @@ private:
 	int pos1 = 500, pos2 = 650;
 	int pdistance = 200;
 	int shot = 0;
-	bool shooting = false, reloading = false, walking = true; 
+	bool shooting = false, reloading = false, walking = true, idle = false;
 	int time = 0;
 	int bullets = 1;
 };

@@ -43,7 +43,7 @@ Enemy_green::Enemy_green(int x, int y) : Enemy(x, y)
 
 
 	//colliders
-	collider = App->collisions->AddCollider({ position.x + 28, position.y + 12, 38, 68 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x + 25, position.y + 12, 38, 68 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
@@ -59,7 +59,7 @@ void Enemy_green::Update()
 		//walk right
 		if (position.x - App->player->position.x <= pdistance && position.x - App->player->position.x >= 0 && App->player->position.y >= 110)
 		{
-			
+			idle = false;
 			shot++;
 			if (shot >= 100 && !reloading && bullets >= 1)
 			{
@@ -73,9 +73,10 @@ void Enemy_green::Update()
 				App->particles->espada.speed = iPoint(-5, 0);
 				if (shot >= 112)
 				{
+					shooting = true;
 					App->particles->AddParticle(App->particles->espada, position.x+20, position.y + 15, Collider::Type::ENEMY_SHOT);
 					shot = 0;
-					shooting = true;
+					
 				}
 			}
 			else if (position.x != App->player->position.x && !shooting && !reloading)
@@ -85,10 +86,13 @@ void Enemy_green::Update()
 				if (position.x - App->player->position.x >= pdistance - 40)
 				{
 					currentAnim = &walkAnim;
+					idle = false;
 					position.x--;
 				}
-				else currentAnim = &idleAnim;
-
+				else {
+					currentAnim = &idleAnim;
+					idle = true;
+				}
 				pl = true;
 
 				if (position.x <= pos2)
@@ -104,6 +108,7 @@ void Enemy_green::Update()
 		//walk left
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->position.y >= 110)
 		{
+			idle = false;
 			shot++;
 			if (shot >= 100 && !reloading && bullets >= 1)
 			{
@@ -117,9 +122,10 @@ void Enemy_green::Update()
 				App->particles->espada.speed = iPoint(5, 0);
 				if (shot >= 112)
 				{
+					shooting = true;
 					App->particles->AddParticle(App->particles->espada, position.x+69, position.y + 15, Collider::Type::ENEMY_SHOT);
 					shot = 0;
-					shooting = true;
+					
 				}
 			}
 			else if (position.x != App->player->position.x && !shooting && !reloading)
@@ -129,10 +135,13 @@ void Enemy_green::Update()
 				if (position.x - App->player->position.x <= -(pdistance - 40))
 				{
 					currentAnim = &walkAnim;
+					idle = false;
 					position.x++;
 				}
-				else currentAnim = &idleAnim;
-
+				else {
+					currentAnim = &idleAnim;
+					idle = true;
+				}
 				pl = true;
 
 				if (position.x >= pos2) changedirection = true;
@@ -147,6 +156,7 @@ void Enemy_green::Update()
 		//walk path
 		else if (!pl && !reloading && !shooting)
 		{
+			idle = false;
 			currentAnim = &walkAnim;
 			if (position.x >= spawnPos.x + 100)
 			{
@@ -167,8 +177,13 @@ void Enemy_green::Update()
 		}
 		else pl = false;
 
-		if (shooting)
+		if (shooting || idle)
 		{
+			/*cout << position.y<<endl;
+			position.y=135;*/
+
+			collider->rect.h = 65;
+			collider->SetPos(position.x + 25, position.y + 8);
 			time++;
 			if (time >= 50)
 			{
@@ -177,8 +192,15 @@ void Enemy_green::Update()
 
 			}
 		}
-
-		collider->SetPos(position.x+28, position.y + 6);
+		else if (currentAnim==&walkAnim)
+		{
+			/*position.y = 135;*/
+			collider->rect.h = 51;
+			collider->SetPos(position.x + 28, position.y + 23);
+		}
+		
+		
+		//collider->SetPos(position.x+28, position.y + 6);
 	}
 	else if (die) currentAnim = &dieAnim;
 
