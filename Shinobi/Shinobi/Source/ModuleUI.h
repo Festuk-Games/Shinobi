@@ -103,6 +103,8 @@ public:
 
 	int nextCounter = 0, nextframe = 0;
 	int goposx = 1900;
+
+	int saveCounter = 0;
 };
 
 #endif

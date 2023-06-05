@@ -303,12 +303,6 @@ Update_Status ModuleUI::Update()
 // Update: draw background
 Update_Status ModuleUI::PostUpdate()
 {
-	
-	//Draw the hostages
-	for (int i = 0; i < hostages; i++)
-	{
-		App->render->Blit(hostage, 40 + 8 * i, 205, SDL_FLIP_NONE, &host, 0.0f);
-	}
 
 	//Draw the lifes
 	for (int i = 0; i < lifenum; i++)
@@ -320,10 +314,30 @@ Update_Status ModuleUI::PostUpdate()
 	if (sk1) App->render->Blit(skill1, 246, 210, SDL_FLIP_NONE, &skill, 0.0f);
 	
 
-	if (!App->scene->nextStage && !App->scene2->nextStage && !App->sceneboss->IsEnabled())
+	if (!App->scene->nextStage && !App->scene2->nextStage && !App->sceneboss->IsEnabled() && App->player->position.x >= 1700)
+	{
+		saveCounter++;
+		if (saveCounter <= 15)
+		{
+			App->render->Blit(nums, 24, 205, SDL_FLIP_NONE, &savet, 0.0f);
+			for (int i = 0; i < hostages; i++)
+			{
+				App->render->Blit(hostage, 41 + 8 * i, 205, SDL_FLIP_NONE, &host, 0.0f);
+			}
+		}
+		else if (saveCounter > 15 && saveCounter <= 30);
+		else saveCounter = 0;
+	}
+	else if (!App->scene->nextStage && !App->scene2->nextStage && !App->sceneboss->IsEnabled())
 	{
 		App->render->Blit(nums, 24, 205, SDL_FLIP_NONE, &savet, 0.0f);
+		//Draw the hostages
+		for (int i = 0; i < hostages; i++)
+		{
+			App->render->Blit(hostage, 41 + 8 * i, 205, SDL_FLIP_NONE, &host, 0.0f);
+		}
 	}
+
 	
 	//App->render->Blit(nums, 286, 200, SDL_FLIP_NONE, &timer[timemin], 0.0f);
 	//App->render->Blit(nums, 295, 203, SDL_FLIP_NONE, &points, 0.0f);
