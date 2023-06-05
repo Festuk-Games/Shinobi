@@ -6,6 +6,8 @@
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include "BossScene.h"
+
 #include <iostream>
 using namespace std;
 #include "ModuleInput.h"
@@ -229,6 +231,15 @@ void Enemy_Boss::Update()
 		currentLegsAnim = &dieLegsAnim;
 		position.y = 117;
 		position.x = 330;
+		if (count >= 80)
+		{
+			App->sceneboss->nextStage = true;
+			count = 0;
+		}
+		else {
+			count++;
+		}
+		
 	}
 	currentAnim->Update();
 	currentHeadAnim->Update();

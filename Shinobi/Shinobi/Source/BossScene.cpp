@@ -82,21 +82,14 @@ Update_Status BossScene::Update()
 {
 
 	//next stage condition
-	if (nextStage)
+	if (nextStage || App->render->win)
 	{
-		if (App->player->position.x >= 2000 || App->render->win)
-		{
-			clear = true;
-			if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
-			clearcount++;
-			if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->missionComplete, false, false, 60);
-			//stage1 = false;
-			//stage2 = true;
-			//App->player->position.x = 30;
-			//App->render->camera.x = 0;
-			//nextStage = false;
-			//App->audio->PlayMusic("Audio/music/mission_2.ogg", 0.5f);
-		}
+		
+		clear = true;
+		if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
+		clearcount++;
+		if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->missionComplete, false, false, 60);
+
 	}
 
 

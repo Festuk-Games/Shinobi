@@ -91,7 +91,7 @@ void Enemy::OnCollision(Collider* collider)
 	{
 		if (isBoss)
 		{
-			if (App->ui->bossLives > 0)
+			if (App->ui->bossLives > 0 && !hit)
 			{
 				App->ui->bossLives--;
 				hit = true;
