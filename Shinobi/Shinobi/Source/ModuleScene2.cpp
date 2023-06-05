@@ -98,8 +98,8 @@ bool ModuleScene2::Start()
 
 
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 325, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 335, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 340, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 375, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 425, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 525, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 841, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 1064, 130-64-32);
@@ -111,15 +111,15 @@ bool ModuleScene2::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::SPIDERMAN, 800, 80);
 
 	//enemigos gunner
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 471, 139);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 576, 139-32);
-	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 896, 139 - 32);
+	App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 471, 139);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 590, 139-32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 900, 139 - 32);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1233, 139 - 32);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1624, 139 - 32-64);
 	//App->enemies->AddEnemy(ENEMY_TYPE::SITTGUNNER, 350,130);
 
 	//Enemigos Tochos (purple...)
-	
+	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 700, 139);
 
 	App->player->Enable();
 	App->auxscene->Enable();
@@ -139,9 +139,13 @@ Update_Status ModuleScene2::Update()
 			clear = true;
 			if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
 			clearcount++;
-			if (clearcount >= 80)
+			if (clearcount >= 100)
 			{
 				App->fade->FadeToBlack(this, (Module*)App->missionBoss, false, false, 60);
+			}
+			if (clearcount == 0)
+			{
+				App->audio->PlayMusic("Audio/music/stage_clear.ogg", 0.0f);
 			}
 		}
 	}

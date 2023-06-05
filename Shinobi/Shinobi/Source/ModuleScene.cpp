@@ -155,11 +155,15 @@ Update_Status ModuleScene::Update()
 			clear = true;
 			if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
 			clearcount++;
-			if (clearcount >= 80)
+			if (clearcount >= 100)
 			{
 				App->fade->FadeToBlack(this, (Module*)App->mission2, false, false, 60);
 				//App->player->position.x = 30;
 				//App->render->camera.x = 0;
+			}
+			if (clearcount == 0)
+			{
+				App->audio->PlayMusic("Audio/music/stage_clear.ogg", 0.0f);
 			}
 			/*stage1 = false;
 			stage2 = true;
