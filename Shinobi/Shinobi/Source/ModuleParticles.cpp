@@ -328,7 +328,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);
 
 			}
-			else if (colliderType != Collider::Type::NONE)
+			else if (colliderType == Collider::Type::ENEMY_SHOT)
 			{
 				p->collider = App->collisions->AddCollider({ 0,0,5,5 }, colliderType, this);
 				if (App->sceneboss->IsEnabled())
