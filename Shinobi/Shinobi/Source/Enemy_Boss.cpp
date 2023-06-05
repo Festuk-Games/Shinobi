@@ -76,7 +76,7 @@ void Enemy_Boss::Update()
 	
 	if (!die)
 	{
-		cout << position.y << endl;
+
 		if (hit && hitCount <= 10)
 		{
 			currentAnim = &hitAnim;
@@ -232,19 +232,13 @@ void Enemy_Boss::Update()
 		currentLegsAnim = &dieLegsAnim;
 		position.y = 117;
 		position.x = 330;
-		if (count==0)
+		count++;
+		if (count==80)
 		{
-			App->audio->isPlaying = false;
-			Mix_HaltMusic();
 			App->audio->PlayMusic("Audio/music/boss_clear.ogg", 0.0f);
-		}
-		if (count >= 80)
-		{
 			App->sceneboss->nextStage = true;
 		}
-		else {
-			count++;
-		}
+		cout << count << endl;
 		
 	}
 	currentAnim->Update();

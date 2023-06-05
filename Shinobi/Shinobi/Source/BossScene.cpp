@@ -88,7 +88,7 @@ Update_Status BossScene::Update()
 		clear = true;
 		if (App->ui->sk1 && clearcount == 0) App->ui->scoreCounter += 5000;
 		clearcount++;
-		if (clearcount >= 60) App->fade->FadeToBlack(this, (Module*)App->missionComplete, false, false, 60);
+		if (clearcount >= 130) App->fade->FadeToBlack(this, (Module*)App->missionComplete, false, false, 60);
 
 	}
 
