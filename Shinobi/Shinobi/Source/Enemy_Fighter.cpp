@@ -117,7 +117,7 @@ void Enemy_Fighter::Update()
 		else if (position.x - App->player->position.x >= -pdistance && position.x - App->player->position.x <= 0 && App->player->alive && !isCollidingLeft
 			&& ((position.y <= 100 && App->player->L2 || position.y >= 100 && !App->player->L2) || !App->scene->IsEnabled()) && App->player->alive
 			&& (App->player->currentAnimation != &App->player->jumpDownFloorAnim || App->player->currentAnimation != &App->player->jumpUpFloorAnim))
-		{
+			{
 			spawnPos.x = position.x + 50;
 			isCollidingRight = false;
 			if (position.x != App->player->position.x && !shooting && !reloading)
