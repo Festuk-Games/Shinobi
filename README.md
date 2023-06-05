@@ -120,9 +120,33 @@ https://github.com/Festuk-Games/Shinobi
         </td>
     </tr>
     <tr>
-        <th>F1</th>
+        <th>F1 in intro</th>
         <td>       
-            <li>Open and close the menu</li>
+            <li>Open and close the intro menu</li>
+        </td>
+    </tr>
+    <tr>
+        <th>F2 in intro</th>
+        <td>       
+            <li>Spawn the player at level 1</li>
+        </td>
+    </tr>
+    <tr>
+        <th>F3 in intro</th>
+        <td>       
+            <li>Spawn the player at level 2</li>
+        </td>
+    </tr>
+    <tr>
+        <th>F4 in intro</th>
+        <td>       
+            <li>Spawn the player at boss level</li>
+        </td>
+    </tr>
+    <tr>
+        <th>F1 playing</th>
+        <td>       
+            <li>Open and close the player menu</li>
         </td>
     </tr>
     <tr>
