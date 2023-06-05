@@ -52,6 +52,7 @@ public:
 	unsigned int boss_hit;
 	unsigned int die_boss;
 	unsigned int boss_attack;
+	
 
 private:
 
