@@ -59,6 +59,12 @@ https://github.com/Festuk-Games/Shinobi
             <li>Crouch</li>
         </td>
     </tr>
+        <tr>
+        <th>G</th>
+        <td>
+            <li>Ultimate</li>
+        </td>
+    </tr>
     <tr>
         <th>Alt</th>
         <td>
