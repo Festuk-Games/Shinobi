@@ -49,7 +49,9 @@ public:
 	unsigned int deathenemy;
 	unsigned int shoot;
 	unsigned int finished;
-	 
+	unsigned int boss_hit;
+	unsigned int die_boss;
+	unsigned int boss_attack;
 
 private:
 

@@ -140,7 +140,10 @@ void Enemy_Boss::Update()
 					particle3[i].alive = true;
 					App->particles->particles[particle3[i].particle]->lifetime = 120;
 				}
-				if (i == 0) timer = 0;
+				if (i == 0) {
+					timer = 0;
+					App->audio->PlayFx(App->audio->boss_attack);
+				}
 			}
 			isShooting = true;
 			delay = 0;
