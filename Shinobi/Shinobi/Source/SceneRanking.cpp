@@ -6,7 +6,11 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleUI.h"
 #include "Animation.h"
+#include <string>
+#include <iostream>
+using namespace std;
 
 SceneRanking::SceneRanking(bool startEnabled) : Module(startEnabled)
 {
@@ -47,6 +51,25 @@ SceneRanking::SceneRanking(bool startEnabled) : Module(startEnabled)
 	missionAnim.speed = 0.2f;
 	missionAnim.loop = false;
 
+	score.x = 1;
+	score.y = 191;
+	score.h = 8;
+	score.w = 81;
+
+	hscore.x = 1;
+	hscore.y = 204;
+	hscore.h = 8;
+	hscore.w = 79;
+
+	for (int i = 0; i < 10; i++)
+	{
+		rscore[i] = { 1 + 8 * i, 60, 7, 8 };
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		h_score[i] = { 1 + 8 * i, 71, 7, 8 };
+	}
 }
 
 SceneRanking::~SceneRanking()
@@ -65,6 +88,8 @@ bool SceneRanking::Start()
 	hab1 = App->textures->Load("Assets/UI/skill1.png");
 	hab2 = App->textures->Load("Assets/UI/skill2.png");
 	hab3 = App->textures->Load("Assets/UI/skill3.png");
+	nums = App->textures->Load("Assets/UI/nums.png");
+
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -132,6 +157,29 @@ Update_Status SceneRanking::PostUpdate()
 			App->render->Blit(hab3, 289, 69 * i + 37, SDL_FLIP_NONE, NULL);
 			App->render->Blit(hab2, 289, 69 * i + 60, SDL_FLIP_NONE, NULL);
 		}
+	}
+
+	App->render->Blit(nums, 85, 60, SDL_FLIP_NONE, &score, 0.0f);
+	App->render->Blit(nums, 85, 80, SDL_FLIP_NONE, &hscore, 0.0f);
+
+	string sc = to_string(App->ui->scoreCounter);
+	xpos = 220 - (sc.size() * 8);
+
+	for (unsigned int i = 0; i < sc.size(); i++)
+	{
+		digit = sc[i] - '0';
+
+		 App->render->Blit(nums, xpos + (i * 8), 60, SDL_FLIP_NONE, &rscore[digit], 0.0f);
+	}
+
+	string hscore = to_string(App->ui->highScore);
+	xpos = 220 - (hscore.size() * 8);
+
+	for (unsigned int i = 0; i < hscore.size(); i++)
+	{
+		digit = hscore[i] - '0';
+
+		App->render->Blit(nums, xpos + (i * 8), 80, SDL_FLIP_NONE, &h_score[digit], 0.0f);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

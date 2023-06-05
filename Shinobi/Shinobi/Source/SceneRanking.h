@@ -37,9 +37,18 @@ public:
 	SDL_Texture* hab2 = nullptr;
 	SDL_Texture* hab3 = nullptr;
 
+	SDL_Rect score, hscore;
+	SDL_Rect rscore[10], h_score[10];
+
+	SDL_Texture* nums = nullptr;
+
+
+
 	SDL_Rect missionrect, missionrect2;
 	int counter = 0;
 	int changescene = 0;
+	int xpos = 0;
+	int digit = 0;
 
 	Animation missionAnim;
 	Animation* currentAnim = nullptr;
