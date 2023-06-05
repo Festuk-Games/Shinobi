@@ -156,7 +156,10 @@ void Enemy_Boss::Update()
 					attackTime = 150;
 					resetTimer = false;
 				}
-				if (i == 0) timer = 0;
+				if (i == 0) {
+					timer = 0;
+					App->audio->PlayFx(App->audio->boss_attack);
+				}
 			}
 			isShooting = true;
 			delay = 0;

@@ -94,12 +94,13 @@ void Enemy::OnCollision(Collider* collider)
 			if (App->ui->bossLives > 0 && !hit)
 			{
 				App->ui->bossLives--;
+				App->audio->PlayFx(App->audio->boss_hit);
 				hit = true;
 			}
 			if (App->ui->bossLives == 0)
 			{
 				die = true;
-				App->audio->PlayFx(App->audio->deathenemy);
+				App->audio->PlayFx(App->audio->die_boss);
 				App->ui->scoreCounter += 200;
 			}
 		}

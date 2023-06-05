@@ -102,26 +102,31 @@ bool ModuleScene::Start()
 
 	App->enemies->Enable();
 	App->hostage->Enable();
-	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 272, 150);
+	
 
 
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 970, 23);
+	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 970, 23);
 
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 220, 142);
-	////App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 341, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 220, 139);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 707, 130-32);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 726, 130-32);
-	//App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 740, 130);
-	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 783, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 300, 142);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 350, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 574, 139);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 753, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 782, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 812, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 855, 130-32);
 
-
-
+	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 1169, 150);
+	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 1210, 150);
+	App->enemies->AddEnemy(ENEMY_TYPE::SOLDIER, 1250, 150);
+	
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1474, 130 - 32);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1690, 139);
 	//Enemigos suelo arriba
-	//App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 610, 97-78);
-	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 958, 97 - 78);
-	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 982, 0);
-
+	
+	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 882, 97 - 78);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 970, 23);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 1435, 23);
+	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1717, 97 - 78);
 	
 	if (hostages[0] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29, 0);
 	

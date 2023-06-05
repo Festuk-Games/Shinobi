@@ -57,6 +57,9 @@ bool ModuleAudio::Init()
 	deathenemy = LoadFx("Audio/FX/death.wav");
 	shoot = LoadFx("Audio/FX/shoot.wav");
 	finished = LoadFx("Audio/FX/finished.wav");
+	boss_hit = LoadFx("Audio/FX/boss_hit.wav");
+	die_boss = LoadFx("Audio/FX/die_boss.wav");
+	boss_attack = LoadFx("Audio/FX/boss_attack.wav");
 	return ret;
 }
 
