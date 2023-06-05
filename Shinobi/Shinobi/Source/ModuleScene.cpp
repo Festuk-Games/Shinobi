@@ -125,7 +125,7 @@ bool ModuleScene::Start()
 	
 	App->enemies->AddEnemy(ENEMY_TYPE::FIGHTER, 882, 97 - 78);
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 970, 23);
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 1435, 23);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE, 1535, 23);
 	App->enemies->AddEnemy(ENEMY_TYPE::GUNNER, 1717, 97 - 78);
 	
 	if (hostages[0] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 480, 208 - 29, 0);
@@ -133,7 +133,7 @@ bool ModuleScene::Start()
 	if (hostages[1] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 705, 97 - 29, 1);
 	if (hostages[2] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1020, 97 - 29, 2);
 	//App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 650, 68);
-	if (hostages[3] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1500, 68, 3);
+	if (hostages[3] == false) App->hostage->AddHostage(HOSTAGE_TYPE::HOSTAGE, 1600, 68, 3);
 
 	stageTexture = App->textures->Load("Assets/Scenes/layer_a.png");
 	skyTexture = App->textures->Load("Assets/Scenes/layer_b.png");
