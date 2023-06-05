@@ -33,7 +33,7 @@ https://github.com/Festuk-Games/Shinobi
             <br></div>
         </td>
         
-<h3>How to play / controls</h3>
+<h3>Controls Keyboard</h3>
 <table>
     <tr>
         <th>A </th>
@@ -225,7 +225,60 @@ https://github.com/Festuk-Games/Shinobi
         </td>
     </tr>
 </table>
-
+<h3>Controls Gamepad Xbox</h3>
+<table>
+    <tr>
+        <th>Left Joystick</th>
+        <td>
+            <li>Move</li>
+        </td>
+    </tr>
+    <tr>
+        <th>A</th>
+        <td>
+            <li> Jump</li>
+        </td>
+    </tr>
+    <tr>
+      <th>X</th>
+        <td>
+            <li>Attack</li>
+        </td>
+    </tr>
+    <tr>
+      <th>Y</th>
+        <td>
+            <li>Ultimate</li>
+        </td>
+    </tr>
+   </table>
+   <h3>Controls Gamepad Playstation</h3>
+<table>
+    <tr>
+        <th>Left Joystick</th>
+        <td>
+            <li>Move</li>
+        </td>
+    </tr>
+    <tr>
+        <th>X</th>
+        <td>
+            <li> Jump</li>
+        </td>
+    </tr>
+    <tr>
+      <th>Square</th>
+        <td>
+            <li>Attack</li>
+        </td>
+    </tr>
+    <tr>
+      <th>Triangle</th>
+        <td>
+            <li>Ultimate</li>
+        </td>
+    </tr>
+   </table>
 <h2>Characteristics:</h2>
 When you attack, if the enemy is too far, the character uses the shuriken and if it’s near, it uses his fist.
 And if it has the power up, use the pistol for the faraway enemies and the katana for the close ones.
