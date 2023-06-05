@@ -65,10 +65,11 @@ bool BossScene::Start()
 
 	App->render->colPos = 0;
 
+	App->ui->bossLives = 8;
 
 	App->collisions->AddCollider({ 0, 208, 2048, 2 }, Collider::Type::GROUND);
 	App->enemies->Enable();
-	App->enemies->AddEnemy(ENEMY_TYPE::BOSS, 360, 50);
+	App->enemies->AddEnemy(ENEMY_TYPE::BOSS, 360, 104);
 	
 
 	App->player->Enable();

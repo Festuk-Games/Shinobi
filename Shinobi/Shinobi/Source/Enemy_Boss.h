@@ -30,10 +30,11 @@ private:
 	Animation idleAnim;
 	Animation headAnim;
 	Animation legsAnim;
+	Animation dieHeadAnim;
+	Animation dieLegsAnim;
 	Animation attackAnim1;
 	Animation hitAnim;
 	Animation dieAnim;
-
 
 
 	bool changedirection = true;
@@ -86,6 +87,8 @@ private:
 	int delay = 0;
 
 	int count = 1;
+
+	int hitCount = 0;
 };
 
 #endif // __ENEMY_BOSS_H__

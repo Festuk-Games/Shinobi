@@ -413,7 +413,6 @@ Update_Status ModuleUI::PostUpdate()
 			}
 		}
 	}
-
 	if (App->sceneboss->IsEnabled() && bossLives > 0)
 	{
 		App->render->Blit(nums, 90, 28, SDL_FLIP_NONE, &bossPow, 0.0f);

@@ -45,7 +45,7 @@ public:
 	int destroyedFx = 0;
 	bool isSpiderman = false;
 	bool purple = false;
-	int hits = 5;
+	int hits = 3;
 	bool ground = false;
 	bool jump = false;
 	bool flip = true;
@@ -54,6 +54,7 @@ public:
 	bool isCollidingRight = false;
 	bool isCollidingLeft = false;
 	bool attackCol = false;
+	bool hit = false;
 	Collider* attack = nullptr;
 
 	int currentParticle = -1;
