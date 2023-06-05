@@ -54,7 +54,7 @@ https://github.com/Festuk-Games/Shinobi
         </td>
     </tr>
     <tr>
-        <th>Ctrl</th>
+        <th>S</th>
         <td>
             <li>Crouch</li>
         </td>
@@ -66,19 +66,19 @@ https://github.com/Festuk-Games/Shinobi
         </td>
     </tr>
     <tr>
-        <th>Ctrl + D</th>
+        <th>S + D</th>
         <td>       
             <li>To move right crouched</li>
         </td>
     </tr>
     <tr>
-        <th>Ctrl + A</th>
+        <th>S + A</th>
         <td>       
             <li>To move left crouched</li>
         </td>
     </tr>
     <tr>
-        <th>Ctrl + Alt</th>
+        <th>S + Alt</th>
         <td>       
             <li>Shot crouched</li>
         </td>
@@ -116,37 +116,82 @@ https://github.com/Festuk-Games/Shinobi
     <tr>
         <th>F1</th>
         <td>       
-            <li>Shows collisions</li>
+            <li>Open and close the menu</li>
         </td>
     </tr>
     <tr>
-        <th>F2</th>
+        <th>F2 with Menu open</th>
         <td>       
-            <li>Shows the player position in the screen</li>
+            <li>Shows all the collisions</li>
         </td>
     </tr>
     <tr>
-        <th>F3</th>
+        <th>F3 with Menu open</th>
         <td>       
             <li>God mode</li>
         </td>
     </tr>
     <tr>
-        <th>F4</th>
+        <th>F4 with Menu open</th>
+        <td>       
+            <li>Enable and disable Power Ups</li>
+        </td>
+    </tr>
+    <tr>
+        <th>F5 with Menu open</th>
         <td>       
             <li>Direct win</li>
         </td>
     </tr>
-    <tr>
-        <th>F5</th>
+        <tr>
+        <th>F6 with Menu open</th>
         <td>       
             <li>Direct lose</li>
         </td>
     </tr>
-        <tr>
-        <th>F6</th>
+        <th>F7 with Menu open</th>
         <td>       
-            <li>Power Up</li>
+            <li>Open the menu to generate Enemies</li>
+        </td>
+    </tr>
+    <th>F1 with Enemy Menu open</th>
+        <td>       
+            <li>Open the player menu</li>
+        </td>
+    </tr>
+    <th>F2 with Enemy Menu open</th>
+        <td>       
+            <li>Generate Fighter enemy</li>
+        </td>
+    </tr>
+    <th>F3 with Enemy Menu open</th>
+        <td>       
+            <li>Generate Soldier enemy</li>
+        </td>
+    </tr>
+    <th>F4 with Enemy Menu open</th>
+        <td>       
+            <li>Generate Gunner enemy</li>
+        </td>
+    </tr>
+    <th>F5 with Enemy Menu open</th>
+        <td>       
+            <li>Generate Ground Gunner enemy</li>
+        </td>
+    </tr>
+    <th>F6 with Enemy Menu open</th>
+        <td>       
+            <li>Generate Purple enemy</li>
+        </td>
+    </tr>
+    <th>F7 with Enemy Menu open</th>
+        <td>       
+            <li>Generate Green enemy</li>
+        </td>
+    </tr>
+    <th>F8 with Enemy Menu open</th>
+        <td>       
+            <li>Generate Spiderman enemy</li>
         </td>
     </tr>
 </table>
