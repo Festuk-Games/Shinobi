@@ -160,6 +160,7 @@ Update_Status ModuleScene::Update()
 			{ 
 			App->audio->PlayMusic("Audio/music/stage_clear.ogg", 0.0f);             
 			}
+
 			/*stage1 = false;
 			stage2 = true;
 			nextStage = false;
