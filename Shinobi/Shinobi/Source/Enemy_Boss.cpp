@@ -66,6 +66,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	/*feet = App->collisions->AddCollider({ position.x, position.y + 69, 83, 1 }, Collider::Type::FEET, (Module*)App->enemies);*/
 	isBoss = true;
 	currentAnim = &idleAnim;
+	count = 0;
 }
 
 void Enemy_Boss::Update()
@@ -231,10 +232,15 @@ void Enemy_Boss::Update()
 		currentLegsAnim = &dieLegsAnim;
 		position.y = 117;
 		position.x = 330;
+		if (count==0)
+		{
+			App->audio->isPlaying = false;
+			Mix_HaltMusic();
+			App->audio->PlayMusic("Audio/music/boss_clear.ogg", 0.0f);
+		}
 		if (count >= 80)
 		{
 			App->sceneboss->nextStage = true;
-			count = 0;
 		}
 		else {
 			count++;
