@@ -8,6 +8,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleScene.h"
 #include "ModuleScene2.h"
+#include "BossScene.h"
 #include "ModuleUI.h"
 #include "Animation.h"
 
@@ -78,6 +79,14 @@ bool SceneIntro::Start()
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+
+	App->render->win = false;
+	App->scene->nextStage = false;
+	App->scene2->nextStage = false;
+	App->sceneboss->nextStage = false;
+	App->scene->clear = false;
+	App->scene2->clear = false;
+	App->sceneboss->clear = false;
 
 	App->audio->isPlaying = false;
 	Mix_HaltMusic();
