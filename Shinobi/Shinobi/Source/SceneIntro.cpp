@@ -120,7 +120,8 @@ bool SceneIntro::Start()
 
 Update_Status SceneIntro::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	GamePad& pad = App->input->pads[0];
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN|| pad.a_down)
 	{
 		App->audio->PlayFx(App->audio->coin);
 		App->fade->FadeToBlack(this, (Module*)App->missionNum, true, false, 50);
